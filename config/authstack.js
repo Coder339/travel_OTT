@@ -12,7 +12,7 @@ export default class AuthStack extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userToken: undefined,
+            userToken: null,
             user: {
                 name: '',
                 said: null,
@@ -20,41 +20,41 @@ export default class AuthStack extends React.Component {
                 phone_number: '',
                 phone_country_code: ''
             },
-            device: device,
-            os: os,
-            signOut: this.signOut,
-            updateUser: this.updateUser
+            // device: device,
+            // os: os,
+            // signOut: this.signOut,
+            // updateUser: this.updateUser
         };
     }
 
-    async componentDidMount() {
-        Auth.currentAuthenticatedUser()
-            .then((res) => {
-                let said = 'custom:said';
-                let countrycode = 'custom:phone_country_code';
-                setTimeout(() => {
-                    this.setState({
-                        user: {
-                            name: res.attributes.name,
-                            said: res.attributes[said],
-                            given_name: res.attributes.given_name,
-                            phone_number: res.attributes.phone_number,
-                            phone_country_code: res.attributes[countrycode]
-                        },
-                        userToken: res.signInUserSession.idToken.jwtToken
-                    })
-                }, 3000)
-            })
-            .catch((e) => {
-                if (e == 'not authenticated') {
-                    setTimeout(() => {
-                        this.setState({
-                            userToken: null
-                        })
-                    }, 3000)
-                }
-            })
-    }
+    // async componentDidMount() {
+        // Auth.currentAuthenticatedUser()
+        //     .then((res) => {
+        //         let said = 'custom:said';
+        //         let countrycode = 'custom:phone_country_code';
+        //         setTimeout(() => {
+        //             this.setState({
+        //                 user: {
+        //                     name: res.attributes.name,
+        //                     said: res.attributes[said],
+        //                     given_name: res.attributes.given_name,
+        //                     phone_number: res.attributes.phone_number,
+        //                     phone_country_code: res.attributes[countrycode]
+        //                 },
+        //                 userToken: res.signInUserSession.idToken.jwtToken
+        //             })
+        //         }, 3000)
+        //     })
+        //     .catch((e) => {
+        //         if (e == 'not authenticated') {
+        //             setTimeout(() => {
+        //                 this.setState({
+        //                     userToken: null
+        //                 })
+        //             }, 3000)
+        //         }
+        //     })
+    // }
 
     signOut = () => {
         Auth.signOut()
@@ -89,14 +89,14 @@ export default class AuthStack extends React.Component {
         };
         return (
             <AuthContext.Provider value={authProviderValue}>
-                {this.state.userToken === undefined ?
+                {/* {this.state.userToken === undefined ?
                     <Welcome />
-                    :
-                    this.state.userToken === null ?
+                    : */}
+                    {this.state.userToken === null ?
                         <Login />
                         :
-                        <Home />
-                }
+                        <Home />}
+                {/* // } */}
             </AuthContext.Provider>
         );
     }
