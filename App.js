@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthStack from './config/authstack';
+import AuthStack from './apps/config/authstack';
 
 const App = () => {
   return <AuthStack />
