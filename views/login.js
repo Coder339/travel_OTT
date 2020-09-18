@@ -32,6 +32,18 @@ export default class login extends Component {
                            color={this.state.color}
                            width={100}
                            height={36}
+                           bordcolor='white'
+                           bordwidth={1}
+                           defaultFocus={true}
+                        />
+                        <ButtonCard 
+                           title='Sign In' 
+                           color={this.state.color}
+                           width={100}
+                           height={36}
+                           bordcolor='white'
+                           bordwidth={1}
+                           defaultFocus={false}
                         />
                         <View style={[styles.bottomContent,globalstyles.hspace]}>
                             <Text style={styles.sign_up}>
