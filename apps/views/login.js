@@ -8,7 +8,8 @@ export default class login extends Component {
     constructor(props){
         super(props);
         this.state={
-             color:colors.travelred
+             color:colors.travelred,
+             textColor:colors.white
         }
     }
     render() {
@@ -20,23 +21,36 @@ export default class login extends Component {
                                  style={styles.logo} 
                                  width='100' 
                     />
-                    <View style={{flex:1,marginTop:80}}>
-                        <Text style={[styles.content,globalstyles.hspace]}>
+                    <View style={[globalstyles.hspace]}>
+                        <Text style={[styles.content]}>
                            Premium 4K Travel Content {'\u0026'} More
                         </Text>
-                        <Text style={[styles.xplore,globalstyles.hspace]}>
+                        <Text style={[styles.xplore]}>
                            see more.xplore more
                         </Text>
                         <ButtonCard 
+                           title='Sign In' 
+                           color={this.state.color}
+                           textColor={this.state.textColor}
+                           opacity={1}
+                           width={100}
+                           height={36}
+                           bordcolor='white'
+                           bordwidth={1}
+                           defaultFocus={true}
+                           navigation={this.props.navigation}
+                           onPress='Otp'
+                        />
+                        {/* <ButtonCard 
                            title='Sign In' 
                            color={this.state.color}
                            width={100}
                            height={36}
                            bordcolor='white'
                            bordwidth={1}
-                           defaultFocus={true}
-                        />
-                        <View style={[styles.bottomContent,globalstyles.hspace]}>
+                           defaultFocus={false}
+                        /> */}
+                        <View style={[styles.bottomContent]}>
                             <Text style={styles.sign_up}>
                                 Not yet signed up to Travelxp?
                             </Text>

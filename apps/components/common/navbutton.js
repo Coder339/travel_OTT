@@ -3,44 +3,58 @@ import { StyleSheet, Text, View, TouchableOpacity,TouchableWithoutFeedback, Butt
 import {colors,globalstyles} from '../../assets/globalstyleconstants';
 
 export default function ButtonCard(props) {
-    const { title,color,width,height,onBlur,onFocus,onPress,bordwidth,bordcolor,defaultFocus }  = props
+    const { 
+        title,
+        color,
+        textColor,
+        width,
+        height,
+        onPress,
+        navigation,
+        bordwidth,
+        bordcolor,
+        defaultFocus,
+        opacity
+     }  = props
     
     const [borderwidth,setborderwidth]  = useState(0)
     const [bordercolor,setbordercolor]  = useState('')
-    
+    const [focus, setfocus] = useState(defaultFocus)
+
     const boderFocushandler = () =>{
         setborderwidth(bordwidth)
         setbordercolor(bordcolor)
     }
 
     const boderBlurhandler = () =>{
-        setborderwidth(!bordwidth)
+        setborderwidth(0)
         setbordercolor('')
-        alert('works')
+        // alert('works')
     }
 
-    // useEffect(() => {
-    //     boderFocushandler()
-    // }, [])
+    useEffect(() => {
+        focus ? (setborderwidth(bordwidth),setbordercolor(bordcolor)) : (setborderwidth(0),setbordercolor(''))
+    }, [])
 
     return (
         <TouchableWithoutFeedback 
-             onPress={()=>{alert('hello')}}
+             onPress={()=>{navigation.navigate(onPress)}}
              onFocus={()=>{boderFocushandler()}}
-             onBlur={()=>{alert('blur')}}
-             hasTVPreferredFocus={defaultFocus}>
+             onBlur={()=>{boderBlurhandler()}}
+             hasTVPreferredFocus={focus}>
             <View style={
                             [styles.button,
-                            globalstyles.hspace,
+                            // globalstyles.hspace,
                             {backgroundColor:color},
                             {width:width},
                             {height:height},
                             {borderWidth:borderwidth},
-                            {borderColor:bordercolor}
+                            {borderColor:bordercolor},
+                            // {opacity:opacity}
                             ]
                             }           
             >
-                <Text style={[styles.text]}>{title}</Text>
+                <Text style={{color:textColor,}}>{title}</Text>
                 {/* <Button title="test"/> */}
             </View>
             
