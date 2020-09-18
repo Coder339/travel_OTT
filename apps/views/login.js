@@ -75,9 +75,10 @@ const styles = StyleSheet.create({
       },
       xplore:{
         // fontWeight:'bold',
-        fontFamily:fontFamily.bold,
+        // fontFamily:fontFamily.bold,
         fontSize:25,
-        color:colors.lightgray
+        color:colors.white,
+        opacity:0.7,
       },
       bottomContent:{
           marginTop:80
