@@ -36,15 +36,6 @@ export default class login extends Component {
                            bordwidth={1}
                            defaultFocus={true}
                         />
-                        <ButtonCard 
-                           title='Sign In' 
-                           color={this.state.color}
-                           width={100}
-                           height={36}
-                           bordcolor='white'
-                           bordwidth={1}
-                           defaultFocus={false}
-                        />
                         <View style={[styles.bottomContent,globalstyles.hspace]}>
                             <Text style={styles.sign_up}>
                                 Not yet signed up to Travelxp?
@@ -77,11 +68,10 @@ const styles = StyleSheet.create({
       content:{
         marginTop:20,
         fontSize:40,
-        fontFamily:'Inter',
+        fontFamily:fontFamily.bold,
         flexShrink:1,
         width:'50%',
         color:colors.white,
-        fontWeight:'bold'
       },
       xplore:{
         // fontWeight:'bold',
@@ -98,7 +88,8 @@ const styles = StyleSheet.create({
           fontWeight:'bold'
       },
       plan:{
-          color:colors.lightgray,
+          color:colors.white,
+          opacity:0.7,
           fontSize:15,
           marginTop:5
       }
