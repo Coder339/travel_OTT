@@ -57,7 +57,7 @@ export const globalstyles = StyleSheet.create({
         marginHorizontal:60
     },
     keypadding:{
-        paddingRight:10,
+        paddingRight:16,
         paddingVertical:7}
 })
 
