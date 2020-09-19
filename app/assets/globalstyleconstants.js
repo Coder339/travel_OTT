@@ -44,7 +44,6 @@ export const colors = {
     
 }
 
-
 export const fontFamily = {
     regular: 'Inter-Regular',
     medium: 'Inter-Medium',

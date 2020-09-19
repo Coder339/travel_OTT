@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View,ImageBackground,Image, Button } from 'react-native';
-import {colors,globalstyles} from '../assets/globalstyleconstants';
+import {colors,globalstyles, fontFamily} from '../assets/globalstyleconstants';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
 import ButtonCard from '../components/common/navbutton';
 
