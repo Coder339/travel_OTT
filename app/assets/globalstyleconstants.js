@@ -54,6 +54,9 @@ export const fontFamily = {
 export const globalstyles = StyleSheet.create({
     hspace:{
         marginHorizontal:60
-    }
+    },
+    keypadding:{
+        paddingRight:10,
+        paddingVertical:7}
 })
 

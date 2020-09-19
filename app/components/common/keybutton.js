@@ -1,16 +1,17 @@
 import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity,TouchableWithoutFeedback, Button } from 'react-native';
 import {colors,globalstyles} from '../../assets/globalstyleconstants';
+import Backspace from '../../assets/images/backspace';
 
-export default function ButtonCard(props) {
+export default function Keybutton(props) {
     const { 
+        type,
         title,
         color,
         textColor,
         width,
         height,
         onPress,
-        navigation,
         bordwidth,
         bordcolor,
         defaultFocus,
@@ -38,7 +39,7 @@ export default function ButtonCard(props) {
 
     return (
         <TouchableWithoutFeedback 
-             onPress={()=>{navigation.navigate(onPress)}}
+             onPress={()=>{}}
              onFocus={()=>{boderFocushandler()}}
              onBlur={()=>{boderBlurhandler()}}
              hasTVPreferredFocus={focus}>
@@ -50,12 +51,18 @@ export default function ButtonCard(props) {
                             {height:height},
                             {borderWidth:borderwidth},
                             {borderColor:bordercolor},
-                            // {opacity:opacity}
+                            {opacity:opacity}
                             ]
                             }           
             >
-                <Text style={{color:textColor}}>{title}</Text>
-                {/* <Button title="test"/> */}
+                {type === 'num' ? 
+                  
+                  <Text style={{color:textColor}}>{title}</Text> :
+
+                  <Backspace/>
+                }
+                
+                
             </View>
             
               
@@ -69,7 +76,6 @@ const styles = StyleSheet.create({
         // flex:1,
         justifyContent:'center',
         alignItems:'center',
-        marginTop:60
     },
     text:{
         color:colors.white
