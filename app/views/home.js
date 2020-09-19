@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
 import {Text, View, StyleSheet,ScrollView} from 'react-native';
-import movieOTTData from '../app/config/OTTdata.json';
+import movieOTTData from '../config/OTTdata.json';
 import RectangleCard from '../components/common/rectangleCardDetails';
-import VerticalCard from "../components/common/verticalCard";
+import VerticalCard from "../components/common/verticalcard";
 
 export class Home extends PureComponent {
   constructor(props) {
@@ -17,8 +17,9 @@ export class Home extends PureComponent {
   render() {
     return (
       <View style={{backgroundColor: '#1F2227'}}>
-        <Text> textInComponentsss </Text>
-        <ScrollView horizontal={false}>
+        <ScrollView 
+        showsVerticalScrollIndicator={false}
+        horizontal={false}>
           {movieOTTData.map((item, index) => (
             <View key={index}>
               {item.type.includes('rectangle-card') ? (

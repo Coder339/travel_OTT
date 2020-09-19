@@ -28,7 +28,6 @@ export function LoginScreens() {
 export function HomeScreens() {
     return (
         <HomeStack.Navigator
-        mode='modal'
         initialRouteName='home'
         screenOptions={{
             headerShown: false

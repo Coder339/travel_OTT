@@ -7,10 +7,10 @@ import {
   ScrollView,
   ProgressBarAndroid,
 } from 'react-native';
-import WatchlistMinusSvg from '../../app/images/watchlistminussvg';
-import FourkSvg from '../../app/images/fourksvg';
-import HDSvg from '../../app/images/hdsvg';
-import WatchlistPlusSvg from '../../app/images/watchlistplussvg';
+import WatchlistMinusSvg from '../../images/watchlistminussvg';
+import FourkSvg from '../../images/fourksvg';
+import HDSvg from '../../images/hdsvg';
+import WatchlistPlusSvg from '../../images/watchlistplussvg';
 
 export default React.memo(function RectangleCard(props) {
   const {type, item} = props;
@@ -28,7 +28,7 @@ export default React.memo(function RectangleCard(props) {
       <ScrollView horizontal={false}>
         <ScrollView horizontal={true}>
           {item.data.map((data, index) => (
-            <View style={styles.container}>
+            <View style={styles.container} key={index}>
               <Image
                 source={{uri: data.image}}
                 style={{width: 250, height: 130}}

@@ -1,14 +1,20 @@
-import {StyleSheet, Dimensions} from "react-native";
+import { StyleSheet } from "react-native";
 
-const Height = Dimensions.get("window").height;
-const Width = Dimensions.get("window").width;
-const ratioX = Width < 375 ? (Width < 320 ? 0.75 : 0.875) : 1;
-const ratioY = Height < 568 ? (Height < 480 ? 0.75 : 0.875) : 1;
-const base_unit = 14;
-const unit = base_unit * ratioX;
 
-export function em(value) {
-    return unit * value;
+export function setImageUrl(imgUrl, tvwidth, tvheight) {
+
+    const width = tvwidth;
+    const height = tvheight;
+
+    if (imgUrl === "" || imgUrl === undefined || imgUrl === null) {
+        return "../../assets/images/noimagefound.png"
+    }
+    else if (imgUrl.includes("images.travelxp.com")) {
+        return imgUrl + "?tr=w-" + width + ",h-" + height
+    }
+    else {
+        return imgUrl
+    }
 }
 
 export function elevationShadowStyle(elevation) {
@@ -22,26 +28,26 @@ export function elevationShadowStyle(elevation) {
 }
 
 export const fontSize = {
-    extrasmallest: em(0.55),
-    smallest: em(0.7),
-    smaller: em(0.8),
-    small: em(0.9),
-    normal: em(1),
-    medium: em(1.1),
-    large: em(1.2),
-    larger: em(1.3),
-    largest: em(1.4), //titlefont is largest
-    extralarge: em(1.6),
-    extralargest: em(2),
-    superlargest: em(2.5)
+    extrasmallest: 0.55,
+    smallest: 0.7,
+    smaller: 0.8,
+    small: 0.9,
+    normal: 1,
+    medium: 1.1,
+    large: 1.2,
+    larger: 1.3,
+    largest: 1.4, //titlefont is largest
+    extralarge: 1.6,
+    extralargest: 2,
+    superlargest: 2.5
 }
 
 export const colors = {
     white: '#fff',
     black: '#000',
-    travelred:'#D9243D',
-    lightgray:'#707070',
-    
+    travelred: '#D9243D',
+    lightgray: '#707070',
+    transparent: 'transparent'
 }
 
 export const fontFamily = {
@@ -52,11 +58,26 @@ export const fontFamily = {
 }
 
 export const globalstyles = StyleSheet.create({
-    hspace:{
-        marginHorizontal:60
+    hspace: {
+        marginHorizontal: 60
     },
-    keypadding:{
-        paddingRight:10,
-        paddingVertical:7}
+    keypadding: {
+        paddingRight: 10,
+        paddingVertical: 7
+    },
+    verticalImage: {
+        aspectRatio: 0.8,
+        height: 200
+    },
+    focusBorder: {
+        borderWidth: 5,
+        borderColor: colors.white,
+        backgroundColor: colors.transparent,
+        opacity: 1
+    },
+    blurBorder: {
+        borderWidth: 5,
+        borderColor: colors.transparent
+    }
 })
 
