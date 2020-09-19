@@ -25,10 +25,10 @@ export default React.memo(function RectangleCard(props) {
           <Text style={styles.textWhiteColor}>{item.title}</Text>
         )}
       </View>
-      <ScrollView horizontal={false}>
+      
         <ScrollView horizontal={true}>
           {item.data.map((data, index) => (
-            <View style={styles.container}>
+            <View style={styles.container} key={index}>
               <Image
                 source={{uri: data.image}}
                 style={{width: 250, height: 130}}
@@ -92,7 +92,6 @@ export default React.memo(function RectangleCard(props) {
             </View>
           ))}
         </ScrollView>
-      </ScrollView>
     </View>
   );
 });

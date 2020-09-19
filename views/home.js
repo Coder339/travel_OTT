@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet,ScrollView} from 'react-native';
 import movieOTTData from '../app/config/OTTdata.json';
 import RectangleCard from '../components/common/rectangleCardDetails';
 import VerticalCard from "../components/common/verticalCard";
@@ -18,9 +18,9 @@ export class Home extends PureComponent {
     return (
       <View style={{backgroundColor: '#1F2227'}}>
         <Text> textInComponentsss </Text>
-        <View>
+        <ScrollView horizontal={false}>
           {movieOTTData.map((item, index) => (
-            <View>
+            <View key={index}>
               {item.type.includes('rectangle-card') ? (
                 <RectangleCard type={item.type} item={item} />
               ) : null}
@@ -29,7 +29,7 @@ export class Home extends PureComponent {
               ) : null}
             </View>
           ))}
-        </View>
+        </ScrollView>
       </View>
     );
   }
