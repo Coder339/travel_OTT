@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import {colors,globalstyles,fontFamily} from '../assets/globalstyleconstants';
 import ButtonCard from '../components/common/navbutton';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
+import Numerickeypad from '../components/common/keypad';
+import TextInputCard from '../components/common/textinputcard'
 
 export default class Otp extends Component {
     constructor(props){
@@ -28,6 +30,11 @@ export default class Otp extends Component {
                     <Text style={[styles.mobile,globalstyles.hspace]}>
                                 Enter your mobile number to login
                     </Text>
+                    <View style={[styles.inputcard,globalstyles.hspace]}>
+                        <TextInputCard/>
+                        <TextInputCard/>
+                    </View>
+                    <Numerickeypad />
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 
@@ -77,6 +84,7 @@ const styles = StyleSheet.create({
         flex:1,
         resizeMode: "cover",
         justifyContent: "center",
+        backgroundColor:'rgba(0,0,0,0.8)'
     },
     logo:{
         position:'absolute',
@@ -86,7 +94,10 @@ const styles = StyleSheet.create({
     mobile:{
         color:colors.white,
         fontSize:20,
-        fontWeight:'bold',
-        
+        fontWeight:'bold',  
     },
+    inputcard:{
+        flexDirection:'row',
+        
+    }
 })
