@@ -1,70 +1,61 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, Button,ImageBackground } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
 import {colors,globalstyles,fontFamily} from '../assets/globalstyleconstants';
 import ButtonCard from '../components/common/navbutton';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
+import Goback  from '../assets/images/goback';
 import Numerickeypad from '../components/common/keypad';
 import TextInputCard from '../components/common/textinputcard'
 import CodeValidation from '../components/common/codevalidation';
 
-export default class Otp extends Component {
+export default class OtpValidate extends Component {
     constructor(props){
         super(props);
         this.state={
-            blackbutton: colors.black,
-            whitebutton: colors.white,
-            blackButtonTextColor: colors.white,
-            whiteButtonTextColor: colors.black,
-            mobile: '',
-            title:'',
-            mobileHolder: 'ENTER YOUR MOBILE NUMBER',
-            mobileHolderColor: colors.white,
-            countryCode: '+91',
-            erroMessage:'Please enter valid country code'
-
+            blackbutton:colors.black,
+            whitebutton:colors.white,
+            blackButtonTextColor:colors.white,
+            whiteButtonTextColor:colors.black,
+            mobile:'ENTER YOUR MOBILE NUMBER',
+            mobileHolderColor:colors.white,
+            otpNum: '',
+            otpArray: [1,2,3,4,5,6]
        }
-       this.mobileHandler = this.mobileHandler.bind(this)
     }
 
-    mobileHandler(text){
-     this.setState({mobile:text})
-     console.log(" mobile ",this.state.mobile)
+    otpNumHandler(num) {
+        this.setState({otpNum:num})
     }
-
     render() {
-        
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
                                  style={styles.image}>
                     
+                    <Goback style={styles.goback}
+                            width='20' />
                     <LogoSvgComponent 
                                  style={styles.logo} 
                                  width='100' 
                     />
                     <Text style={[styles.mobile,globalstyles.hspace]}>
-                                Enter your mobile number to login
+                                Enter OTP
                     </Text>
-                    <View style={{width:'35%'}}>
-                        <View style={[styles.inputcard,globalstyles.hspace]}>
-                            <TextInputCard 
-                            width={95} 
-                            height={40} 
-                            title={this.state.countryCode} 
-                            defaultValue={this.state.countryCode}
-                            />
-                            <TextInputCard 
-                            width={230} 
-                            height={40} 
-                            placeholder={this.state.mobileHolder}
-                            placeholderTextColor={this.state.mobileHolderColor}
-                            value={this.state.mobile}
-                            onChange={(text)=>this.mobileHandler(text)}
-                            />
-                        </View>
-                        <CodeValidation erroMessage={this.state.erroMessage}/>
+                    
+                    <View style={[styles.inputcard,globalstyles.hspace]}>
+                        
+                            {this.state.otpArray.map((item,index)=>
+                                <TextInputCard 
+                                key={index}
+                                width={55} 
+                                height={50} 
+                                placeholderTextColor={this.state.mobileHolderColor}
+                                title={this.state.otpNum}
+                                />
+                            )}
+        
                     </View>
+                    
                     <Numerickeypad />
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
@@ -77,12 +68,12 @@ export default class Otp extends Component {
                                 height={36}
                                 bordcolor='white'
                                 bordwidth={2}
-                                defaultFocus={false}
+                                defaultFocus={true}
                                 navigation={this.props.navigation}
                                 onPress='Login'
                         />
                         <ButtonCard 
-                                title='Next' 
+                                title='Login' 
                                 color={this.state.whitebutton}
                                 textColor={this.state.whiteButtonTextColor}
                                 opacity={0.7}
@@ -122,6 +113,12 @@ const styles = StyleSheet.create({
         top:0,
         left:60
     },
+    goback:{
+        position:'absolute',
+        top:15,
+        left:30,
+        
+    },
     mobile:{
         color:colors.white,
         fontSize:20,
@@ -129,6 +126,9 @@ const styles = StyleSheet.create({
     },
     inputcard:{
         flexDirection:'row',
+        justifyContent:'space-between',
         marginTop:20,
+        width:'44%',
+        // backgroundColor:'blue'
     }
 })

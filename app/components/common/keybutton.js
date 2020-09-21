@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity,TouchableWithoutFeedback, Button } from 'react-native';
 import {colors,globalstyles} from '../../assets/globalstyleconstants';
 import Backspace from '../../assets/images/backspace';
+import TextInputCard from '../../components/common/textinputcard';
+import Otp from '../../views/otp';
 
 export default function Keybutton(props) {
     const { 
@@ -33,13 +35,20 @@ export default function Keybutton(props) {
         // alert('works')
     }
 
-    useEffect(() => {
-        focus ? (setborderwidth(bordwidth),setbordercolor(bordcolor)) : (setborderwidth(0),setbordercolor(''))
-    }, [])
+    const textValueHandler = () => {
+        alert(title)
+        // console.log(title)
+        // {<Otp title={title}/>}
+        // {<TextInputCard title={title}/>}
+    }
+
+    // useEffect(() => {
+    //     focus ? (setborderwidth(bordwidth),setbordercolor(bordcolor)) : (setborderwidth(0),setbordercolor(''))
+    // }, [])
 
     return (
         <TouchableWithoutFeedback 
-             onPress={()=>{}}
+             onPress={()=>textValueHandler()}
              onFocus={()=>{boderFocushandler()}}
              onBlur={()=>{boderBlurhandler()}}
              hasTVPreferredFocus={focus}>

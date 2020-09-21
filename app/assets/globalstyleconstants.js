@@ -78,6 +78,9 @@ export const globalstyles = StyleSheet.create({
     blurBorder: {
         borderWidth: 5,
         borderColor: colors.transparent
-    }
+    },
+    keypadding:{
+        paddingRight:16,
+        paddingVertical:7}
 })
 
