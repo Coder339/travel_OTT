@@ -25,7 +25,7 @@ export default function Numerickeypad(props) {
                             bordcolor='white'
                             bordwidth={2}
                             defaultFocus={true}
-                            // opacity={0.6}
+                            opacity={0.6}
                         />
                     </View>
                 )}
@@ -41,7 +41,7 @@ export default function Numerickeypad(props) {
                     bordcolor='white'
                     bordwidth={2}
                     defaultFocus={true}
-                    // opacity={0.6}
+                    opacity={0.6}
                 />
             </View>
 

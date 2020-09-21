@@ -35,9 +35,11 @@ export default function Keybutton(props) {
         // alert('works')
     }
 
-    const textValueHandler = (title) => {
+    const textValueHandler = () => {
         alert(title)
-        // <Otp title={title}/>
+        // console.log(title)
+        // {<Otp title={title}/>}
+        // {<TextInputCard title={title}/>}
     }
 
     // useEffect(() => {
@@ -46,7 +48,7 @@ export default function Keybutton(props) {
 
     return (
         <TouchableWithoutFeedback 
-             onPress={(title)=>{textValueHandler(title)}}
+             onPress={()=>textValueHandler()}
              onFocus={()=>{boderFocushandler()}}
              onBlur={()=>{boderBlurhandler()}}
              hasTVPreferredFocus={focus}>

@@ -16,19 +16,24 @@ export default class Otp extends Component {
             whitebutton: colors.white,
             blackButtonTextColor: colors.white,
             whiteButtonTextColor: colors.black,
-            mobile: props.title,
+            mobile: '',
+            title:'',
             mobileHolder: 'ENTER YOUR MOBILE NUMBER',
             mobileHolderColor: colors.white,
             countryCode: '+91',
+            erroMessage:'Please enter valid country code'
 
        }
        this.mobileHandler = this.mobileHandler.bind(this)
     }
 
-    mobileHandler(mobile){
-     this.setState({mobile:mobile})
+    mobileHandler(text){
+     this.setState({mobile:text})
+     console.log(" mobile ",this.state.mobile)
     }
+
     render() {
+        
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
@@ -41,24 +46,24 @@ export default class Otp extends Component {
                     <Text style={[styles.mobile,globalstyles.hspace]}>
                                 Enter your mobile number to login
                     </Text>
-                    <View style={{width:'30%'}}>
+                    <View style={{width:'35%'}}>
                         <View style={[styles.inputcard,globalstyles.hspace]}>
                             <TextInputCard 
-                            width={70} 
+                            width={95} 
                             height={40} 
                             title={this.state.countryCode} 
                             defaultValue={this.state.countryCode}
                             />
                             <TextInputCard 
-                            width={210} 
+                            width={230} 
                             height={40} 
                             placeholder={this.state.mobileHolder}
                             placeholderTextColor={this.state.mobileHolderColor}
                             value={this.state.mobile}
-                            onChange={(mobile)=>this.mobileHandler(mobile)}
+                            onChange={(text)=>this.mobileHandler(text)}
                             />
                         </View>
-                        <CodeValidation/>
+                        <CodeValidation erroMessage={this.state.erroMessage}/>
                     </View>
                     <Numerickeypad />
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
@@ -72,7 +77,7 @@ export default class Otp extends Component {
                                 height={36}
                                 bordcolor='white'
                                 bordwidth={2}
-                                defaultFocus={true}
+                                defaultFocus={false}
                                 navigation={this.props.navigation}
                                 onPress='Login'
                         />

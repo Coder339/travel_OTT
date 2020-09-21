@@ -2,10 +2,11 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import {colors,globalstyles,fontFamily} from '../../assets/globalstyleconstants';
 
-export default function CodeValidation() {
+export default function CodeValidation(props) {
+    const { erroMessage } = props
     return (
         <View style={[styles.messageContainer,globalstyles.hspace]}>
-            <Text style={styles.errorText}>Please enter valid country code</Text>
+            <Text style={styles.errorText}>{erroMessage}</Text>
         </View>
     )
 }

@@ -50,7 +50,7 @@ export default function ButtonCard(props) {
                             {height:height},
                             {borderWidth:borderwidth},
                             {borderColor:bordercolor},
-                            // {opacity:opacity}
+                            {opacity:opacity}
                             ]
                             }           
             >

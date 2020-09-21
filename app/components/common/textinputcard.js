@@ -3,8 +3,10 @@ import { StyleSheet, Text, View,TextInput,Keyboard,KeyboardAvoidingView } from '
 import {colors,globalstyles,fontFamily} from '../../assets/globalstyleconstants';
 
 export default function TextInputCard(props) {
-    const { width, height,title, defaultValue, value,onChange,placeholder,placeholderTextColor } = props
+    const { width, height,title,defaultValue,value,onChange,placeholder,placeholderTextColor } = props
     // const [value, setValue] = useState(title)
+    
+    // console.log(title)
     return (
         <View style={styles.inputContainer}>
             <TextInput 
@@ -18,10 +20,11 @@ export default function TextInputCard(props) {
                placeholder={placeholder}
                placeholderTextColor={placeholderTextColor}
                defaultValue={defaultValue}
-               onFocus={Keyboard.dismiss}
+            //    onFocus={Keyboard.dismiss}
                onChangeText={onChange}
                value={value}
                />
+               
         </View>
     )
 }
