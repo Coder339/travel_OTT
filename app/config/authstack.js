@@ -6,7 +6,7 @@ import aws_exports from './aws-exports';
 import Home from '../views/home';
 import Login from '../views/login';
 import { NavigationContainer } from '@react-navigation/native';
-import { LoginScreens,HomeScreens } from './router';
+import { LoginScreens,HomeScreens, DrawerTabs } from './router';
 
 
 Amplify.configure(aws_exports);
@@ -15,7 +15,7 @@ export default class AuthStack extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userToken: 'null',
+            userToken: "null",
             user: {
                 name: '',
                 said: null,
@@ -102,7 +102,9 @@ export default class AuthStack extends React.Component {
                             {this.state.userToken === null ?
                                 <LoginScreens />
                                 :
-                                <HomeScreens />}
+                                // <HomeScreens />
+                                <DrawerTabs />
+                                }
                                 
                         </NavigationContainer>
 
