@@ -1,25 +1,15 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ScrollView,
-  ProgressBarAndroid,
-} from 'react-native';
-import WatchlistMinusSvg from '../../images/watchlistminussvg';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import FourkSvg from '../../images/fourksvg';
 import HDSvg from '../../images/hdsvg';
-import WatchlistPlusSvg from '../../images/watchlistplussvg';
-import PlaySvg from '../../images/playsvg';
 import ProgressiveImage from './progressiveimage';
 import {
   colors,
   setImageUrl,
   globalstyles,
-  fontSize,
 } from '../../assets/globalstyleconstants';
 import VerticalCarditem from './verticalcarditem';
+import PlayWatchButton from './playwatchbutton';
 
 export default React.memo(function HeroCard(props) {
   const {type, item} = props;
@@ -70,7 +60,7 @@ export default React.memo(function HeroCard(props) {
                     {item.data[0].data.map((data, index) => (
                       <View 
                         key={index}
-                        Vertical={false}
+                        Vertical={false}   
                         showsHorizontalScrollIndicator={false}>
                         <VerticalCarditem data={data} key={index} />
                       </View>
@@ -81,10 +71,7 @@ export default React.memo(function HeroCard(props) {
             </View>
           ))}
           <View style={styles.playWatchContainer}>
-            <View style={styles.playwatchText}>
-              <PlaySvg width="20" height="20" />
-              <Text>Watch</Text>
-            </View>
+            <PlayWatchButton name="Watch" />
           </View>
         </View>
       ) : null}

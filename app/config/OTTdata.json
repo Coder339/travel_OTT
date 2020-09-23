@@ -49,7 +49,7 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 40,
+                "progress": 30,
                 "image": "https://images.travelxp.com/deals/dealholidayhome/splendorsofhimachalpradeshtwo.jpg",
                 "watchlist": true
             },
@@ -64,7 +64,7 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 20,
+                "progress": 30,
                 "image": "https://images.travelxp.com/images/txpin/general/donasylviabeachresortgoa.jpg",
                 "watchlist": true
             },
@@ -79,7 +79,7 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 50,
+                "progress": 30,
                 "image": "https://images.travelxp.com/images/txpin/holidays/525x280/pack_213.jpg",
                 "watchlist": true
             },
@@ -94,7 +94,7 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 40,
+                "progress": 30,
                 "image": "https://images.travelxp.com/images/india/goa/goa.jpg",
                 "watchlist": true
             },
@@ -109,7 +109,7 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 10,
+                "progress": 30,
                 "image": "https://images.travelxp.com/images/txpin/general/royalorchidgoa.jpg",
                 "watchlist": true
             }
@@ -328,7 +328,7 @@
                     {
                         "image": "https://images.travelxp.com/images/txpin/general/donasylviabeachresortgoa.jpg",
                         "id": "984nkjsdfb8",
-                        "type": "program1",
+                        "type": "program",
                         "title": "",
                         "description": "",
                         "episode": null,

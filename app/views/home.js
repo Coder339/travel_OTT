@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Text, View, StyleSheet,ScrollView} from 'react-native';
+import {View,ScrollView} from 'react-native';
 import movieOTTData from '../config/OTTdata.json';
 import RectangleCard from '../components/common/rectanglecard';
 import VerticalCard from "../components/common/verticalcard";

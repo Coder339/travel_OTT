@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import VerticalCarditem from './verticalcarditem';
-import {fontSize,fontFamily} from '../../assets/globalstyleconstants';
+import {fontFamily} from '../../assets/globalstyleconstants';
 
 export default function VerticalCard(props) {
   const { type, item } = props;

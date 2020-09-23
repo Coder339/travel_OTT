@@ -101,4 +101,22 @@ export const globalstyles = StyleSheet.create({
     fontSize: fontSize.superlargest,
     fontFamily:fontFamily.bold
   },
+  focusPlayButton:{
+    backgroundColor: colors.travelred,
+    width: 150,
+    height: 55,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 30,
+  },
+  blurPlayButton:{
+    backgroundColor: colors.white,
+    width: 150,
+    height: 55,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingLeft: 30,
+  }
 });

@@ -1,10 +1,7 @@
-import react from 'react';
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {
   colors,
-  setImageUrl,
-  globalstyles,
 } from '../../assets/globalstyleconstants';
 import RectangleCarditem from './rectanglecarditem';
 
@@ -23,9 +20,7 @@ export default function RectangleCard(props) {
       </View>
       <ScrollView horizontal={true}>
         {item.data.map((data, index) => (
-          <React.Fragment>
             <RectangleCarditem data={data} type={type} key={index} />
-          </React.Fragment>
         ))}
       </ScrollView>
     </View>
