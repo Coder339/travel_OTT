@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import VerticalCarditem from './verticalcarditem';
+import {fontSize,fontFamily} from '../../assets/globalstyleconstants';
 
 export default function VerticalCard(props) {
   const { type, item } = props;
@@ -19,7 +20,8 @@ export default function VerticalCard(props) {
   console.log(focus, ' focus')
 
   return (
-    <React.Fragment>
+    <View style={styles.container}> 
+    {/* chnaged from react-fragment to view for alignment*/}
       <View style={styles.titleContainer}>
         <Text style={styles.textWhiteColor}>{item.title}</Text>
       </View>
@@ -30,7 +32,7 @@ export default function VerticalCard(props) {
           <VerticalCarditem data={data} key={index} />
         ))}
       </ScrollView>
-    </React.Fragment>
+    </View>
   );
 };
 
@@ -39,12 +41,13 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 10,
     paddingBottom: 30,
-    paddingLeft: 20,
+    paddingLeft: 5,
   },
   titleContainer: {
-    paddingLeft: 20,
+    paddingLeft: 15,
   },
   textWhiteColor: {
     color: 'white',
+    fontFamily:fontFamily.regular
   }
 });

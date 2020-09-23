@@ -20,102 +20,6 @@
         ]
     },
     {
-        "type": "vertical-card",
-        "title": "Trending Now",
-        "data": [
-            {
-                "image": "https://images.travelxp.com/images/txpin/general/donasylviabeachresortgoa.jpg",
-                "id": "984nkjsdfb8",
-                "type": "program",
-                "title": "",
-                "description": "",
-                "episode": null,
-                "seasons": null,
-                "episodes": null,
-                "dur": null,
-                "4k": true,
-                "hlghdr": true,
-                "progress": null,
-                "watchlist": true
-            },
-            {
-                "image": "https://images.travelxp.com/deals/dealmainhome/gatewaychikmagalur.jpeg",
-                "id": "984nkjsdfb8",
-                "type": "program",
-                "title": "",
-                "description": "",
-                "episode": null,
-                "seasons": null,
-                "episodes": null,
-                "dur": null,
-                "4k": true,
-                "hlghdr": true,
-                "progress": null,
-                "watchlist": true
-            },
-            {
-                "image": "https://images.travelxp.com/images/india/himachal/sunrisecrystallake.jpg",
-                "id": "984nkjsdfb8",
-                "type": "program",
-                "title": "",
-                "description": "",
-                "episode": null,
-                "seasons": null,
-                "episodes": null,
-                "dur": null,
-                "4k": true,
-                "hlghdr": true,
-                "progress": null,
-                "watchlist": true
-            },
-            {
-                "image": "https://images.travelxp.com/images/txpin/holidays/525x280/pack_24.jpg",
-                "id": "984nkjsdfb8",
-                "type": "program",
-                "title": "",
-                "description": "",
-                "episode": null,
-                "seasons": null,
-                "episodes": null,
-                "dur": null,
-                "4k": true,
-                "hlghdr": true,
-                "progress": null,
-                "watchlist": true
-            },
-            {
-                "image": "https://images.travelxp.com/images/dubai/lourvemuseumdubai.jpg",
-                "id": "984nkjsdfb8",
-                "type": "program",
-                "title": "",
-                "description": "",
-                "episode": null,
-                "seasons": null,
-                "episodes": null,
-                "dur": null,
-                "4k": true,
-                "hlghdr": true,
-                "progress": null,
-                "watchlist": true
-            },
-            {
-                "image": "https://images.travelxp.com/images/dubai/romanceindubai.jpg",
-                "id": "984nkjsdfb8",
-                "type": "program",
-                "title": "",
-                "description": "",
-                "episode": null,
-                "seasons": null,
-                "episodes": null,
-                "dur": null,
-                "4k": true,
-                "hlghdr": true,
-                "progress": null,
-                "watchlist": true
-            }
-        ]
-    },
-    {
         "type": "rectangle-card-title",
         "title": "Continue Watching",
         "data": [
@@ -145,7 +49,7 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 30,
+                "progress": 40,
                 "image": "https://images.travelxp.com/deals/dealholidayhome/splendorsofhimachalpradeshtwo.jpg",
                 "watchlist": true
             },
@@ -160,7 +64,7 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 30,
+                "progress": 20,
                 "image": "https://images.travelxp.com/images/txpin/general/donasylviabeachresortgoa.jpg",
                 "watchlist": true
             },
@@ -175,7 +79,7 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 30,
+                "progress": 50,
                 "image": "https://images.travelxp.com/images/txpin/holidays/525x280/pack_213.jpg",
                 "watchlist": true
             },
@@ -190,7 +94,7 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 30,
+                "progress": 40,
                 "image": "https://images.travelxp.com/images/india/goa/goa.jpg",
                 "watchlist": true
             },
@@ -205,12 +109,13 @@
                 "dur": null,
                 "4k": true,
                 "hlghdr": true,
-                "progress": 30,
+                "progress": 10,
                 "image": "https://images.travelxp.com/images/txpin/general/royalorchidgoa.jpg",
                 "watchlist": true
             }
         ]
-    },{
+    },
+    {
         "type": "rectangle-card-details",
         "title": "Continue Watching",
         "data": [
@@ -423,7 +328,7 @@
                     {
                         "image": "https://images.travelxp.com/images/txpin/general/donasylviabeachresortgoa.jpg",
                         "id": "984nkjsdfb8",
-                        "type": "program",
+                        "type": "program1",
                         "title": "",
                         "description": "",
                         "episode": null,

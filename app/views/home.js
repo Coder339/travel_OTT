@@ -1,8 +1,9 @@
 import React, {PureComponent} from 'react';
 import {Text, View, StyleSheet,ScrollView} from 'react-native';
 import movieOTTData from '../config/OTTdata.json';
-import RectangleCard from '../components/common/rectangleCardDetails';
+import RectangleCard from '../components/common/rectanglecard';
 import VerticalCard from "../components/common/verticalcard";
+import HeroCard from '../components/common/herocard';
 
 export class Home extends PureComponent {
   constructor(props) {
@@ -27,6 +28,9 @@ export class Home extends PureComponent {
               ) : null}
               {item.type.includes('vertical-card') ? (
                 <VerticalCard type={item.type} item={item} />
+              ) : null}
+              {item.type.includes('hero') ? (
+                <HeroCard type={item.type} item={item} />
               ) : null}
             </View>
           ))}
