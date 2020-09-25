@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, Button,ImageBackground } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
-import {colors,globalstyles,fontFamily} from '../assets/globalstyleconstants';
+import {colors,globalstyles,fontFamily,fontSize} from '../assets/globalstyleconstants';
 import ButtonCard from '../components/common/navbutton';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
 import Numerickeypad from '../components/common/keypad';
@@ -21,8 +21,9 @@ export default class Otp extends Component {
             mobileHolder: 'ENTER YOUR MOBILE NUMBER',
             mobileHolderColor: colors.white,
             countryCode: '+91',
-            erroMessage:'Please enter valid country code'
-
+            erroMessage:'Please enter valid country code',
+            defaultNum:'9'
+         
        }
        this.mobileHandler = this.mobileHandler.bind(this)
     }
@@ -51,12 +52,14 @@ export default class Otp extends Component {
                             <TextInputCard 
                             width={95} 
                             height={40} 
+                            maxLength={3}
                             title={this.state.countryCode} 
                             defaultValue={this.state.countryCode}
                             />
                             <TextInputCard 
                             width={230} 
                             height={40} 
+                            maxLength={10}
                             placeholder={this.state.mobileHolder}
                             placeholderTextColor={this.state.mobileHolderColor}
                             value={this.state.mobile}
@@ -65,7 +68,7 @@ export default class Otp extends Component {
                         </View>
                         <CodeValidation erroMessage={this.state.erroMessage}/>
                     </View>
-                    <Numerickeypad />
+                    <Numerickeypad defaultNum={this.state.defaultNum}/>
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 
@@ -124,8 +127,8 @@ const styles = StyleSheet.create({
     },
     mobile:{
         color:colors.white,
-        fontSize:20,
-        fontWeight:'bold',  
+        fontSize:fontSize.largest,
+        fontFamily:fontFamily.bold,  
     },
     inputcard:{
         flexDirection:'row',

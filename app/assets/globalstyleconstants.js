@@ -33,7 +33,8 @@ export const fontSize = {
     largest: em(1.4), //titlefont is largest
     extralarge: em(1.6),
     extralargest: em(2),
-    superlargest: em(2.5)
+    superlargest: em(2.5),
+    superextralargest: em(2.7)
 }
 
 export const colors = {

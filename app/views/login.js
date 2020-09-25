@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View,ImageBackground,Image, Button } from 'react-native';
-import {colors,globalstyles,fontFamily} from '../assets/globalstyleconstants';
+import {colors,globalstyles,fontFamily,fontSize} from '../assets/globalstyleconstants';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
 import ButtonCard from '../components/common/navbutton';
 
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
       },
       content:{
         marginTop:20,
-        fontSize:40,
+        fontSize:fontSize.superextralargest,
         fontFamily:fontFamily.bold,
         flexShrink:1,
         width:'50%',
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
       xplore:{
         // fontWeight:'bold',
         // fontFamily:fontFamily.bold,
-        fontSize:25,
+        fontSize:fontSize.extralargest,
         color:colors.white,
         opacity:0.7,
       },
@@ -99,13 +99,13 @@ const styles = StyleSheet.create({
       },
       sign_up:{
           color:colors.white,
-          fontSize:20,
+          fontSize:fontSize.largest,
           fontWeight:'bold'
       },
       plan:{
           color:colors.white,
           opacity:0.7,
-          fontSize:15,
+          fontSize:fontSize.normal,
           marginTop:5
       }
     

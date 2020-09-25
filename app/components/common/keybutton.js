@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity,TouchableWithoutFeedback, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,TouchableHighlight,TouchableWithoutFeedback, Button } from 'react-native';
 import {colors,globalstyles} from '../../assets/globalstyleconstants';
 import Backspace from '../../assets/images/backspace';
 import TextInputCard from '../../components/common/textinputcard';
@@ -17,6 +17,7 @@ export default function Keybutton(props) {
         bordwidth,
         bordcolor,
         defaultFocus,
+        defaultNum,
         opacity
      }  = props
     
@@ -42,12 +43,16 @@ export default function Keybutton(props) {
         // {<TextInputCard title={title}/>}
     }
 
-    // useEffect(() => {
-    //     focus ? (setborderwidth(bordwidth),setbordercolor(bordcolor)) : (setborderwidth(0),setbordercolor(''))
-    // }, [])
+    useEffect(() => {
+        (defaultNum === title && type === 'num') ? (setborderwidth(bordwidth),setbordercolor(bordcolor),setfocus(true)) : (setborderwidth(0),setbordercolor(''))
+        
+    }, [])
 
     return (
-        <TouchableWithoutFeedback 
+        <TouchableHighlight 
+        // activeOpacity={false}
+             underlayColor={false}
+             activeOpacity={opacity}
              onPress={()=>textValueHandler()}
              onFocus={()=>{boderFocushandler()}}
              onBlur={()=>{boderBlurhandler()}}
@@ -71,12 +76,12 @@ export default function Keybutton(props) {
                   <Backspace/>
                 }
                 
-                
+      
             </View>
             
               
             
-        </TouchableWithoutFeedback>
+        </TouchableHighlight>
     )
 }
 

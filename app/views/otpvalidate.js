@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Button,ImageBackground } from 'react-native'
-import {colors,globalstyles,fontFamily} from '../assets/globalstyleconstants';
+import { Text, StyleSheet, View, Button,ImageBackground,Keyboard } from 'react-native'
+import { colors,globalstyles,fontFamily,fontSize } from '../assets/globalstyleconstants';
 import ButtonCard from '../components/common/navbutton';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
 import Goback  from '../assets/images/goback';
@@ -11,6 +11,14 @@ import CodeValidation from '../components/common/codevalidation';
 export default class OtpValidate extends Component {
     constructor(props){
         super(props);
+        this.inputRefs = [
+            React.createRef(),
+            React.createRef(),
+            React.createRef(),
+            React.createRef(),
+            React.createRef(),
+            React.createRef()
+        ]
         this.state={
             blackbutton:colors.black,
             whitebutton:colors.white,
@@ -19,14 +27,58 @@ export default class OtpValidate extends Component {
             mobile:'ENTER YOUR MOBILE NUMBER',
             mobileHolderColor:colors.white,
             otpNum: '',
-            otpArray: [1,2,3,4,5,6]
+            otpArray: ['1','2','3','4','5','6'],
+            defaultNum:'1',
+            message:'',
+            
        }
+       this.otpNumHandler = this.otpNumHandler.bind(this)
+       this.onChangeHandler = this.onChangeHandler.bind(this)
+       this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     otpNumHandler(num) {
         this.setState({otpNum:num})
+        
     }
+    _goNextAfterEdit(index){
+        this.inputRefs[index+1].focus()
+        
+    }
+    
+    onChangeHandler(event,message,index){
+        this.setState({message: message + event})
+                                        
+        if ( index === this.state.otpArray.length-1 ){ 
+            // issue with last event addition
+            alert(message + event)
+            Keyboard.dismiss()
+
+        }
+        else {
+            this._goNextAfterEdit(index)
+        }
+    }
+    
+    handleKeyPress(nativeEvent,index) {
+        if (nativeEvent.key === 'Backspace') {
+            
+            if (index === 0){
+                return
+            }
+            else{
+                this.inputRefs[index-1].focus()
+            }
+        }
+        // nativeEvent.key === 'Backspace' ? alert('delete') : alert('ghjgjh')
+
+    }
+    componentDidMount = () =>{
+        // this.refs.defaultNum.focus()
+    }
+    
     render() {
+        const { otpArray,mobileHolderColor,message } = this.state
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
@@ -44,19 +96,25 @@ export default class OtpValidate extends Component {
                     
                     <View style={[styles.inputcard,globalstyles.hspace]}>
                         
-                            {this.state.otpArray.map((item,index)=>
-                                <TextInputCard 
-                                key={index}
-                                width={55} 
-                                height={50} 
-                                placeholderTextColor={this.state.mobileHolderColor}
-                                title={this.state.otpNum}
-                                />
-                            )}
+                            {otpArray.map((item,index) => 
+                                 
+                                <View key={index}>
+                                    <TextInputCard 
+                                    inputRef={r => this.inputRefs[index] =  r}
+                                    maxLength={1}
+                                    width={55} 
+                                    height={50} 
+                                    placeholderTextColor={mobileHolderColor}
+                                    // title={this.state.otpNum}
+                                    onChange={(event) =>  this.onChangeHandler(event,message,index)}
+                                    onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
+                                    />
+                                </View>
+                          )}
         
                     </View>
                     
-                    <Numerickeypad />
+                    <Numerickeypad defaultNum={this.state.defaultNum}/>
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 
@@ -68,9 +126,9 @@ export default class OtpValidate extends Component {
                                 height={36}
                                 bordcolor='white'
                                 bordwidth={2}
-                                defaultFocus={true}
+                                defaultFocus={false}
                                 navigation={this.props.navigation}
-                                onPress='Login'
+                                onPress='Otp'
                         />
                         <ButtonCard 
                                 title='Login' 
@@ -96,6 +154,7 @@ export default class OtpValidate extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        position:'relative',
       },
     buttonContainer:{
         flexDirection:'row',
@@ -121,8 +180,8 @@ const styles = StyleSheet.create({
     },
     mobile:{
         color:colors.white,
-        fontSize:20,
-        fontWeight:'bold',  
+        fontSize:fontSize.larger,
+        fontFamily:fontFamily.bold,  
     },
     inputcard:{
         flexDirection:'row',
