@@ -13,11 +13,11 @@ export default function Keybutton(props) {
         textColor,
         width,
         height,
-        onPress,
         bordwidth,
         bordcolor,
         defaultFocus,
         defaultNum,
+        onPress,
         opacity
      }  = props
     
@@ -36,12 +36,9 @@ export default function Keybutton(props) {
         // alert('works')
     }
 
-    const textValueHandler = () => {
-        alert(title)
-        // console.log(title)
-        // {<Otp title={title}/>}
-        // {<TextInputCard title={title}/>}
-    }
+    // const textValueHandler = () => {
+    //     alert(title)
+    // }
 
     useEffect(() => {
         (defaultNum === title && type === 'num') ? (setborderwidth(bordwidth),setbordercolor(bordcolor),setfocus(true)) : (setborderwidth(0),setbordercolor(''))
@@ -53,7 +50,7 @@ export default function Keybutton(props) {
         // activeOpacity={false}
              underlayColor={false}
              activeOpacity={opacity}
-             onPress={()=>textValueHandler()}
+             onPress={()=>onPress(title)}
              onFocus={()=>{boderFocushandler()}}
              onBlur={()=>{boderBlurhandler()}}
              hasTVPreferredFocus={focus}>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View,TextInput,Keyboard,KeyboardAvoidingView } from 'react-native'
 import {colors,globalstyles,fontFamily,fontSize} from '../../assets/globalstyleconstants';
 
@@ -23,6 +23,16 @@ export default function TextInputCard(props) {
         // Keyboard.dismiss()
         setActive(true)
     }
+    
+
+    const referenceHandler = (r) => {
+        inputRef && inputRef(r) 
+    }
+
+    useEffect(() => {
+        // referenceHandler(0)
+        // inputRef[0].focus()
+    }, [])
     return (
         <View style={styles.inputContainer}>
             <TextInput 
@@ -34,12 +44,13 @@ export default function TextInputCard(props) {
                       }
                      ]}
                      
-               ref={(r) => { inputRef && inputRef(r) }}
+               ref={(r)=>referenceHandler(r)}
                maxLength={maxLength}
                placeholder={placeholder}
                placeholderTextColor={placeholderTextColor}
                defaultValue={defaultValue}
-            //    keyboardType='number-pad'
+               keyboardType='numeric'
+            //    autoFocus={true}
                onKeyPress={onkeypress}
                onFocus={()=>borderFocusHandler()}
                onBlur={()=>setActive(false)}
@@ -60,7 +71,7 @@ const styles = StyleSheet.create({
         opacity:0.7,
         color:colors.white,
         textAlign:'center',
-        fontWeight:'bold'
+        fontFamily:fontFamily.bold
 
     },
     inputContainer:{

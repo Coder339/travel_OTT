@@ -24,8 +24,6 @@ export default class OtpValidate extends Component {
             whitebutton:colors.white,
             blackButtonTextColor:colors.white,
             whiteButtonTextColor:colors.black,
-            mobile:'ENTER YOUR MOBILE NUMBER',
-            mobileHolderColor:colors.white,
             otpNum: '',
             otpArray: ['1','2','3','4','5','6'],
             defaultNum:'1',
@@ -35,6 +33,7 @@ export default class OtpValidate extends Component {
        this.otpNumHandler = this.otpNumHandler.bind(this)
        this.onChangeHandler = this.onChangeHandler.bind(this)
        this.handleKeyPress = this.handleKeyPress.bind(this);
+       this.keyTextHandler = this.keyTextHandler.bind(this);
     }
 
     otpNumHandler(num) {
@@ -48,7 +47,8 @@ export default class OtpValidate extends Component {
     
     onChangeHandler(event,message,index){
         this.setState({message: message + event})
-                                        
+        console.log(this.state.message.length)  
+                     
         if ( index === this.state.otpArray.length-1 ){ 
             // issue with last event addition
             alert(message + event)
@@ -73,8 +73,14 @@ export default class OtpValidate extends Component {
         // nativeEvent.key === 'Backspace' ? alert('delete') : alert('ghjgjh')
 
     }
+
+    keyTextHandler(text){
+        alert(text)
+    }
+
     componentDidMount = () =>{
-        // this.refs.defaultNum.focus()
+        // <TextInputCard inputRef={r => this.inputRefs[0] =  r}/>
+        // this.inputRefs[0].focus()
     }
     
     render() {
@@ -104,7 +110,6 @@ export default class OtpValidate extends Component {
                                     maxLength={1}
                                     width={55} 
                                     height={50} 
-                                    placeholderTextColor={mobileHolderColor}
                                     // title={this.state.otpNum}
                                     onChange={(event) =>  this.onChangeHandler(event,message,index)}
                                     onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
@@ -114,7 +119,7 @@ export default class OtpValidate extends Component {
         
                     </View>
                     
-                    <Numerickeypad defaultNum={this.state.defaultNum}/>
+                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.keyTextHandler(text)}/>
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 
