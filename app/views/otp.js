@@ -122,7 +122,7 @@ export default class Otp extends Component {
                                     <TextInputCard 
                                     inputRef={r => this.inputRefs[index] =  r}
                                     maxLength={index === 0 ? 3 : 10}
-                                    // defaultValue={index === 0 ? countryCode: ''}
+                                    // defaultValue={index === 0 ? countryCode : ''}
                                     width={index === 0 ? 95 : 230} 
                                     height={40} 
                                     placeholder={index === 0 ? '' : mobileHolder}

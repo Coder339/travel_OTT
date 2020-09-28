@@ -51,9 +51,8 @@ export default class OtpValidate extends Component {
                      
         if ( index === this.state.otpArray.length-1 ){ 
             // issue with last event addition
-            alert(message + event)
             Keyboard.dismiss()
-
+            // alert(message + event)
         }
         else {
             this._goNextAfterEdit(index)
@@ -84,7 +83,7 @@ export default class OtpValidate extends Component {
     }
     
     render() {
-        const { otpArray,mobileHolderColor,message } = this.state
+        const { otpArray,mobileHolderColor,message,otpNum } = this.state
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
@@ -110,8 +109,8 @@ export default class OtpValidate extends Component {
                                     maxLength={1}
                                     width={55} 
                                     height={50} 
-                                    // title={this.state.otpNum}
-                                    onChange={(event) =>  this.onChangeHandler(event,message,index)}
+                                    value={otpNum}
+                                    onChange={(num) =>  this.onChangeHandler(num,message,index)}
                                     onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
                                     />
                                 </View>
@@ -119,7 +118,7 @@ export default class OtpValidate extends Component {
         
                     </View>
                     
-                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.keyTextHandler(text)}/>
+                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.otpNumHandler(text)}/>
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 

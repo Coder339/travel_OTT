@@ -30,8 +30,9 @@ export default function TextInputCard(props) {
     }
 
     useEffect(() => {
-        // referenceHandler(0)
+        referenceHandler(0)
         // inputRef[0].focus()
+        
     }, [])
     return (
         <View style={styles.inputContainer}>
@@ -40,7 +41,7 @@ export default function TextInputCard(props) {
                       {width:width,
                       height:height,
                       borderBottomWidth: active ? 1 : 0,
-                      fontSize:fontSize.medium
+                      fontSize:fontSize.normal
                       }
                      ]}
                      
