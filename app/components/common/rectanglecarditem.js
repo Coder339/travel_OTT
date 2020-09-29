@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   ProgressBarAndroid,
+  TouchableHighlight,
 } from 'react-native';
 import {
   colors,
@@ -17,6 +18,7 @@ import WatchlistMinusSvg from '../../images/watchlistminussvg';
 import FourkSvg from '../../images/fourksvg';
 import HDSvg from '../../images/hdsvg';
 import WatchlistPlusSvg from '../../images/watchlistplussvg';
+import ProgressBar from './progressbar';
 
 export default class RectangleCarditem extends PureComponent {
   constructor(props) {
@@ -46,14 +48,16 @@ export default class RectangleCarditem extends PureComponent {
 
   render() {
     const {data, type} = this.props;
+    const sizing = {width: 250, height: 155};
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        <TouchableHighlight
+          underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           style={
             this.state.focused
-              ? globalstyles.focusBorder
+              ? [globalstyles.focusBorder, sizing]
               : globalstyles.blurBorder
           }>
           <ProgressiveImage
@@ -62,23 +66,31 @@ export default class RectangleCarditem extends PureComponent {
             thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
             source={{uri: setImageUrl(data.image, 320, 300)}}
           />
-        </TouchableOpacity>
+        </TouchableHighlight>
         {type === 'rectangle-card-title' ||
         type === 'rectangle-card-details' ? (
           <View style={styles.bannerTitleContainer}>
-            <View style={{width: 180, paddingBottom: 15}}>
+            <View style={{width: 180, paddingBottom: 15, paddingLeft: 5}}>
               <Text numberOfLines={2} style={styles.bannerTitle}>
                 {data.title}
               </Text>
             </View>
             {type === 'rectangle-card-title' ? (
-              <View style={styles.selected}>
-                <ProgressBarAndroid
+              <View
+                style={
+                  this.state.focused ? styles.selectedFocus : styles.selected
+                }>
+                <ProgressBar
+                  progress={data.progress + '%'}
+                  // innerStyle={styles.innerStyle}
+                  // outerStyle={styles.outerStyle}
+                />
+                {/* <ProgressBarAndroid
                   styleAttr="Horizontal"
                   indeterminate={false}
                   progress={data.progress / 100}
                   color="white"
-                />
+                /> */}
               </View>
             ) : null}
 
@@ -124,18 +136,25 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 20,
+    paddingLeft: 10,
     position: 'relative',
   },
   titleContainer: {
-    paddingLeft: 20,
+    paddingLeft: 10,
   },
   selected: {
     position: 'absolute',
     top: -30,
-    left: 10,
+    left: 18,
     opacity: 1,
     width: 230,
+  },
+  selectedFocus: {
+    position: 'absolute',
+    top: -30,
+    left: 18,
+    opacity: 1,
+    width: 210,
   },
   bannerTitleContainer: {
     flex: 1,

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   TouchableWithoutFeedback,
+  TouchableHighlight
 } from 'react-native';
 import {
   colors,
@@ -42,13 +43,16 @@ export default class VerticalCarditem extends PureComponent {
 
   render() {
     const {data} = this.props;
+    const sizing = {height: 350, width: 250};
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        <TouchableHighlight underlayColor={false} activeOpacity={0.9} 
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           style={
-            this.state.focused ? globalstyles.focusBorder : globalstyles.blurBorder
+            this.state.focused
+              ? [globalstyles.focusBorder,sizing]
+              : globalstyles.blurBorder
           }>
           <ProgressiveImage
             style={globalstyles.verticalImage}
@@ -56,7 +60,7 @@ export default class VerticalCarditem extends PureComponent {
             thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
             source={{uri: setImageUrl(data.image, 720, 900)}}
           />
-        </TouchableOpacity>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
   },
   image: {},
-  container:{
-      paddingLeft:10
-  }
+  container: {
+    paddingLeft: 10,
+  },
 });

@@ -1,5 +1,11 @@
 import React, {PureComponent} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  TouchableHighlight,
+} from 'react-native';
 import {
   colors,
   globalstyles,
@@ -37,7 +43,8 @@ export default class PlayWatchButton extends PureComponent {
     const {name} = this.props;
     return (
       <View style={styles.container}>
-        <TouchableOpacity
+        <TouchableHighlight
+          underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           style={
@@ -45,16 +52,18 @@ export default class PlayWatchButton extends PureComponent {
               ? globalstyles.focusPlayButton
               : globalstyles.blurPlayButton
           }>
-          <PlaySvg width="20" height="20" />
-          <Text
-            style={
-              this.state.focused
-                ? styles.playwatchTextfocused
-                : styles.playwatchTextblured
-            }>
-            {name}
-          </Text>
-        </TouchableOpacity>
+          <View style={styles.innerContainer}>
+            <PlaySvg width="20" height="20" />
+            <Text
+              style={
+                this.state.focused
+                  ? styles.playwatchTextfocused
+                  : styles.playwatchTextblured
+              }>
+              {name}
+            </Text>
+          </View>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -74,4 +83,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.black,
   },
+  innerContainer:{flexDirection:'row'}
 });

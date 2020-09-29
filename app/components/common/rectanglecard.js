@@ -1,8 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import {
-  colors,
-} from '../../assets/globalstyleconstants';
+import {colors} from '../../assets/globalstyleconstants';
 import RectangleCarditem from './rectanglecarditem';
 
 export default function RectangleCard(props) {
@@ -18,11 +16,13 @@ export default function RectangleCard(props) {
           <Text style={styles.sectionTitle}>{item.title}</Text>
         )}
       </View>
-      <ScrollView horizontal={true}>
-        {item.data.map((data, index) => (
+      <View style={styles.imageContainer}>
+        <ScrollView horizontal={true}>
+          {item.data.map((data, index) => (
             <RectangleCarditem data={data} type={type} key={index} />
-        ))}
-      </ScrollView>
+          ))}
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 20,
+    paddingLeft: 45,
     position: 'relative',
   },
   titleContainer: {
-    paddingLeft: 20,
+    paddingLeft: 55,
   },
   sectionTitle: {
     color: colors.white,
@@ -44,8 +44,11 @@ const styles = StyleSheet.create({
   selected: {
     position: 'absolute',
     top: -20,
-    left: 10,
+    // left: 10,
     opacity: 1,
     width: 230,
+  },
+  imageContainer: {
+    paddingLeft: 40,
   },
 });

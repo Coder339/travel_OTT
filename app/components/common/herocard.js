@@ -70,6 +70,7 @@ export default React.memo(function HeroCard(props) {
               ) : null}
             </View>
           ))}
+          
           <View style={styles.playWatchContainer}>
             <PlayWatchButton name="Watch" />
           </View>
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     width: 490,
     paddingBottom: 15,
     paddingTop: 2,
-    paddingLeft: 20,
+    paddingLeft: 70,
     position: 'absolute',
     top: 140,
   },
@@ -109,22 +110,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     width: 250,
-    paddingLeft: 20,
+    paddingLeft: 70,
     position: 'absolute',
     top: 230,
   },
   hdfourkContainer: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    width: 100,
-    paddingLeft: 20,
+    width: 150,
+    paddingLeft: 70,
     paddingRight: 20,
     paddingBottom: 25,
   },
   descContainer: {
-    width: 450,
+    width: 600,
     paddingBottom: 30,
-    paddingLeft: 20,
+    paddingLeft: 70,
     position: 'absolute',
     top: 260,
   },
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   playWatchContainer: {
-    paddingLeft: 20,
+    paddingLeft: 70,
     position: 'absolute',
     top: 340,
     flex: 1,
@@ -145,6 +146,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingLeft: 30,
+    paddingLeft: 50,
   },
 });

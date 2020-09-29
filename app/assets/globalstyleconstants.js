@@ -8,7 +8,6 @@ export function setImageUrl(imgUrl, tvwidth, tvheight) {
     return '../../assets/images/noimagefound.png';
   } else if (imgUrl.includes('images.travelxp.com')) {
     return imgUrl + '?tr=w-' + width + ',h-' + height;
-    // return imgUrl
   } else {
     return imgUrl;
   }
@@ -45,6 +44,7 @@ export const colors = {
   travelred: '#D9243D',
   lightgray: '#707070',
   transparent: 'transparent',
+  backgroundColor: '#1F2227',
 };
 
 export const fontFamily = {
@@ -77,7 +77,7 @@ export const globalstyles = StyleSheet.create({
     height: 550,
   },
   focusBorder: {
-    borderWidth: 10,
+    borderWidth: 7,
     borderColor: colors.white,
     // color: colors.transparent,
     // backgroundColor: colors.white,
@@ -99,9 +99,9 @@ export const globalstyles = StyleSheet.create({
   bannerTitle: {
     color: colors.white,
     fontSize: fontSize.superlargest,
-    fontFamily:fontFamily.bold
+    fontFamily: fontFamily.bold,
   },
-  focusPlayButton:{
+  focusPlayButton: {
     backgroundColor: colors.travelred,
     width: 150,
     height: 55,
@@ -109,8 +109,9 @@ export const globalstyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 30,
+    
   },
-  blurPlayButton:{
+  blurPlayButton: {
     backgroundColor: colors.white,
     width: 150,
     height: 55,
@@ -118,5 +119,15 @@ export const globalstyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 30,
-  }
+  },
+  focusMenuBar: {
+    backgroundColor: colors.travelred,
+    color: colors.white,
+    overflow: 'hidden',
+    borderRadius:55,
+  },
+  blurMenuBar: {
+    // backgroundColor: '#1F2227',
+    // color: colors.black,
+  },
 });
