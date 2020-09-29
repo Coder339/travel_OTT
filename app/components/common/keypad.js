@@ -37,6 +37,7 @@ export default function Numerickeypad(props) {
             <View style={{paddingVertical:0,}}>
                 <Keybutton 
                     type='svg'
+                    title='backspace'
                     color={color}
                     textColor={textColor}
                     opacity={1}
@@ -46,6 +47,7 @@ export default function Numerickeypad(props) {
                     bordwidth={2}
                     defaultFocus={false}
                     opacity={0.6}
+                    onPress={onPress}
                 />
             </View>
 

@@ -9,19 +9,22 @@ export default function TextInputCard(props) {
         height,
         maxLength,
         title,
+        index,
         defaultValue,
         value,
         onChange,
+        onFocus,
+        active,
         inputRef,
         placeholder,
         placeholderTextColor } = props
     // const [value, setValue] = useState(title)
-    const [active,setActive] = useState(false)
+    // const [active,setActive] = useState(false)
     // console.log(title)
 
     const borderFocusHandler = () => {
-        // Keyboard.dismiss()
-        setActive(true)
+        Keyboard.dismiss()
+        // setActive(true)
     }
     
 
@@ -31,7 +34,7 @@ export default function TextInputCard(props) {
 
     useEffect(() => {
         referenceHandler(0)
-        // inputRef[0].focus()
+        // inputRef && inputRef(0) 
         
     }, [])
     return (
@@ -41,7 +44,7 @@ export default function TextInputCard(props) {
                       {width:width,
                       height:height,
                       borderBottomWidth: active ? 1 : 0,
-                      fontSize:fontSize.normal
+                      fontSize:fontSize.normal,
                       }
                      ]}
                      
@@ -51,10 +54,10 @@ export default function TextInputCard(props) {
                placeholderTextColor={placeholderTextColor}
                defaultValue={defaultValue}
                keyboardType='numeric'
-            //    autoFocus={true}
+            //    autoFocus={index === 0 ? true: false}
                onKeyPress={onkeypress}
                onFocus={()=>borderFocusHandler()}
-               onBlur={()=>setActive(false)}
+            //    onBlur={()=>setActive(false)}
                onChangeText={onChange}
                value={value}
                />

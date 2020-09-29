@@ -15,7 +15,11 @@ export default class Otp extends Component {
             React.createRef(),
             React.createRef(),
         ]
+        const textArray = Array(2).fill('');
+        const activeArray = Array(2).fill(false);
         this.state={
+            textArray:textArray,
+            active:activeArray,
             blackbutton: colors.black,
             whitebutton: colors.white,
             blackButtonTextColor: colors.white,
@@ -28,15 +32,75 @@ export default class Otp extends Component {
             erroMessage:'Please enter valid country code',
             defaultNum:'9',
             message:'',
+            index:0,
             inputArray: ['1','2'],
        }
        this.mobileHandler = this.mobileHandler.bind(this)
     }
 
-    mobileHandler(text){
-     this.setState({mobile:text})
-     console.log(" mobile ",this.state.mobile)
+    mobileHandler(text,index){
+        if (text === 'backspace') {
+            // alert('back')
+            this.setState(prevState=>{
+                console.log('length',this.state.textArray[index].length)
+                prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
+
+                return {
+                    textArray: prevState.textArray
+                  }
+            })
+            
+            if (this.state.textArray[1].length === 1){
+                this.state.active.fill(false,index)
+                this.setState({index:index-1})
+            }
+            console.log(this.state.textArray[index])
+            // console.log(this.state.active)
+            
+        }
+        else{
+            this.setState(prevState => {
+                if (index === 0){
+                    if (this.state.textArray[index].length < 3){
+                        prevState.textArray[index] = prevState.textArray[index] + text
+                        prevState.active[index] = true
+                        console.log('textarrayLength',this.state.textArray[index].length)
+                   
+                    }
+                }
+                if (index === 1) {
+                    // console.log('index',index)
+                    if (this.state.textArray[index].length < 10){
+                        prevState.textArray[index] = prevState.textArray[index] + text
+                        prevState.active[index] = true
+                        console.log('textarrayLength',this.state.textArray[index].length)
+                   
+                    }
+                }
+                return {
+                  textArray: prevState.textArray
+                }
+              }, 
+            //   () => console.log('textarray',this.state.textArray)
+            )
+            // this.state.index === index ? this.setState({active:true}) : this.setState({active:false})
+            if (index===0){
+
+                if (this.state.textArray[index].length === 2){
+                    this.setState({index:index+1})
+                }
+            }
+            else {
+                if (this.state.textArray[index].length === 9){
+                    this.setState({index:index})
+                }
+            }
+            
+            
+        }
     }
+
+
     
     _goNextAfterEdit(index){
         this.inputRefs[index+1].focus()
@@ -76,11 +140,11 @@ export default class Otp extends Component {
 
     }
     
-    componentDidMount = () =>{
+    componentDidMount = () => {
         // this.inputRefs[0].focus()
     }
     render() {
-        const { inputArray,mobileHolder,mobileHolderColor,message,countryCode } = this.state
+        const { active,inputArray,mobileHolder,mobileHolderColor,message,countryCode,textArray,index } = this.state
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
@@ -91,7 +155,7 @@ export default class Otp extends Component {
                                  width='100' 
                     />
                     <Text style={[styles.mobile,globalstyles.hspace]}>
-                                Enter your mobile number to login
+                                Enter your mobile number to login.
                     </Text>
                     <View style={{width:'35%'}}>
                         {/* <View style={[styles.inputcard,globalstyles.hspace]}>
@@ -125,9 +189,12 @@ export default class Otp extends Component {
                                     // defaultValue={index === 0 ? countryCode : ''}
                                     width={index === 0 ? 95 : 230} 
                                     height={40} 
+                                    active={active[index]}
+                                    index={index}
                                     placeholder={index === 0 ? '' : mobileHolder}
                                     placeholderTextColor={mobileHolderColor}
                                     // title={this.state.otpNum}
+                                    value={textArray[index]}
                                     onChange={(event) =>  this.onChangeHandler(event,message,index)}
                                     onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
                                     />
@@ -138,7 +205,7 @@ export default class Otp extends Component {
                         
                         <CodeValidation erroMessage={this.state.erroMessage}/>
                     </View>
-                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>alert(text)}/>
+                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.mobileHandler(text,index)}/>
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 
@@ -197,7 +264,7 @@ const styles = StyleSheet.create({
     },
     mobile:{
         color:colors.white,
-        fontSize:fontSize.largest,
+        fontSize:fontSize.extralarge,
         fontFamily:fontFamily.bold,  
     },
     inputcard:{

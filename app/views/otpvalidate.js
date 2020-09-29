@@ -19,7 +19,11 @@ export default class OtpValidate extends Component {
             React.createRef(),
             React.createRef()
         ]
+        const textArray = Array(6).fill('');
+        const activeArray = Array(6).fill(false);
         this.state={
+            textArray: textArray,
+            focusedIndex: null,
             blackbutton:colors.black,
             whitebutton:colors.white,
             blackButtonTextColor:colors.white,
@@ -28,6 +32,8 @@ export default class OtpValidate extends Component {
             otpArray: ['1','2','3','4','5','6'],
             defaultNum:'1',
             message:'',
+            index:0,
+            active:activeArray,
             
        }
        this.otpNumHandler = this.otpNumHandler.bind(this)
@@ -36,8 +42,34 @@ export default class OtpValidate extends Component {
        this.keyTextHandler = this.keyTextHandler.bind(this);
     }
 
-    otpNumHandler(num) {
-        this.setState({otpNum:num})
+
+    otpNumHandler(text,index) {
+        //  console.log('text',text)
+        if (text === 'backspace') {
+            // alert('back')
+            this.state.textArray.fill('',index)
+            this.state.active.fill(false,index)
+            this.setState({index:index-1})
+            console.log(this.state.textArray)
+            console.log(this.state.active)
+        }
+        else{
+            this.setState(prevState => {
+                
+                if (index < this.state.textArray.length){
+                    prevState.textArray[index] = text
+                    prevState.active[index] = true
+               
+                }
+                return {
+                  textArray: prevState.textArray
+                }
+              }, () => console.log(this.state.textArray))
+            // this.state.index === index ? this.setState({active:true}) : this.setState({active:false})
+            this.setState({index:index+1})
+            
+            console.log(this.state.active)
+        }
         
     }
     _goNextAfterEdit(index){
@@ -45,9 +77,11 @@ export default class OtpValidate extends Component {
         
     }
     
-    onChangeHandler(event,message,index){
-        this.setState({message: message + event})
-        console.log(this.state.message.length)  
+    onChangeHandler(text,message,index){
+        
+        this.setState({index:index})
+        this.setState({message: message + text})
+        console.log(this.state.message.length,this.state.index)  
                      
         if ( index === this.state.otpArray.length-1 ){ 
             // issue with last event addition
@@ -58,6 +92,10 @@ export default class OtpValidate extends Component {
             this._goNextAfterEdit(index)
         }
     }
+
+    // handleBorderColor = (index) => {
+    //     return index === this.state.focusedIndex ? 'red' : 'grey'
+    //   }
     
     handleKeyPress(nativeEvent,index) {
         if (nativeEvent.key === 'Backspace') {
@@ -77,13 +115,15 @@ export default class OtpValidate extends Component {
         alert(text)
     }
 
-    componentDidMount = () =>{
+    componentDidMount = () => {
         // <TextInputCard inputRef={r => this.inputRefs[0] =  r}/>
         // this.inputRefs[0].focus()
+        
+        console.log(this.state.active[0])
     }
     
     render() {
-        const { otpArray,mobileHolderColor,message,otpNum } = this.state
+        const { otpArray,mobileHolderColor,message,otpNum,textArray,index,active } = this.state
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
@@ -102,23 +142,26 @@ export default class OtpValidate extends Component {
                     <View style={[styles.inputcard,globalstyles.hspace]}>
                         
                             {otpArray.map((item,index) => 
-                                 
+                                //  this.setState({index:index})
                                 <View key={index}>
                                     <TextInputCard 
                                     inputRef={r => this.inputRefs[index] =  r}
+                                    active={active[index]}
+                                    index={index}
                                     maxLength={1}
                                     width={55} 
                                     height={50} 
-                                    value={otpNum}
-                                    onChange={(num) =>  this.onChangeHandler(num,message,index)}
+                                    value={textArray[index]}
+                                    onChange={(text) =>  this.onChangeHandler(text,message,index)}
                                     onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
+                                    // onFocus={() => this.setState({focusedIndex: index})}
                                     />
                                 </View>
                           )}
         
                     </View>
                     
-                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.otpNumHandler(text)}/>
+                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.otpNumHandler(text,index)}/>
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 
