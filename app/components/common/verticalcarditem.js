@@ -43,7 +43,7 @@ export default class VerticalCarditem extends PureComponent {
 
   render() {
     const {data} = this.props;
-    const sizing = {height: 350, width: 250};
+    const sizing = {height: 360, width: 258.5};
     return (
       <View style={styles.container}>
         <TouchableHighlight underlayColor={false} activeOpacity={0.9} 

@@ -2,9 +2,7 @@ import React, {PureComponent} from 'react';
 import {
   Text,
   View,
-  TouchableOpacity,
   StyleSheet,
-  ProgressBarAndroid,
   TouchableHighlight,
 } from 'react-native';
 import {
@@ -48,7 +46,7 @@ export default class RectangleCarditem extends PureComponent {
 
   render() {
     const {data, type} = this.props;
-    const sizing = {width: 250, height: 155};
+    const sizing = {width: 257.5, height: 160};
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -80,17 +78,7 @@ export default class RectangleCarditem extends PureComponent {
                 style={
                   this.state.focused ? styles.selectedFocus : styles.selected
                 }>
-                <ProgressBar
-                  progress={data.progress + '%'}
-                  // innerStyle={styles.innerStyle}
-                  // outerStyle={styles.outerStyle}
-                />
-                {/* <ProgressBarAndroid
-                  styleAttr="Horizontal"
-                  indeterminate={false}
-                  progress={data.progress / 100}
-                  color="white"
-                /> */}
+                <ProgressBar progress={data.progress + '%'} />
               </View>
             ) : null}
 
