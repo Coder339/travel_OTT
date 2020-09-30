@@ -102,8 +102,8 @@ export default class AuthStack extends React.Component {
                             {this.state.userToken === null ?
                                 <LoginScreens />
                                 :
-                                // <HomeScreens />
-                                <DrawerTabs />
+                                <HomeScreens />
+                                // <DrawerTabs />
                                 }
                                 
                         </NavigationContainer>
