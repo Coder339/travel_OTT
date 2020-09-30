@@ -2,8 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity,TouchableHighlight,TouchableWithoutFeedback, Button } from 'react-native';
 import {colors,globalstyles} from '../../assets/globalstyleconstants';
 import Backspace from '../../assets/images/backspace';
-import TextInputCard from '../../components/common/textinputcard';
-import Otp from '../../views/otp';
+
 
 export default function Keybutton(props) {
     const { 
@@ -30,7 +29,7 @@ export default function Keybutton(props) {
         setbordercolor(bordcolor)
     }
 
-    const boderBlurhandler = () =>{
+    const boderBlurhandler = () => {
         setborderwidth(0)
         setbordercolor('')
         // alert('works')
@@ -50,7 +49,7 @@ export default function Keybutton(props) {
         // activeOpacity={false}
              underlayColor={false}
              activeOpacity={opacity}
-             onPress={()=>onPress(title)}
+             onPress={()=>{onPress(title)}}
              onFocus={()=>{boderFocushandler()}}
              onBlur={()=>{boderBlurhandler()}}
              hasTVPreferredFocus={focus}>
