@@ -67,6 +67,10 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - lottie-ios (3.1.8)
+  - lottie-react-native (3.5.0):
+    - lottie-ios (~> 3.1.8)
+    - React
   - OpenSSL-Universal (1.0.2.9):
     - OpenSSL-Universal/Static (= 1.0.2.9)
   - OpenSSL-Universal/Static (1.0.2.9)
@@ -218,6 +222,8 @@ PODS:
     - React-cxxreact (= 0.63.1-1)
     - React-jsi (= 0.63.1-1)
   - React-jsinspector (0.63.1-1)
+  - react-native-safe-area-context (3.1.8):
+    - React-Core
   - React-RCTAnimation (0.63.1-1):
     - FBReactNativeSpec (= 0.63.1-1)
     - Folly (= 2020.01.13.00)
@@ -270,6 +276,16 @@ PODS:
     - React-Core (= 0.63.1-1)
     - React-cxxreact (= 0.63.1-1)
     - React-jsi (= 0.63.1-1)
+  - RNCMaskedView (0.1.10):
+    - React
+  - RNGestureHandler (1.8.0):
+    - React
+  - RNReanimated (1.13.0):
+    - React
+  - RNScreens (2.11.0):
+    - React
+  - RNSVG (12.1.0):
+    - React
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga
@@ -285,6 +301,7 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (~> 0.30.2)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - lottie-react-native (from `../node_modules/lottie-react-native`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -297,6 +314,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
   - React-RCTImage (from `../node_modules/react-native/Libraries/Image`)
@@ -305,6 +323,11 @@ DEPENDENCIES:
   - React-RCTSettings (from `../node_modules/react-native/Libraries/Settings`)
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
+  - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -322,6 +345,7 @@ SPEC REPOS:
   trunk:
     - boost-for-react-native
     - CocoaAsyncSocket
+    - lottie-ios
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -334,6 +358,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  lottie-react-native:
+    :path: "../node_modules/lottie-react-native"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -354,6 +380,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   React-RCTAnimation:
     :path: "../node_modules/react-native/Libraries/NativeAnimation"
   React-RCTBlob:
@@ -370,6 +398,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Text"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCMaskedView:
+    :path: "../node_modules/@react-native-community/masked-view"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
+  RNScreens:
+    :path: "../node_modules/react-native-screens"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -389,6 +427,8 @@ SPEC CHECKSUMS:
   FlipperKit: 31028f4bd9b85b8f2a98aa4d7f169b394d009439
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
+  lottie-react-native: 1fb4ce21d6ad37dab8343eaff8719df76035bd93
   OpenSSL-Universal: 7cbe4bc3c032ace1c0ce897d6b5d58a3b9f6b8e2
   RCTRequired: d61a2971ac821f58d742aab72ed7d48675f7d3d0
   RCTTypeSafety: fdee8013e73626078d006d2f7873db1bcece8e06
@@ -400,6 +440,7 @@ SPEC CHECKSUMS:
   React-jsi: ab68eb8444acd928d0e29d7035bf83f6f7cdede0
   React-jsiexecutor: b7b34f6423b0f016d0305ba13a534dd6964ac659
   React-jsinspector: 63d2d1cd8497a8228b3012d5702a38e6421173f7
+  react-native-safe-area-context: 79fea126c6830c85f65947c223a5e3058a666937
   React-RCTAnimation: 33de1a41021c81b792878546ffaac6bebf867041
   React-RCTBlob: 848849ded2dd42ce392817c15b40d848bb665ef2
   React-RCTImage: 57c8fcaecbef98a8d6c71e88762764e3fbaa3f79
@@ -408,9 +449,14 @@ SPEC CHECKSUMS:
   React-RCTSettings: b1f6864af1396c16e1a69194054aa1b5ad50237b
   React-RCTText: dbdf4f79938764330a692a8804f66047b6fb3916
   ReactCommon: 94f059140bd4f70389d75c199b1a0a0e846b3049
+  RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
+  RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
+  RNReanimated: 89f5e0a04d1dd52fbf27e7e7030d8f80a646a3fc
+  RNScreens: 0e91da98ab26d5d04c7b59a9b6bd694124caf88c
+  RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   Yoga: af418e2740c63b84c6ef5340a74b758efea42d4f
   YogaKit: 1e22bf2228b3a5ac8cc88965153061ae92c494b5
 
 PODFILE CHECKSUM: 2a32533089f486ac5d278d3107bb5b38e4ab9722
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0.rc.1

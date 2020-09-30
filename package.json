@@ -12,9 +12,18 @@
   "dependencies": {
     "@aws-amplify/auth": "^3.4.3",
     "@aws-amplify/core": "^3.5.3",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/drawer": "^5.9.0",
+    "@react-navigation/native": "^5.7.3",
+    "@react-navigation/stack": "^5.9.0",
     "lottie-react-native": "^3.5.0",
     "react": "16.13.1",
-    "react-native": "npm:react-native-tvos@0.63.1-1"
+    "react-native": "npm:react-native-tvos@0.63.1-1",
+    "react-native-gesture-handler": "^1.8.0",
+    "react-native-reanimated": "^1.13.0",
+    "react-native-safe-area-context": "^3.1.8",
+    "react-native-screens": "^2.11.0",
+    "react-native-svg": "^12.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
