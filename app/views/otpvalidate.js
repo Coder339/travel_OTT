@@ -44,12 +44,24 @@ export default class OtpValidate extends Component {
 
 
     otpNumHandler(text,index) {
-        //  console.log('text',text)
+         console.log('text',text)
+        
         if (text === 'backspace') {
             // alert('back')
-            this.state.textArray.fill('',index)
-            this.state.active.fill(false,index)
-            this.setState({index:index-1})
+             console.log('index',index)
+            this.setState(prevState=>{
+                prevState.textArray[index] = ''
+                prevState.active[index] = false
+                return {
+                    textArray: prevState.textArray,
+                    active: prevState.active
+                  }
+            })
+            // this.state.textArray.fill('',index)
+            // this.state.active.fill(false,index)
+            if (index > 0){
+                this.setState({index:index-1})
+            }
             console.log(this.state.textArray)
             console.log(this.state.active)
         }
@@ -59,16 +71,20 @@ export default class OtpValidate extends Component {
                 if (index < this.state.textArray.length){
                     prevState.textArray[index] = text
                     prevState.active[index] = true
-               
+                    console.log(this.state.active)
+                    console.log('indexx',index)
                 }
                 return {
                   textArray: prevState.textArray
                 }
               }, () => console.log(this.state.textArray))
             // this.state.index === index ? this.setState({active:true}) : this.setState({active:false})
-            this.setState({index:index+1})
+            if (index < 5){
+                this.setState({index:index+1})
+            }
             
-            console.log(this.state.active)
+            
+            
         }
         
     }

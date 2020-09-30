@@ -41,39 +41,45 @@ export default class Otp extends Component {
     mobileHandler(text,index){
         if (text === 'backspace') {
             // alert('back')
-            this.setState(prevState=>{
-                console.log('length',this.state.textArray[index].length)
-                prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
 
+            this.setState(prevState=>{
+                prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
+                console.log('length',this.state.textArray[index].length)
                 return {
                     textArray: prevState.textArray
                   }
             })
-            
-            if (this.state.textArray[1].length === 1){
-                this.state.active.fill(false,index)
-                this.setState({index:index-1})
+
+            if (this.state.textArray[1].length === 0){
+                this.state.active.fill(false,1)
+                this.setState({index:0})
             }
+            
             console.log(this.state.textArray[index])
-            // console.log(this.state.active)
+            console.log(this.state.active)
+            
             
         }
         else{
+            // console.log('indexxx',index)
             this.setState(prevState => {
                 if (index === 0){
                     if (this.state.textArray[index].length < 3){
                         prevState.textArray[index] = prevState.textArray[index] + text
                         prevState.active[index] = true
-                        console.log('textarrayLength',this.state.textArray[index].length)
+                        // console.log('textarrayLength',this.state.textArray[index].length)
                    
                     }
                 }
                 if (index === 1) {
-                    // console.log('index',index)
                     if (this.state.textArray[index].length < 10){
                         prevState.textArray[index] = prevState.textArray[index] + text
                         prevState.active[index] = true
-                        console.log('textarrayLength',this.state.textArray[index].length)
+                        // console.log('textarrayLength',this.state.textArray[index].length)
+                        if (this.state.textArray[index].length===10){
+                            alert(this.state.textArray[index-1]+this.state.textArray[index])
+                            // prevState.textArray[index] = ''
+                        }
                    
                     }
                 }
@@ -81,19 +87,19 @@ export default class Otp extends Component {
                   textArray: prevState.textArray
                 }
               }, 
-            //   () => console.log('textarray',this.state.textArray)
+              () => console.log('textarray',this.state.textArray)
             )
+
             // this.state.index === index ? this.setState({active:true}) : this.setState({active:false})
             if (index===0){
 
-                if (this.state.textArray[index].length === 2){
+                if (this.state.textArray[index].length === 3){
                     this.setState({index:index+1})
                 }
             }
             else {
-                if (this.state.textArray[index].length === 9){
                     this.setState({index:index})
-                }
+                     
             }
             
             
@@ -142,6 +148,11 @@ export default class Otp extends Component {
     
     componentDidMount = () => {
         // this.inputRefs[0].focus()
+        this.setState({index:1})
+        this.setState(prevState=>{
+            prevState.textArray[0] = this.state.countryCode
+
+        })
     }
     render() {
         const { active,inputArray,mobileHolder,mobileHolderColor,message,countryCode,textArray,index } = this.state

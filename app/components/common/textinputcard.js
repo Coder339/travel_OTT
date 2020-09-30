@@ -48,18 +48,19 @@ export default function TextInputCard(props) {
                       }
                      ]}
                      
-               ref={(r)=>referenceHandler(r)}
+            //    ref={(r)=>referenceHandler(r)}
                maxLength={maxLength}
                placeholder={placeholder}
                placeholderTextColor={placeholderTextColor}
                defaultValue={defaultValue}
-               keyboardType='numeric'
+            //    keyboardType='numeric'
             //    autoFocus={index === 0 ? true: false}
                onKeyPress={onkeypress}
                onFocus={()=>borderFocusHandler()}
             //    onBlur={()=>setActive(false)}
                onChangeText={onChange}
                value={value}
+               
                />
                
         </View>
