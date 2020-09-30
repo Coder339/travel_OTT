@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import {colors, fontSize,fontFamily} from '../../assets/globalstyleconstants';
+import {colors, fontSize, fontFamily} from '../../assets/globalstyleconstants';
 import RectangleCarditem from './rectanglecarditem';
 
 export default function RectangleCard(props) {
@@ -17,7 +17,14 @@ export default function RectangleCard(props) {
         )}
       </View>
       <View style={styles.imageContainer}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView 
+          horizontal={true} 
+          showsHorizontalScrollIndicator={false}
+          centerContent={true}
+          decelerationRate={"fast"}
+          snapToAlignment='start'
+          snapToInterval={550}
+          >
           {item.data.map((data, index) => (
             <RectangleCarditem data={data} type={type} key={index} />
           ))}
@@ -40,9 +47,9 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     color: colors.white,
-    fontSize:fontSize.larger,
-    fontFamily:fontFamily.regular,
-    paddingTop:15,
+    fontSize: fontSize.larger,
+    fontFamily: fontFamily.regular,
+    paddingTop: 15,
   },
   selected: {
     position: 'absolute',

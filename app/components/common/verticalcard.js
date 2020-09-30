@@ -26,7 +26,14 @@ export default function VerticalCard(props) {
         <Text style={styles.textWhiteColor}>{item.title}</Text>
       </View>
       <View style={styles.imageContainer}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView 
+          horizontal={true} 
+          showsHorizontalScrollIndicator={false}
+          centerContent={true}
+          decelerationRate={"fast"}
+          snapToAlignment='start'
+          snapToInterval={550}
+          >
           {item.data.map((data, index) => (
             <VerticalCarditem data={data} key={index} />
           ))}

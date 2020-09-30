@@ -10,6 +10,7 @@ import {
 } from '../../assets/globalstyleconstants';
 import VerticalCarditem from './verticalcarditem';
 import PlayWatchButton from './playwatchbutton';
+import LinearGradient from 'react-native-linear-gradient'
 
 export default React.memo(function HeroCard(props) {
   const {type, item} = props;
@@ -55,7 +56,7 @@ export default React.memo(function HeroCard(props) {
               </View>
 
               {type === 'hero-card' ? (
-                <View style={{position: 'absolute', top: 100, left: 500}}>
+                <View style={{position: 'absolute', top: 100, left: 550}}>
                   <ScrollView horizontal={true}>
                     {item.data[0].data.map((data, index) => (
                       <View 
