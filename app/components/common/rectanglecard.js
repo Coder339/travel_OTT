@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import {colors} from '../../assets/globalstyleconstants';
+import {colors, fontSize,fontFamily} from '../../assets/globalstyleconstants';
 import RectangleCarditem from './rectanglecarditem';
 
 export default function RectangleCard(props) {
@@ -8,7 +8,7 @@ export default function RectangleCard(props) {
   console.log('TYPE', type);
   console.log('DATA', item);
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.titleContainer}>
         {type === 'rectangle-card' ? (
           <Text style={styles.sectionTitle}>{item.section_title}</Text>
@@ -17,7 +17,7 @@ export default function RectangleCard(props) {
         )}
       </View>
       <View style={styles.imageContainer}>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {item.data.map((data, index) => (
             <RectangleCarditem data={data} type={type} key={index} />
           ))}
@@ -29,17 +29,20 @@ export default function RectangleCard(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 45,
-    position: 'relative',
+    // flex: 1,
+    // paddingTop: 10,
+    // paddingBottom: 10,
+    paddingLeft: 20,
+    // position: 'relative',
   },
   titleContainer: {
     paddingLeft: 55,
   },
   sectionTitle: {
     color: colors.white,
+    fontSize:fontSize.larger,
+    fontFamily:fontFamily.regular,
+    paddingTop:15,
   },
   selected: {
     position: 'absolute',

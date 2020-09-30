@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import VerticalCarditem from './verticalcarditem';
-import {fontFamily} from '../../assets/globalstyleconstants';
+import {colors, fontFamily,fontSize} from '../../assets/globalstyleconstants';
 
 export default function VerticalCard(props) {
   const {type, item} = props;
@@ -41,14 +41,16 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 10,
     paddingBottom: 30,
-    paddingLeft: 5,
+    paddingLeft: 25,
   },
   titleContainer: {
     paddingLeft: 48,
   },
   textWhiteColor: {
-    color: 'white',
-    fontFamily: fontFamily.regular,
+    color: colors.white,
+    fontSize:fontSize.larger,
+    fontFamily:fontFamily.regular,
+    paddingTop:15,
   },
   imageContainer: {
     paddingLeft: 35,

@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     width: 490,
     paddingBottom: 15,
     paddingTop: 2,
-    paddingLeft: 70,
+    paddingLeft: 75,
     position: 'absolute',
     top: 140,
   },
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     width: 250,
     paddingLeft: 70,
     position: 'absolute',
-    top: 230,
+    top: 215,
   },
   hdfourkContainer: {
     justifyContent: 'space-between',
@@ -123,20 +123,20 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
   },
   descContainer: {
-    width: 600,
+    width: 560,
     paddingBottom: 30,
-    paddingLeft: 70,
+    paddingLeft: 75,
     position: 'absolute',
-    top: 260,
+    top: 250,
   },
   bannerParagraph: {
     fontSize: 12,
     color: 'white',
   },
   playWatchContainer: {
-    paddingLeft: 70,
+    paddingLeft: 75,
     position: 'absolute',
-    top: 340,
+    top: 335,
     flex: 1,
   },
   playwatchText: {
