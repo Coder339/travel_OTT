@@ -188,7 +188,7 @@ export default class OtpValidate extends Component {
                                 bordwidth={2}
                                 defaultFocus={false}
                                 navigation={this.props.navigation}
-                                onPress='OtpValidate'
+                                onPress='home'
                         />
                     </View>
                 </ImageBackground>
