@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, ImageBackground, Image, Button } from 'react-native';
-import { colors, globalstyles, fontFamily } from '../assets/globalstyleconstants';
-import LogoSvgComponent from '../assets/images/travelxplogo';
+import { Text, StyleSheet, View,ImageBackground,Image, Button } from 'react-native';
+import {colors,globalstyles,fontFamily,fontSize} from '../assets/globalstyleconstants';
+import LogoSvgComponent  from '../assets/images/travelxplogo';
 import ButtonCard from '../components/common/navbutton';
 
 export default class login extends Component {
@@ -73,42 +73,42 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: "cover",
         justifyContent: "center",
-    },
-    logo: {
-        position: 'absolute',
-        top: 0,
-        left: 60
-    },
-    content: {
-        marginTop: 20,
-        fontSize: 40,
-        fontFamily: fontFamily.bold,
-        flexShrink: 1,
-        width: '50%',
-        color: colors.white,
-    },
-    xplore: {
+      },
+      logo:{
+          position:'absolute',
+          top:0,
+          left:60
+      },
+      content:{
+        marginTop:20,
+        fontSize:fontSize.superextralargest,
+        fontFamily:fontFamily.bold,
+        flexShrink:1,
+        width:'50%',
+        color:colors.white,
+      },
+      xplore:{
         // fontWeight:'bold',
         // fontFamily:fontFamily.bold,
-        fontSize: 25,
-        color: colors.white,
-        opacity: 0.7,
-    },
-    bottomContent: {
-        marginTop: 80
-    },
-    sign_up: {
-        color: colors.white,
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    plan: {
-        color: colors.white,
-        opacity: 0.7,
-        fontSize: 15,
-        marginTop: 5
-    }
-
-
+        fontSize:fontSize.extralargest,
+        color:colors.white,
+        opacity:0.7,
+      },
+      bottomContent:{
+          marginTop:80
+      },
+      sign_up:{
+          color:colors.white,
+          fontSize:fontSize.largest,
+          fontWeight:'bold'
+      },
+      plan:{
+          color:colors.white,
+          opacity:0.7,
+          fontSize:fontSize.normal,
+          marginTop:5
+      }
+    
+      
 })
 

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity,TouchableWithoutFeedback, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,TouchableHighlight,TouchableWithoutFeedback, Button } from 'react-native';
 import {colors,globalstyles} from '../../assets/globalstyleconstants';
 
 export default function ButtonCard(props) {
@@ -37,7 +37,10 @@ export default function ButtonCard(props) {
     }, [])
 
     return (
-        <TouchableWithoutFeedback 
+        <TouchableHighlight 
+        // disabled={true}
+             underlayColor={false}
+             activeOpacity={1}
              onPress={()=>{navigation.navigate(onPress)}}
              onFocus={()=>{boderFocushandler()}}
              onBlur={()=>{boderBlurhandler()}}
@@ -60,7 +63,7 @@ export default function ButtonCard(props) {
             
               
             
-        </TouchableWithoutFeedback>
+        </TouchableHighlight>
     )
 }
 

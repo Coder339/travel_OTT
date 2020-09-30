@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Button,ImageBackground } from 'react-native'
+import { Text, StyleSheet, View, Button,ImageBackground,Keyboard } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
-import {colors,globalstyles,fontFamily} from '../assets/globalstyleconstants';
+import {colors,globalstyles,fontFamily,fontSize} from '../assets/globalstyleconstants';
 import ButtonCard from '../components/common/navbutton';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
 import Numerickeypad from '../components/common/keypad';
@@ -11,7 +11,15 @@ import CodeValidation from '../components/common/codevalidation';
 export default class Otp extends Component {
     constructor(props){
         super(props);
+        this.inputRefs = [
+            React.createRef(),
+            React.createRef(),
+        ]
+        const textArray = Array(2).fill('');
+        const activeArray = Array(2).fill(false);
         this.state={
+            textArray:textArray,
+            active:activeArray,
             blackbutton: colors.black,
             whitebutton: colors.white,
             blackButtonTextColor: colors.white,
@@ -21,19 +29,122 @@ export default class Otp extends Component {
             mobileHolder: 'ENTER YOUR MOBILE NUMBER',
             mobileHolderColor: colors.white,
             countryCode: '+91',
-            erroMessage:'Please enter valid country code'
-
+            erroMessage:'Please enter valid country code',
+            defaultNum:'9',
+            message:'',
+            index:0,
+            inputArray: ['1','2'],
        }
        this.mobileHandler = this.mobileHandler.bind(this)
     }
 
-    mobileHandler(text){
-     this.setState({mobile:text})
-     console.log(" mobile ",this.state.mobile)
+    mobileHandler(text,index){
+        if (text === 'backspace') {
+            // alert('back')
+            this.setState(prevState=>{
+                console.log('length',this.state.textArray[index].length)
+                prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
+
+                return {
+                    textArray: prevState.textArray
+                  }
+            })
+            
+            if (this.state.textArray[1].length === 1){
+                this.state.active.fill(false,index)
+                this.setState({index:index-1})
+            }
+            console.log(this.state.textArray[index])
+            // console.log(this.state.active)
+            
+        }
+        else{
+            this.setState(prevState => {
+                if (index === 0){
+                    if (this.state.textArray[index].length < 3){
+                        prevState.textArray[index] = prevState.textArray[index] + text
+                        prevState.active[index] = true
+                        console.log('textarrayLength',this.state.textArray[index].length)
+                   
+                    }
+                }
+                if (index === 1) {
+                    // console.log('index',index)
+                    if (this.state.textArray[index].length < 10){
+                        prevState.textArray[index] = prevState.textArray[index] + text
+                        prevState.active[index] = true
+                        console.log('textarrayLength',this.state.textArray[index].length)
+                   
+                    }
+                }
+                return {
+                  textArray: prevState.textArray
+                }
+              }, 
+            //   () => console.log('textarray',this.state.textArray)
+            )
+            // this.state.index === index ? this.setState({active:true}) : this.setState({active:false})
+            if (index===0){
+
+                if (this.state.textArray[index].length === 2){
+                    this.setState({index:index+1})
+                }
+            }
+            else {
+                if (this.state.textArray[index].length === 9){
+                    this.setState({index:index})
+                }
+            }
+            
+            
+        }
     }
 
-    render() {
+
+    
+    _goNextAfterEdit(index){
+        this.inputRefs[index+1].focus()
         
+    }
+
+    onChangeHandler(event,message,index){
+        this.setState({message: message + event})
+        console.log(this.state.message.length)       
+
+        if ( index === this.state.inputArray.length-1 ){ 
+            // issue with last event addition
+            if (this.state.message.length === 13){
+                alert(message + event)
+                Keyboard.dismiss()
+            }
+
+        }
+        else {
+            if (this.state.message.length === 3){
+                this._goNextAfterEdit(index)
+            }
+        }
+    }
+    
+    handleKeyPress(nativeEvent,index) {
+        if (nativeEvent.key === 'Backspace') {
+            
+            if (index === 0){
+                return
+            }
+            else{
+                this.inputRefs[index-1].focus()
+            }
+        }
+        // nativeEvent.key === 'Backspace' ? alert('delete') : alert('ghjgjh')
+
+    }
+    
+    componentDidMount = () => {
+        // this.inputRefs[0].focus()
+    }
+    render() {
+        const { active,inputArray,mobileHolder,mobileHolderColor,message,countryCode,textArray,index } = this.state
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
@@ -44,28 +155,57 @@ export default class Otp extends Component {
                                  width='100' 
                     />
                     <Text style={[styles.mobile,globalstyles.hspace]}>
-                                Enter your mobile number to login
+                                Enter your mobile number to login.
                     </Text>
                     <View style={{width:'35%'}}>
-                        <View style={[styles.inputcard,globalstyles.hspace]}>
+                        {/* <View style={[styles.inputcard,globalstyles.hspace]}>
                             <TextInputCard 
+                            // inputRef={r => this.inputRefs[0] =  r}
                             width={95} 
                             height={40} 
+                            maxLength={3}
                             title={this.state.countryCode} 
                             defaultValue={this.state.countryCode}
                             />
                             <TextInputCard 
                             width={230} 
                             height={40} 
-                            placeholder={this.state.mobileHolder}
-                            placeholderTextColor={this.state.mobileHolderColor}
+                            maxLength={10}
+                            placeholder={mobileHolder}
+                            placeholderTextColor={mobileHolderColor}
                             value={this.state.mobile}
                             onChange={(text)=>this.mobileHandler(text)}
                             />
+                        </View> */}
+
+                        <View style={[styles.inputcard,globalstyles.hspace]}>
+                        
+                            {inputArray.map((item,index) => 
+                                 
+                                <View key={index}>
+                                    <TextInputCard 
+                                    inputRef={r => this.inputRefs[index] =  r}
+                                    maxLength={index === 0 ? 3 : 10}
+                                    // defaultValue={index === 0 ? countryCode : ''}
+                                    width={index === 0 ? 95 : 230} 
+                                    height={40} 
+                                    active={active[index]}
+                                    index={index}
+                                    placeholder={index === 0 ? '' : mobileHolder}
+                                    placeholderTextColor={mobileHolderColor}
+                                    // title={this.state.otpNum}
+                                    value={textArray[index]}
+                                    onChange={(event) =>  this.onChangeHandler(event,message,index)}
+                                    onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
+                                    />
+                                </View>
+                          )}
+        
                         </View>
+                        
                         <CodeValidation erroMessage={this.state.erroMessage}/>
                     </View>
-                    <Numerickeypad />
+                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.mobileHandler(text,index)}/>
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 
@@ -124,8 +264,8 @@ const styles = StyleSheet.create({
     },
     mobile:{
         color:colors.white,
-        fontSize:20,
-        fontWeight:'bold',  
+        fontSize:fontSize.extralarge,
+        fontFamily:fontFamily.bold,  
     },
     inputcard:{
         flexDirection:'row',

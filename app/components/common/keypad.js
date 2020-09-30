@@ -5,10 +5,12 @@ import Keybutton from './keybutton';
 import Backspace from '../../assets/images/backspace';
 
 export default function Numerickeypad(props) {
+
+    const { defaultNum,onPress } = props
     let color = colors.black
     let textColor = colors.white
     const numArray = ["1","2","3","4","5","6","7","8","9","0"]
-    // const stringNum = JSON.stringify(numArray)
+    
     return (
         <View style={[styles.container,globalstyles.hspace]}>
             <View style={{flexDirection:'row',flexWrap:'wrap'}}>
@@ -16,6 +18,7 @@ export default function Numerickeypad(props) {
                     <View key={index} style={globalstyles.keypadding}>
                         <Keybutton 
                             type='num'
+                            defaultNum={defaultNum}
                             title={button}
                             color={color}
                             textColor={textColor}
@@ -24,8 +27,9 @@ export default function Numerickeypad(props) {
                             height={36}
                             bordcolor='white'
                             bordwidth={2}
-                            defaultFocus={true}
+                            defaultFocus={false}
                             opacity={0.6}
+                            onPress={onPress}
                         />
                     </View>
                 )}
@@ -33,6 +37,7 @@ export default function Numerickeypad(props) {
             <View style={{paddingVertical:0,}}>
                 <Keybutton 
                     type='svg'
+                    title='backspace'
                     color={color}
                     textColor={textColor}
                     opacity={1}
@@ -40,8 +45,9 @@ export default function Numerickeypad(props) {
                     height={86}
                     bordcolor='white'
                     bordwidth={2}
-                    defaultFocus={true}
+                    defaultFocus={false}
                     opacity={0.6}
+                    onPress={onPress}
                 />
             </View>
 
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         width:'37.3%',
         marginTop:60,
-        // backgroundColor:'blue'
+        // backgroundColor:
         
     }
 })
