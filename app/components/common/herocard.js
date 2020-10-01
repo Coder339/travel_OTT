@@ -6,11 +6,10 @@ import ProgressiveImage from './progressiveimage';
 import {
   colors,
   setImageUrl,
-  globalstyles,
+  globalstyles, fontFamily, fontSize
 } from '../../assets/globalstyleconstants';
 import VerticalCarditem from './verticalcarditem';
 import PlayWatchButton from './playwatchbutton';
-import LinearGradient from 'react-native-linear-gradient'
 
 export default React.memo(function HeroCard(props) {
   const {type, item} = props;
@@ -28,6 +27,8 @@ export default React.memo(function HeroCard(props) {
                   overlay={false}
                   thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
                   source={{uri: setImageUrl(data.image, 900, 900)}}
+                  isLinearGradient={true}
+                  type={type}
                 />
               </View>
               <View style={styles.titleContainer}>
@@ -57,11 +58,21 @@ export default React.memo(function HeroCard(props) {
 
               {type === 'hero-card' ? (
                 <View style={{position: 'absolute', top: 100, left: 550}}>
+                  <View style={{paddingLeft: 14}}>
+                    <Text
+                      style={{
+                        color: colors.white,
+                        fontSize: fontSize.larger,
+                        fontFamily: fontFamily.regular,
+                      }}>
+                      Experience Mode
+                    </Text>
+                  </View>
                   <ScrollView horizontal={true}>
                     {item.data[0].data.map((data, index) => (
-                      <View 
+                      <View
                         key={index}
-                        Vertical={false}   
+                        Vertical={false}
                         showsHorizontalScrollIndicator={false}>
                         <VerticalCarditem data={data} key={index} />
                       </View>
@@ -71,7 +82,7 @@ export default React.memo(function HeroCard(props) {
               ) : null}
             </View>
           ))}
-          
+
           <View style={styles.playWatchContainer}>
             <PlayWatchButton name="Watch" />
           </View>

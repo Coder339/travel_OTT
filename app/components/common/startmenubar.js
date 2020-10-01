@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 100,
     backgroundColor: colors.backgroundColor,
-    opacity: 0.9,
+    opacity: 0.8,
     height: 1000,
   },
 });
