@@ -19,7 +19,7 @@ export default function ButtonCard(props) {
     
     const [borderwidth,setborderwidth]  = useState(0)
     const [bordercolor,setbordercolor]  = useState('')
-    const [focus, setfocus] = useState(defaultFocus)
+    const [focus, setfocus] = useState(false)
 
     const boderFocushandler = () =>{
         setborderwidth(bordwidth)
@@ -34,7 +34,7 @@ export default function ButtonCard(props) {
     }
 
     useEffect(() => {
-        focus ? (setborderwidth(bordwidth),setbordercolor(bordcolor)) : (setborderwidth(0),setbordercolor(''))
+        // focus ? (setborderwidth(bordwidth),setbordercolor(bordcolor)) : (setborderwidth(0),setbordercolor(''))
     }, [])
 
     return (

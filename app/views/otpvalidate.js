@@ -180,7 +180,6 @@ export default class OtpValidate extends Component {
                                 height={36}
                                 bordcolor='white'
                                 bordwidth={2}
-                                defaultFocus={false}
                                 navigation={this.props.navigation}
                                 onPress='Otp'
                         />
@@ -193,7 +192,6 @@ export default class OtpValidate extends Component {
                                 height={36}
                                 bordcolor='#000'
                                 bordwidth={2}
-                                defaultFocus={false}
                                 navigation={this.props.navigation}
                                 onPress='OtpValidate'
                         />

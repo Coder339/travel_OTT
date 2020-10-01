@@ -26,7 +26,6 @@ export default function Numerickeypad(props) {
                             height={36}
                             bordcolor='white'
                             bordwidth={2}
-                            defaultFocus={false}
                             opacity={0.7}
                             onPress={onPress}
                         />
@@ -43,7 +42,6 @@ export default function Numerickeypad(props) {
                     height={86}
                     bordcolor='white'
                     bordwidth={2}
-                    defaultFocus={false}
                     opacity={0.7}
                     onPress={onPress}
                 />

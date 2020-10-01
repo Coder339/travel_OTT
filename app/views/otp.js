@@ -40,27 +40,27 @@ export default class Otp extends Component {
 
     mobileHandler(text,index){
         if (text === 'backspace') {
-
-            this.setState(prevState=>{
-                prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
-                console.log('length',this.state.textArray[index].length)
-                return {
-                    textArray: prevState.textArray
-                  }
-            })
-
-            if (this.state.textArray[1].length === 0){
-                this.state.active.fill(false,1)
-                this.setState({index:0})
-            }
-            
-            console.log(this.state.textArray[index])
-            console.log(this.state.active)
-            
-            
+            if (this.state.textArray[0].length > 1){
+                this.setState(prevState=>{
+                    prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
+                    console.log('length',this.state.textArray[index].length)
+                    return {
+                        textArray: prevState.textArray
+                      }
+                })
+    
+                if (this.state.textArray[1].length === 0){
+                    this.state.active.fill(false,1)
+                    this.setState({index:0})
+                }
+                
+                console.log(this.state.textArray[index])
+                console.log(this.state.active)
+            }    
         }
-        else{
+        else {
             // console.log('indexxx',index)
+            console.log(text)
             this.setState(prevState => {
                 if (index === 0){
                     if (this.state.textArray[index].length < 3){
@@ -188,8 +188,10 @@ export default class Otp extends Component {
                           )}
         
                         </View>
+                        {
+                            textArray[0].length === 3 ? <Text></Text> : <CodeValidation erroMessage={this.state.erroMessage}/>
+                        }
                         
-                        <CodeValidation erroMessage={this.state.erroMessage}/>
                     </View>
                     <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.mobileHandler(text,index)}/>
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
@@ -203,7 +205,6 @@ export default class Otp extends Component {
                                 height={36}
                                 bordcolor='white'
                                 bordwidth={2}
-                                defaultFocus={false}
                                 navigation={this.props.navigation}
                                 onPress='Login'
                         />
@@ -216,7 +217,6 @@ export default class Otp extends Component {
                                 height={36}
                                 bordcolor='#000'
                                 bordwidth={2}
-                                defaultFocus={false}
                                 navigation={this.props.navigation}
                                 onPress='OtpValidate'
                         />

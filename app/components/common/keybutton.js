@@ -24,24 +24,29 @@ export default function Keybutton(props) {
     const [bordercolor,setbordercolor]  = useState('')
     const [buttonOpacity,setButtonOpacity]  = useState(0.5)
     // const [textOpacity,setTextOpacity]  = useState(1)
-    const [focus, setfocus] = useState(defaultFocus)
+    const [focus, setfocus] = useState(false)
 
-    const boderFocushandler = () =>{
+    const boderFocushandler = () => {
         setborderwidth(bordwidth)
         setbordercolor(bordcolor)
         setButtonOpacity(opacity)
+        // setfocus(true)
+        console.log('borderFocus',focus)
+
     }
 
     const boderBlurhandler = () => {
         setborderwidth(0)
         setbordercolor('')
         setButtonOpacity(0.5)
+        // setfocus(false)
+        // console.log('borderBlur',focus)
 
     }
 
     useEffect(() => {
         (defaultNum === title && type === 'num') ? (setborderwidth(bordwidth),setbordercolor(bordcolor),setfocus(true)) : (setborderwidth(0),setbordercolor(''))
-        
+        console.log('focus',focus)
     }, [])
 
     return (

@@ -48,6 +48,7 @@ export default function TextInputCard(props) {
                placeholder={placeholder}
                placeholderTextColor={placeholderTextColor}
                defaultValue={defaultValue}
+               editable={false}
             //    keyboardType='numeric'
             //    autoFocus={index === 0 ? true: false}
                onKeyPress={onkeypress}
