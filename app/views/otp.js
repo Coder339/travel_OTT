@@ -40,7 +40,6 @@ export default class Otp extends Component {
 
     mobileHandler(text,index){
         if (text === 'backspace') {
-            // alert('back')
 
             this.setState(prevState=>{
                 prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
@@ -90,7 +89,6 @@ export default class Otp extends Component {
               () => console.log('textarray',this.state.textArray)
             )
 
-            // this.state.index === index ? this.setState({active:true}) : this.setState({active:false})
             if (index===0){
 
                 if (this.state.textArray[index].length === 3){
@@ -142,12 +140,10 @@ export default class Otp extends Component {
                 this.inputRefs[index-1].focus()
             }
         }
-        // nativeEvent.key === 'Backspace' ? alert('delete') : alert('ghjgjh')
 
     }
     
     componentDidMount = () => {
-        // this.inputRefs[0].focus()
         this.setState({index:1})
         this.setState(prevState=>{
             prevState.textArray[0] = this.state.countryCode
@@ -169,25 +165,6 @@ export default class Otp extends Component {
                                 Enter your mobile number to login.
                     </Text>
                     <View style={{width:'35%'}}>
-                        {/* <View style={[styles.inputcard,globalstyles.hspace]}>
-                            <TextInputCard 
-                            // inputRef={r => this.inputRefs[0] =  r}
-                            width={95} 
-                            height={40} 
-                            maxLength={3}
-                            title={this.state.countryCode} 
-                            defaultValue={this.state.countryCode}
-                            />
-                            <TextInputCard 
-                            width={230} 
-                            height={40} 
-                            maxLength={10}
-                            placeholder={mobileHolder}
-                            placeholderTextColor={mobileHolderColor}
-                            value={this.state.mobile}
-                            onChange={(text)=>this.mobileHandler(text)}
-                            />
-                        </View> */}
 
                         <View style={[styles.inputcard,globalstyles.hspace]}>
                         
@@ -197,14 +174,12 @@ export default class Otp extends Component {
                                     <TextInputCard 
                                     inputRef={r => this.inputRefs[index] =  r}
                                     maxLength={index === 0 ? 3 : 10}
-                                    // defaultValue={index === 0 ? countryCode : ''}
                                     width={index === 0 ? 95 : 230} 
                                     height={40} 
                                     active={active[index]}
                                     index={index}
                                     placeholder={index === 0 ? '' : mobileHolder}
                                     placeholderTextColor={mobileHolderColor}
-                                    // title={this.state.otpNum}
                                     value={textArray[index]}
                                     onChange={(event) =>  this.onChangeHandler(event,message,index)}
                                     onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}

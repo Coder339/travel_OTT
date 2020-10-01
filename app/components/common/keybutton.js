@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity,TouchableHighlight,TouchableWithoutFeedback, Button } from 'react-native';
-import {colors,globalstyles} from '../../assets/globalstyleconstants';
+import {colors,globalstyles, fontFamily} from '../../assets/globalstyleconstants';
 import Backspace from '../../assets/images/backspace';
 
 
@@ -22,22 +22,22 @@ export default function Keybutton(props) {
     
     const [borderwidth,setborderwidth]  = useState(0)
     const [bordercolor,setbordercolor]  = useState('')
+    const [buttonOpacity,setButtonOpacity]  = useState(0.5)
+    // const [textOpacity,setTextOpacity]  = useState(1)
     const [focus, setfocus] = useState(defaultFocus)
 
     const boderFocushandler = () =>{
         setborderwidth(bordwidth)
         setbordercolor(bordcolor)
+        setButtonOpacity(opacity)
     }
 
     const boderBlurhandler = () => {
         setborderwidth(0)
         setbordercolor('')
-        // alert('works')
-    }
+        setButtonOpacity(0.5)
 
-    // const textValueHandler = () => {
-    //     alert(title)
-    // }
+    }
 
     useEffect(() => {
         (defaultNum === title && type === 'num') ? (setborderwidth(bordwidth),setbordercolor(bordcolor),setfocus(true)) : (setborderwidth(0),setbordercolor(''))
@@ -46,7 +46,6 @@ export default function Keybutton(props) {
 
     return (
         <TouchableHighlight 
-        // activeOpacity={false}
              underlayColor={false}
              activeOpacity={opacity}
              onPress={()=>{onPress(title)}}
@@ -55,19 +54,18 @@ export default function Keybutton(props) {
              hasTVPreferredFocus={focus}>
             <View style={
                             [styles.button,
-                            // globalstyles.hspace,
                             {backgroundColor:color},
                             {width:width},
                             {height:height},
                             {borderWidth:borderwidth},
                             {borderColor:bordercolor},
-                            {opacity:opacity}
+                            {opacity:buttonOpacity}
                             ]
                             }           
             >
                 {type === 'num' ? 
                   
-                  <Text style={{color:textColor}}>{title}</Text> :
+                  <Text style={{color:textColor,fontFamily:fontFamily.bold}}>{title}</Text> :
 
                   <Backspace/>
                 }
@@ -83,7 +81,6 @@ export default function Keybutton(props) {
 
 const styles = StyleSheet.create({
     button:{
-        // flex:1,
         justifyContent:'center',
         alignItems:'center',
     },

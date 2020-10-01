@@ -5,8 +5,7 @@ import ButtonCard from '../components/common/navbutton';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
 import Goback  from '../assets/images/goback';
 import Numerickeypad from '../components/common/keypad';
-import TextInputCard from '../components/common/textinputcard'
-import CodeValidation from '../components/common/codevalidation';
+import TextInputCard from '../components/common/textinputcard';
 
 export default class OtpValidate extends Component {
     constructor(props){
@@ -44,11 +43,10 @@ export default class OtpValidate extends Component {
 
 
     otpNumHandler(text,index) {
-         console.log('text',text)
+        //  console.log('text',text)
         
         if (text === 'backspace') {
-            // alert('back')
-             console.log('index',index)
+            //  console.log('index',index)
             this.setState(prevState=>{
                 prevState.textArray[index] = ''
                 prevState.active[index] = false
@@ -57,8 +55,6 @@ export default class OtpValidate extends Component {
                     active: prevState.active
                   }
             })
-            // this.state.textArray.fill('',index)
-            // this.state.active.fill(false,index)
             if (index > 0){
                 this.setState({index:index-1})
             }
@@ -78,7 +74,7 @@ export default class OtpValidate extends Component {
                   textArray: prevState.textArray
                 }
               }, () => console.log(this.state.textArray))
-            // this.state.index === index ? this.setState({active:true}) : this.setState({active:false})
+    
             if (index < 5){
                 this.setState({index:index+1})
             }
@@ -123,7 +119,6 @@ export default class OtpValidate extends Component {
                 this.inputRefs[index-1].focus()
             }
         }
-        // nativeEvent.key === 'Backspace' ? alert('delete') : alert('ghjgjh')
 
     }
 
@@ -132,8 +127,6 @@ export default class OtpValidate extends Component {
     }
 
     componentDidMount = () => {
-        // <TextInputCard inputRef={r => this.inputRefs[0] =  r}/>
-        // this.inputRefs[0].focus()
         
         console.log(this.state.active[0])
     }
@@ -158,7 +151,6 @@ export default class OtpValidate extends Component {
                     <View style={[styles.inputcard,globalstyles.hspace]}>
                         
                             {otpArray.map((item,index) => 
-                                //  this.setState({index:index})
                                 <View key={index}>
                                     <TextInputCard 
                                     inputRef={r => this.inputRefs[index] =  r}
@@ -170,7 +162,6 @@ export default class OtpValidate extends Component {
                                     value={textArray[index]}
                                     onChange={(text) =>  this.onChangeHandler(text,message,index)}
                                     onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
-                                    // onFocus={() => this.setState({focusedIndex: index})}
                                     />
                                 </View>
                           )}
@@ -251,6 +242,5 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         marginTop:20,
         width:'44%',
-        // backgroundColor:'blue'
     }
 })

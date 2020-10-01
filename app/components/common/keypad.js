@@ -22,13 +22,12 @@ export default function Numerickeypad(props) {
                             title={button}
                             color={color}
                             textColor={textColor}
-                            opacity={1}
                             width={55}
                             height={36}
                             bordcolor='white'
                             bordwidth={2}
                             defaultFocus={false}
-                            opacity={0.6}
+                            opacity={0.7}
                             onPress={onPress}
                         />
                     </View>
@@ -40,13 +39,12 @@ export default function Numerickeypad(props) {
                     title='backspace'
                     color={color}
                     textColor={textColor}
-                    opacity={1}
                     width={55}
                     height={86}
                     bordcolor='white'
                     bordwidth={2}
                     defaultFocus={false}
-                    opacity={0.6}
+                    opacity={0.7}
                     onPress={onPress}
                 />
             </View>
@@ -62,7 +60,6 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         width:'37.3%',
         marginTop:60,
-        // backgroundColor:
         
     }
 })

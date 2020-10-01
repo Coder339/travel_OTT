@@ -18,9 +18,6 @@ export default function TextInputCard(props) {
         inputRef,
         placeholder,
         placeholderTextColor } = props
-    // const [value, setValue] = useState(title)
-    // const [active,setActive] = useState(false)
-    // console.log(title)
 
     const borderFocusHandler = () => {
         Keyboard.dismiss()
@@ -33,8 +30,6 @@ export default function TextInputCard(props) {
     }
 
     useEffect(() => {
-        referenceHandler(0)
-        // inputRef && inputRef(0) 
         
     }, [])
     return (
