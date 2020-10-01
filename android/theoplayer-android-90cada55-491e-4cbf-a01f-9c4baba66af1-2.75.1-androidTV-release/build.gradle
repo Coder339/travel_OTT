@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('theoplayer-android-90cada55-491e-4cbf-a01f-9c4baba66af1-2.75.1-androidTV-release.aar'))
