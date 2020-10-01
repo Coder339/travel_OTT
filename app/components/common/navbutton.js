@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity,TouchableHighlight,TouchableWithoutFeedback, Button } from 'react-native';
-import {colors,globalstyles} from '../../assets/globalstyleconstants';
+import {colors,globalstyles,fontFamily} from '../../assets/globalstyleconstants';
 
 export default function ButtonCard(props) {
     const { 
@@ -24,12 +24,13 @@ export default function ButtonCard(props) {
     const boderFocushandler = () =>{
         setborderwidth(bordwidth)
         setbordercolor(bordcolor)
+        // setButtonOpacity(opacity)
     }
 
     const boderBlurhandler = () =>{
         setborderwidth(0)
         setbordercolor('')
-        // alert('works')
+       
     }
 
     useEffect(() => {
@@ -38,7 +39,6 @@ export default function ButtonCard(props) {
 
     return (
         <TouchableHighlight 
-        // disabled={true}
              underlayColor={false}
              activeOpacity={1}
              onPress={()=>{navigation.navigate(onPress)}}
@@ -47,7 +47,6 @@ export default function ButtonCard(props) {
              hasTVPreferredFocus={focus}>
             <View style={
                             [styles.button,
-                            // globalstyles.hspace,
                             {backgroundColor:color},
                             {width:width},
                             {height:height},
@@ -56,9 +55,11 @@ export default function ButtonCard(props) {
                             {opacity:opacity}
                             ]
                             }           
-            >
-                <Text style={{color:textColor}}>{title}</Text>
-                {/* <Button title="test"/> */}
+            >  
+                
+                <Text style={{color:textColor,fontFamily:fontFamily.bold}}>{title}</Text>
+                
+    
             </View>
             
               
@@ -69,7 +70,6 @@ export default function ButtonCard(props) {
 
 const styles = StyleSheet.create({
     button:{
-        // flex:1,
         justifyContent:'center',
         alignItems:'center',
         marginTop:60
