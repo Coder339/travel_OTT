@@ -6,6 +6,7 @@ import Login from '../views/login';
 import Otp from '../views/otp';
 import OtpValidate from '../views/otpvalidate';
 import Home from '../views/home';
+import Player from '../views/player';
 
 const LoginStack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -34,6 +35,7 @@ export function HomeScreens() {
             headerShown: false
         }}>
             <HomeStack.Screen name='home' component={Home}/>
+            <HomeStack.Screen name='player' component={Player}/>
         </HomeStack.Navigator>
     )
 }

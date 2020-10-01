@@ -6,6 +6,7 @@ import VerticalCard from '../components/common/verticalcard';
 import HeroCard from '../components/common/herocard';
 import StartMenuBar from '../components/common/startmenubar';
 import {colors} from '../assets/globalstyleconstants';
+import Player from './player';
 
 export class Home extends PureComponent {
   constructor(props) {
@@ -21,6 +22,7 @@ export class Home extends PureComponent {
     return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false} horizontal={false}>
+          <Player />
           {movieOTTData.map((item, index) => (
             <View key={index}>
               {item.type.includes('rectangle-card') ? (
