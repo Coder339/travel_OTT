@@ -1,3 +1,4 @@
+include ':theoplayer-android-90cada55-491e-4cbf-a01f-9c4baba66af1-2.75.1-androidTV-release'
 rootProject.name = 'foodxp_tv_app'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
