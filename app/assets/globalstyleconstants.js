@@ -117,7 +117,7 @@ export const globalstyles = StyleSheet.create({
     backgroundColor: colors.travelred,
     color: colors.white,
     overflow: 'hidden',
-    borderRadius: 55,
+    // borderRadius: 55,
   },
   blurMenuBar: {
     // backgroundColor: '#1F2227',

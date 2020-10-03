@@ -22,7 +22,7 @@ export default function RectangleCard(props) {
           showsHorizontalScrollIndicator={false}
           centerContent={true}
           decelerationRate={"fast"}
-          snapToAlignment='start'
+          snapToAlignment='center'
           snapToInterval={550}
           >
           {item.data.map((data, index) => (

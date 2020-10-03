@@ -21,19 +21,44 @@ export class Home extends PureComponent {
     return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false} horizontal={false}>
-          {movieOTTData.map((item, index) => (
-            <View key={index}>
-              {item.type.includes('rectangle-card') ? (
-                <RectangleCard type={item.type} item={item} />
-              ) : null}
-              {item.type.includes('vertical-card') ? (
-                <VerticalCard type={item.type} item={item} />
-              ) : null}
-              {item.type.includes('hero') ? (
-                <HeroCard type={item.type} item={item} />
-              ) : null}
-            </View>
-          ))}
+          <View style={{position: 'relative'}}>
+            {movieOTTData.map(
+              (item, index) =>
+                index < 2 && (
+                  <View
+                    key={index}
+                    style={index === 1 ? styles.positionBlock : {}}>
+                    {item.type.includes('rectangle-card') ? (
+                      <RectangleCard type={item.type} item={item} />
+                    ) : null}
+                    {item.type.includes('vertical-card') ? (
+                      <VerticalCard type={item.type} item={item} />
+                    ) : null}
+                    {item.type.includes('hero') ? (
+                      <HeroCard type={item.type} item={item} />
+                    ) : null}
+                  </View>
+                ),
+            )}
+          </View>
+          <View style={{marginTop: 160}}>
+            {movieOTTData.map(
+              (item, index) =>
+                index > 1 && (
+                  <View key={index}>
+                    {item.type.includes('rectangle-card') ? (
+                      <RectangleCard type={item.type} item={item} />
+                    ) : null}
+                    {item.type.includes('vertical-card') ? (
+                      <VerticalCard type={item.type} item={item} />
+                    ) : null}
+                    {item.type.includes('hero') ? (
+                      <HeroCard type={item.type} item={item} />
+                    ) : null}
+                  </View>
+                ),
+            )}
+          </View>
         </ScrollView>
         <View style={styles.sideBarContainer}>
           <StartMenuBar />
@@ -53,5 +78,9 @@ const styles = StyleSheet.create({
   sideBarContainer: {
     position: 'absolute',
     left: 0,
+  },
+  positionBlock: {
+    position: 'absolute',
+    bottom: -160,
   },
 });
