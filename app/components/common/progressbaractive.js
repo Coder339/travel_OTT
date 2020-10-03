@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     innerClass: {
         height:  3 ,
         borderRadius: 1 ,
-        backgroundColor: colors.highlight
+        backgroundColor: colors.travelred
     },
     seekbar: {
         position: 'absolute',

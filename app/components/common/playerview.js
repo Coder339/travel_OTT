@@ -246,7 +246,7 @@ export default class PlayerView extends React.Component {
                                         </View>
 
                                         <View style={[styles.bottomBar, {
-                                            marginLeft: 20 ,
+                                            marginLeft: 150 ,
                                             marginRight: 20 
                                         }]}>
                                             <ProgressBarActive
