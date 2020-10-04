@@ -21,7 +21,7 @@ export function LoginScreens() {
         }}>
             <LoginStack.Screen name='Login' component={Login}/>
             <LoginStack.Screen name='Otp' component={Otp}/>
-            <LoginStack.Screen name='OtpValidate' component={OtpValidate}/>
+            {/* <LoginStack.Screen name='OtpValidate' component={OtpValidate}/> */}
         </LoginStack.Navigator>
     )
 }

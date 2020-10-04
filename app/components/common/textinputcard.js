@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import { StyleSheet, Text, View,TextInput,Keyboard,KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, Text, View,TextInput,Keyboard,KeyboardAvoidingView,TouchableHighlight } from 'react-native'
 import {colors,globalstyles,fontFamily,fontSize} from '../../assets/globalstyleconstants';
 
 export default function TextInputCard(props) {
@@ -13,32 +13,46 @@ export default function TextInputCard(props) {
         defaultValue,
         value,
         onChange,
+        changeIndex,
         onFocus,
         active,
         inputRef,
         placeholder,
         placeholderTextColor } = props
-
+    
+    const [proactive,setActive] = useState(active)
+    
     const borderFocusHandler = () => {
-        Keyboard.dismiss()
-        // setActive(true)
+        // Keyboard.dismiss()
+        changeIndex(index)
+        setActive(true)
     }
     
-
-    const referenceHandler = (r) => {
-        inputRef && inputRef(r) 
+    const borderBlurhandler = () => {
+        // Keyboard.dismiss()
+        setActive(false)
     }
+
+    // const referenceHandler = (r) => {
+    //     inputRef && inputRef(r) 
+    // }
 
     useEffect(() => {
         
     }, [])
     return (
-        <View style={styles.inputContainer}>
+        <TouchableHighlight 
+            style={styles.inputContainer}
+            underlayColor={false}
+            onPress={()=>{}}
+            onFocus={()=>{borderFocusHandler()}}
+            onBlur={()=>{borderBlurhandler()}}
+            >
             <TextInput 
                style={[styles.input,
                       {width:width,
                       height:height,
-                      borderBottomWidth: active ? 1 : 0,
+                      borderBottomWidth: proactive ? 1 : 0,
                       fontSize:fontSize.normal,
                       }
                      ]}
@@ -51,15 +65,15 @@ export default function TextInputCard(props) {
                editable={false}
             //    keyboardType='numeric'
             //    autoFocus={index === 0 ? true: false}
-               onKeyPress={onkeypress}
-               onFocus={()=>borderFocusHandler()}
+            //    onKeyPress={onkeypress}
+            //    onFocus={()=>borderFocusHandler()}
             //    onBlur={()=>setActive(false)}
                onChangeText={onChange}
                value={value}
                
                />
                
-        </View>
+        </TouchableHighlight>
     )
 }
 

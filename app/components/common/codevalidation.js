@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from 'react-native'
 import {colors,globalstyles,fontFamily} from '../../assets/globalstyleconstants';
 
 export default function CodeValidation(props) {
-    const { erroMessage } = props
+    const { errorMessage } = props
     return (
         <View style={[styles.messageContainer,globalstyles.hspace]}>
-            <Text style={styles.errorText}>{erroMessage}</Text>
+            <Text style={styles.errorText}>{errorMessage}</Text>
         </View>
     )
 }

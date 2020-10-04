@@ -25,8 +25,22 @@ export default function Keybutton(props) {
     const [buttonOpacity,setButtonOpacity]  = useState(0.5)
     // const [textOpacity,setTextOpacity]  = useState(1)
     const [focus, setfocus] = useState(false)
+    const [disable, setDisable] = useState(false)
+ 
+    // To prevent the debouncing
+    const onButtonPress = (title) => {
+        if(disable) return;
+        setDisable(true)
+        setTimeout(()=>{
+            setDisable(false)
+        }, 500);
 
-    const boderFocushandler = () => {
+        onPress && onPress(title);
+    }
+
+    const borderFocushandler = () => {
+        
+
         setborderwidth(bordwidth)
         setbordercolor(bordcolor)
         setButtonOpacity(opacity)
@@ -35,7 +49,7 @@ export default function Keybutton(props) {
 
     }
 
-    const boderBlurhandler = () => {
+    const borderBlurhandler = () => {
         setborderwidth(0)
         setbordercolor('')
         setButtonOpacity(0.5)
@@ -53,10 +67,11 @@ export default function Keybutton(props) {
         <TouchableHighlight 
              underlayColor={false}
              activeOpacity={opacity}
-             onPress={()=>{onPress(title)}}
-             onFocus={()=>{boderFocushandler()}}
-             onBlur={()=>{boderBlurhandler()}}
-             hasTVPreferredFocus={focus}>
+             onPress={()=>{onButtonPress(title)}}
+             onFocus={()=>{borderFocushandler()}}
+             onBlur={()=>{borderBlurhandler()}}
+             hasTVPreferredFocus={focus}
+             >
             <View style={
                             [styles.button,
                             {backgroundColor:color},

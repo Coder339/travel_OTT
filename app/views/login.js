@@ -39,7 +39,7 @@ export default class login extends Component {
                            bordwidth={1}
                            defaultFocus={true}
                            navigation={this.props.navigation}
-                           onPress='Otp'
+                           onPress={()=>this.props.navigation.navigate('Otp')}
                         />
                         {/* <ButtonCard 
                            title='Sign In' 
