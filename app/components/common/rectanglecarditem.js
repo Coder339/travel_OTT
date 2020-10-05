@@ -8,7 +8,7 @@ import {
 import {
   colors,
   setImageUrl,
-  globalstyles,
+  globalstyles, fontFamily, fontSize
 } from '../../assets/globalstyleconstants';
 import ProgressiveImage from './progressiveimage';
 
@@ -68,8 +68,8 @@ export default class RectangleCarditem extends PureComponent {
         {type === 'rectangle-card-title' ||
         type === 'rectangle-card-details' ? (
           <View style={styles.bannerTitleContainer}>
-            <View style={{width: 180, paddingBottom: 15, paddingLeft: 5}}>
-              <Text numberOfLines={2} style={styles.bannerTitle}>
+            <View style={{width: 200, paddingBottom: 1, paddingLeft: 5}}>
+              <Text numberOfLines={2} style={globalstyles.cardTitle}>
                 {data.title}
               </Text>
             </View>
@@ -135,26 +135,30 @@ const styles = StyleSheet.create({
     top: -30,
     left: 18,
     opacity: 1,
-    width: 230,
+    width: 220,
   },
   selectedFocus: {
     position: 'absolute',
     top: -30,
     left: 18,
     opacity: 1,
-    width: 210,
+    width: 220,
   },
   bannerTitleContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 10,
+    paddingTop:5
   },
-  bannerTitle: {color: colors.white},
+  bannerTitle: {
+    color: colors.white,
+    fontFamily:fontFamily.heavy
+  },
   epiDurContainer: {
     flex: 1,
     justifyContent: 'space-between',
     flexDirection: 'row',
+    paddingLeft: 5
   },
   svgsContainer: {
     flex: 1,
@@ -166,6 +170,10 @@ const styles = StyleSheet.create({
     width: 200,
     paddingBottom: 15,
     paddingTop: 10,
+    paddingLeft: 5
   },
-  cardParagraph: {color: colors.lightgray},
+  cardParagraph: {
+    color: colors.lightgray,
+    fontSize:fontSize.medium,
+  },
 });

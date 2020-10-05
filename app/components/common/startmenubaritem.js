@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {View, StyleSheet, TouchableOpacity, Text, TouchableHighlight} from 'react-native';
+import {View, StyleSheet, Text, TouchableHighlight} from 'react-native';
 import {colors, globalstyles} from '../../assets/globalstyleconstants';
 
 import SearchSvg from '../../images/searchsvg';
@@ -41,7 +41,6 @@ export default class StartMenuBarItem extends PureComponent {
 
   render() {
     const sizing = {width:this.props.width,height: 55};
-    // const sizing = {height: 55};
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -116,14 +115,12 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     backgroundColor: colors.backgroundColor,
     opacity: 0.5,
-    // width: 150,
   },
   containerItems: {
     paddingTop: 18,
     paddingLeft: 15,
     paddingRight: 15,
     flex: 1,
-    // width: 150,
   },
   containerItemsBlur:{
     paddingTop: 18,

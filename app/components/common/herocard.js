@@ -6,7 +6,7 @@ import ProgressiveImage from './progressiveimage';
 import {
   colors,
   setImageUrl,
-  globalstyles,
+  globalstyles, fontFamily, fontSize
 } from '../../assets/globalstyleconstants';
 import VerticalCarditem from './verticalcarditem';
 import PlayWatchButton from './playwatchbutton';
@@ -27,6 +27,8 @@ export default React.memo(function HeroCard(props) {
                   overlay={false}
                   thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
                   source={{uri: setImageUrl(data.image, 900, 900)}}
+                  isLinearGradient={true}
+                  type={type}
                 />
               </View>
               <View style={styles.titleContainer}>
@@ -55,12 +57,22 @@ export default React.memo(function HeroCard(props) {
               </View>
 
               {type === 'hero-card' ? (
-                <View style={{position: 'absolute', top: 100, left: 500}}>
+                <View style={{position: 'absolute', top: 100, left: 550}}>
+                  <View style={{paddingLeft: 14}}>
+                    <Text
+                      style={{
+                        color: colors.white,
+                        fontSize: fontSize.larger,
+                        fontFamily: fontFamily.regular,
+                      }}>
+                      Experience Mode
+                    </Text>
+                  </View>
                   <ScrollView horizontal={true}>
                     {item.data[0].data.map((data, index) => (
-                      <View 
+                      <View
                         key={index}
-                        Vertical={false}   
+                        Vertical={false}
                         showsHorizontalScrollIndicator={false}>
                         <VerticalCarditem data={data} key={index} />
                       </View>
@@ -70,7 +82,7 @@ export default React.memo(function HeroCard(props) {
               ) : null}
             </View>
           ))}
-          
+
           <View style={styles.playWatchContainer}>
             <PlayWatchButton name="Watch" />
           </View>
@@ -102,7 +114,7 @@ const styles = StyleSheet.create({
     width: 490,
     paddingBottom: 15,
     paddingTop: 2,
-    paddingLeft: 70,
+    paddingLeft: 75,
     position: 'absolute',
     top: 140,
   },
@@ -112,7 +124,7 @@ const styles = StyleSheet.create({
     width: 250,
     paddingLeft: 70,
     position: 'absolute',
-    top: 230,
+    top: 215,
   },
   hdfourkContainer: {
     justifyContent: 'space-between',
@@ -123,20 +135,20 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
   },
   descContainer: {
-    width: 600,
+    width: 560,
     paddingBottom: 30,
-    paddingLeft: 70,
+    paddingLeft: 75,
     position: 'absolute',
-    top: 260,
+    top: 250,
   },
   bannerParagraph: {
     fontSize: 12,
     color: 'white',
   },
   playWatchContainer: {
-    paddingLeft: 70,
+    paddingLeft: 75,
     position: 'absolute',
-    top: 340,
+    top: 335,
     flex: 1,
   },
   playwatchText: {
