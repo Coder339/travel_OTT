@@ -7,6 +7,7 @@ import Otp from '../views/otp';
 import OtpValidate from '../views/otpvalidate';
 import Home from '../views/home';
 import Player from '../views/player';
+import ProgramDetail  from '../views/programdetail';
 
 const LoginStack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -35,6 +36,7 @@ export function HomeScreens() {
         }}>
             <HomeStack.Screen name='home' component={Home}/>
             <HomeStack.Screen name='player' component={Player}/>
+            <HomeStack.Screen name='programdetail' component={ProgramDetail}/>
         </HomeStack.Navigator>
     )
 }

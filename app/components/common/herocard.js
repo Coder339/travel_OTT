@@ -6,7 +6,9 @@ import ProgressiveImage from './progressiveimage';
 import {
   colors,
   setImageUrl,
-  globalstyles, fontFamily, fontSize
+  globalstyles,
+  fontFamily,
+  fontSize,
 } from '../../assets/globalstyleconstants';
 import VerticalCarditem from './verticalcarditem';
 import PlayWatchButton from './playwatchbutton';
@@ -57,7 +59,7 @@ export default React.memo(function HeroCard(props) {
               </View>
 
               {type === 'hero-card' ? (
-                <View style={{position: 'absolute', top: 100, left: 550}}>
+                <View style={{position: 'absolute', top: 50, left: 550}}>
                   <View style={{paddingLeft: 14}}>
                     <Text
                       style={{
@@ -68,12 +70,12 @@ export default React.memo(function HeroCard(props) {
                       Experience Mode
                     </Text>
                   </View>
-                  <ScrollView horizontal={true}>
+                  <ScrollView
+                    horizontal={true}
+                    Vertical={false}
+                    showsHorizontalScrollIndicator={false}>
                     {item.data[0].data.map((data, index) => (
-                      <View
-                        key={index}
-                        Vertical={false}
-                        showsHorizontalScrollIndicator={false}>
+                      <View key={index}>
                         <VerticalCarditem data={data} key={index} />
                       </View>
                     ))}
@@ -160,4 +162,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 50,
   },
+  verticalCardContainer:{
+    position: 'absolute',
+  }
 });

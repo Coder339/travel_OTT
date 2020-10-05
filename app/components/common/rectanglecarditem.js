@@ -28,6 +28,7 @@ export default class RectangleCarditem extends PureComponent {
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onPress = this.onPress.bind(this);
+    
   }
 
   onFocus() {
@@ -41,7 +42,7 @@ export default class RectangleCarditem extends PureComponent {
     });
   }
   onPress() {
-    alert('Clicked');
+    this.props.onPress('programdetail')
   }
 
   render() {
@@ -53,6 +54,7 @@ export default class RectangleCarditem extends PureComponent {
           underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          onPress={()=>this.onPress()}
           style={
             this.state.focused
               ? [globalstyles.focusBorder, sizing]
