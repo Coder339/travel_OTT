@@ -36,7 +36,7 @@ export default class PlayWatchButton extends PureComponent {
     });
   }
   onPress() {
-    alert('Clicked');
+    this.props.onPress('player')
   }
 
   render() {
@@ -47,6 +47,7 @@ export default class PlayWatchButton extends PureComponent {
           underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          onPress={this.onPress}
           style={
             this.state.focused
               ? globalstyles.focusPlayButton

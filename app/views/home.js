@@ -12,14 +12,14 @@ export class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
-    this.rectangleCardpress = this.rectangleCardpress.bind(this);
+    this.Cardpress = this.Cardpress.bind(this);
   }
 
   componentDidMount() {
     console.log('home');
   }
 
-  rectangleCardpress(nav){
+  Cardpress(nav){
     // console.log(nav+"     nav")
     this.props.navigation.navigate(nav)
   }
@@ -36,13 +36,13 @@ export class Home extends PureComponent {
                     key={index}
                     style={index === 1 ? styles.positionBlock : {}}>
                     {item.type.includes('rectangle-card') ? (
-                      <RectangleCard type={item.type} item={item} onPress={this.rectangleCardpress} />
+                      <RectangleCard type={item.type} item={item} onPress={this.Cardpress} />
                     ) : null}
                     {item.type.includes('vertical-card') ? (
                       <VerticalCard type={item.type} item={item} />
                     ) : null}
                     {item.type.includes('hero') ? (
-                      <HeroCard type={item.type} item={item} />
+                      <HeroCard type={item.type} item={item} onPress={this.Cardpress} />
                     ) : null}
                   </View>
                 ),

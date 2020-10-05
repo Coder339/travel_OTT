@@ -86,7 +86,7 @@ export default React.memo(function HeroCard(props) {
           ))}
 
           <View style={styles.playWatchContainer}>
-            <PlayWatchButton name="Watch" />
+            <PlayWatchButton name="Watch" onPress={(nav)=>props.onPress(nav)} />
           </View>
         </View>
       ) : null}

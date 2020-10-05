@@ -14,7 +14,7 @@ export default class AuthStack extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userToken: 'undefined',
+            userToken: 'null',
             user: {
                 name: '',
                 said: null,
