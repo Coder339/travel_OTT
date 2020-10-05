@@ -34,7 +34,7 @@ export default function ButtonCard(props) {
     const boderFocushandler = () =>{
         setborderwidth(bordwidth)
         setbordercolor(bordcolor)
-        // setButtonOpacity(opacity)
+
     }
 
     const boderBlurhandler = () =>{

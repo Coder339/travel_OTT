@@ -8,8 +8,9 @@ export default function OtpValidation(props) {
         otpArray,
         textArray,
         active,
-        changeIndex
-        // onChange,
+        changeIndex,
+        onFocus,
+        onBlur,
         } = props
     return (
         <View>
@@ -30,8 +31,8 @@ export default function OtpValidation(props) {
                             height={50} 
                             value={textArray[index]}
                             changeIndex={changeIndex}
-                            // onChange={onChange}
-                            // onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
+                            onFocus={onFocus}
+                            onBlur={onBlur}
                             />
                         </View>
                     )}

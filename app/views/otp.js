@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Button,ImageBackground,Keyboard } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { Text, StyleSheet, View, Button,ImageBackground,Keyboard } from 'react-native';
 import {colors,globalstyles,fontFamily,fontSize} from '../assets/globalstyleconstants';
 import ButtonCard from '../components/common/navbutton';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
 import Numerickeypad from '../components/common/keypad';
-import TextInputCard from '../components/common/textinputcard'
-import CodeValidation from '../components/common/codevalidation';
 import MobileValidation from './mobilevalidation';
 import OtpValidation from './otpvalidation';
 import data from '../config/countrylist.json';
@@ -26,6 +23,7 @@ export default class Otp extends Component {
             data,
             code:'',
             isTrue:true,
+            isComplete:true,
             textArray:textArray,
             active:activeArray,
             otpTextArray:otpTextArray,
@@ -34,7 +32,8 @@ export default class Otp extends Component {
             whitebutton: colors.white,
             blackButtonTextColor: colors.white,
             whiteButtonTextColor: colors.black,
-            mobile: '',
+            mobileNumber: '',
+            otpText:'',
             title:'',
             mobileHolder: 'ENTER YOUR MOBILE NUMBER',
             mobileHolderColor: colors.white,
@@ -62,9 +61,6 @@ export default class Otp extends Component {
                     if (this.state.textArray[0]===this.state.code){
                         prevState.isTrue = true
                     }
-                    // if(index === 1 && this.state.textArray[index-1]===this.state.code){
-                    //     prevState.isTrue = true
-                    // }
                     else{
                         prevState.isTrue = false
                     }
@@ -73,26 +69,18 @@ export default class Otp extends Component {
                       }
                     
                 })
-    
-                if (this.state.textArray[1].length === 0){
-                    this.state.active.fill(false,1)
-                    this.setState({mobileIndex:0})
-                }
                 
                 console.log(this.state.textArray[index])
                 console.log(this.state.active)
             }    
         }
         else {
-            // console.log('indexxx',index)
             console.log(text)
             this.setState(prevState => {
                 if (index === 0){
                     
                     prevState.textArray[index] = prevState.textArray[index] + text
-                    prevState.active[index] = true
-                    
-                    // console.log('textarrayLength',this.state.textArray[index].length)
+
                     let element = this.state.data.find((item)=>{
                         console.log('item',item.dial_code)
                         return item.dial_code === this.state.textArray[index] ;
@@ -102,10 +90,8 @@ export default class Otp extends Component {
                         prevState.code = element.dial_code
 
                         prevState.isTrue = true
-                        // if (this.state.textArray[index] === this.state.code){
-                        //     alert(this.state.textArray[index])
-                        //     prevState.isTrue = true
-                        // }
+                        prevState.isComplete = true
+
                     }
                     
                     else{
@@ -116,13 +102,16 @@ export default class Otp extends Component {
                 if (index === 1) {
                     if (this.state.textArray[index].length < 10){
                         prevState.textArray[index] = prevState.textArray[index] + text
-                        prevState.active[index] = true
-                        // console.log('textarrayLength',this.state.textArray[index].length)
+
                         if (this.state.textArray[index].length===10){
-                            alert(this.state.textArray[index-1]+this.state.textArray[index])
-                            // prevState.textArray[index] = ''
+                            prevState.mobileNumber = this.state.textArray[index-1] + this.state.textArray[index]
+                            alert(this.state.mobileNumber)
+                            // POST MOBILE NUMBER...
                         }
                    
+                    }
+                    else{
+                        prevState.isComplete = true
                     }
                 }
                 return {
@@ -131,19 +120,7 @@ export default class Otp extends Component {
               }, 
               () => console.log('textarray',this.state.textArray)
             )
-
-            if (index===0){
-
-                if (this.state.textArray[index].length === 4){
-                    this.setState({mobileIndex:index+1})
-                }
-            }
-            else {
-                    this.setState({mobileIndex:index})
-                     
-            }
-            
-            
+             
         }
     }
     
@@ -152,7 +129,6 @@ export default class Otp extends Component {
         //  console.log('text',text)
         
         if (text === 'backspace') {
-            //  console.log('index',index)
             this.setState(prevState=>{
                 prevState.otpTextArray[index] = ''
                 prevState.otpActiveArray[index] = false
@@ -184,9 +160,7 @@ export default class Otp extends Component {
             if (index < 5){
                 this.setState({otpIndex:index+1})
             }
-            
-            
-            
+              
         }
         
     }
@@ -239,6 +213,28 @@ export default class Otp extends Component {
 
     componentChangeHandler = () => {
         this.setState({navButtonTitle:'Login'})
+        if (this.state.navButtonTitle === 'Login'){
+            
+            let otpMessage = this.state.otpTextArray.join('')
+            this.setState({otpText:otpMessage},() => {
+                console.log('otp',this.state.otpText);
+                if(this.state.otpText.length===this.state.otpTextArray.length){
+
+                        this.state.otpTextArray.map((item,index)=>{
+                            this.setState(prevState=>{
+                                prevState.otpTextArray[index] = ''
+                                prevState.otpActiveArray[index] = false
+                            })
+                        })
+                        this.setState({otpIndex:0})
+                        alert(this.state.otpText)
+                    }
+                    else{
+                        alert('otp is incomplete')
+                    }
+              })
+              
+        }
 
     }
 
@@ -248,6 +244,31 @@ export default class Otp extends Component {
         :
         this.setState({navButtonTitle:'Next'})
     }
+
+    mobileOnFocusHandler = (index) =>{
+        this.setState(prevState=>{
+            prevState.active[index] = true
+        })
+    }
+
+    mobileOnBlurHandler = (index) =>{
+        this.setState(prevState=>{
+            prevState.active[index] = false
+        })
+    }
+
+    otpOnFocusHandler = (index) =>{
+        this.setState(prevState=>{
+            prevState.otpActiveArray[index] = true
+        })
+    }
+
+    otpOnBlurHandler = (index) =>{
+        this.setState(prevState=>{
+            prevState.otpActiveArray[index] = false
+        })
+    }
+
     
     initialStateChange=()=>{
         this.setState({mobileIndex:1})
@@ -274,6 +295,7 @@ export default class Otp extends Component {
             otpTextArray,
             otpActiveArray,
             isTrue,
+            isComplete,
             textArray,mobileIndex,otpIndex } = this.state
         return (
             <View style={styles.container}>
@@ -290,12 +312,16 @@ export default class Otp extends Component {
                                 inputArray={inputArray}
                                 textArray={textArray}
                                 isTrue={isTrue}
+                                isComplete={isComplete}
                                 changeIndex={this.mobileIndexChange}
+                                checkIndex={mobileIndex}
                                 active={active}
                                 message={message}
                                 errorMessage={errorMessage}
                                 mobileHolder={mobileHolder}
                                 mobileHolderColor={mobileHolderColor}
+                                onFocus={(index)=>this.mobileOnFocusHandler(index)}
+                                onBlur={(index)=>this.mobileOnBlurHandler(index)}
                                 onChange={(event) =>  this.onChangeHandler(event,message,mobileIndex)}
                             />
                             :
@@ -304,6 +330,9 @@ export default class Otp extends Component {
                             textArray={otpTextArray}
                             active={otpActiveArray}
                             changeIndex={this.otpIndexChange}
+                            checkIndex={otpIndex}
+                            onFocus={(index)=>this.otpOnFocusHandler(index)}
+                            onBlur={(index)=>this.otpOnBlurHandler(index)}
                             />
                     }
 

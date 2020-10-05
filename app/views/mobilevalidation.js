@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import TextInputCard from '../components/common/textinputcard'
 import CodeValidation from '../components/common/codevalidation';
@@ -10,18 +10,19 @@ export default function MobileValidation(props) {
         inputArray,
         textArray,
         changeIndex,
+        checkIndex,
         isTrue,
+        isComplete,
         active,
         message,
         errorMessage,
         mobileHolder,
         mobileHolderColor,
         onChange,
+        onFocus,
+        onBlur,
         } = props
     
-    // const [isCodePresent,setIsCodePresent] = useState(false)
-    // const code = data.map((item,index)=>{data[index].dial_code==='+46'? setIsCodePresent(true):setIsCodePresent(false)})
-    // console.log('code',data.dial_code)
     return (
         <View>
             <Text style={[styles.mobile,globalstyles.hspace]}>
@@ -46,7 +47,12 @@ export default function MobileValidation(props) {
                             value={textArray[index]}
                             onChange={onChange}
                             changeIndex={changeIndex}
-                            // onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
+                            checkIndex={checkIndex}
+                            isTrue={isTrue}
+                            isComplete={isComplete}
+                            onFocus={onFocus}
+                            onBlur={onBlur}
+
                             />
                         </View>
                     )}
