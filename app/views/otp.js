@@ -7,6 +7,9 @@ import LogoSvgComponent  from '../assets/images/travelxplogo';
 import Numerickeypad from '../components/common/keypad';
 import TextInputCard from '../components/common/textinputcard'
 import CodeValidation from '../components/common/codevalidation';
+import MobileValidation from './mobilevalidation';
+import OtpValidation from './otpvalidation';
+import data from '../config/countrylist.json';
 
 export default class Otp extends Component {
     constructor(props){
@@ -17,9 +20,16 @@ export default class Otp extends Component {
         ]
         const textArray = Array(2).fill('');
         const activeArray = Array(2).fill(false);
+        const otpTextArray = Array(6).fill('');
+        const otpActiveArray = Array(6).fill(false);
         this.state={
+            data,
+            code:'',
+            isTrue:true,
             textArray:textArray,
             active:activeArray,
+            otpTextArray:otpTextArray,
+            otpActiveArray:otpActiveArray,
             blackbutton: colors.black,
             whitebutton: colors.white,
             blackButtonTextColor: colors.white,
@@ -29,46 +39,79 @@ export default class Otp extends Component {
             mobileHolder: 'ENTER YOUR MOBILE NUMBER',
             mobileHolderColor: colors.white,
             countryCode: '+91',
-            erroMessage:'Please enter valid country code',
+            errorMessage:'Please enter valid country code',
             defaultNum:'9',
             message:'',
-            index:0,
+            mobileIndex:0,
+            otpIndex:0,
             inputArray: ['1','2'],
+            otpArray: ['1','2','3','4','5','6'],
+            navButtonTitle:'Next',
        }
        this.mobileHandler = this.mobileHandler.bind(this)
+       this.otpNumHandler = this.otpNumHandler.bind(this)
     }
 
     mobileHandler(text,index){
         if (text === 'backspace') {
-
-            this.setState(prevState=>{
-                prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
-                console.log('length',this.state.textArray[index].length)
-                return {
-                    textArray: prevState.textArray
-                  }
-            })
-
-            if (this.state.textArray[1].length === 0){
-                this.state.active.fill(false,1)
-                this.setState({index:0})
-            }
-            
-            console.log(this.state.textArray[index])
-            console.log(this.state.active)
-            
-            
+            if (this.state.textArray[0].length > 1){
+                this.setState(prevState=>{
+                    prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
+                    console.log('length',this.state.textArray[0])
+                    console.log('length',this.state.code)
+                    if (this.state.textArray[0]===this.state.code){
+                        prevState.isTrue = true
+                    }
+                    // if(index === 1 && this.state.textArray[index-1]===this.state.code){
+                    //     prevState.isTrue = true
+                    // }
+                    else{
+                        prevState.isTrue = false
+                    }
+                    return {
+                        textArray: prevState.textArray
+                      }
+                    
+                })
+    
+                if (this.state.textArray[1].length === 0){
+                    this.state.active.fill(false,1)
+                    this.setState({mobileIndex:0})
+                }
+                
+                console.log(this.state.textArray[index])
+                console.log(this.state.active)
+            }    
         }
-        else{
+        else {
             // console.log('indexxx',index)
+            console.log(text)
             this.setState(prevState => {
                 if (index === 0){
-                    if (this.state.textArray[index].length < 3){
-                        prevState.textArray[index] = prevState.textArray[index] + text
-                        prevState.active[index] = true
-                        // console.log('textarrayLength',this.state.textArray[index].length)
-                   
+                    
+                    prevState.textArray[index] = prevState.textArray[index] + text
+                    prevState.active[index] = true
+                    
+                    // console.log('textarrayLength',this.state.textArray[index].length)
+                    let element = this.state.data.find((item)=>{
+                        console.log('item',item.dial_code)
+                        return item.dial_code === this.state.textArray[index] ;
+                    });
+                    if (element) {
+                        console.log(element.dial_code)
+                        prevState.code = element.dial_code
+
+                        prevState.isTrue = true
+                        // if (this.state.textArray[index] === this.state.code){
+                        //     alert(this.state.textArray[index])
+                        //     prevState.isTrue = true
+                        // }
                     }
+                    
+                    else{
+                        prevState.isTrue = false
+                    }
+                    
                 }
                 if (index === 1) {
                     if (this.state.textArray[index].length < 10){
@@ -91,19 +134,62 @@ export default class Otp extends Component {
 
             if (index===0){
 
-                if (this.state.textArray[index].length === 3){
-                    this.setState({index:index+1})
+                if (this.state.textArray[index].length === 4){
+                    this.setState({mobileIndex:index+1})
                 }
             }
             else {
-                    this.setState({index:index})
+                    this.setState({mobileIndex:index})
                      
             }
             
             
         }
     }
+    
 
+    otpNumHandler(text,index) {
+        //  console.log('text',text)
+        
+        if (text === 'backspace') {
+            //  console.log('index',index)
+            this.setState(prevState=>{
+                prevState.otpTextArray[index] = ''
+                prevState.otpActiveArray[index] = false
+                return {
+                    otpTextArray: prevState.otpTextArray,
+                    otpActiveArray: prevState.otpActiveArray
+                  }
+            })
+            if (index > 0){
+                this.setState({otpIndex:index-1})
+            }
+            console.log(this.state.otpTextArray)
+            console.log(this.state.otpActiveArray)
+        }
+        else{
+            this.setState(prevState => {
+                
+                if (index < this.state.otpTextArray.length){
+                    prevState.otpTextArray[index] = text
+                    prevState.otpActiveArray[index] = true
+                    console.log(this.state.active)
+                    console.log('indexx',index)
+                }
+                return {
+                    otpTextArray: prevState.otpTextArray
+                }
+              }, () => console.log(this.state.otpTextArray))
+    
+            if (index < 5){
+                this.setState({otpIndex:index+1})
+            }
+            
+            
+            
+        }
+        
+    }
 
     
     _goNextAfterEdit(index){
@@ -142,16 +228,53 @@ export default class Otp extends Component {
         }
 
     }
+
+    mobileIndexChange = (index) =>{
+        this.setState({mobileIndex:index})
+    }
+
+    otpIndexChange = (index) =>{
+        this.setState({otpIndex:index})
+    }
+
+    componentChangeHandler = () => {
+        this.setState({navButtonTitle:'Login'})
+
+    }
+
+    backChangeHandler = () => {
+        this.state.navButtonTitle === 'Next' ?
+        this.props.navigation.navigate('Login')
+        :
+        this.setState({navButtonTitle:'Next'})
+    }
     
-    componentDidMount = () => {
-        this.setState({index:1})
+    initialStateChange=()=>{
+        this.setState({mobileIndex:1})
         this.setState(prevState=>{
             prevState.textArray[0] = this.state.countryCode
-
+            prevState.code = this.state.countryCode
         })
     }
+    
+    componentDidMount = () => {
+        this.initialStateChange()
+    }
     render() {
-        const { active,inputArray,mobileHolder,mobileHolderColor,message,countryCode,textArray,index } = this.state
+        const { 
+            navButtonTitle,
+            active,
+            inputArray,
+            mobileHolder,
+            mobileHolderColor,
+            message,
+            countryCode,
+            errorMessage,
+            otpArray,
+            otpTextArray,
+            otpActiveArray,
+            isTrue,
+            textArray,mobileIndex,otpIndex } = this.state
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
@@ -161,37 +284,37 @@ export default class Otp extends Component {
                                  style={styles.logo} 
                                  width='100' 
                     />
-                    <Text style={[styles.mobile,globalstyles.hspace]}>
-                                Enter your mobile number to login.
-                    </Text>
-                    <View style={{width:'35%'}}>
+                    {
+                        navButtonTitle === 'Next' ?
+                            <MobileValidation 
+                                inputArray={inputArray}
+                                textArray={textArray}
+                                isTrue={isTrue}
+                                changeIndex={this.mobileIndexChange}
+                                active={active}
+                                message={message}
+                                errorMessage={errorMessage}
+                                mobileHolder={mobileHolder}
+                                mobileHolderColor={mobileHolderColor}
+                                onChange={(event) =>  this.onChangeHandler(event,message,mobileIndex)}
+                            />
+                            :
+                            <OtpValidation 
+                            otpArray={otpArray}
+                            textArray={otpTextArray}
+                            active={otpActiveArray}
+                            changeIndex={this.otpIndexChange}
+                            />
+                    }
 
-                        <View style={[styles.inputcard,globalstyles.hspace]}>
-                        
-                            {inputArray.map((item,index) => 
-                                 
-                                <View key={index}>
-                                    <TextInputCard 
-                                    inputRef={r => this.inputRefs[index] =  r}
-                                    maxLength={index === 0 ? 3 : 10}
-                                    width={index === 0 ? 95 : 230} 
-                                    height={40} 
-                                    active={active[index]}
-                                    index={index}
-                                    placeholder={index === 0 ? '' : mobileHolder}
-                                    placeholderTextColor={mobileHolderColor}
-                                    value={textArray[index]}
-                                    onChange={(event) =>  this.onChangeHandler(event,message,index)}
-                                    onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
-                                    />
-                                </View>
-                          )}
-        
-                        </View>
-                        
-                        <CodeValidation erroMessage={this.state.erroMessage}/>
-                    </View>
-                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.mobileHandler(text,index)}/>
+                    
+                    <Numerickeypad 
+                        defaultNum={this.state.defaultNum} 
+                        onPress={ navButtonTitle === 'Next'? 
+                            (text)=>this.mobileHandler(text,mobileIndex) 
+                            : 
+                            (text)=>this.otpNumHandler(text,otpIndex)}
+                    />
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 
@@ -201,24 +324,24 @@ export default class Otp extends Component {
                                 opacity={0.7}
                                 width={80}
                                 height={36}
-                                bordcolor='white'
-                                bordwidth={2}
+                                bordcolor={colors.white}
                                 defaultFocus={false}
+                                bordwidth={2}
                                 navigation={this.props.navigation}
-                                onPress='Login'
+                                onPress={()=>this.backChangeHandler()}
                         />
                         <ButtonCard 
-                                title='Next' 
+                                title={navButtonTitle} 
                                 color={this.state.whitebutton}
                                 textColor={this.state.whiteButtonTextColor}
                                 opacity={0.7}
                                 width={80}
                                 height={36}
-                                bordcolor='#000'
-                                bordwidth={2}
+                                bordcolor={colors.black}
                                 defaultFocus={false}
+                                bordwidth={2}
                                 navigation={this.props.navigation}
-                                onPress='OtpValidate'
+                                onPress={()=>this.componentChangeHandler()}
                         />
                     </View>
                 </ImageBackground>

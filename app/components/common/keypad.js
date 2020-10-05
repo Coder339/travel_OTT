@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,ScrollView } from 'react-native'
 import {colors,globalstyles,fontFamily} from '../../assets/globalstyleconstants';
 import Keybutton from './keybutton';
 import Backspace from '../../assets/images/backspace';
@@ -26,7 +26,6 @@ export default function Numerickeypad(props) {
                             height={36}
                             bordcolor='white'
                             bordwidth={2}
-                            defaultFocus={false}
                             opacity={0.7}
                             onPress={onPress}
                         />
@@ -43,7 +42,6 @@ export default function Numerickeypad(props) {
                     height={86}
                     bordcolor='white'
                     bordwidth={2}
-                    defaultFocus={false}
                     opacity={0.7}
                     onPress={onPress}
                 />

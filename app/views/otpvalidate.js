@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Button,ImageBackground,Keyboard } from 'react-native'
+import { Text, StyleSheet, View, Button,ImageBackground,Keyboard,ScrollView } from 'react-native'
 import { colors,globalstyles,fontFamily,fontSize } from '../assets/globalstyleconstants';
 import ButtonCard from '../components/common/navbutton';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
@@ -135,6 +135,7 @@ export default class OtpValidate extends Component {
         const { otpArray,mobileHolderColor,message,otpNum,textArray,index,active } = this.state
         return (
             <View style={styles.container}>
+                
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
                                  style={styles.image}>
                     
@@ -144,6 +145,7 @@ export default class OtpValidate extends Component {
                                  style={styles.logo} 
                                  width='100' 
                     />
+
                     <Text style={[styles.mobile,globalstyles.hspace]}>
                                 Enter OTP
                     </Text>
@@ -167,10 +169,9 @@ export default class OtpValidate extends Component {
                           )}
         
                     </View>
-                    
                     <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.otpNumHandler(text,index)}/>
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
-
+                        
                         <ButtonCard 
                                 title='Back' 
                                 color={this.state.blackbutton}
@@ -179,8 +180,8 @@ export default class OtpValidate extends Component {
                                 width={80}
                                 height={36}
                                 bordcolor='white'
-                                bordwidth={2}
                                 defaultFocus={false}
+                                bordwidth={2}
                                 navigation={this.props.navigation}
                                 onPress='Otp'
                         />
@@ -192,8 +193,8 @@ export default class OtpValidate extends Component {
                                 width={80}
                                 height={36}
                                 bordcolor='#000'
-                                bordwidth={2}
                                 defaultFocus={false}
+                                bordwidth={2}
                                 navigation={this.props.navigation}
                                 onPress='home'
                         />
@@ -208,7 +209,7 @@ export default class OtpValidate extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        position:'relative',
+        // position:'relative',
       },
     buttonContainer:{
         flexDirection:'row',

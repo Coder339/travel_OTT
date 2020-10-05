@@ -20,7 +20,17 @@ export default function ButtonCard(props) {
     const [borderwidth,setborderwidth]  = useState(0)
     const [bordercolor,setbordercolor]  = useState('')
     const [focus, setfocus] = useState(defaultFocus)
+    const [disable, setDisable] = useState(false)
 
+    const onButtonPress = (title) => {
+        if(disable) return;
+        setDisable(true)
+        setTimeout(()=>{
+            setDisable(false)
+        }, 500);
+
+        onPress();
+    }
     const boderFocushandler = () =>{
         setborderwidth(bordwidth)
         setbordercolor(bordcolor)
@@ -34,14 +44,14 @@ export default function ButtonCard(props) {
     }
 
     useEffect(() => {
-        focus ? (setborderwidth(bordwidth),setbordercolor(bordcolor)) : (setborderwidth(0),setbordercolor(''))
+        // focus ? (setborderwidth(bordwidth),setbordercolor(bordcolor)) : (setborderwidth(0),setbordercolor(''))
     }, [])
 
     return (
         <TouchableHighlight 
              underlayColor={false}
              activeOpacity={1}
-             onPress={()=>{navigation.navigate(onPress)}}
+             onPress={()=>{onButtonPress()}}
              onFocus={()=>{boderFocushandler()}}
              onBlur={()=>{boderBlurhandler()}}
              hasTVPreferredFocus={focus}>
