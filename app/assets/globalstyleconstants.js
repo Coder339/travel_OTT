@@ -77,6 +77,11 @@ export const globalstyles = StyleSheet.create({
     aspectRatio: 0.8,
     height: 480,
   },
+  rectangleImageDetail: {
+    aspectRatio: 1,
+    height: 350,
+    width: 750,
+  },
   focusBorder: {
     borderWidth: 5,
     borderColor: colors.white,
@@ -112,6 +117,24 @@ export const globalstyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 30,
+  },
+  blurPlayButtonDetails:{
+    backgroundColor: colors.black,
+    width: 150,
+    height: 55,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  focusPlayButtonDetails:{
+    width: 150,
+    height: 55,
+    borderWidth: 5,
+    borderColor: colors.white,
+    overflow: 'hidden',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   focusMenuBar: {
     backgroundColor: colors.travelred,

@@ -93,7 +93,7 @@ export default class ProgressiveImage extends React.PureComponent {
                 colors={['transparent', 'transparent', colors.backgroundColor]}
                 start={{x: 5, y: 0}}
                 end={{x: 0.0, y: 0.0}}
-                locations={[0, 0.9, 1]}
+                locations={[0, 0.85, 1]}
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -117,6 +117,35 @@ export default class ProgressiveImage extends React.PureComponent {
                 }}
               />
             </React.Fragment>
+          ) : type === 'details' ? (
+            <React.Fragment>
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 5, y: 0}}
+                end={{x: 0.0, y: 0.0}}
+                locations={[0, 0.4, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 0.5, y: 0.1}}
+                end={{x: 0.5, y: 1}}
+                locations={[0, 0.95, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+            </React.Fragment>
           ) : (
             <React.Fragment>
               {/* BOTTOM */}
@@ -124,7 +153,7 @@ export default class ProgressiveImage extends React.PureComponent {
                 colors={['transparent', 'transparent', colors.backgroundColor]}
                 start={{x: 0.5, y: 0.1}}
                 end={{x: 0.5, y: 1}}
-                locations={[0, 0.9, 1]}
+                locations={[0, 0.85, 1]}
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -138,7 +167,7 @@ export default class ProgressiveImage extends React.PureComponent {
                 colors={['transparent', 'transparent', colors.backgroundColor]}
                 start={{x: 0.5, y: 0.9}}
                 end={{x: 0.5, y: 0}}
-                locations={[0, 0.9, 1]}
+                locations={[0, 0.3, 1]}
                 style={{
                   position: 'absolute',
                   top: 0,
@@ -152,7 +181,7 @@ export default class ProgressiveImage extends React.PureComponent {
                 colors={['transparent', 'transparent', colors.backgroundColor]}
                 start={{x: 0.1, y: 0.1}}
                 end={{x: 1, y: 0.1}}
-                locations={[0, 0.9, 1]}
+                locations={[0, 0.5, 1]}
                 style={{
                   position: 'absolute',
                   top: 0,
