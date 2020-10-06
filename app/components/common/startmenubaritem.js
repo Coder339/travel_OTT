@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {View, StyleSheet, TouchableOpacity, Text, TouchableHighlight} from 'react-native';
+import {View, StyleSheet, Text, TouchableHighlight} from 'react-native';
 import {colors, globalstyles} from '../../assets/globalstyleconstants';
 
 import SearchSvg from '../../images/searchsvg';
