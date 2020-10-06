@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity,TouchableHighlight,TouchableWithoutFeedback, Button } from 'react-native';
-import {colors,globalstyles} from '../../assets/globalstyleconstants';
+import {colors,globalstyles, fontFamily} from '../../assets/globalstyleconstants';
 import Backspace from '../../assets/images/backspace';
 
 
@@ -22,52 +22,70 @@ export default function Keybutton(props) {
     
     const [borderwidth,setborderwidth]  = useState(0)
     const [bordercolor,setbordercolor]  = useState('')
-    const [focus, setfocus] = useState(defaultFocus)
+    const [buttonOpacity,setButtonOpacity]  = useState(0.5)
+    // const [textOpacity,setTextOpacity]  = useState(1)
+    const [focus, setfocus] = useState(false)
+    const [disable, setDisable] = useState(false)
+ 
+    // To prevent the debouncing
+    const onButtonPress = (title) => {
+        if(disable) return;
+        setDisable(true)
+        setTimeout(()=>{
+            setDisable(false)
+        }, 500);
 
-    const boderFocushandler = () =>{
+        onPress && onPress(title);
+    }
+
+    const borderFocushandler = () => {
+        
+
         setborderwidth(bordwidth)
         setbordercolor(bordcolor)
+        setButtonOpacity(opacity)
+        // setfocus(true)
+        console.log('borderFocus',focus)
+
     }
 
-    const boderBlurhandler = () => {
+    const borderBlurhandler = () => {
         setborderwidth(0)
         setbordercolor('')
-        // alert('works')
-    }
+        setButtonOpacity(0.5)
+        // setfocus(false)
+        // console.log('borderBlur',focus)
 
-    // const textValueHandler = () => {
-    //     alert(title)
-    // }
+    }
 
     useEffect(() => {
         (defaultNum === title && type === 'num') ? (setborderwidth(bordwidth),setbordercolor(bordcolor),setfocus(true)) : (setborderwidth(0),setbordercolor(''))
-        
+        console.log('focus',focus)
     }, [])
 
     return (
         <TouchableHighlight 
-        // activeOpacity={false}
              underlayColor={false}
              activeOpacity={opacity}
-             onPress={()=>{onPress(title)}}
-             onFocus={()=>{boderFocushandler()}}
-             onBlur={()=>{boderBlurhandler()}}
-             hasTVPreferredFocus={focus}>
+             onPress={()=>{onButtonPress(title)}}
+             onFocus={()=>{borderFocushandler()}}
+             onBlur={()=>{borderBlurhandler()}}
+             hasTVPreferredFocus={focus}
+             >
             <View style={
                             [styles.button,
-                            // globalstyles.hspace,
                             {backgroundColor:color},
                             {width:width},
                             {height:height},
                             {borderWidth:borderwidth},
                             {borderColor:bordercolor},
-                            {opacity:opacity}
+                            {opacity:buttonOpacity}
                             ]
                             }           
             >
                 {type === 'num' ? 
                   
-                  <Text style={{color:textColor}}>{title}</Text> :
+                  <Text style={{color:textColor,fontFamily:fontFamily.bold}}>{title}</Text> :
 
                   <Backspace/>
                 }
@@ -83,7 +101,6 @@ export default function Keybutton(props) {
 
 const styles = StyleSheet.create({
     button:{
-        // flex:1,
         justifyContent:'center',
         alignItems:'center',
     },

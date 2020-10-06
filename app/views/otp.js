@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, Button,ImageBackground,Keyboard } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { Text, StyleSheet, View, Button,ImageBackground,Keyboard } from 'react-native';
 import {colors,globalstyles,fontFamily,fontSize} from '../assets/globalstyleconstants';
 import ButtonCard from '../components/common/navbutton';
 import LogoSvgComponent  from '../assets/images/travelxplogo';
 import Numerickeypad from '../components/common/keypad';
-import TextInputCard from '../components/common/textinputcard'
-import CodeValidation from '../components/common/codevalidation';
+import MobileValidation from './mobilevalidation';
+import OtpValidation from './otpvalidation';
+import data from '../config/countrylist.json';
 
 export default class Otp extends Component {
     constructor(props){
@@ -17,70 +17,101 @@ export default class Otp extends Component {
         ]
         const textArray = Array(2).fill('');
         const activeArray = Array(2).fill(false);
+        const otpTextArray = Array(6).fill('');
+        const otpActiveArray = Array(6).fill(false);
         this.state={
+            data,
+            code:'',
+            isTrue:true,
+            isComplete:true,
             textArray:textArray,
             active:activeArray,
+            otpTextArray:otpTextArray,
+            otpActiveArray:otpActiveArray,
             blackbutton: colors.black,
             whitebutton: colors.white,
             blackButtonTextColor: colors.white,
             whiteButtonTextColor: colors.black,
-            mobile: '',
+            mobileNumber: '',
+            otpText:'',
             title:'',
             mobileHolder: 'ENTER YOUR MOBILE NUMBER',
             mobileHolderColor: colors.white,
             countryCode: '+91',
-            erroMessage:'Please enter valid country code',
+            errorMessage:'Please enter valid country code',
             defaultNum:'9',
             message:'',
-            index:0,
+            mobileIndex:0,
+            otpIndex:0,
             inputArray: ['1','2'],
+            otpArray: ['1','2','3','4','5','6'],
+            navButtonTitle:'Next',
        }
        this.mobileHandler = this.mobileHandler.bind(this)
+       this.otpNumHandler = this.otpNumHandler.bind(this)
     }
 
     mobileHandler(text,index){
         if (text === 'backspace') {
-            // alert('back')
-
-            this.setState(prevState=>{
-                prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
-                console.log('length',this.state.textArray[index].length)
-                return {
-                    textArray: prevState.textArray
-                  }
-            })
-
-            if (this.state.textArray[1].length === 0){
-                this.state.active.fill(false,1)
-                this.setState({index:0})
-            }
-            
-            console.log(this.state.textArray[index])
-            console.log(this.state.active)
-            
-            
+            if (this.state.textArray[0].length > 1){
+                this.setState(prevState=>{
+                    prevState.textArray[index] = prevState.textArray[index].substring(0,this.state.textArray[index].length - 1)
+                    console.log('length',this.state.textArray[0])
+                    console.log('length',this.state.code)
+                    if (this.state.textArray[0]===this.state.code){
+                        prevState.isTrue = true
+                    }
+                    else{
+                        prevState.isTrue = false
+                    }
+                    return {
+                        textArray: prevState.textArray
+                      }
+                    
+                })
+                
+                console.log(this.state.textArray[index])
+                console.log(this.state.active)
+            }    
         }
-        else{
-            // console.log('indexxx',index)
+        else {
+            console.log(text)
             this.setState(prevState => {
                 if (index === 0){
-                    if (this.state.textArray[index].length < 3){
-                        prevState.textArray[index] = prevState.textArray[index] + text
-                        prevState.active[index] = true
-                        // console.log('textarrayLength',this.state.textArray[index].length)
-                   
+                    
+                    prevState.textArray[index] = prevState.textArray[index] + text
+
+                    let element = this.state.data.find((item)=>{
+                        console.log('item',item.dial_code)
+                        return item.dial_code === this.state.textArray[index] ;
+                    });
+                    if (element) {
+                        console.log(element.dial_code)
+                        prevState.code = element.dial_code
+
+                        prevState.isTrue = true
+                        prevState.isComplete = true
+
                     }
+                    
+                    else{
+                        prevState.isTrue = false
+                    }
+                    
                 }
                 if (index === 1) {
                     if (this.state.textArray[index].length < 10){
                         prevState.textArray[index] = prevState.textArray[index] + text
-                        prevState.active[index] = true
-                        // console.log('textarrayLength',this.state.textArray[index].length)
+
                         if (this.state.textArray[index].length===10){
-                            alert(this.state.textArray[index-1]+this.state.textArray[index])
-                            // prevState.textArray[index] = ''
+                            prevState.mobileNumber = this.state.textArray[index-1] + this.state.textArray[index]
+                            alert(this.state.mobileNumber)
+                            // POST MOBILE NUMBER...
                         }
                    
+                    }
+                    else{
+                        prevState.isComplete = true
                     }
                 }
                 return {
@@ -89,23 +120,50 @@ export default class Otp extends Component {
               }, 
               () => console.log('textarray',this.state.textArray)
             )
-
-            // this.state.index === index ? this.setState({active:true}) : this.setState({active:false})
-            if (index===0){
-
-                if (this.state.textArray[index].length === 3){
-                    this.setState({index:index+1})
-                }
-            }
-            else {
-                    this.setState({index:index})
-                     
-            }
-            
-            
+             
         }
     }
+    
 
+    otpNumHandler(text,index) {
+        //  console.log('text',text)
+        
+        if (text === 'backspace') {
+            this.setState(prevState=>{
+                prevState.otpTextArray[index] = ''
+                prevState.otpActiveArray[index] = false
+                return {
+                    otpTextArray: prevState.otpTextArray,
+                    otpActiveArray: prevState.otpActiveArray
+                  }
+            })
+            if (index > 0){
+                this.setState({otpIndex:index-1})
+            }
+            console.log(this.state.otpTextArray)
+            console.log(this.state.otpActiveArray)
+        }
+        else{
+            this.setState(prevState => {
+                
+                if (index < this.state.otpTextArray.length){
+                    prevState.otpTextArray[index] = text
+                    prevState.otpActiveArray[index] = true
+                    console.log(this.state.active)
+                    console.log('indexx',index)
+                }
+                return {
+                    otpTextArray: prevState.otpTextArray
+                }
+              }, () => console.log(this.state.otpTextArray))
+    
+            if (index < 5){
+                this.setState({otpIndex:index+1})
+            }
+              
+        }
+        
+    }
 
     
     _goNextAfterEdit(index){
@@ -142,20 +200,112 @@ export default class Otp extends Component {
                 this.inputRefs[index-1].focus()
             }
         }
-        // nativeEvent.key === 'Backspace' ? alert('delete') : alert('ghjgjh')
+
+    }
+
+
+    componentChangeHandler = () => {
+        this.setState({navButtonTitle:'Login'})
+    
+            
+        let otpMessage = this.state.otpTextArray.join('')
+        this.setState({otpText:otpMessage},() => {
+            console.log('otp',this.state.otpText);
+            if(this.state.otpText.length===this.state.otpTextArray.length){
+
+                    this.state.otpTextArray.map((item,index)=>{
+                        this.setState(prevState=>{
+                            prevState.otpTextArray[index] = ''
+                            prevState.otpActiveArray[index] = false
+                        })
+                    })
+                    this.setState({otpIndex:0})
+                    alert(this.state.otpText)
+                }
+                // else{
+                //     alert('otp is incomplete')
+                // }
+            })
+              
+    }
+
+    backChangeHandler = () => {
+        this.state.navButtonTitle === 'Next' ?
+        this.props.navigation.navigate('Login')
+        :
+        this.setState({navButtonTitle:'Next'})
+    }
+
+    mobileIndexChange = (index) =>{
+        this.setState({mobileIndex:index})
+    }
+
+    otpIndexChange = (index) =>{
+        this.setState({otpIndex:index})
+    }
+
+    mobileOnFocusHandler = (index) =>{
+        this.setState(prevState=>{
+            prevState.active[index] = true
+        })
+    }
+
+    mobileOnBlurHandler = (index) =>{
+        this.setState(prevState=>{
+            prevState.active[index] = false
+        })
+    }
+
+    mobileBorderFocusHandler = (index) => {
+        this.mobileOnFocusHandler(index)
+        this.mobileIndexChange(index)
 
     }
     
-    componentDidMount = () => {
-        // this.inputRefs[0].focus()
-        this.setState({index:1})
+    mobileBorderBlurhandler = (index) => {
+        this.mobileOnBlurHandler(index)
+    }
+
+    // otpOnFocusHandler = (index) =>{
+    //     this.setState(prevState=>{
+    //         prevState.otpActiveArray[index] = true
+    //     })
+    // }
+
+    // otpOnBlurHandler = (index) =>{
+    //     this.setState(prevState=>{
+    //         prevState.otpActiveArray[index] = false
+    //     })
+    // }
+
+    
+    initialStateChange=()=>{
+        this.setState({mobileIndex:1})
         this.setState(prevState=>{
             prevState.textArray[0] = this.state.countryCode
-
+            prevState.code = this.state.countryCode
         })
     }
+    
+    componentDidMount = () => {
+        this.initialStateChange()
+    }
     render() {
-        const { active,inputArray,mobileHolder,mobileHolderColor,message,countryCode,textArray,index } = this.state
+        const { 
+            navButtonTitle,
+            active,
+            inputArray,
+            mobileHolder,
+            mobileHolderColor,
+            message,
+            countryCode,
+            errorMessage,
+            otpArray,
+            otpTextArray,
+            otpActiveArray,
+            isTrue,
+            isComplete,
+            textArray,mobileIndex,otpIndex } = this.state
         return (
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/otpbackground.png')} 
@@ -165,58 +315,44 @@ export default class Otp extends Component {
                                  style={styles.logo} 
                                  width='100' 
                     />
-                    <Text style={[styles.mobile,globalstyles.hspace]}>
-                                Enter your mobile number to login.
-                    </Text>
-                    <View style={{width:'35%'}}>
-                        {/* <View style={[styles.inputcard,globalstyles.hspace]}>
-                            <TextInputCard 
-                            // inputRef={r => this.inputRefs[0] =  r}
-                            width={95} 
-                            height={40} 
-                            maxLength={3}
-                            title={this.state.countryCode} 
-                            defaultValue={this.state.countryCode}
+                    {
+                        navButtonTitle === 'Next' ?
+                            <MobileValidation 
+                                inputArray={inputArray}
+                                textArray={textArray}
+                                isTrue={isTrue}
+                                isComplete={isComplete}
+                                // changeIndex={this.mobileIndexChange}
+                                checkIndex={mobileIndex}
+                                active={active}
+                                message={message}
+                                errorMessage={errorMessage}
+                                mobileHolder={mobileHolder}
+                                mobileHolderColor={mobileHolderColor}
+                                onFocus={(index)=>this.mobileBorderFocusHandler(index)}
+                                onBlur={(index)=>this.mobileBorderBlurhandler(index)}
+                                onChange={(event) =>  this.onChangeHandler(event,message,mobileIndex)}
                             />
-                            <TextInputCard 
-                            width={230} 
-                            height={40} 
-                            maxLength={10}
-                            placeholder={mobileHolder}
-                            placeholderTextColor={mobileHolderColor}
-                            value={this.state.mobile}
-                            onChange={(text)=>this.mobileHandler(text)}
+                            :
+                            <OtpValidation 
+                            otpArray={otpArray}
+                            textArray={otpTextArray}
+                            active={otpActiveArray}
+                            changeIndex={this.otpIndexChange}
+                            checkIndex={otpIndex}
+                            onFocus={()=>{}}
+                            onBlur={()=>{}}
                             />
-                        </View> */}
+                    }
 
-                        <View style={[styles.inputcard,globalstyles.hspace]}>
-                        
-                            {inputArray.map((item,index) => 
-                                 
-                                <View key={index}>
-                                    <TextInputCard 
-                                    inputRef={r => this.inputRefs[index] =  r}
-                                    maxLength={index === 0 ? 3 : 10}
-                                    // defaultValue={index === 0 ? countryCode : ''}
-                                    width={index === 0 ? 95 : 230} 
-                                    height={40} 
-                                    active={active[index]}
-                                    index={index}
-                                    placeholder={index === 0 ? '' : mobileHolder}
-                                    placeholderTextColor={mobileHolderColor}
-                                    // title={this.state.otpNum}
-                                    value={textArray[index]}
-                                    onChange={(event) =>  this.onChangeHandler(event,message,index)}
-                                    onkeypress={({nativeEvent}) => this.handleKeyPress(nativeEvent,index)}
-                                    />
-                                </View>
-                          )}
-        
-                        </View>
-                        
-                        <CodeValidation erroMessage={this.state.erroMessage}/>
-                    </View>
-                    <Numerickeypad defaultNum={this.state.defaultNum} onPress={(text)=>this.mobileHandler(text,index)}/>
+                    
+                    <Numerickeypad 
+                        defaultNum={this.state.defaultNum} 
+                        onPress={ navButtonTitle === 'Next'? 
+                            (text)=>this.mobileHandler(text,mobileIndex) 
+                            : 
+                            (text)=>this.otpNumHandler(text,otpIndex)}
+                    />
                     <View style={[styles.buttonContainer,globalstyles.hspace]}>
 
                         <ButtonCard 
@@ -226,24 +362,24 @@ export default class Otp extends Component {
                                 opacity={0.7}
                                 width={80}
                                 height={36}
-                                bordcolor='white'
-                                bordwidth={2}
+                                bordcolor={colors.white}
                                 defaultFocus={false}
+                                bordwidth={2}
                                 navigation={this.props.navigation}
-                                onPress='Login'
+                                onPress={()=>this.backChangeHandler()}
                         />
                         <ButtonCard 
-                                title='Next' 
+                                title={navButtonTitle} 
                                 color={this.state.whitebutton}
                                 textColor={this.state.whiteButtonTextColor}
                                 opacity={0.7}
                                 width={80}
                                 height={36}
-                                bordcolor='#000'
-                                bordwidth={2}
+                                bordcolor={colors.black}
                                 defaultFocus={false}
+                                bordwidth={2}
                                 navigation={this.props.navigation}
-                                onPress='OtpValidate'
+                                onPress={()=>this.componentChangeHandler()}
                         />
                     </View>
                 </ImageBackground>

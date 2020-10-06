@@ -28,18 +28,18 @@ export default class login extends Component {
                         <Text style={[styles.xplore]}>
                             see more.xplore more
                         </Text>
-                        <ButtonCard
-                            title='Sign In'
-                            color={this.state.color}
-                            textColor={this.state.textColor}
-                            opacity={1}
-                            width={100}
-                            height={36}
-                            bordcolor='white'
-                            bordwidth={1}
-                            defaultFocus={true}
-                            navigation={this.props.navigation}
-                            onPress='Otp'
+                        <ButtonCard 
+                           title='Sign In' 
+                           color={this.state.color}
+                           textColor={this.state.textColor}
+                           opacity={1}
+                           width={100}
+                           height={36}
+                           bordcolor='white'
+                           bordwidth={1}
+                           defaultFocus={true}
+                           navigation={this.props.navigation}
+                           onPress={()=>this.props.navigation.navigate('Otp')}
                         />
                         {/* <ButtonCard 
                            title='Sign In' 

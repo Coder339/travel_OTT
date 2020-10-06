@@ -1,10 +1,13 @@
 import React,{useState,useEffect} from 'react'
-import { StyleSheet, Text, View,TextInput,Keyboard,KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, Text, View,TextInput,Keyboard,KeyboardAvoidingView,TouchableHighlight } from 'react-native'
 import {colors,globalstyles,fontFamily,fontSize} from '../../assets/globalstyleconstants';
 
 export default function TextInputCard(props) {
     const { 
         onkeypress,
+        onFocus,
+        onBlur,
+        isTrue,
         width, 
         height,
         maxLength,
@@ -13,32 +16,40 @@ export default function TextInputCard(props) {
         defaultValue,
         value,
         onChange,
-        onFocus,
+        changeIndex,
+        checkIndex,
         active,
         inputRef,
         placeholder,
+        isComplete,
         placeholderTextColor } = props
-    // const [value, setValue] = useState(title)
-    // const [active,setActive] = useState(false)
-    // console.log(title)
-
-    const borderFocusHandler = () => {
-        Keyboard.dismiss()
-        // setActive(true)
-    }
     
+    const [proactive,setActive] = useState(active)
 
-    const referenceHandler = (r) => {
-        inputRef && inputRef(r) 
-    }
+    // const borderFocusHandler = () => {
+    //     onFocus(index)
+    //     changeIndex(index)
+    // }
+    
+    // const borderBlurhandler = () => {
+    //     onBlur(index)
+    //     console.log('checkindex',checkIndex)
+    //     console.log('index',index)
+        
+    // }
+
 
     useEffect(() => {
-        referenceHandler(0)
-        // inputRef && inputRef(0) 
         
     }, [])
     return (
-        <View style={styles.inputContainer}>
+        <TouchableHighlight 
+            style={styles.inputContainer}
+            underlayColor={false}
+            onPress={()=>{}}
+            onFocus={()=>onFocus(index)}
+            onBlur={()=>onBlur(index)}
+            >
             <TextInput 
                style={[styles.input,
                       {width:width,
@@ -53,24 +64,18 @@ export default function TextInputCard(props) {
                placeholder={placeholder}
                placeholderTextColor={placeholderTextColor}
                defaultValue={defaultValue}
-            //    keyboardType='numeric'
-            //    autoFocus={index === 0 ? true: false}
-               onKeyPress={onkeypress}
-               onFocus={()=>borderFocusHandler()}
-            //    onBlur={()=>setActive(false)}
+               editable={false}
                onChangeText={onChange}
                value={value}
                
                />
                
-        </View>
+        </TouchableHighlight>
     )
 }
 
 const styles = StyleSheet.create({
     input:{
-        // height:40,
-        // width:200,
         borderColor:colors.white,
         backgroundColor:'gray',
         opacity:0.7,
