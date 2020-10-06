@@ -2,7 +2,6 @@ import React, {PureComponent} from 'react';
 import {
   Text,
   View,
-  TouchableOpacity,
   StyleSheet,
   TouchableHighlight,
 } from 'react-native';
@@ -11,9 +10,8 @@ import {
   globalstyles,
   fontFamily,
 } from '../../assets/globalstyleconstants';
-import PlaySvg from '../../images/playsvg';
 
-export default class PlayWatchButton extends PureComponent {
+export default class Buttons extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -40,28 +38,26 @@ export default class PlayWatchButton extends PureComponent {
   }
 
   render() {
-    const {name} = this.props;
+    const {name, value} = this.props;
     return (
       <View style={styles.container}>
         <TouchableHighlight
           underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
-          hasTVPreferredFocus={true}
           style={
             this.state.focused
-              ? globalstyles.focusPlayButton
-              : globalstyles.blurPlayButton
+              ? globalstyles.focusPlayButtonDetails
+              : globalstyles.blurPlayButtonDetails
           }>
           <View style={styles.innerContainer}>
-            <PlaySvg width="20" height="20" />
             <Text
               style={
                 this.state.focused
                   ? styles.playwatchTextfocused
                   : styles.playwatchTextblured
               }>
-              {name}
+              {name} {value + 1}
             </Text>
           </View>
         </TouchableHighlight>
@@ -82,7 +78,9 @@ const styles = StyleSheet.create({
   playwatchTextblured: {
     fontFamily: fontFamily.bold,
     fontSize: 16,
-    color: colors.black,
+    color: colors.white,
   },
-  innerContainer:{flexDirection:'row'}
+  innerContainer: {
+    flexDirection: 'row', 
+  },
 });
