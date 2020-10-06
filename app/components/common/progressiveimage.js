@@ -146,6 +146,23 @@ export default class ProgressiveImage extends React.PureComponent {
                 }}
               />
             </React.Fragment>
+          ) : type === 'title' ? (
+            <React.Fragment>
+              {/* BOTTOM */}
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 0.5, y: 0.1}}
+                end={{x: 0.5, y: 1}}
+                locations={[0, 0.7, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+            </React.Fragment>
           ) : (
             <React.Fragment>
               {/* BOTTOM */}

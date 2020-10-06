@@ -14,21 +14,22 @@ import ProgressiveImage from './progressiveimage';
 
 export default function RectangleCard(props) {
   const {type, item} = props;
-  console.log('TYPE', type);
-  console.log('DATA', item);
+  // console.log('TYPE', type);
+  // console.log('DATA', item);
   const seasons = Array(item.seasons).fill('');
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        {type === 'rectangle-card' ? (
-          <Text style={styles.sectionTitle}>
-            {item.section_title}
-            {item.title}
-          </Text>
-        ) : type === 'rectangle-card-title' ? (
-          <Text style={styles.sectionTitle}>{item.title}</Text>
-        ) : null}
+        {
+          (type === 'rectangle-card' || type === 'rectangle-card-title') && (
+            <Text style={styles.sectionTitle}>
+              {type === 'rectangle-card' && item.section_title}
+              {item.title}
+            </Text>
+          )
+
+        }
 
         {type === 'rectangle-card-details' ? (
           <View>
@@ -86,7 +87,7 @@ export default function RectangleCard(props) {
                 <PlayWatchButton name="Trailer" />
 
                 {seasons.map((item, index) => (
-                  <Buttons name="SEASON" value={index} />
+                  <Buttons name="SEASON" value={index} key={index}/>
                 ))}
               </View>
             </View>

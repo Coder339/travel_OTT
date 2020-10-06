@@ -136,6 +136,14 @@ export const globalstyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  focusBorderMinusPlusSVG:{
+    borderColor:colors.white,
+    borderWidth:2,
+  },
+  blurBorderMinusPlusSVG:{
+    borderColor:colors.white,
+    borderWidth:2,
+  },
   focusMenuBar: {
     backgroundColor: colors.travelred,
     color: colors.white,

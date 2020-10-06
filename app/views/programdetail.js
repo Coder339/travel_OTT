@@ -10,26 +10,20 @@ export class ProgramDetail extends PureComponent {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log('Program Detail Page');
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false} horizontal={false}>
-          {/* <View style={{position: 'relative'}}> */}
-            {movieOTTData.map((item, index) => (
-              <View key={index}>
-                {item.type.includes('rectangle-card-details') ? (
-                  <RectangleCard type={item.type} item={item} />
-                ) : null}
-                {item.type === 'rectangle-card' ? (
-                  <RectangleCard type={item.type} item={item} />
-                ) : null}
-              </View>
-            ))}
-          {/* </View> */}
+          {movieOTTData.map((item, index) => (
+            <View key={index}>
+              {item.type.includes('rectangle-card-details') ? (
+                <RectangleCard type={item.type} item={item} />
+              ) : null}
+              {item.type === 'rectangle-card' ? (
+                <RectangleCard type={item.type} item={item} />
+              ) : null}
+            </View>
+          ))}
         </ScrollView>
       </View>
     );
@@ -41,6 +35,6 @@ export default ProgramDetail;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:colors.backgroundColor,
+    backgroundColor: colors.backgroundColor,
   },
 });
