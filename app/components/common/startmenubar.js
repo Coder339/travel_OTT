@@ -1,94 +1,137 @@
 import React, {PureComponent} from 'react';
-import {View, StyleSheet, TouchableOpacity, Animated, TouchableHighlight} from 'react-native';
+import {View, TextInput,Text,StyleSheet, TouchableOpacity, Animated, TouchableHighlight} from 'react-native';
 import {colors} from '../../assets/globalstyleconstants';
 
 import StartMenuBarItem from './startmenubaritem';
 
+import TVEventHandler from 'react-native';
+
 export default class StartMenuBar extends PureComponent {
+  
+
   constructor(props) {
     super(props);
 
     this.state = {
-      focused: false,
+      drawerfocused: false,
+      menufocused:false,
+  
     };
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
+    this.menuonFocus = this.menuonFocus.bind(this);
+    this.menuonBlur = this.menuonBlur.bind(this);
   }
 
-  onFocus() {
+  menuonFocus() {
     // alert('focused');
     this.setState({
-      focused: true,
+      menufocused: true,
     });
+    this.setState({drawerfocused:true})
+    console.log('menu',this.state.menufocused)
+    console.log('draw',this.state.drawerfocused)
   }
-  onBlur() {
+  menuonBlur() {
     // alert('Blured');
     this.setState({
-      focused: false,
+      menufocused: false,
+    });
+    // this.setState({drawerfocused:false})
+    console.log('menublur',this.state.menufocused)
+  }
+
+  // draweronFocus=()=> {
+  //   // alert('focused');
+  //   this.setState({
+  //     drawerfocused: true,
+  //   });
+  // }
+  draweronBlur=()=> {
+    // alert('Blured');
+    this.setState({
+      drawerfocused: false,
     });
   }
 
+
   render() {
+    const { draweronFocus,drawerfocused,menufocused } = this.state
     return (
       <TouchableHighlight
-        activeOpacity={0.1}
-        underlayColor="white"
-
-
-        onFocus={this.onFocus}
+        activeOpacity={0.9}
+        underlayColor={false}
+        // onFocus={this.draweronFocus}
         onBlur={
           // () => {
           //   alert('blured');
           // }
-          this.onBlur
+          this.draweronBlur
         }
+        // hasTVPreferredFocus={this.state.drawerfocused}
         style={[
           styles.container,
           {
-            // width: this.state.focused ? 150 : 60,
+            width: this.state.drawerfocused ? 150 : 50,
             // borderWidth: this.state.focused ? 0 : 1,
             // borderColor: colors.travelred,
           },
         ]}>
-        <View>
-          <StartMenuBarItem
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            svgType="search"
-            width={this.state.focused ? 150 : 50}
-          />
-          <StartMenuBarItem
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            svgType="home"
-            width={this.state.focused ? 150 : 50}
-          />
-          <StartMenuBarItem
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            svgType="squaregroup"
-            width={this.state.focused ? 150 : 50}
-          />
-          <StartMenuBarItem
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            svgType="tv"
-            width={this.state.focused ? 150 : 50}
-          />
-          <StartMenuBarItem
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            svgType="watchlistplus"
-            width={this.state.focused ? 150 : 50}
-          />
-          <StartMenuBarItem
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            svgType="power"
-            width={this.state.focused ? 150 : 50}
-          />
-        </View>
-      </TouchableHighlight>
+        <View >
+            <StartMenuBarItem
+              menuonFocus={this.menuonFocus}
+              menuonBlur={this.menuonBlur}
+              svgType="search"
+              width={this.state.drawerfocused ? 150 : 50}
+              draweronFocus={draweronFocus}
+              drawerfocused={drawerfocused}
+              menufocused={menufocused}
+            />
+            <StartMenuBarItem
+              menuonFocus={this.menuonFocus}
+              menuonBlur={this.menuonBlur}
+              svgType="home"
+              width={this.state.drawerfocused ? 150 : 50}
+              draweronFocus={draweronFocus}
+              drawerfocused={drawerfocused}
+              menufocused={menufocused}
+            />
+            <StartMenuBarItem
+              menuonFocus={this.menuonFocus}
+              menuonBlur={this.menuonBlur}
+              svgType="squaregroup"
+              width={this.state.drawerfocused ? 150 : 50}
+              draweronFocus={draweronFocus}
+              drawerfocused={drawerfocused}
+              menufocused={menufocused}
+            />
+            <StartMenuBarItem
+              menuonFocus={this.menuonFocus}
+              menuonBlur={this.menuonBlur}
+              svgType="tv"
+              width={this.state.drawerfocused ? 150 : 50}
+              draweronFocus={draweronFocus}
+              drawerfocused={drawerfocused}
+              menufocused={menufocused}
+            />
+            <StartMenuBarItem
+              menuonFocus={this.menuonFocus}
+              menuonBlur={this.menuonBlur}
+              svgType="watchlistplus"
+              width={this.state.drawerfocused ? 150 : 50}
+              draweronFocus={draweronFocus}
+              drawerfocused={drawerfocused}
+              menufocused={menufocused}
+            />
+            <StartMenuBarItem
+              menuonFocus={this.menuonFocus}
+              menuonBlur={this.menuonBlur}
+              svgType="power"
+              width={this.state.drawerfocused ? 150 : 50}
+              draweronFocus={draweronFocus}
+              drawerfocused={drawerfocused}
+              menufocused={menufocused}
+            />
+          </View>
+    </TouchableHighlight>
     );
   }
 }
@@ -99,5 +142,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundColor,
     opacity: 0.9,
     height: 1000,
+    // width:150
   },
 });
