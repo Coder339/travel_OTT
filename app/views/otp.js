@@ -203,39 +203,30 @@ export default class Otp extends Component {
 
     }
 
-    mobileIndexChange = (index) =>{
-        this.setState({mobileIndex:index})
-    }
-
-    otpIndexChange = (index) =>{
-        this.setState({otpIndex:index})
-    }
 
     componentChangeHandler = () => {
         this.setState({navButtonTitle:'Login'})
-        if (this.state.navButtonTitle === 'Login'){
+    
             
-            let otpMessage = this.state.otpTextArray.join('')
-            this.setState({otpText:otpMessage},() => {
-                console.log('otp',this.state.otpText);
-                if(this.state.otpText.length===this.state.otpTextArray.length){
+        let otpMessage = this.state.otpTextArray.join('')
+        this.setState({otpText:otpMessage},() => {
+            console.log('otp',this.state.otpText);
+            if(this.state.otpText.length===this.state.otpTextArray.length){
 
-                        this.state.otpTextArray.map((item,index)=>{
-                            this.setState(prevState=>{
-                                prevState.otpTextArray[index] = ''
-                                prevState.otpActiveArray[index] = false
-                            })
+                    this.state.otpTextArray.map((item,index)=>{
+                        this.setState(prevState=>{
+                            prevState.otpTextArray[index] = ''
+                            prevState.otpActiveArray[index] = false
                         })
-                        this.setState({otpIndex:0})
-                        alert(this.state.otpText)
-                    }
-                    else{
-                        alert('otp is incomplete')
-                    }
-              })
+                    })
+                    this.setState({otpIndex:0})
+                    alert(this.state.otpText)
+                }
+                // else{
+                //     alert('otp is incomplete')
+                // }
+            })
               
-        }
-
     }
 
     backChangeHandler = () => {
@@ -243,6 +234,14 @@ export default class Otp extends Component {
         this.props.navigation.navigate('Login')
         :
         this.setState({navButtonTitle:'Next'})
+    }
+
+    mobileIndexChange = (index) =>{
+        this.setState({mobileIndex:index})
+    }
+
+    otpIndexChange = (index) =>{
+        this.setState({otpIndex:index})
     }
 
     mobileOnFocusHandler = (index) =>{
@@ -257,17 +256,27 @@ export default class Otp extends Component {
         })
     }
 
-    otpOnFocusHandler = (index) =>{
-        this.setState(prevState=>{
-            prevState.otpActiveArray[index] = true
-        })
+    mobileBorderFocusHandler = (index) => {
+        this.mobileOnFocusHandler(index)
+        this.mobileIndexChange(index)
+
+    }
+    
+    mobileBorderBlurhandler = (index) => {
+        this.mobileOnBlurHandler(index)
     }
 
-    otpOnBlurHandler = (index) =>{
-        this.setState(prevState=>{
-            prevState.otpActiveArray[index] = false
-        })
-    }
+    // otpOnFocusHandler = (index) =>{
+    //     this.setState(prevState=>{
+    //         prevState.otpActiveArray[index] = true
+    //     })
+    // }
+
+    // otpOnBlurHandler = (index) =>{
+    //     this.setState(prevState=>{
+    //         prevState.otpActiveArray[index] = false
+    //     })
+    // }
 
     
     initialStateChange=()=>{
@@ -313,15 +322,15 @@ export default class Otp extends Component {
                                 textArray={textArray}
                                 isTrue={isTrue}
                                 isComplete={isComplete}
-                                changeIndex={this.mobileIndexChange}
+                                // changeIndex={this.mobileIndexChange}
                                 checkIndex={mobileIndex}
                                 active={active}
                                 message={message}
                                 errorMessage={errorMessage}
                                 mobileHolder={mobileHolder}
                                 mobileHolderColor={mobileHolderColor}
-                                onFocus={(index)=>this.mobileOnFocusHandler(index)}
-                                onBlur={(index)=>this.mobileOnBlurHandler(index)}
+                                onFocus={(index)=>this.mobileBorderFocusHandler(index)}
+                                onBlur={(index)=>this.mobileBorderBlurhandler(index)}
                                 onChange={(event) =>  this.onChangeHandler(event,message,mobileIndex)}
                             />
                             :
@@ -331,8 +340,8 @@ export default class Otp extends Component {
                             active={otpActiveArray}
                             changeIndex={this.otpIndexChange}
                             checkIndex={otpIndex}
-                            onFocus={(index)=>this.otpOnFocusHandler(index)}
-                            onBlur={(index)=>this.otpOnBlurHandler(index)}
+                            onFocus={()=>{}}
+                            onBlur={()=>{}}
                             />
                     }
 

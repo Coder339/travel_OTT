@@ -26,17 +26,17 @@ export default function TextInputCard(props) {
     
     const [proactive,setActive] = useState(active)
 
-    const borderFocusHandler = () => {
-        onFocus(index)
-        changeIndex(index)
-    }
+    // const borderFocusHandler = () => {
+    //     onFocus(index)
+    //     changeIndex(index)
+    // }
     
-    const borderBlurhandler = () => {
-        onBlur(index)
-        console.log('checkindex',checkIndex)
-        console.log('index',index)
+    // const borderBlurhandler = () => {
+    //     onBlur(index)
+    //     console.log('checkindex',checkIndex)
+    //     console.log('index',index)
         
-    }
+    // }
 
 
     useEffect(() => {
@@ -47,8 +47,8 @@ export default function TextInputCard(props) {
             style={styles.inputContainer}
             underlayColor={false}
             onPress={()=>{}}
-            onFocus={()=>borderFocusHandler()}
-            onBlur={()=>borderBlurhandler()}
+            onFocus={()=>onFocus(index)}
+            onBlur={()=>onBlur(index)}
             >
             <TextInput 
                style={[styles.input,
