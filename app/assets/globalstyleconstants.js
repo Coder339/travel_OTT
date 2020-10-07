@@ -119,7 +119,7 @@ export const globalstyles = StyleSheet.create({
     paddingLeft: 30,
   },
   blurPlayButtonDetails:{
-    backgroundColor: colors.black,
+    // backgroundColor: colors.black,
     width: 150,
     height: 55,
     flexDirection: 'row',

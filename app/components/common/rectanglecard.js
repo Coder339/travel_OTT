@@ -18,20 +18,32 @@ export default function RectangleCard(props) {
   // console.log('DATA', item);
   const seasons = Array(item.seasons).fill('');
 
+  const [season, setSeason] = useState(undefined);
+  const [episodeFocus, setEpisodeFocus] = useState(undefined);
+  let seasonNo = item.data.map((item) => item.season);
+
+  const seasonChange = (currentSeason) => {
+    if (season != currentSeason) {
+      setSeason(currentSeason);
+    }
+  };
+  const episodeChange = (currentSeason) => {
+    let episode = seasonNo.findIndex((item) => item == currentSeason);
+    console.log(episode + '     episode Index');
+    setEpisodeFocus(episode);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        {
-          (type === 'rectangle-card' || type === 'rectangle-card-title') && (
-            <Text style={styles.sectionTitle}>
-              {type === 'rectangle-card' && item.section_title}
-              {item.title}
-            </Text>
-          )
+        {(type === 'rectangle-card' || type === 'rectangle-card-title') && (
+          <Text style={styles.sectionTitle}>
+            {type === 'rectangle-card' && item.section_title}
+            {item.title}
+          </Text>
+        )}
 
-        }
-
-        {type === 'rectangle-card-details' ? (
+        {type === 'rectangle-card-details' && (
           <View>
             <View style={styles.progressiveImageContainer}>
               <View
@@ -87,12 +99,18 @@ export default function RectangleCard(props) {
                 <PlayWatchButton name="Trailer" />
 
                 {seasons.map((item, index) => (
-                  <Buttons name="SEASON" value={index} key={index}/>
+                  <Buttons
+                    name="SEASON"
+                    value={index}
+                    key={index}
+                    season={season}
+                    onPress={episodeChange}
+                  />
                 ))}
               </View>
             </View>
           </View>
-        ) : null}
+        )}
       </View>
       <View style={styles.imageContainer}>
         <ScrollView
@@ -108,6 +126,9 @@ export default function RectangleCard(props) {
               type={type}
               key={index}
               onPress={(nav) => props.onPress(nav)}
+              onFocus={seasonChange}
+              onBlur={seasonChange}
+              episodeFocus={episodeFocus == index}
             />
           ))}
         </ScrollView>

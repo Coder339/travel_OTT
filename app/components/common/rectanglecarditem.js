@@ -30,18 +30,20 @@ export default class RectangleCarditem extends PureComponent {
     this.setState({
       focused: true,
     });
+    this.props.onFocus(this.props.data.season)
   }
   onBlur() {
     this.setState({
       focused: false,
     });
+    this.props.onBlur(null)
   }
   onPress() {
     this.props.onPress('programdetail');
   }
 
   render() {
-    const {data, type} = this.props;
+    const {data, type, episodeFocus} = this.props;
     const sizing = {width: 257.5, height: 160};
     return (
       <View style={styles.container}>
@@ -51,7 +53,7 @@ export default class RectangleCarditem extends PureComponent {
           onBlur={this.onBlur}
           onPress={() => this.onPress()}
           style={
-            this.state.focused
+            (episodeFocus || this.state.focused)
               ? [globalstyles.focusBorder, sizing]
               : globalstyles.blurBorder
           }>
@@ -67,7 +69,7 @@ export default class RectangleCarditem extends PureComponent {
           ) : type === 'rectangle-card-details' && this.state.focused ? (
             <React.Fragment>
               <ProgressiveImage
-                style={globalstyles.rectangleImage}
+                style={globalstyles.rectangleImage}   
                 overlay={false}
                 thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
                 source={{uri: setImageUrl(data.image, 320, 300)}}

@@ -1,10 +1,5 @@
 import React, {PureComponent} from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableHighlight,
-} from 'react-native';
+import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
 import {
   colors,
   globalstyles,
@@ -34,29 +29,25 @@ export default class Buttons extends PureComponent {
     });
   }
   onPress() {
-    alert('Clicked');
+    this.props.onPress(this.props.value + 1);
   }
 
   render() {
-    const {name, value} = this.props;
+    const {name, value, season} = this.props;
     return (
       <View style={styles.container}>
         <TouchableHighlight
           underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          onPress={this.onPress}
           style={
-            this.state.focused
+            season == value + 1 || this.state.focused
               ? globalstyles.focusPlayButtonDetails
               : globalstyles.blurPlayButtonDetails
           }>
           <View style={styles.innerContainer}>
-            <Text
-              style={
-                this.state.focused
-                  ? styles.playwatchTextfocused
-                  : styles.playwatchTextblured
-              }>
+            <Text style={styles.playwatchTextfocused}>
               {name} {value + 1}
             </Text>
           </View>
@@ -81,6 +72,6 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
   innerContainer: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
   },
 });
