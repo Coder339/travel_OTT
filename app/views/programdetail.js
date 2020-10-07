@@ -12,20 +12,21 @@ export class ProgramDetail extends PureComponent {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false} horizontal={false}>
-          {movieOTTData.map((item, index) => (
-            <View key={index}>
-              {item.type.includes('rectangle-card-details') ? (
-                <RectangleCard type={item.type} item={item} />
-              ) : null}
-              {item.type === 'rectangle-card' ? (
-                <RectangleCard type={item.type} item={item} />
-              ) : null}
-            </View>
-          ))}
-        </ScrollView>
-      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        horizontal={false}
+        style={styles.container}>
+        {movieOTTData.map((item, index) => (
+          <View key={index}>
+            {item.type.includes('rectangle-card-details') ? (
+              <RectangleCard type={item.type} item={item} />
+            ) : null}
+            {item.type === 'rectangle-card' ? (
+              <RectangleCard type={item.type} item={item} />
+            ) : null}
+          </View>
+        ))}
+      </ScrollView>
     );
   }
 }
