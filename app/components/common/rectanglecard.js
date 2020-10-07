@@ -29,7 +29,7 @@ export default function RectangleCard(props) {
   };
   const episodeChange = (currentSeason) => {
     let episode = seasonNo.findIndex((item) => item == currentSeason);
-    console.log(episode + '     episode Index');
+    // console.log(episode + '     episode Index');
     setEpisodeFocus(episode);
   };
 
@@ -112,27 +112,27 @@ export default function RectangleCard(props) {
           </View>
         )}
       </View>
-      <View style={styles.imageContainer}>
-        <ScrollView
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          centerContent={true}
-          decelerationRate={'fast'}
-          snapToAlignment="center"
-          snapToInterval={550}>
-          {item.data.map((data, index) => (
-            <RectangleCarditem
-              data={data}
-              type={type}
-              key={index}
-              onPress={(nav) => props.onPress(nav)}
-              onFocus={seasonChange}
-              onBlur={seasonChange}
-              episodeFocus={episodeFocus == index}
-            />
-          ))}
-        </ScrollView>
-      </View>
+
+      <ScrollView
+        style={styles.imageContainer}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        centerContent={true}
+        decelerationRate={'fast'}
+        snapToAlignment="center"
+        snapToInterval={550}>
+        {item.data.map((data, index) => (
+          <RectangleCarditem
+            data={data}
+            type={type}
+            key={index}
+            onPress={(nav) => props.onPress(nav)}
+            onFocus={seasonChange}
+            onBlur={seasonChange}
+            episodeFocus={episodeFocus == index}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 }

@@ -42,7 +42,7 @@ export default class Buttons extends PureComponent {
           onBlur={this.onBlur}
           onPress={this.onPress}
           style={
-            season == value + 1 || this.state.focused
+            (season == value + 1 || this.state.focused)
               ? globalstyles.focusPlayButtonDetails
               : globalstyles.blurPlayButtonDetails
           }>

@@ -18,9 +18,9 @@ export class Home extends PureComponent {
     // console.log('home');
   }
 
-  rectangleCardpress(nav){
+  rectangleCardpress(nav) {
     // console.log(nav+"     nav")
-    this.props.navigation.navigate(nav)
+    this.props.navigation.navigate(nav);
   }
 
   render() {
@@ -34,15 +34,19 @@ export class Home extends PureComponent {
                   <View
                     key={index}
                     style={index === 1 ? styles.positionBlock : {}}>
-                    {item.type.includes('rectangle-card') ? (
-                      <RectangleCard type={item.type} item={item} onPress={this.rectangleCardpress} />
-                    ) : null}
-                    {item.type.includes('vertical-card') ? (
+                    {item.type.includes('rectangle-card') && (
+                      <RectangleCard
+                        type={item.type}
+                        item={item}
+                        onPress={this.rectangleCardpress}
+                      />
+                    )}
+                    {item.type.includes('vertical-card') && (
                       <VerticalCard type={item.type} item={item} />
-                    ) : null}
-                    {item.type.includes('hero') ? (
+                    )}
+                    {item.type.includes('hero') && (
                       <HeroCard type={item.type} item={item} />
-                    ) : null}
+                    )}
                   </View>
                 ),
             )}
@@ -52,15 +56,15 @@ export class Home extends PureComponent {
               (item, index) =>
                 index > 1 && (
                   <View key={index}>
-                    {item.type.includes('rectangle-card') ? (
+                    {item.type.includes('rectangle-card') && (
                       <RectangleCard type={item.type} item={item} />
-                    ) : null}
-                    {item.type.includes('vertical-card') ? (
+                    )}
+                    {item.type.includes('vertical-card') && (
                       <VerticalCard type={item.type} item={item} />
-                    ) : null}
-                    {item.type.includes('hero') ? (
+                    )}
+                    {item.type.includes('hero') && (
                       <HeroCard type={item.type} item={item} />
-                    ) : null}
+                    )}
                   </View>
                 ),
             )}
