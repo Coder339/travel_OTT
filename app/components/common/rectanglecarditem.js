@@ -112,7 +112,7 @@ export default class RectangleCarditem extends PureComponent {
             )}
           </View>
         )}
-        {type === 'rectangle-card-details' ? (
+        {type === 'rectangle-card-details' && (
           <View>
             <View style={styles.epiDurContainer}>
               <Text style={{color: colors.lightgray}}>
@@ -131,7 +131,7 @@ export default class RectangleCarditem extends PureComponent {
               </Text>
             </View>
           </View>
-        ) : null}
+        )}
       </View>
     );
   }

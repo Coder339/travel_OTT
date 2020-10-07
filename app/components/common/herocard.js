@@ -19,7 +19,7 @@ export default React.memo(function HeroCard(props) {
   // console.log('DATA from hero', item);
   return (
     <View style={styles.mainContainer}>
-      {type === 'hero-banner' || 'hero-banner-detailed' ? (
+      {type === 'hero-banner' || 'hero-banner-detailed' && (
         <View>
           {item.data.map((data, index) => (
             <View style={styles.container} key={index}>
@@ -38,7 +38,7 @@ export default React.memo(function HeroCard(props) {
                   {data.title}
                 </Text>
               </View>
-              {type === 'hero-banner-detailed' ? (
+              {type === 'hero-banner-detailed' && (
                 <View style={styles.durEpisodeContainer}>
                   <Text style={{color: colors.lightgray}}>
                     Episode {data.episode}
@@ -50,7 +50,7 @@ export default React.memo(function HeroCard(props) {
                     <HDSvg width="20" height="20" />
                   </View>
                 </View>
-              ) : null}
+              )}
 
               <View style={styles.descContainer}>
                 <Text style={globalstyles.bannerParagraph} numberOfLines={3}>
@@ -58,7 +58,7 @@ export default React.memo(function HeroCard(props) {
                 </Text>
               </View>
 
-              {type === 'hero-card' ? (
+              {type === 'hero-card' && (
                 <View style={{position: 'absolute', top: 50, left: 550}}>
                   <View style={{paddingLeft: 14}}>
                     <Text
@@ -81,7 +81,7 @@ export default React.memo(function HeroCard(props) {
                     ))}
                   </ScrollView>
                 </View>
-              ) : null}
+              )}
             </View>
           ))}
 
@@ -89,7 +89,7 @@ export default React.memo(function HeroCard(props) {
             <PlayWatchButton name="Watch" />
           </View>
         </View>
-      ) : null}
+      )}
     </View>
   );
 });

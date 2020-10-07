@@ -18,12 +18,9 @@ export class ProgramDetail extends PureComponent {
         style={styles.container}>
         {movieOTTData.map((item, index) => (
           <View key={index}>
-            {item.type.includes('rectangle-card-details') ? (
-              <RectangleCard type={item.type} item={item} />
-            ) : null}
-            {item.type === 'rectangle-card' ? (
-              <RectangleCard type={item.type} item={item} />
-            ) : null}
+            {(item.type.includes('rectangle-card-details') || item.type === 'rectangle-card') && (
+                <RectangleCard type={item.type} item={item} />
+              )}
           </View>
         ))}
       </ScrollView>
