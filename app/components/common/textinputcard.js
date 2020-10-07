@@ -9,9 +9,7 @@ export default function TextInputCard(props) {
                style={styles.input}
                placeholder='mobile number'
                defaultValue='num'
-               />
-                
-            
+               />          
         </View>
     )
 }

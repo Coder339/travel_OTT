@@ -19,77 +19,71 @@ export default React.memo(function HeroCard(props) {
   // console.log('DATA from hero', item);
   return (
     <View style={styles.mainContainer}>
-      {type === 'hero-banner' || 'hero-banner-detailed' && (
-        <View>
-          {item.data.map((data, index) => (
-            <View style={styles.container} key={index}>
-              <View style={styles.progressiveImageContainer}>
-                <ProgressiveImage
-                  style={globalstyles.heroImage}
-                  overlay={false}
-                  thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-                  source={{uri: setImageUrl(data.image, 900, 900)}}
-                  isLinearGradient={true}
-                  type={type}
-                />
-              </View>
-              <View style={styles.titleContainer}>
-                <Text numberOfLines={2} style={globalstyles.bannerTitle}>
-                  {data.title}
-                </Text>
-              </View>
-              {type === 'hero-banner-detailed' && (
-                <View style={styles.durEpisodeContainer}>
-                  <Text style={{color: colors.lightgray}}>
-                    Episode {data.episode}
+      {type === 'hero-banner' ||
+        ('hero-banner-detailed' && (
+          <View>
+            {item.data.map((data, index) => (
+              <View style={styles.container} key={index}>
+                <View style={styles.progressiveImageContainer}>
+                  <ProgressiveImage
+                    style={globalstyles.heroImage}
+                    overlay={false}
+                    thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
+                    source={{uri: setImageUrl(data.image, 900, 900)}}
+                    isLinearGradient={true}
+                    type={type}
+                  />
+                </View>
+                <View style={styles.titleContainer}>
+                  <Text numberOfLines={2} style={globalstyles.bannerTitle}>
+                    {data.title}
                   </Text>
-                  <Text style={{color: colors.lightgray}}> | </Text>
-                  <Text style={{color: colors.lightgray}}>{data.dur} min</Text>
-                  <View style={styles.hdfourkContainer}>
-                    <FourkSvg width="20" height="20" />
-                    <HDSvg width="20" height="20" />
-                  </View>
                 </View>
-              )}
+                {type === 'hero-banner-detailed' && (
+                  <View style={styles.durEpisodeContainer}>
+                    <Text style={styles.textColor}>Episode {data.episode}</Text>
+                    <Text style={styles.textColor}> | </Text>
+                    <Text style={styles.textColor}>{data.dur} min</Text>
+                    <View style={styles.hdfourkContainer}>
+                      <FourkSvg width="20" height="20" />
+                      <HDSvg width="20" height="20" />
+                    </View>
+                  </View>
+                )}
 
-              <View style={styles.descContainer}>
-                <Text style={globalstyles.bannerParagraph} numberOfLines={3}>
-                  {data.description}
-                </Text>
+                <View style={styles.descContainer}>
+                  <Text style={globalstyles.bannerParagraph} numberOfLines={3}>
+                    {data.description}
+                  </Text>
+                </View>
+
+                {type === 'hero-card' && (
+                  <View style={styles.HeroCardExperienceCont}>
+                    <View style={styles.HeroCardExperienceContInner}>
+                      <Text style={styles.HeroCardExperienceContInnerText}>
+                        Experience Mode
+                      </Text>
+                    </View>
+                    <ScrollView
+                      horizontal={true}
+                      Vertical={false}
+                      showsHorizontalScrollIndicator={false}>
+                      {item.data[0].data.map((data, index) => (
+                        <View key={index}>
+                          <VerticalCarditem data={data} key={index} />
+                        </View>
+                      ))}
+                    </ScrollView>
+                  </View>
+                )}
               </View>
+            ))}
 
-              {type === 'hero-card' && (
-                <View style={{position: 'absolute', top: 50, left: 550}}>
-                  <View style={{paddingLeft: 14}}>
-                    <Text
-                      style={{
-                        color: colors.white,
-                        fontSize: fontSize.larger,
-                        fontFamily: fontFamily.regular,
-                      }}>
-                      Experience Mode
-                    </Text>
-                  </View>
-                  <ScrollView
-                    horizontal={true}
-                    Vertical={false}
-                    showsHorizontalScrollIndicator={false}>
-                    {item.data[0].data.map((data, index) => (
-                      <View key={index}>
-                        <VerticalCarditem data={data} key={index} />
-                      </View>
-                    ))}
-                  </ScrollView>
-                </View>
-              )}
+            <View style={styles.playWatchContainer}>
+              <PlayWatchButton name="Watch" />
             </View>
-          ))}
-
-          <View style={styles.playWatchContainer}>
-            <PlayWatchButton name="Watch" />
           </View>
-        </View>
-      )}
+        ))}
     </View>
   );
 });
@@ -162,7 +156,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 50,
   },
-  verticalCardContainer:{
+  verticalCardContainer: {
     position: 'absolute',
-  }
+  },
+  textColor: {
+    color: colors.lightgray,
+  },
+  HeroCardExperienceCont: {
+    position: 'absolute',
+    top: 50,
+    left: 550,
+  },
+  HeroCardExperienceContInner: {
+    paddingLeft: 14,
+  },
+  HeroCardExperienceContInnerText: {
+    color: colors.white,
+    fontSize: fontSize.larger,
+    fontFamily: fontFamily.regular,
+  },
 });

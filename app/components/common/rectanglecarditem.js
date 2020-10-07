@@ -30,13 +30,13 @@ export default class RectangleCarditem extends PureComponent {
     this.setState({
       focused: true,
     });
-    this.props.onFocus(this.props.data.season)
+    this.props.onFocus(this.props.data.season);
   }
   onBlur() {
     this.setState({
       focused: false,
     });
-    this.props.onBlur(null)
+    this.props.onBlur(null);
   }
   onPress() {
     this.props.onPress('programdetail');
@@ -53,7 +53,7 @@ export default class RectangleCarditem extends PureComponent {
           onBlur={this.onBlur}
           onPress={() => this.onPress()}
           style={
-            (episodeFocus || this.state.focused)
+            episodeFocus || this.state.focused
               ? [globalstyles.focusBorder, sizing]
               : globalstyles.blurBorder
           }>
@@ -69,14 +69,14 @@ export default class RectangleCarditem extends PureComponent {
           ) : type === 'rectangle-card-details' && this.state.focused ? (
             <React.Fragment>
               <ProgressiveImage
-                style={globalstyles.rectangleImage}   
+                style={globalstyles.rectangleImage}
                 overlay={false}
                 thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
                 source={{uri: setImageUrl(data.image, 320, 300)}}
                 isLinearGradient={true}
                 type="title"
               />
-              <View style={{top:-20,width: 220,left:18}}>
+              <View style={progressContainer}>
                 <ProgressBar progress={data.progress + '%'} />
               </View>
             </React.Fragment>
@@ -92,7 +92,7 @@ export default class RectangleCarditem extends PureComponent {
         {(type === 'rectangle-card-title' ||
           type === 'rectangle-card-details') && (
           <View style={styles.bannerTitleContainer}>
-            <View style={{width: 200, paddingBottom: 1, paddingLeft: 5}}>
+            <View style={styles.bannerTitleContainerInner}>
               <Text numberOfLines={2} style={globalstyles.cardTitle}>
                 {data.title}
               </Text>
@@ -115,11 +115,9 @@ export default class RectangleCarditem extends PureComponent {
         {type === 'rectangle-card-details' && (
           <View>
             <View style={styles.epiDurContainer}>
-              <Text style={{color: colors.lightgray}}>
-                Episode {data.episode}
-              </Text>
-              <Text style={{color: colors.lightgray}}> | </Text>
-              <Text style={{color: colors.lightgray}}>{data.dur} min</Text>
+              <Text style={styles.lightgray}>Episode {data.episode}</Text>
+              <Text style={styles.lightgray}> | </Text>
+              <Text style={styles.lightgray}>{data.dur} min</Text>
               <View style={styles.svgsContainer}>
                 <FourkSvg width="20" height="20" />
                 <HDSvg width="20" height="20" />
@@ -173,6 +171,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 5,
   },
+  bannerTitleContainerInner: {
+    width: 200,
+    paddingBottom: 1,
+    paddingLeft: 5,
+  },
   bannerTitle: {
     color: colors.white,
     fontFamily: fontFamily.heavy,
@@ -198,5 +201,13 @@ const styles = StyleSheet.create({
   cardParagraph: {
     color: colors.lightgray,
     fontSize: fontSize.medium,
+  },
+  progressContainer: {
+    top: -20,
+    width: 220,
+    left: 18,
+  },
+  lightgray: {
+    color: colors.lightgray,
   },
 });

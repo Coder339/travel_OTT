@@ -57,45 +57,22 @@ export default function RectangleCard(props) {
                   type="details"
                 />
               </View>
-              <View style={{position: 'absolute', top: 100}}>
+              <View style={styles.rectangleImageDetailTitle}>
                 <Text style={styles.sectionTitleDetails}>{item.title}</Text>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: 'space-between',
-                  flexDirection: 'row',
-                  paddingLeft: 1,
-                  width: 175,
-                  position: 'absolute',
-                  top: 160,
-                }}>
-                <Text
-                  style={{color: colors.lightgray, fontSize: fontSize.medium}}>
-                  {item.seasons} seasons
-                </Text>
+              <View style={styles.seasonEpisodeCont}>
+                <Text style={styles.itemCont}>{item.seasons} seasons</Text>
                 <Text style={{color: colors.lightgray}}>|</Text>
-                <Text
-                  style={{color: colors.lightgray, fontSize: fontSize.medium}}>
-                  {item.episodes} Episodes
-                </Text>
+                <Text style={styles.itemCont}>{item.episodes} Episodes</Text>
               </View>
-              <View style={{width: 380, position: 'absolute', top: 185}}>
-                <Text
-                  numberOfLines={3}
-                  style={{fontSize: fontSize.medium, color: colors.white}}>
+              <View style={styles.descCont}>
+                <Text numberOfLines={3} style={styles.descContInner}>
                   {item.description}
                 </Text>
               </View>
 
               <View
-                style={{
-                  flexDirection: 'row',
-                  width: 500,
-                  justifyContent: 'space-between',
-                  position: 'absolute',
-                  top: 280,
-                }}>
+                style={styles.buttonCont}>
                 <PlayWatchButton name="Trailer" />
 
                 {seasons.map((item, index) => (
@@ -174,4 +151,36 @@ const styles = StyleSheet.create({
     position: 'relative',
     top: 10,
   },
+  rectangleImageDetailTitle: {
+    position: 'absolute',
+    top: 100,
+  },
+  seasonEpisodeCont: {
+    flex: 1,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    paddingLeft: 1,
+    width: 175,
+    position: 'absolute',
+    top: 160,
+  },
+  itemCont: {
+    color: colors.lightgray,
+    fontSize: fontSize.medium,
+  },
+  descCont: {
+    width: 380, 
+    position: 'absolute', 
+    top: 185},
+  descContInner: {
+    fontSize: fontSize.medium, 
+    color: colors.white
+  },
+  buttonCont:{
+    flexDirection: 'row',
+    width: 500,
+    justifyContent: 'space-between',
+    position: 'absolute',
+    top: 280,
+  }
 });
