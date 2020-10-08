@@ -55,7 +55,7 @@ export default function TextInputCard(props) {
                       {width:width,
                       height:height,
                       borderBottomWidth: active ? 1 : 0,
-                      fontSize:fontSize.normal,
+                      fontSize:20,
                       }
                      ]}
                      

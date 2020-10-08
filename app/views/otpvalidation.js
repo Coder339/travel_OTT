@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import TextInputCard from '../components/common/textinputcard';
 import {colors,globalstyles,fontFamily,fontSize} from '../assets/globalstyleconstants';
+import CodeValidation from '../components/common/codevalidation';
 
 export default function OtpValidation(props) {
     const {
@@ -11,6 +12,8 @@ export default function OtpValidation(props) {
         changeIndex,
         onFocus,
         onBlur,
+        errorMessage,
+        isTrue
         } = props
     return (
         <View>
@@ -38,6 +41,11 @@ export default function OtpValidation(props) {
                     )}
 
             </View>
+            <View style={{width:'43%'}}>
+               {  
+                    isTrue ? <Text></Text> : <CodeValidation errorMessage={errorMessage}/>
+                }
+            </View>
         </View>
     )
 }
@@ -45,7 +53,7 @@ export default function OtpValidation(props) {
 const styles = StyleSheet.create({
     mobile:{
         color:colors.white,
-        fontSize:fontSize.extralarge,
+        fontSize:20,
         fontFamily:fontFamily.bold,  
     },
     inputcard:{

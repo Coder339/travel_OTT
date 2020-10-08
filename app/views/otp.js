@@ -7,6 +7,17 @@ import Numerickeypad from '../components/common/keypad';
 import MobileValidation from './mobilevalidation';
 import OtpValidation from './otpvalidation';
 import data from '../config/countrylist.json';
+import Auth from '@aws-amplify/auth';
+import AuthContext from "../config/authcontext";
+
+
+Auth.configure({
+    identityPoolId: 'ap-south-1:119c534f-90a6-45ef-8909-e0bdeae29f67',
+    region: 'ap-south-1',
+    userPoolId: 'ap-south-1_7KkAvxuka',
+    userPoolWebClientId: '4276al3b7o5c6lmufbp7t2ctqk',
+    authenticationFlowType: 'CUSTOM_AUTH'
+  });
 
 export default class Otp extends Component {
     constructor(props){
@@ -20,6 +31,7 @@ export default class Otp extends Component {
         const otpTextArray = Array(6).fill('');
         const otpActiveArray = Array(6).fill(false);
         this.state={
+            userObject:[],
             data,
             code:'',
             isTrue:true,
@@ -105,7 +117,7 @@ export default class Otp extends Component {
 
                         if (this.state.textArray[index].length===10){
                             prevState.mobileNumber = this.state.textArray[index-1] + this.state.textArray[index]
-                            alert(this.state.mobileNumber)
+                            // alert(this.state.mobileNumber)
                             // POST MOBILE NUMBER...
                         }
                    
@@ -205,27 +217,126 @@ export default class Otp extends Component {
 
 
     componentChangeHandler = () => {
-        this.setState({navButtonTitle:'Login'})
-    
-            
-        let otpMessage = this.state.otpTextArray.join('')
-        this.setState({otpText:otpMessage},() => {
-            console.log('otp',this.state.otpText);
-            if(this.state.otpText.length===this.state.otpTextArray.length){
+        console.log(this.state.mobileNumber,  'from next handler')
 
-                    this.state.otpTextArray.map((item,index)=>{
-                        this.setState(prevState=>{
-                            prevState.otpTextArray[index] = ''
-                            prevState.otpActiveArray[index] = false
-                        })
+
+        let phone = this.state.mobileNumber;
+        
+        if (this.state.navButtonTitle!=='Login'){
+        
+            try {
+                Auth.signIn(phone)
+                  .then(user => {
+                    if (user.challengeName === 'CUSTOM_CHALLENGE') {
+                      // to send the answer of the custom challenge
+                      console.log(user.challengeName,'chalname');
+                      console.log(user,'user');
+                      this.setState(prevState=>{
+                        prevState.navButtonTitle = "Login"
+                        prevState.userObject = user
+                    },()=>{this.setState({navButtonTitle:'Login'})})
+                    } else {
+                      console.log(user,'autherror');
+                      this.setState(prevState=>{
+                          prevState.errorMessage = "invalid"
+                      },()=>{this.setState({isTrue:false})})
+                    }
+                  })
+                  .catch(err => {
+                    if (err.code === "UserNotFoundException") {
+                      // this.setState({ screen: "name" })
+                      // console.log(err.code);
+                      this.setState(prevState=>{
+                        prevState.errorMessage = "You don't have a Travelxp account. Signup on www.travelxp.com"
+                    },()=>{this.setState({isTrue:false})})
+                    }
+                    else {
+                      console.log(err,'er');
+                      this.setState(prevState=>{
+                        prevState.errorMessage = "You don't have a Travelxp account. Signup on www.travelxp.com"
+                    },()=>{this.setState({isTrue:false})})
+                    console.log('invaild',this.state.errorMessage)
+                    console.log('isTrue',this.state.isTrue)
+                    }
+                  });
+        
+              } catch (err) {
+                console.log('error', err);
+                this.setState(prevState=>{
+                    prevState.errorMessage = "Something Wrong"
+                },()=>{this.setState({isTrue:false})})
+              }
+        }
+        else{
+           let otpMessage = this.state.otpTextArray.join('')
+            this.setState({otpText:otpMessage},() => {
+                console.log('otp',this.state.otpText);
+                if(this.state.otpText.length===this.state.otpTextArray.length){
+                    Auth.sendCustomChallengeAnswer(this.state.userObject, this.state.otpText)
+                    .then(res => {
+                        console.log(res);
+                        console.log(this.state.userObject)
+                        if (res.signInUserSession === null) {
+                            // alert("Incorrect or invalid OTP")
+                            this.setState(prevState=>{
+                                prevState.errorMessage = "Incorrect or invalid OTP"
+                            },()=>{this.setState({isTrue:false})})
+                        }
+                        else {
+        
+                            Auth.currentAuthenticatedUser()
+                                .then(res => {
+                                    if (res != null) {
+                                        context.updateUser(res)
+                                       
+                                    }
+                                }).catch(err => {
+                                    
+                                    if (err === "not authenticated") {
+                                        // alert("Not Authenticated")
+                                        this.setState(prevState=>{
+                                            prevState.errorMessage = "Not Authenticated"
+                                        },()=>{this.setState({isTrue:false})})
+                            
+                                    }
+                                });
+                        }
                     })
-                    this.setState({otpIndex:0})
-                    alert(this.state.otpText)
-                }
-                // else{
-                //     alert('otp is incomplete')
-                // }
-            })
+                    .catch(err => {
+                        
+                        console.log(err)
+                        this.setState(prevState=>{
+                            prevState.errorMessage = "Something Wrong"
+                        },()=>{this.setState({isTrue:false})})
+                    });
+                
+                    }
+                    // else{
+                    //     alert('otp is incomplete')
+                    // }
+                })
+        }
+    
+        
+            
+        // let otpMessage = this.state.otpTextArray.join('')
+        // this.setState({otpText:otpMessage},() => {
+        //     console.log('otp',this.state.otpText);
+        //     if(this.state.otpText.length===this.state.otpTextArray.length){
+
+        //             this.state.otpTextArray.map((item,index)=>{
+        //                 this.setState(prevState=>{
+        //                     prevState.otpTextArray[index] = ''
+        //                     prevState.otpActiveArray[index] = false
+        //                 })
+        //             })
+        //             this.setState({otpIndex:0})
+        //             alert(this.state.otpText)
+        //         }
+        //         // else{
+        //         //     alert('otp is incomplete')
+        //         // }
+        //     })
               
     }
 
@@ -342,6 +453,8 @@ export default class Otp extends Component {
                             checkIndex={otpIndex}
                             onFocus={()=>{}}
                             onBlur={()=>{}}
+                            errorMessage={errorMessage}
+                            isTrue={isTrue}
                             />
                     }
 
@@ -411,7 +524,7 @@ const styles = StyleSheet.create({
     },
     mobile:{
         color:colors.white,
-        fontSize:fontSize.extralarge,
+        fontSize:20,
         fontFamily:fontFamily.bold,  
     },
     inputcard:{

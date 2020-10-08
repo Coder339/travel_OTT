@@ -71,7 +71,7 @@ export default function MobileValidation(props) {
 const styles = StyleSheet.create({
     mobile:{
         color:colors.white,
-        fontSize:fontSize.extralarge,
+        fontSize:20,
         fontFamily:fontFamily.bold,  
     },
     inputcard:{
