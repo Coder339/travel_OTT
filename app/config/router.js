@@ -34,7 +34,7 @@ export function HomeScreens() {
             headerShown: false
         }}>
             <HomeStack.Screen name='home' component={Home}/>
-            <HomeStack.Screen name='programdetail' component={ProgramDetail}/>
+            <HomeStack.Screen name='program' component={ProgramDetail}/>
         </HomeStack.Navigator>
     )
 }

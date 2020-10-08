@@ -20,10 +20,12 @@ export default class RectangleCarditem extends PureComponent {
 
     this.state = {
       focused: false,
+      watchList:this.props.data.watchlist,
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onPress = this.onPress.bind(this);
+    this.plusMinusClickHandler = this.plusMinusClickHandler.bind(this);
   }
 
   onFocus() {
@@ -39,12 +41,18 @@ export default class RectangleCarditem extends PureComponent {
     this.props.onBlur(null);
   }
   onPress() {
-    this.props.onPress('programdetail');
+    // this.props.onPress(this.props.data.type); //needs episode to be created and handled also
+    this.props.onPress('program');
+  }
+  plusMinusClickHandler() {
+    this.setState({watchList : !this.state.watchList})
+    console.log('valOut4')
   }
 
   render() {
     const {data, type, episodeFocus} = this.props;
     const sizing = {width: 257.5, height: 160};
+    console.log(this.props.data.watchlist)
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -76,7 +84,7 @@ export default class RectangleCarditem extends PureComponent {
                 isLinearGradient={true}
                 type="title"
               />
-              <View style={progressContainer}>
+              <View style={styles.progressContainer}>
                 <ProgressBar progress={data.progress + '%'} />
               </View>
             </React.Fragment>
@@ -105,11 +113,13 @@ export default class RectangleCarditem extends PureComponent {
                 <ProgressBar progress={data.progress + '%'} />
               </View>
             )}
-            {data.watchlist === true ? (
-              <WatchlistMinusSvg width="20" height="20" />
-            ) : (
-              <WatchlistPlusSvg width="20" height="20" />
-            )}
+            <TouchableHighlight onPress={this.plusMinusClickHandler}>
+              {this.state.watchList  ? 
+                <WatchlistMinusSvg width="20" height="20" />
+               : 
+                <WatchlistPlusSvg width="20" height="20" />
+              }
+            </TouchableHighlight>
           </View>
         )}
         {type === 'rectangle-card-details' && (

@@ -27,6 +27,7 @@ export default function RectangleCard(props) {
       setSeason(currentSeason);
     }
   };
+  
   const episodeChange = (currentSeason) => {
     let episode = seasonNo.findIndex((item) => item == currentSeason);
     // console.log(episode + '     episode Index');
