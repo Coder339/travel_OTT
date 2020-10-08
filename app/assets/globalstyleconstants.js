@@ -45,6 +45,7 @@ export const colors = {
   lightgray: '#707070',
   transparent: 'transparent',
   backgroundColor: '#1F2227',
+  orange :'#FA6F2A'
 };
 
 
@@ -69,7 +70,8 @@ export const globalstyles = StyleSheet.create({
     width: 250,
   },
   rectangleImage: {
-    aspectRatio: 1.65,
+    // aspectRatio: 1.667,
+    aspectRatio: 250 / 150,
     height: 150,
     width: 250,
   },

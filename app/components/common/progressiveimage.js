@@ -123,7 +123,7 @@ export default class ProgressiveImage extends React.PureComponent {
                 colors={['transparent', 'transparent', colors.backgroundColor]}
                 start={{x: 5, y: 0}}
                 end={{x: 0.0, y: 0.0}}
-                locations={[0, 0.4, 1]}
+                locations={[0, 0.6, 1]}
                 style={{
                   position: 'absolute',
                   top: 0,

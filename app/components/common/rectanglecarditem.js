@@ -20,7 +20,8 @@ export default class RectangleCarditem extends PureComponent {
 
     this.state = {
       focused: false,
-      watchList:this.props.data.watchlist,
+      watchList: this.props.data.watchlist,
+      disabled: false,
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -45,14 +46,19 @@ export default class RectangleCarditem extends PureComponent {
     this.props.onPress('program');
   }
   plusMinusClickHandler() {
-    this.setState({watchList : !this.state.watchList})
-    console.log('valOut4')
+    if (this.state.disabled) return;
+    this.setState({disabled: true});
+    setTimeout(() => {
+      this.setState({disabled: false});
+    }, 500);
+    this.setState({watchList: !this.state.watchList});
+    console.log('valOut4');
   }
 
   render() {
     const {data, type, episodeFocus} = this.props;
-    const sizing = {width: 257.5, height: 160};
-    console.log(this.props.data.watchlist)
+    const sizing = {width: 260.1, height: 160};
+    console.log(this.props.data.watchlist);
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -70,7 +76,7 @@ export default class RectangleCarditem extends PureComponent {
               style={globalstyles.rectangleImage}
               overlay={false}
               thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-              source={{uri: setImageUrl(data.image, 320, 300)}}
+              source={{uri: setImageUrl(data.image, 320, 100)}}
               isLinearGradient={true}
               type="title"
             />
@@ -114,11 +120,11 @@ export default class RectangleCarditem extends PureComponent {
               </View>
             )}
             <TouchableHighlight onPress={this.plusMinusClickHandler}>
-              {this.state.watchList  ? 
+              {this.state.watchList ? (
                 <WatchlistMinusSvg width="20" height="20" />
-               : 
+              ) : (
                 <WatchlistPlusSvg width="20" height="20" />
-              }
+              )}
             </TouchableHighlight>
           </View>
         )}

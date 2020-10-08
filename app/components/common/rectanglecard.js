@@ -48,7 +48,8 @@ export default function RectangleCard(props) {
           <View>
             <View style={styles.progressiveImageContainer}>
               <View
-                style={{alignItems: 'flex-end', justifyContent: 'flex-end'}}>
+                style={{alignItems: 'flex-end', justifyContent: 'flex-end'}}
+                >
                 <ProgressiveImage
                   style={globalstyles.rectangleImageDetail}
                   overlay={false}
@@ -96,9 +97,10 @@ export default function RectangleCard(props) {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         centerContent={true}
-        decelerationRate={'fast'}
+        decelerationRate={'normal'}
         snapToAlignment="center"
-        snapToInterval={550}>
+        snapToInterval={700}
+        >
         {item.data.map((data, index) => (
           <RectangleCarditem
             data={data}
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   sectionTitleDetails: {
-    color: '#FA6F2A',
+    color: colors.orange,
     fontSize: fontSize.superlargest,
     fontFamily: fontFamily.bold,
     paddingTop: 15,
@@ -146,7 +148,9 @@ const styles = StyleSheet.create({
     width: 230,
   },
   imageContainer: {
-    paddingLeft: 40,
+    // paddingLeft: 40,
+    // paddingRight:140,
+    marginLeft:40
   },
   progressiveImageContainer: {
     position: 'relative',
