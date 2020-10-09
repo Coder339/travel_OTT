@@ -66,11 +66,12 @@ export const globalstyles = StyleSheet.create({
   },
   verticalImage: {
     aspectRatio: 0.71,
+    // aspectRatio:250/350,
     height: 350,
     width: 250,
   },
   rectangleImage: {
-    // aspectRatio: 1.667,
+    // aspectRatio: 1.667,width by height
     aspectRatio: 250 / 150,
     height: 150,
     width: 250,
@@ -131,7 +132,7 @@ export const globalstyles = StyleSheet.create({
   focusPlayButtonDetails:{
     width: 150,
     height: 55,
-    borderWidth: 5,
+    borderWidth: 2,
     borderColor: colors.white,
     overflow: 'hidden',
     flexDirection: 'row',

@@ -73,6 +73,7 @@ export default class PlayWatchButton extends PureComponent {
 const styles = StyleSheet.create({
   container: {
     padding: 0.1,
+    opacity:0.8
   },
   playwatchTextfocused: {
     fontFamily: fontFamily.bold,

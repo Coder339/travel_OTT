@@ -86,6 +86,7 @@ export default class ProgressiveImage extends React.PureComponent {
 
         {!this.state.isError &&
           isLinearGradient &&
+          //should reduce the linear gradient to a single component.
           (type === 'hero-banner-detailed' ? (
             <React.Fragment>
               {/* LEFT */}

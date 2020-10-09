@@ -147,7 +147,14 @@ export default class RectangleCarditem extends PureComponent {
                   <WatchlistMinusSvg width="20" height="20" />
                 </View>
               ) : (
-                <WatchlistPlusSvg width="20" height="20" />
+                <View
+                  style={
+                    this.state.focusedWatchList
+                      ? styles.innerWatchlistBackground
+                      : styles.watchlistBackground
+                  }>
+                  <WatchlistPlusSvg width="20" height="20" />
+                </View>
               )}
             </TouchableHighlight>
           </View>

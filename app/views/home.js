@@ -35,11 +35,7 @@ export class Home extends PureComponent {
                     key={index}
                     style={index === 1 ? styles.positionBlock : {}}>
                     {item.type.includes('rectangle-card') && (
-                      <RectangleCard
-                        type={item.type}
-                        item={item}
-                        onPress={this.rectangleCardpress}
-                      />
+                      <RectangleCard type={item.type} item={item} onPress={this.rectangleCardpress} />
                     )}
                     {item.type.includes('vertical-card') && (
                       <VerticalCard type={item.type} item={item} />

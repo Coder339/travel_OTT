@@ -29,6 +29,7 @@ export default class Buttons extends PureComponent {
     });
   }
   onPress() {
+    //index value 0 + 1 ... to match the iterating value
     this.props.onPress(this.props.value + 1);
   }
 
