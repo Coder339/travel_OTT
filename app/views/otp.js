@@ -58,6 +58,7 @@ export default class Otp extends Component {
             inputArray: ['1','2'],
             otpArray: ['1','2','3','4','5','6'],
             navButtonTitle:'Next',
+            isBackspace:false,
        }
        this.mobileHandler = this.mobileHandler.bind(this)
        this.otpNumHandler = this.otpNumHandler.bind(this)
@@ -142,8 +143,9 @@ export default class Otp extends Component {
         
         if (text === 'backspace') {
             this.setState(prevState=>{
+                prevState.isBackspace = true
                 prevState.otpTextArray[index] = ''
-                prevState.otpActiveArray[index] = false
+                // prevState.otpActiveArray[index] = false
                 return {
                     otpTextArray: prevState.otpTextArray,
                     otpActiveArray: prevState.otpActiveArray
@@ -161,12 +163,14 @@ export default class Otp extends Component {
                 if (index < this.state.otpTextArray.length){
                     prevState.otpTextArray[index] = text
                     prevState.otpActiveArray[index] = true
+                    prevState.isBackspace = false
                     console.log(this.state.active)
                     console.log('indexx',index)
                 }
                 return {
                     otpTextArray: prevState.otpTextArray
                 }
+                
               }, () => console.log(this.state.otpTextArray))
     
             if (index < 5){
@@ -231,10 +235,8 @@ export default class Otp extends Component {
                       // to send the answer of the custom challenge
                       console.log(user.challengeName,'chalname');
                       console.log(user,'user');
-                      this.setState(prevState=>{
-                        prevState.navButtonTitle = "Login"
-                        prevState.userObject = user
-                    },()=>{this.setState({navButtonTitle:'Login'})})
+                      this.setState({navButtonTitle:"Login",userObject:user})
+                      
                     } else {
                       console.log(user,'autherror');
                       this.setState(prevState=>{
