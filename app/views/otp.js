@@ -224,99 +224,109 @@ export default class Otp extends Component {
         console.log(this.state.mobileNumber,  'from next handler')
 
 
-        let phone = this.state.mobileNumber;
+        let phone = this.state.mobileNumber
         
-        if (this.state.navButtonTitle!=='Login'){
-        
-            try {
-                Auth.signIn(phone)
-                  .then(user => {
-                    if (user.challengeName === 'CUSTOM_CHALLENGE') {
-                      // to send the answer of the custom challenge
-                      console.log(user.challengeName,'chalname');
-                      console.log(user,'user');
-                      this.setState({navButtonTitle:"Login",userObject:user})
-                      
-                    } else {
-                      console.log(user,'autherror');
-                      this.setState(prevState=>{
-                          prevState.errorMessage = "invalid"
-                      },()=>{this.setState({isTrue:false})})
-                    }
-                  })
-                  .catch(err => {
-                    if (err.code === "UserNotFoundException") {
-                      // this.setState({ screen: "name" })
-                      // console.log(err.code);
-                      this.setState(prevState=>{
-                        prevState.errorMessage = "You don't have a Travelxp account. Signup on www.travelxp.com"
-                    },()=>{this.setState({isTrue:false})})
-                    }
-                    else {
-                      console.log(err,'er');
-                      this.setState(prevState=>{
-                        prevState.errorMessage = "You don't have a Travelxp account. Signup on www.travelxp.com"
-                    },()=>{this.setState({isTrue:false})})
-                    console.log('invaild',this.state.errorMessage)
-                    console.log('isTrue',this.state.isTrue)
-                    }
-                  });
-        
-              } catch (err) {
-                console.log('error', err);
-                this.setState(prevState=>{
-                    prevState.errorMessage = "Something Wrong"
-                },()=>{this.setState({isTrue:false})})
-              }
-        }
-        else{
-           let otpMessage = this.state.otpTextArray.join('')
-            this.setState({otpText:otpMessage},() => {
-                console.log('otp',this.state.otpText);
-                if(this.state.otpText.length===this.state.otpTextArray.length){
-                    Auth.sendCustomChallengeAnswer(this.state.userObject, this.state.otpText)
-                    .then(res => {
-                        console.log(res);
-                        console.log(this.state.userObject)
-                        if (res.signInUserSession === null) {
-                            // alert("Incorrect or invalid OTP")
-                            this.setState(prevState=>{
-                                prevState.errorMessage = "Incorrect or invalid OTP"
-                            },()=>{this.setState({isTrue:false})})
+        if (phone.length === 13 || phone.length === 14){
+            console.log(phone,'phone')
+            if (this.state.navButtonTitle!=='Login'){
+            
+                try {
+                    Auth.signIn(phone)
+                      .then(user => {
+                        if (user.challengeName === 'CUSTOM_CHALLENGE') {
+                          // to send the answer of the custom challenge
+                          console.log(user.challengeName,'chalname');
+                          console.log(user,'user');
+                          this.setState({navButtonTitle:"Login",userObject:user})
+                          
+                        } else {
+                          console.log(user,'autherror');
+                          this.setState(prevState=>{
+                              prevState.errorMessage = "invalid"
+                          },()=>{this.setState({isTrue:false})})
+                        }
+                      })
+                      .catch(err => {
+                        if (err.code === "UserNotFoundException") {
+                          // this.setState({ screen: "name" })
+                          // console.log(err.code);
+                          this.setState(prevState=>{
+                            prevState.errorMessage = "You don't have a Travelxp account. Signup on www.travelxp.com"
+                        },()=>{this.setState({isTrue:false})})
                         }
                         else {
-        
-                            Auth.currentAuthenticatedUser()
-                                .then(res => {
-                                    if (res != null) {
-                                        context.updateUser(res)
-                                       
-                                    }
-                                }).catch(err => {
-                                    
-                                    if (err === "not authenticated") {
-                                        // alert("Not Authenticated")
-                                        this.setState(prevState=>{
-                                            prevState.errorMessage = "Not Authenticated"
-                                        },()=>{this.setState({isTrue:false})})
-                            
-                                    }
-                                });
-                        }
-                    })
-                    .catch(err => {
-                        
-                        console.log(err)
-                        this.setState(prevState=>{
-                            prevState.errorMessage = "Something Wrong"
+                          console.log(err,'er');
+                          this.setState(prevState=>{
+                            prevState.errorMessage = "You don't have a Travelxp account. Signup on www.travelxp.com"
                         },()=>{this.setState({isTrue:false})})
-                    });
-                
-                    }
-                    // else{
-                    //     alert('otp is incomplete')
-                    // }
-                })
+                        console.log('invaild',this.state.errorMessage)
+                        console.log('isTrue',this.state.isTrue)
+                        }
+                      });
+            
+                  } catch (err) {
+                    console.log('error', err);
+                    this.setState(prevState=>{
+                        prevState.errorMessage = "Something Wrong"
+                    },()=>{this.setState({isTrue:false})})
+                  }
+            }
+            else{
+               let otpMessage = this.state.otpTextArray.join('')
+                this.setState({otpText:otpMessage},() => {
+                    console.log('otp',this.state.otpText);
+                    if(this.state.otpText.length===this.state.otpTextArray.length){
+                        Auth.sendCustomChallengeAnswer(this.state.userObject, this.state.otpText)
+                        .then(res => {
+                            console.log(res);
+                            console.log(this.state.userObject)
+                            if (res.signInUserSession === null) {
+                                // alert("Incorrect or invalid OTP")
+                                this.setState(prevState=>{
+                                    prevState.errorMessage = "Incorrect or invalid OTP"
+                                },()=>{this.setState({isTrue:false})})
+                            }
+                            else {
+            
+                                Auth.currentAuthenticatedUser()
+                                    .then(res => {
+                                        if (res != null) {
+                                            context.updateUser(res)
+                                           
+                                        }
+                                    }).catch(err => {
+                                        
+                                        if (err === "not authenticated") {
+                                            // alert("Not Authenticated")
+                                            this.setState(prevState=>{
+                                                prevState.errorMessage = "Not Authenticated"
+                                            },()=>{this.setState({isTrue:false})})
+                                
+                                        }
+                                    });
+                            }
+                        })
+                        .catch(err => {
+                            
+                            console.log(err)
+                            this.setState(prevState=>{
+                                prevState.errorMessage = "Something Wrong"
+                            },()=>{this.setState({isTrue:false})})
+                        });
+                    
+                        }
+                        // else{
+                        //     alert('otp is incomplete')
+                        // }
+                    })
+            }
+        }
+        else{
+            console.log(this.state.textArray[1].length)
+            this.setState({
+                errorMessage:"Phone length is not 10",
+                // isTrue:true
+            },()=>{this.setState({isTrue:false})})
         }
     
         
@@ -517,12 +527,12 @@ const styles = StyleSheet.create({
         flex:1,
         resizeMode: "cover",
         justifyContent: "center",
-        backgroundColor:'rgba(0,0,0,0.8)'
+        backgroundColor:'rgba(0,0,0,0.8)',
     },
     logo:{
         position:'absolute',
         top:0,
-        left:60
+        left:60,
     },
     mobile:{
         color:colors.white,

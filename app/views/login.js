@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
       },
       content:{
         marginTop:20,
-        fontSize:fontSize.superextralargest,
+        fontSize:40,
         fontFamily:fontFamily.bold,
         flexShrink:1,
         width:'50%',
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
       xplore:{
         // fontWeight:'bold',
         // fontFamily:fontFamily.bold,
-        fontSize:fontSize.extralargest,
+        fontSize:26,
         color:colors.white,
         opacity:0.7,
       },
@@ -99,13 +99,13 @@ const styles = StyleSheet.create({
       },
       sign_up:{
           color:colors.white,
-          fontSize:fontSize.largest,
+          fontSize:16,
           fontWeight:'bold'
       },
       plan:{
           color:colors.white,
           opacity:0.7,
-          fontSize:fontSize.normal,
+          fontSize:15,
           marginTop:5
       }
     

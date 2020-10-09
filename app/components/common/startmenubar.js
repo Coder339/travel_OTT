@@ -23,7 +23,6 @@ export default class StartMenuBar extends PureComponent {
   }
 
   menuonFocus() {
-    // alert('focused');
     this.setState({
       menufocused: true,
     });
@@ -32,7 +31,6 @@ export default class StartMenuBar extends PureComponent {
     // console.log('draw',this.state.drawerfocused)
   }
   menuonBlur() {
-    // alert('Blured');
     this.setState({
       menufocused: false,
     });
@@ -47,7 +45,6 @@ export default class StartMenuBar extends PureComponent {
   //   });
   // }
   draweronBlur=()=> {
-    // alert('Blured');
     this.setState({
       drawerfocused: false,
     });
@@ -66,9 +63,6 @@ export default class StartMenuBar extends PureComponent {
         onPress={()=>{this.draweronBlur()}}
         // onFocus={this.draweronFocus}
         onBlur={
-          // () => {
-          //   alert('blured');
-          // }
           this.draweronBlur
         }
         // hasTVPreferredFocus={true}
@@ -76,8 +70,6 @@ export default class StartMenuBar extends PureComponent {
           styles.container,
           {
             width: this.state.drawerfocused ? 150 : 50,
-            // borderWidth: this.state.focused ? 0 : 1,
-            // borderColor: colors.travelred,
           },
         ]}>
         <View>
