@@ -22,11 +22,14 @@ export default class RectangleCarditem extends PureComponent {
       focused: false,
       watchList: this.props.data.watchlist,
       disabled: false,
+      focusedWatchList: false,
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onPress = this.onPress.bind(this);
     this.plusMinusClickHandler = this.plusMinusClickHandler.bind(this);
+    this.onFocusWatchList = this.onFocusWatchList.bind(this);
+    this.onBlurWatchList = this.onBlurWatchList.bind(this);
   }
 
   onFocus() {
@@ -41,6 +44,17 @@ export default class RectangleCarditem extends PureComponent {
     });
     this.props.onBlur(null);
   }
+  onFocusWatchList() {
+    this.setState({
+      focusedWatchList: true,
+    });
+  }
+  onBlurWatchList() {
+    this.setState({
+      focusedWatchList: false,
+    });
+  }
+
   onPress() {
     // this.props.onPress(this.props.data.type); //needs episode to be created and handled also
     this.props.onPress('program');
@@ -52,7 +66,6 @@ export default class RectangleCarditem extends PureComponent {
       this.setState({disabled: false});
     }, 500);
     this.setState({watchList: !this.state.watchList});
-    console.log('valOut4');
   }
 
   render() {
@@ -119,9 +132,20 @@ export default class RectangleCarditem extends PureComponent {
                 <ProgressBar progress={data.progress + '%'} />
               </View>
             )}
-            <TouchableHighlight onPress={this.plusMinusClickHandler}>
+            <TouchableHighlight
+              onPress={this.plusMinusClickHandler}
+              onFocus={this.onFocusWatchList}
+              onBlur={this.onBlurWatchList}
+              style={styles.watchlistBackground}>
               {this.state.watchList ? (
-                <WatchlistMinusSvg width="20" height="20" />
+                <View
+                  style={
+                    this.state.focusedWatchList
+                      ? styles.innerWatchlistBackground
+                      : styles.watchlistBackground
+                  }>
+                  <WatchlistMinusSvg width="20" height="20" />
+                </View>
               ) : (
                 <WatchlistPlusSvg width="20" height="20" />
               )}
@@ -225,5 +249,15 @@ const styles = StyleSheet.create({
   },
   lightgray: {
     color: colors.lightgray,
+  },
+  watchlistBackground: {
+    backgroundColor: colors.backgroundColor,
+    borderRadius: 15,
+    height: 20,
+  },
+  innerWatchlistBackground: {
+    backgroundColor: colors.lightgray,
+    borderRadius: 15,
+    height: 20,
   },
 });
