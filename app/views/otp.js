@@ -168,12 +168,10 @@ export default class Otp extends Component {
         else{
             console.log('length',this.state.otpTextArray[0])
             if (this.state.isBackspace){
-                if (this.state.otpTextArray[0]===""){
-                    index = index
+                if (this.state.otpTextArray[0]!==""){
+                    index = index+1
                 }
-                else{
-                    index=index+1
-                }
+    
             }
             this.setState(prevState => {
                 prevState.isBackspace = false
