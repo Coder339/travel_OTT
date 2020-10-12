@@ -15,6 +15,7 @@ export default function Keybutton(props) {
         bordwidth,
         bordcolor,
         defaultFocus,
+        disableButton,
         defaultNum,
         onPress,
         opacity
@@ -23,6 +24,7 @@ export default function Keybutton(props) {
     const [borderwidth,setborderwidth]  = useState(0)
     const [bordercolor,setbordercolor]  = useState('')
     const [buttonOpacity,setButtonOpacity]  = useState(0.5)
+    const [disableButtonOpacity,setDisableButtonOpacity]  = useState(0.3)
     // const [textOpacity,setTextOpacity]  = useState(1)
     const [focus, setfocus] = useState(false)
     const [disable, setDisable] = useState(false)
@@ -61,6 +63,7 @@ export default function Keybutton(props) {
     useEffect(() => {
         (defaultNum === title && type === 'num') ? (setborderwidth(bordwidth),setbordercolor(bordcolor),setfocus(true)) : (setborderwidth(0),setbordercolor(''))
         console.log('focus',focus)
+        // (title === 0 && type === 'num') ? setButtonOpacity(0.3) : setButtonOpacity(0.5)
     }, [])
 
     return (
@@ -79,7 +82,7 @@ export default function Keybutton(props) {
                             {height:height},
                             {borderWidth:borderwidth},
                             {borderColor:bordercolor},
-                            {opacity:buttonOpacity}
+                            {opacity:title === disableButton && type === 'num' ? disableButtonOpacity : buttonOpacity}
                             ]
                             }           
             >

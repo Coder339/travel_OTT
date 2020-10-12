@@ -6,7 +6,7 @@ import Backspace from '../../assets/images/backspace';
 
 export default function Numerickeypad(props) {
 
-    const { defaultNum,onPress } = props
+    const { defaultNum,onPress,disableButton } = props
     let color = colors.black
     let textColor = colors.white
     const numArray = ["1","2","3","4","5","6","7","8","9","0"]
@@ -28,6 +28,7 @@ export default function Numerickeypad(props) {
                             bordwidth={2}
                             opacity={0.7}
                             onPress={onPress}
+                            disableButton={disableButton}
                         />
                     </View>
                 )}

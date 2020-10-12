@@ -52,6 +52,8 @@ export default class Otp extends Component {
             countryCode: '+91',
             errorMessage:'Please enter valid country code',
             defaultNum:'9',
+            disableButton:'0',
+            disable:true,
             message:'',
             mobileIndex:0,
             otpIndex:0,
@@ -89,50 +91,56 @@ export default class Otp extends Component {
         }
         else {
             console.log(text)
-            this.setState(prevState => {
-                if (index === 0){
-                    
-                    prevState.textArray[index] = prevState.textArray[index] + text
-
-                    let element = this.state.data.find((item)=>{
-                        console.log('item',item.dial_code)
-                        return item.dial_code === this.state.textArray[index] ;
-                    });
-                    if (element) {
-                        console.log(element.dial_code)
-                        prevState.code = element.dial_code
-
-                        prevState.isTrue = true
-                        prevState.isComplete = true
-
-                    }
-                    
-                    else{
-                        prevState.isTrue = false
-                    }
-                    
-                }
-                if (index === 1) {
-                    if (this.state.textArray[index].length < 10){
+            if (text===this.state.disableButton && this.state.disable){
+                return
+            }
+            else{
+                this.setState({disable:false})
+                this.setState(prevState => {
+                    if (index === 0){
+                        
                         prevState.textArray[index] = prevState.textArray[index] + text
-
-                        if (this.state.textArray[index].length===10){
-                            prevState.mobileNumber = this.state.textArray[index-1] + this.state.textArray[index]
-                            // alert(this.state.mobileNumber)
-                            // POST MOBILE NUMBER...
+    
+                        let element = this.state.data.find((item)=>{
+                            console.log('item',item.dial_code)
+                            return item.dial_code === this.state.textArray[index] ;
+                        });
+                        if (element) {
+                            console.log(element.dial_code)
+                            prevState.code = element.dial_code
+    
+                            prevState.isTrue = true
+                            prevState.isComplete = true
+    
                         }
-                   
+                        
+                        else{
+                            prevState.isTrue = false
+                        }
+                        
                     }
-                    else{
-                        prevState.isComplete = true
+                    if (index === 1) {
+                        if (this.state.textArray[index].length < 10){
+                            prevState.textArray[index] = prevState.textArray[index] + text
+    
+                            if (this.state.textArray[index].length===10){
+                                prevState.mobileNumber = this.state.textArray[index-1] + this.state.textArray[index]
+                                // alert(this.state.mobileNumber)
+                                // POST MOBILE NUMBER...
+                            }
+                       
+                        }
+                        else{
+                            prevState.isComplete = true
+                        }
                     }
-                }
-                return {
-                  textArray: prevState.textArray
-                }
-              }, 
-              () => console.log('textarray',this.state.textArray)
-            )
+                    return {
+                      textArray: prevState.textArray
+                    }
+                  }, 
+                  () => console.log('textarray',this.state.textArray)
+                )
+            }
              
         }
     }
@@ -158,8 +166,17 @@ export default class Otp extends Component {
             console.log(this.state.otpActiveArray)
         }
         else{
+            console.log('length',this.state.otpTextArray[0])
+            if (this.state.isBackspace){
+                if (this.state.otpTextArray[0]===""){
+                    index = index
+                }
+                else{
+                    index=index+1
+                }
+            }
             this.setState(prevState => {
-                
+                prevState.isBackspace = false
                 if (index < this.state.otpTextArray.length){
                     prevState.otpTextArray[index] = text
                     prevState.otpActiveArray[index] = true
@@ -324,7 +341,7 @@ export default class Otp extends Component {
         else{
             console.log(this.state.textArray[1].length)
             this.setState({
-                errorMessage:"Phone length is not 10",
+                errorMessage:"digit length is not 10",
                 // isTrue:true
             },()=>{this.setState({isTrue:false})})
         }
@@ -473,6 +490,7 @@ export default class Otp extends Component {
                     
                     <Numerickeypad 
                         defaultNum={this.state.defaultNum} 
+                        disableButton={this.state.disableButton}
                         onPress={ navButtonTitle === 'Next'? 
                             (text)=>this.mobileHandler(text,mobileIndex) 
                             : 

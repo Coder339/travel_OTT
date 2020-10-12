@@ -102,6 +102,8 @@ export default class AuthStack extends React.Component {
                             :
                             <HomeScreens />
                         }
+
+                        {/* <HomeScreens /> */}
                         
 
                     </NavigationContainer>
