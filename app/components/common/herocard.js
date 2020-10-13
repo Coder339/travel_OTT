@@ -7,75 +7,83 @@ import {
   colors,
   setImageUrl,
   globalstyles,
+  fontFamily,
+  fontSize,
 } from '../../assets/globalstyleconstants';
 import VerticalCarditem from './verticalcarditem';
 import PlayWatchButton from './playwatchbutton';
 
 export default React.memo(function HeroCard(props) {
   const {type, item} = props;
-  console.log('TYPE', type);
-  console.log('DATA from hero', item);
+  // console.log('TYPE', type);
+  // console.log('DATA from hero', item);
   return (
     <View style={styles.mainContainer}>
-      {type === 'hero-banner' || 'hero-banner-detailed' ? (
-        <View>
-          {item.data.map((data, index) => (
-            <View style={styles.container} key={index}>
-              <View style={styles.progressiveImageContainer}>
-                <ProgressiveImage
-                  style={globalstyles.heroImage}
-                  overlay={false}
-                  thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-                  source={{uri: setImageUrl(data.image, 900, 900)}}
-                />
-              </View>
-              <View style={styles.titleContainer}>
-                <Text numberOfLines={2} style={globalstyles.bannerTitle}>
-                  {data.title}
-                </Text>
-              </View>
-              {type === 'hero-banner-detailed' ? (
-                <View style={styles.durEpisodeContainer}>
-                  <Text style={{color: colors.lightgray}}>
-                    Episode {data.episode}
+      {type === 'hero-banner' ||
+        ('hero-banner-detailed' && (
+          <View>
+            {item.data.map((data, index) => (
+              <View style={styles.container} key={index}>
+                <View style={styles.progressiveImageContainer}>
+                  <ProgressiveImage
+                    style={globalstyles.heroImage}
+                    overlay={false}
+                    thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
+                    source={{uri: setImageUrl(data.image, 900, 900)}}
+                    isLinearGradient={true}
+                    type={type}
+                  />
+                </View>
+                <View style={styles.titleContainer}>
+                  <Text numberOfLines={2} style={globalstyles.bannerTitle}>
+                    {data.title}
                   </Text>
-                  <Text style={{color: colors.lightgray}}> | </Text>
-                  <Text style={{color: colors.lightgray}}>{data.dur} min</Text>
-                  <View style={styles.hdfourkContainer}>
-                    <FourkSvg width="20" height="20" />
-                    <HDSvg width="20" height="20" />
+                </View>
+                {type === 'hero-banner-detailed' && (
+                  <View style={styles.durEpisodeContainer}>
+                    <Text style={styles.textColor}>Episode {data.episode}</Text>
+                    <Text style={styles.textColor}> | </Text>
+                    <Text style={styles.textColor}>{data.dur} min</Text>
+                    <View style={styles.hdfourkContainer}>
+                      <FourkSvg width="20" height="20" />
+                      <HDSvg width="20" height="20" />
+                    </View>
                   </View>
-                </View>
-              ) : null}
+                )}
 
-              <View style={styles.descContainer}>
-                <Text style={globalstyles.bannerParagraph} numberOfLines={3}>
-                  {data.description}
-                </Text>
+                <View style={styles.descContainer}>
+                  <Text style={globalstyles.bannerParagraph} numberOfLines={3}>
+                    {data.description}
+                  </Text>
+                </View>
+
+                {type === 'hero-card' && (
+                  <View style={styles.HeroCardExperienceCont}>
+                    <View style={styles.HeroCardExperienceContInner}>
+                      <Text style={styles.HeroCardExperienceContInnerText}>
+                        Experience Mode
+                      </Text>
+                    </View>
+                    <ScrollView
+                      horizontal={true}
+                      Vertical={false}
+                      showsHorizontalScrollIndicator={false}>
+                      {item.data[0].data.map((data, index) => (
+                        <View key={index}>
+                          <VerticalCarditem data={data} key={index} />
+                        </View>
+                      ))}
+                    </ScrollView>
+                  </View>
+                )}
               </View>
+            ))}
 
-              {type === 'hero-card' ? (
-                <View style={{position: 'absolute', top: 100, left: 500}}>
-                  <ScrollView horizontal={true}>
-                    {item.data[0].data.map((data, index) => (
-                      <View 
-                        key={index}
-                        Vertical={false}   
-                        showsHorizontalScrollIndicator={false}>
-                        <VerticalCarditem data={data} key={index} />
-                      </View>
-                    ))}
-                  </ScrollView>
-                </View>
-              ) : null}
+            <View style={styles.playWatchContainer}>
+              <PlayWatchButton name="Watch" />
             </View>
-          ))}
-          
-          <View style={styles.playWatchContainer}>
-            <PlayWatchButton name="Watch" />
           </View>
-        </View>
-      ) : null}
+        ))}
     </View>
   );
 });
@@ -86,7 +94,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   mainContainer: {
-    paddingBottom: 40,
+    marginBottom: 40,
   },
   selected: {
     position: 'absolute',
@@ -99,10 +107,10 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   titleContainer: {
-    width: 490,
-    paddingBottom: 15,
-    paddingTop: 2,
-    paddingLeft: 70,
+    width: 410,
+    marginBottom: 15,
+    marginTop: 2,
+    marginLeft: 75,
     position: 'absolute',
     top: 140,
   },
@@ -110,33 +118,33 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     width: 250,
-    paddingLeft: 70,
+    marginLeft: 75,
     position: 'absolute',
-    top: 230,
+    top: 215,
   },
   hdfourkContainer: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    width: 150,
-    paddingLeft: 70,
-    paddingRight: 20,
-    paddingBottom: 25,
+    width: 80,
+    marginLeft: 30,
+    marginRight: 20,
+    marginBottom: 25,
   },
   descContainer: {
-    width: 600,
-    paddingBottom: 30,
-    paddingLeft: 70,
+    width: 490,
+    marginBottom: 30,
+    marginLeft: 75,
     position: 'absolute',
-    top: 260,
+    top: 250,
   },
   bannerParagraph: {
     fontSize: 12,
     color: 'white',
   },
   playWatchContainer: {
-    paddingLeft: 70,
+    marginLeft: 75,
     position: 'absolute',
-    top: 340,
+    top: 335,
     flex: 1,
   },
   playwatchText: {
@@ -146,6 +154,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingLeft: 50,
+    marginLeft: 50,
+  },
+  verticalCardContainer: {
+    position: 'absolute',
+  },
+  textColor: {
+    color: colors.lightgray,
+  },
+  HeroCardExperienceCont: {
+    position: 'absolute',
+    top: 50,
+    left: 550,
+  },
+  HeroCardExperienceContInner: {
+    marginLeft: 25,
+  },
+  HeroCardExperienceContInnerText: {
+    color: colors.white,
+    fontSize: fontSize.larger,
+    fontFamily: fontFamily.regular,
   },
 });

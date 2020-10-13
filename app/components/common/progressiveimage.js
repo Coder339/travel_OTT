@@ -1,32 +1,31 @@
 import React from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import {View, StyleSheet, Animated} from 'react-native';
+import {colors} from '../../assets/globalstyleconstants';
 import OverlayImage from './overlayimage';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class ProgressiveImage extends React.PureComponent {
-
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       source: '',
-      isError: false
-    }
+      isError: false,
+    };
   }
 
   static getDerivedStateFromProps(nextProps, nextState) {
     if (nextProps.source !== nextState.source) {
       return {
-        source: nextProps.source
-      }
-    }
-    else if (nextState.isError) {
+        source: nextProps.source,
+      };
+    } else if (nextState.isError) {
       return {
-        source: require('../../assets/images/noimagefound.png')
-      }
-    }
-    else {
+        source: require('../../assets/images/noimagefound.png'),
+      };
+    } else {
       return {
-        source: nextProps.source
-      }
+        source: nextProps.source,
+      };
     }
   }
 
@@ -37,26 +36,34 @@ export default class ProgressiveImage extends React.PureComponent {
   handleThumbnailLoad = () => {
     Animated.timing(this.thumbnailAnimated, {
       toValue: 1,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
-  }
+  };
 
   onImageLoad = () => {
     Animated.timing(this.imageAnimated, {
       toValue: 1,
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start();
-  }
+  };
 
   onErrorLoad = () => {
     this.setState({
-      isError: true
-    })
-  }
+      isError: true,
+    });
+  };
 
   render() {
-
-    const { thumbnailSource, source, style, viewstyle, overlay, ...props } = this.props;
+    const {
+      thumbnailSource,
+      source,
+      style,
+      viewstyle,
+      overlay,
+      isLinearGradient,
+      type,
+      ...props
+    } = this.props;
 
     return (
       <View style={[viewstyle, styles.container]}>
@@ -64,21 +71,147 @@ export default class ProgressiveImage extends React.PureComponent {
           {...props}
           source={thumbnailSource}
           blurRadius={this.props.blur ? 1 : null}
-          style={[style, { opacity: this.thumbnailAnimated }]}
+          style={[style, {opacity: this.thumbnailAnimated}]}
           onLoad={this.handleThumbnailLoad}
         />
         <Animated.Image
           {...props}
           source={this.state.source}
           blurRadius={this.props.blur ? 1 : null}
-          style={[styles.imageOverlay, { opacity: this.imageAnimated }, style]}
+          style={[styles.imageOverlay, {opacity: this.imageAnimated}, style]}
           onLoad={this.onImageLoad}
           onError={this.onErrorLoad.bind(this)}
         />
         {overlay && <OverlayImage style={styles} />}
+
+        {!this.state.isError &&
+          isLinearGradient &&
+          //should reduce the linear gradient to a single component.
+          (type === 'hero-banner-detailed' ? (
+            <React.Fragment>
+              {/* LEFT */}
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 5, y: 0}}
+                end={{x: 0.0, y: 0.0}}
+                locations={[0, 0.85, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+              {/* BOTTOM */}
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 0.5, y: 0.1}}
+                end={{x: 0.5, y: 1}}
+                locations={[0, 0.9, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+            </React.Fragment>
+          ) : type === 'details' ? (
+            <React.Fragment>
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 5, y: 0}}
+                end={{x: 0.0, y: 0.0}}
+                locations={[0, 0.6, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 0.5, y: 0.1}}
+                end={{x: 0.5, y: 1}}
+                locations={[0, 0.95, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+            </React.Fragment>
+          ) : type === 'title' ? (
+            <React.Fragment>
+              {/* BOTTOM */}
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 0.5, y: 0.1}}
+                end={{x: 0.5, y: 1}}
+                locations={[0, 0.7, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              {/* BOTTOM */}
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 0.5, y: 0.1}}
+                end={{x: 0.5, y: 1}}
+                locations={[0, 0.85, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+              {/* Top */}
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 0.5, y: 0.9}}
+                end={{x: 0.5, y: 0}}
+                locations={[0, 0.3, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+              {/* Right */}
+              <LinearGradient
+                colors={['transparent', 'transparent', colors.backgroundColor]}
+                start={{x: 0.1, y: 0.1}}
+                end={{x: 1, y: 0.1}}
+                locations={[0, 0.5, 1]}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              />
+            </React.Fragment>
+          ))}
       </View>
     );
-
   }
 }
 

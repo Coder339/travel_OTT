@@ -73,6 +73,6 @@ const styles = StyleSheet.create({
   },
   image: {},
   container: {
-    paddingLeft: 10,
+    marginLeft: 10,
   },
 });

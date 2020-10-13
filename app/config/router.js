@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../views/login';
 import Otp from '../views/otp';
 import Home from '../views/home';
+import ProgramDetail  from '../views/programdetail';
 
 const LoginStack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -31,6 +32,7 @@ export function HomeScreens() {
             headerShown: false
         }}>
             <HomeStack.Screen name='home' component={Home}/>
+            <HomeStack.Screen name='program' component={ProgramDetail}/>
         </HomeStack.Navigator>
     )
 }

@@ -1,19 +1,12 @@
 import React, {PureComponent} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  TouchableHighlight,
-} from 'react-native';
+import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
 import {
   colors,
   globalstyles,
   fontFamily,
 } from '../../assets/globalstyleconstants';
-import PlaySvg from '../../images/playsvg';
 
-export default class PlayWatchButton extends PureComponent {
+export default class Buttons extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -36,32 +29,27 @@ export default class PlayWatchButton extends PureComponent {
     });
   }
   onPress() {
-    alert('Clicked');
+    //index value 0 + 1 ... to match the iterating value
+    this.props.onPress(this.props.value + 1);
   }
 
   render() {
-    const {name} = this.props;
+    const {name, value, season} = this.props;
     return (
       <View style={styles.container}>
         <TouchableHighlight
           underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
-          hasTVPreferredFocus={true}
+          onPress={this.onPress}
           style={
-            this.state.focused
-              ? globalstyles.focusPlayButton
-              : globalstyles.blurPlayButton
+            (season == value + 1 || this.state.focused)
+              ? globalstyles.focusPlayButtonDetails
+              : globalstyles.blurPlayButtonDetails
           }>
           <View style={styles.innerContainer}>
-            <PlaySvg width="20" height="20" />
-            <Text
-              style={
-                this.state.focused
-                  ? styles.playwatchTextfocused
-                  : styles.playwatchTextblured
-              }>
-              {name}
+            <Text style={styles.playwatchTextfocused}>
+              {name} {value + 1}
             </Text>
           </View>
         </TouchableHighlight>
@@ -72,8 +60,7 @@ export default class PlayWatchButton extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 0.1,
-    opacity:0.8
+    margin: 0.1,
   },
   playwatchTextfocused: {
     fontFamily: fontFamily.bold,
@@ -83,7 +70,9 @@ const styles = StyleSheet.create({
   playwatchTextblured: {
     fontFamily: fontFamily.bold,
     fontSize: 16,
-    color: colors.black,
+    color: colors.white,
   },
-  innerContainer:{flexDirection:'row'}
+  innerContainer: {
+    flexDirection: 'row',
+  },
 });
