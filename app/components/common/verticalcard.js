@@ -5,20 +5,8 @@ import {colors, fontFamily,fontSize} from '../../assets/globalstyleconstants';
 
 export default function VerticalCard(props) {
   const {type, item} = props;
-  const [focus, setFocus] = useState(false);
-  // console.log('TYPE', type);
-  // console.log('DATA', item);
-
-  const onFocus = () => {
-    setFocus(true);
-    // console.log(focus, ' from func');
-  };
-
-  const onBlur = () => {
-    setFocus(false);
-  };
-  // console.log(focus, ' focus');
-
+  // const [focus, setFocus] = useState(false);
+  
   return (
     <View style={styles.container}>
       {/* chnaged from react-fragment to view for alignment*/}
@@ -46,20 +34,20 @@ export default function VerticalCard(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 10,
-    paddingBottom: 30,
-    paddingLeft: 25,
+    marginTop: 10,
+    marginBottom: 30,
+    marginLeft: 25,
   },
   titleContainer: {
-    paddingLeft: 48,
+    marginLeft: 48,
   },
   textWhiteColor: {
     color: colors.white,
     fontSize:fontSize.larger,
     fontFamily:fontFamily.regular,
-    paddingTop:15,
+    marginTop:15,
   },
   imageContainer: {
-    paddingLeft: 35,
+    marginLeft: 35,
   },
 });

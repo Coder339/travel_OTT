@@ -1,12 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
-import {
-  colors,
-  setImageUrl,
-  globalstyles,
-  fontFamily,
-  fontSize,
-} from '../../assets/globalstyleconstants';
+import {colors,setImageUrl,globalstyles,fontFamily,fontSize,} from '../../assets/globalstyleconstants';
 import ProgressiveImage from './progressiveimage';
 import WatchlistMinusSvg from '../../images/watchlistminussvg';
 import FourkSvg from '../../images/fourksvg';
@@ -190,13 +184,10 @@ const styles = StyleSheet.create({
   image: {},
   container: {
     flex: 1,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 10,
     position: 'relative',
-  },
-  titleContainer: {
-    paddingLeft: 10,
   },
   selected: {
     position: 'absolute',
@@ -216,12 +207,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 5,
+    marginTop: 5,
   },
   bannerTitleContainerInner: {
     width: 200,
-    paddingBottom: 1,
-    paddingLeft: 5,
+    marginBottom: 1,
+    marginLeft: 5,
   },
   bannerTitle: {
     color: colors.white,
@@ -231,19 +222,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingLeft: 5,
+    marginLeft: 5,
   },
   svgsContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    paddingLeft: 20,
+    marginLeft: 20,
   },
   cardParagraphContainer: {
     width: 200,
-    paddingBottom: 15,
-    paddingTop: 10,
-    paddingLeft: 5,
+    marginBottom: 15,
+    marginTop: 10,
+    marginLeft: 5,
   },
   cardParagraph: {
     color: colors.lightgray,

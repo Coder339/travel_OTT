@@ -60,7 +60,7 @@ export default class Buttons extends PureComponent {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 0.1,
+    margin: 0.1,
   },
   playwatchTextfocused: {
     fontFamily: fontFamily.bold,

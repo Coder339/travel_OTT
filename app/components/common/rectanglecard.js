@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useRef} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {
   colors,
@@ -16,11 +16,12 @@ export default function RectangleCard(props) {
   const {type, item} = props;
   // console.log('TYPE', type);
   // console.log('DATA', item);
-  const seasons = Array(item.seasons).fill('');
+  const seasons = Array(item.seasons).fill('');//converting the season JSON value to array for mapping.
 
   const [season, setSeason] = useState(undefined);
   const [episodeFocus, setEpisodeFocus] = useState(undefined);
-  let seasonNo = item.data.map((item) => item.season);
+  const episodeRef = useRef();//for direct focus on season click episode!!!
+  let seasonNo = item.data.map((item) => item.season);//getting the season number.
 
   const seasonChange = (currentSeason) => {
     if (season != currentSeason) {
@@ -30,8 +31,8 @@ export default function RectangleCard(props) {
   
   const episodeChange = (currentSeason) => {
     let episode = seasonNo.findIndex((item) => item == currentSeason);
-    // console.log(episode + '     episode Index');
     setEpisodeFocus(episode);
+    // console.log(episode + '     episode Index');
   };
 
   return (
@@ -100,6 +101,7 @@ export default function RectangleCard(props) {
         decelerationRate={'normal'}
         snapToAlignment="center"
         snapToInterval={700}
+        // ref={episodeFocus}
         >
         {item.data.map((data, index) => (
           <RectangleCarditem
@@ -119,26 +121,22 @@ export default function RectangleCard(props) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // paddingTop: 10,
-    // paddingBottom: 10,
-    paddingLeft: 20,
-    // position: 'relative',
+    marginLeft: 20,
   },
   titleContainer: {
-    paddingLeft: 55,
+    marginLeft: 55,
   },
   sectionTitle: {
     color: colors.white,
     fontSize: fontSize.larger,
     fontFamily: fontFamily.regular,
-    paddingTop: 15,
+    marginTop: 15,
   },
   sectionTitleDetails: {
     color: colors.orange,
     fontSize: fontSize.superlargest,
     fontFamily: fontFamily.bold,
-    paddingTop: 15,
+    marginTop: 15,
   },
   selected: {
     position: 'absolute',
@@ -164,7 +162,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingLeft: 1,
+    marginLeft: 1,
     width: 175,
     position: 'absolute',
     top: 160,
@@ -176,7 +174,8 @@ const styles = StyleSheet.create({
   descCont: {
     width: 380, 
     position: 'absolute', 
-    top: 185},
+    top: 185}
+  ,
   descContInner: {
     fontSize: fontSize.medium, 
     color: colors.white
