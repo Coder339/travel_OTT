@@ -56,9 +56,10 @@ export default function RectangleCard(props) {
         key={index}
         style={styles.item}
         onLayout={(event) => {
-          const layout = event.nativeEvent.layout;
-          dataSourceCords[index] = layout.x;
-          setDataSourceCords(dataSourceCords);
+          // const layout = event.nativeEvent.layout;
+          // dataSourceCords[index] = layout.x;
+          // setDataSourceCords(dataSourceCords);
+
           // console.log(dataSourceCords);
           // console.log('height:', layout.height);
           // console.log('width:', layout.width);
@@ -69,6 +70,7 @@ export default function RectangleCard(props) {
           data={data}
           type={type}
           key={index}
+          title={item.title}
           onPress={(nav) => props.onPress(nav)}
           onFocus={seasonChange}
           onBlur={seasonChange}
