@@ -48,10 +48,8 @@ export default function RectangleCard(props) {
         {type === 'rectangle-card-details' && (
           <View>
             <View style={styles.progressiveImageContainer}>
-              <View
-                style={{alignItems: 'flex-end', justifyContent: 'flex-end'}}
-                >
-                <ProgressiveImage
+              <View style={styles.progressiveImageInnerContainer} >
+                <ProgressiveImage 
                   style={globalstyles.rectangleImageDetail}
                   overlay={false}
                   thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
@@ -124,35 +122,34 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   titleContainer: {
-    marginLeft: 55,
+    marginLeft: 54,
   },
   sectionTitle: {
     color: colors.white,
     fontSize: fontSize.larger,
     fontFamily: fontFamily.regular,
-    marginTop: 15,
   },
   sectionTitleDetails: {
     color: colors.orange,
     fontSize: fontSize.superlargest,
     fontFamily: fontFamily.bold,
-    marginTop: 15,
   },
   selected: {
     position: 'absolute',
     top: -20,
-    // left: 10,
     opacity: 1,
     width: 230,
   },
   imageContainer: {
-    // paddingLeft: 40,
-    // paddingRight:140,
     marginLeft:40
   },
   progressiveImageContainer: {
     position: 'relative',
     top: 10,
+  },
+  progressiveImageInnerContainer:{
+    alignItems: 'flex-end', 
+    justifyContent: 'flex-end'
   },
   rectangleImageDetailTitle: {
     position: 'absolute',
