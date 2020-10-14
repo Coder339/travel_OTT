@@ -15,7 +15,6 @@ import ProgressiveImage from './progressiveimage';
 export default function RectangleCard(props) {
   const {type, item} = props;
 
-  const [dataSource, setDataSource] = useState([]);
   const [scrollToIndex, setScrollToIndex] = useState(0);
   const [dataSourceCords, setDataSourceCords] = useState([]);
   const [ref, setRef] = useState(null);
@@ -32,16 +31,6 @@ export default function RectangleCard(props) {
   const scrollHandler = () => {
     console.log(dataSourceCords.length, scrollToIndex);
     if (dataSourceCords.length > scrollToIndex) {
-      // item.data.map((item,index)=>{
-      //   if (scrollToIndex===index){
-      //     setEpisodeFocus(true)
-      //     console.log('scrollToindex',scrollToIndex)
-      //     console.log('scrollToindex',index)
-      //   }
-      //   else{
-      //     setEpisodeFocus(false)
-      //   }
-      // })
       ref.scrollTo({
         x: dataSourceCords[scrollToIndex-1],
         y: 0,
@@ -60,9 +49,9 @@ export default function RectangleCard(props) {
         key={index}
         style={styles.item}
         onLayout={(event) => {
-          // const layout = event.nativeEvent.layout;
-          // dataSourceCords[index] = layout.x;
-          // setDataSourceCords(dataSourceCords);
+          const layout = event.nativeEvent.layout;
+          dataSourceCords[index] = layout.x;
+          setDataSourceCords(dataSourceCords);
 
           // console.log(dataSourceCords);
           // console.log('height:', layout.height);
@@ -176,23 +165,9 @@ export default function RectangleCard(props) {
           setRef(ref);
         }}
         >
-        {/* {item.data.map((data, index) => (
-          <View key={index}> 
-
-              <RectangleCarditem
-                data={data}
-                type={type}
-                key={index}
-                onPress={(nav) => props.onPress(nav)}
-                onFocus={seasonChange}
-                onBlur={seasonChange}
-                episodeFocus={episodeFocus == index}
-              />
-          </View>
-        ))} */}
-
 
         {item.data.map(ItemView)}
+
       </ScrollView>
     </View>
   );
