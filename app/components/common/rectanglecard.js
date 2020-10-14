@@ -98,7 +98,7 @@ export default function RectangleCard(props) {
         centerContent={true}
         decelerationRate={'normal'}
         snapToAlignment="center"
-        snapToInterval={700}
+        snapToInterval={550}
         // ref={episodeFocus}
         >
         {item.data.map((data, index) => (
