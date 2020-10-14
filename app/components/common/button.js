@@ -19,22 +19,21 @@ export default class Buttons extends PureComponent {
   }
 
   onFocus() {
-    this.setState({
-      focused: true,
-    });
+    this.setState({focused: true});
     this.props.seasonOnFocus(this.props.value + 1)
     this.props.scrollHandler()
-    // alert(this.props.value)
   }
+
   onBlur() {
     this.setState({
       focused: false,
     });
   }
+
   onPress() {
     //index value 0 + 1 ... to match the iterating value
     // this.props.onPress(this.props.value + 1);
-    
+    this.props.seasonOnFocus(this.props.value + 1)
   }
 
   render() {

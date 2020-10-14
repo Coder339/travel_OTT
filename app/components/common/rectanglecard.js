@@ -64,17 +64,16 @@ export default function RectangleCard(props) {
           // console.log('width:', layout.width);
           // console.log('x:', layout.x);
           // console.log('y:', layout.y);
-          
         }}>
         <RectangleCarditem
-                data={data}
-                type={type}
-                key={index}
-                onPress={(nav) => props.onPress(nav)}
-                onFocus={seasonChange}
-                onBlur={seasonChange}
-                episodeFocus={episodeFocus}
-              />
+          data={data}
+          type={type}
+          key={index}
+          onPress={(nav) => props.onPress(nav)}
+          onFocus={seasonChange}
+          onBlur={seasonChange}
+          episodeFocus={episodeFocus}
+        />
       </View>
     );
   };
@@ -84,7 +83,6 @@ export default function RectangleCard(props) {
     let episodeIndex = seasonNo.findIndex((item) => item == scrollToIndex);
     // alert(episodeIndex)
     setScrollToIndex(parseInt(episodeIndex != 0 ? episodeIndex : 0))
-    
   }
 
   const seasonChange = (currentSeason) => {
@@ -136,10 +134,8 @@ export default function RectangleCard(props) {
                 </Text>
               </View>
 
-              <View
-                style={styles.buttonCont}>
+              <View style={styles.buttonCont}>
                 <PlayWatchButton name="Trailer" />
-
                 {seasons.map((item, index) => (
                   <Buttons
                     key={index}
@@ -150,6 +146,8 @@ export default function RectangleCard(props) {
                     onPress={episodeChange}
                     seasonOnFocus={(index)=>seasonOnFocus(index)}
                     scrollHandler={()=>scrollHandler()}
+                    // onFocus={onFocus}
+                    // onBlur={onBlur}
                   />
                 ))}
               </View>
@@ -166,6 +164,7 @@ export default function RectangleCard(props) {
         decelerationRate={'fast'}
         snapToAlignment="start"
         snapToInterval={550}
+
         ref={(ref) => {
           setRef(ref);
         }}
