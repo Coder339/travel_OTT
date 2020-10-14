@@ -97,13 +97,13 @@ export default class AuthStack extends React.Component {
 
                     <NavigationContainer>
 
-                        {this.state.userToken === null ?
+                        {/* {this.state.userToken === null ?
                             <LoginScreens />
                             :
                             <HomeScreens />
-                        }
+                        } */}
 
-                        {/* <HomeScreens /> */}
+                        <HomeScreens />
                         
 
                     </NavigationContainer>

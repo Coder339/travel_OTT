@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
 
     },
     inputContainer:{
-        paddingRight:10
+        marginRight:10
     }
 })
