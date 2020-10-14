@@ -36,6 +36,10 @@ export default function RectangleCard(props) {
       //   if (scrollToIndex===index){
       //     setEpisodeFocus(true)
       //     console.log('scrollToindex',scrollToIndex)
+      //     console.log('scrollToindex',index)
+      //   }
+      //   else{
+      //     setEpisodeFocus(false)
       //   }
       // })
       ref.scrollTo({
@@ -69,6 +73,8 @@ export default function RectangleCard(props) {
         <RectangleCarditem
                 data={data}
                 type={type}
+                scrollToIndex={scrollToIndex}
+                index={index}
                 key={index}
                 onPress={(nav) => props.onPress(nav)}
                 onFocus={seasonChange}

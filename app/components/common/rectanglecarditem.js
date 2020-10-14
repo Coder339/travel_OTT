@@ -74,7 +74,7 @@ export default class RectangleCarditem extends PureComponent {
           onBlur={this.onBlur}
           onPress={() => this.onPress()}
           style={
-            episodeFocus || this.state.focused
+            this.props.index===this.props.scrollToIndex || this.state.focused
               ? [globalstyles.focusBorder, sizing]
               : globalstyles.blurBorder
           }>
@@ -259,3 +259,6 @@ const styles = StyleSheet.create({
     height: 20,
   },
 });
+
+
+
