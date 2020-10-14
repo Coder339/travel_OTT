@@ -14,14 +14,78 @@ import ProgressiveImage from './progressiveimage';
 
 export default function RectangleCard(props) {
   const {type, item} = props;
+
+  const [dataSource, setDataSource] = useState([]);
+  const [scrollToIndex, setScrollToIndex] = useState(0);
+  const [dataSourceCords, setDataSourceCords] = useState([]);
+  const [ref, setRef] = useState(null);
   // console.log('TYPE', type);
   // console.log('DATA', item);
   const seasons = Array(item.seasons).fill('');//converting the season JSON value to array for mapping.
 
   const [season, setSeason] = useState(undefined);
-  const [episodeFocus, setEpisodeFocus] = useState(undefined);
+  const [episodeFocus, setEpisodeFocus] = useState(false);
   const episodeRef = useRef();//for direct focus on season click episode!!!
   let seasonNo = item.data.map((item) => item.season);//getting the season number.
+  
+
+  const scrollHandler = () => {
+    console.log(dataSourceCords.length, scrollToIndex);
+    if (dataSourceCords.length > scrollToIndex) {
+      // item.data.map((item,index)=>{
+      //   if (scrollToIndex===index){
+      //     setEpisodeFocus(true)
+      //     console.log('scrollToindex',scrollToIndex)
+      //   }
+      // })
+      ref.scrollTo({
+        x: dataSourceCords[scrollToIndex-1],
+        y: 0,
+        animated: true,
+      });
+    } else {
+      // alert('Out of Max Index');
+      console.log('Out of Max Index')
+    }
+  };
+
+  const ItemView = (data, index) => {
+    return (
+      // Flat List Item
+      <View
+        key={index}
+        style={styles.item}
+        onLayout={(event) => {
+          const layout = event.nativeEvent.layout;
+          dataSourceCords[index] = layout.x;
+          setDataSourceCords(dataSourceCords);
+          // console.log(dataSourceCords);
+          // console.log('height:', layout.height);
+          // console.log('width:', layout.width);
+          // console.log('x:', layout.x);
+          // console.log('y:', layout.y);
+          
+        }}>
+        <RectangleCarditem
+                data={data}
+                type={type}
+                key={index}
+                onPress={(nav) => props.onPress(nav)}
+                onFocus={seasonChange}
+                onBlur={seasonChange}
+                episodeFocus={episodeFocus}
+              />
+      </View>
+    );
+  };
+   
+
+  const seasonOnFocus = (scrollToIndex) => {
+    let episodeIndex = seasonNo.findIndex((item) => item == scrollToIndex);
+    // alert(episodeIndex)
+    setScrollToIndex(parseInt(episodeIndex != 0 ? episodeIndex : 0))
+    
+  }
 
   const seasonChange = (currentSeason) => {
     if (season != currentSeason) {
@@ -78,11 +142,14 @@ export default function RectangleCard(props) {
 
                 {seasons.map((item, index) => (
                   <Buttons
-                    name="SEASON"
-                    value={index}
                     key={index}
+                    name="SEASON"
+                    item={item}
+                    value={index}
                     season={season}
                     onPress={episodeChange}
+                    seasonOnFocus={(index)=>seasonOnFocus(index)}
+                    scrollHandler={()=>scrollHandler()}
                   />
                 ))}
               </View>
@@ -96,22 +163,30 @@ export default function RectangleCard(props) {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         centerContent={true}
-        decelerationRate={'normal'}
-        snapToAlignment="center"
+        decelerationRate={'fast'}
+        snapToAlignment="start"
         snapToInterval={550}
-        // ref={episodeFocus}
+        ref={(ref) => {
+          setRef(ref);
+        }}
         >
-        {item.data.map((data, index) => (
-          <RectangleCarditem
-            data={data}
-            type={type}
-            key={index}
-            onPress={(nav) => props.onPress(nav)}
-            onFocus={seasonChange}
-            onBlur={seasonChange}
-            episodeFocus={episodeFocus == index}
-          />
-        ))}
+        {/* {item.data.map((data, index) => (
+          <View key={index}> 
+
+              <RectangleCarditem
+                data={data}
+                type={type}
+                key={index}
+                onPress={(nav) => props.onPress(nav)}
+                onFocus={seasonChange}
+                onBlur={seasonChange}
+                episodeFocus={episodeFocus == index}
+              />
+          </View>
+        ))} */}
+
+
+        {item.data.map(ItemView)}
       </ScrollView>
     </View>
   );

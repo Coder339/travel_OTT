@@ -11,6 +11,7 @@ export class ProgramDetail extends PureComponent {
   }
 
   render() {
+    console.log('program')
     return (
       <ScrollView
         showsVerticalScrollIndicator={false}

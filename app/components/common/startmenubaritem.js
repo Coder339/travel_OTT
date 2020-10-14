@@ -15,7 +15,8 @@ export default class StartMenuBarItem extends PureComponent {
 
     this.state = {
       focused: false,
-      initialFocused: false
+      firstfocus:false,
+      // initialFocused: false
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -24,35 +25,46 @@ export default class StartMenuBarItem extends PureComponent {
   onFocus() {
     this.setState({
       focused: true,
-      initialFocused: true,
+      // initialFocused: true,
     });
-    this.props.onFocus();
+    this.props.menuonFocus();
   }
   onBlur() {
     this.setState({
       focused: false,
     });
-    this.props.onBlur();
+    this.props.menuonBlur();
   }
   onPress() {
     alert('Clicked');
   }
   
+  componentDidMount=()=>{
+    this.setState(prevState=>{
+      this.props.svgType === 'search' && this.props.menufocused ? prevState.firstfocus = true : prevState.firstfocus = false
+    })
+  }
+  
 
   render() {
     const sizing = {width:this.props.width,height: 55};
+    // const sizing = {height: 55};
+    console.log('menxx',this.props.menufocused)
     return (
       <View style={styles.container}>
         <TouchableHighlight
+          // hasTVPreferredFocus={this.props.svgType === 'search'}
+          activeOpacity={0.9}
           underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          // width={this.props.draweronFocus ? 150 : 50}
           style={
-            this.state.focused
+            [this.state.focused
               ? [globalstyles.focusMenuBar, sizing]
               : [globalstyles.blurMenuBar, sizing]
-          }>
-          <View style={styles.containerItems}>
+            ]}>
+          <View style={[styles.containerItems]}>
             {this.props.svgType === 'search' && (
               <View style={styles.svgs}>
                 <SearchSvg width="20" height="20" />
@@ -115,12 +127,17 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     backgroundColor: colors.backgroundColor,
     opacity: 0.5,
+    // width: 150,
+    // height:90
   },
   containerItems: {
     paddingTop: 18,
     paddingLeft: 15,
     paddingRight: 15,
     flex: 1,
+    // height:0,
+    // width: 150,
+    
   },
   containerItemsBlur:{
     paddingTop: 18,
@@ -131,5 +148,6 @@ const styles = StyleSheet.create({
   },
   svgs: {flexDirection: 'row'},
   titles: {paddingLeft: 20},
-  titleColor:{color: colors.white}
+  titleColor:{color: colors.white},
+  // item:{alignSelf:'stretch',}
 });

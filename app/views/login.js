@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, ImageBackground, Image, Button } from 'react-native';
-import { colors, globalstyles, fontFamily } from '../assets/globalstyleconstants';
-import LogoSvgComponent from '../assets/images/travelxplogo';
+import { Text, StyleSheet, View,ImageBackground,Image, Button } from 'react-native';
+import {colors,globalstyles,fontFamily,fontSize} from '../assets/globalstyleconstants';
+import LogoSvgComponent  from '../assets/images/travelxplogo';
 import ButtonCard from '../components/common/navbutton';
 
 export default class login extends Component {
@@ -28,18 +28,18 @@ export default class login extends Component {
                         <Text style={[styles.xplore]}>
                             see more.xplore more
                         </Text>
-                        <ButtonCard
-                            title='Sign In'
-                            color={this.state.color}
-                            textColor={this.state.textColor}
-                            opacity={1}
-                            width={100}
-                            height={36}
-                            bordcolor='white'
-                            bordwidth={1}
-                            defaultFocus={true}
-                            navigation={this.props.navigation}
-                            onPress='Otp'
+                        <ButtonCard 
+                           title='Sign In' 
+                           color={this.state.color}
+                           textColor={this.state.textColor}
+                           opacity={1}
+                           width={100}
+                           height={36}
+                           bordcolor='white'
+                           bordwidth={1}
+                           defaultFocus={true}
+                           navigation={this.props.navigation}
+                           onPress={()=>this.props.navigation.navigate('Otp')}
                         />
                         {/* <ButtonCard 
                            title='Sign In' 
@@ -73,42 +73,42 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: "cover",
         justifyContent: "center",
-    },
-    logo: {
-        position: 'absolute',
-        top: 0,
-        left: 60
-    },
-    content: {
-        marginTop: 20,
-        fontSize: 40,
-        fontFamily: fontFamily.bold,
-        flexShrink: 1,
-        width: '50%',
-        color: colors.white,
-    },
-    xplore: {
+      },
+      logo:{
+          position:'absolute',
+          top:0,
+          left:60
+      },
+      content:{
+        marginTop:20,
+        fontSize:40,
+        fontFamily:fontFamily.bold,
+        flexShrink:1,
+        width:'50%',
+        color:colors.white,
+      },
+      xplore:{
         // fontWeight:'bold',
         // fontFamily:fontFamily.bold,
-        fontSize: 25,
-        color: colors.white,
-        opacity: 0.7,
-    },
-    bottomContent: {
-        marginTop: 80
-    },
-    sign_up: {
-        color: colors.white,
-        fontSize: 20,
-        fontWeight: 'bold'
-    },
-    plan: {
-        color: colors.white,
-        opacity: 0.7,
-        fontSize: 15,
-        marginTop: 5
-    }
-
-
+        fontSize:26,
+        color:colors.white,
+        opacity:0.7,
+      },
+      bottomContent:{
+          marginTop:80
+      },
+      sign_up:{
+          color:colors.white,
+          fontSize:16,
+          fontWeight:'bold'
+      },
+      plan:{
+          color:colors.white,
+          opacity:0.7,
+          fontSize:15,
+          marginTop:5
+      }
+    
+      
 })
 
