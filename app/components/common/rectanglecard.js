@@ -18,7 +18,7 @@ export default function RectangleCard(props) {
   const [dataSource, setDataSource] = useState([]);
   const [scrollToIndex, setScrollToIndex] = useState(0);
   const [dataSourceCords, setDataSourceCords] = useState([]);
-  const [ref, setRef] = useState(null);
+  let [ref, setRef] = useState(null);
   // console.log('TYPE', type);
   // console.log('DATA', item);
   const seasons = Array(item.seasons).fill('');//converting the season JSON value to array for mapping.
@@ -31,7 +31,7 @@ export default function RectangleCard(props) {
 
   const scrollHandler = () => {
     console.log(dataSourceCords.length, scrollToIndex);
-    if (dataSourceCords.length > scrollToIndex) {
+    // if (dataSourceCords.length > scrollToIndex) {
       // item.data.map((item,index)=>{
       //   if (scrollToIndex===index){
       //     setEpisodeFocus(true)
@@ -39,14 +39,14 @@ export default function RectangleCard(props) {
       //   }
       // })
       ref.scrollTo({
-        x: dataSourceCords[scrollToIndex-1],
-        y: 0,
-        animated: true,
+        x: 260 * scrollToIndex,
+        // y: 0,
+        // animated: true,
       });
-    } else {
-      // alert('Out of Max Index');
-      console.log('Out of Max Index')
-    }
+    // } else {
+    //   // alert('Out of Max Index');
+    //   console.log('Out of Max Index')
+    // }
   };
 
   const ItemView = (data, index) => {
@@ -147,7 +147,7 @@ export default function RectangleCard(props) {
                     season={season}
                     onPress={episodeChange}
                     seasonOnFocus={(index)=>seasonOnFocus(index)}
-                    scrollHandler={()=>scrollHandler()}
+                    scrollHandler={scrollHandler}
                     // onFocus={onFocus}
                     // onBlur={onBlur}
                   />
@@ -165,13 +165,13 @@ export default function RectangleCard(props) {
         centerContent={true}
         decelerationRate={'fast'}
         snapToAlignment="start"
-        snapToInterval={550}
+        // snapToInterval={550}
 
         ref={(ref) => {
           setRef(ref);
         }}
         >
-        {/* {item.data.map((data, index) => (
+        {item.data.map((data, index) => (
           <View key={index}> 
 
               <RectangleCarditem
@@ -182,12 +182,13 @@ export default function RectangleCard(props) {
                 onFocus={seasonChange}
                 onBlur={seasonChange}
                 episodeFocus={episodeFocus == index}
+                title={item.title}
               />
           </View>
-        ))} */}
+        ))}
 
 
-        {item.data.map(ItemView)}
+        {/* {item.data.map(ItemView)} */}
       </ScrollView>
     </View>
   );

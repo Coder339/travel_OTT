@@ -51,7 +51,7 @@ export default class RectangleCarditem extends PureComponent {
 
   onPress() {
     // this.props.onPress(this.props.data.type); //needs episode to be created and handled also
-    this.props.title === 'Continue Watching' && this.props.onPress('program');
+    this.props.data.title === 'Continue Watching' && this.props.onPress('program');
   }
   
   plusMinusClickHandler() {
@@ -79,37 +79,21 @@ export default class RectangleCarditem extends PureComponent {
               ? [globalstyles.focusBorder, sizing]
               : globalstyles.blurBorder
           }>
-          {type === 'rectangle-card-title' ? (
-            <ProgressiveImage
-              style={globalstyles.rectangleImage}
-              overlay={false}
-              thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-              source={{uri: setImageUrl(data.image, 320, 100)}}
-              isLinearGradient={true}
-              type="title"
-            />
-          ) : type === 'rectangle-card-details' && this.state.focused ? (
             <React.Fragment>
               <ProgressiveImage
                 style={globalstyles.rectangleImage}
                 overlay={false}
                 thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
                 source={{uri: setImageUrl(data.image, 320, 300)}}
-                isLinearGradient={true}
+                isLinearGradient={(type === 'rectangle-card-title' || 
+                (type === 'rectangle-card-details' && this.state.focused))}
                 type="title"
               />
+             {type === 'rectangle-card-details' && this.state.focused &&
               <View style={styles.progressContainer}>
                 <ProgressBar progress={data.progress + '%'} />
-              </View>
+              </View>}
             </React.Fragment>
-          ) : (
-            <ProgressiveImage
-              style={globalstyles.rectangleImage}
-              overlay={false}
-              thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-              source={{uri: setImageUrl(data.image, 320, 300)}}
-            />
-          )}
         </TouchableHighlight>
         {(type === 'rectangle-card-title' || type === 'rectangle-card-details') && (
           <View style={styles.bannerTitleContainer}>
