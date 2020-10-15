@@ -53,6 +53,7 @@ export default class RectangleCarditem extends PureComponent {
     // this.props.onPress(this.props.data.type); //needs episode to be created and handled also
     this.props.title === 'Continue Watching' && this.props.onPress('program');
   }
+  
   plusMinusClickHandler() {
     if (this.state.disabled) return;
     this.setState({disabled: true});
@@ -110,8 +111,7 @@ export default class RectangleCarditem extends PureComponent {
             />
           )}
         </TouchableHighlight>
-        {(type === 'rectangle-card-title' ||
-          type === 'rectangle-card-details') && (
+        {(type === 'rectangle-card-title' || type === 'rectangle-card-details') && (
           <View style={styles.bannerTitleContainer}>
             <View style={styles.bannerTitleContainerInner}>
               <Text numberOfLines={2} style={globalstyles.cardTitle}>
