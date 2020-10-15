@@ -19,72 +19,24 @@ export default function RectangleCard(props) {
   const [scrollToIndex, setScrollToIndex] = useState(0);
   const [dataSourceCords, setDataSourceCords] = useState([]);
   let [ref, setRef] = useState(null);
-  // console.log('TYPE', type);
-  // console.log('DATA', item);
   const seasons = Array(item.seasons).fill('');//converting the season JSON value to array for mapping.
 
   const [season, setSeason] = useState(undefined);
   const [episodeFocus, setEpisodeFocus] = useState(false);
-  const episodeRef = useRef();//for direct focus on season click episode!!!
   let seasonNo = item.data.map((item) => item.season);//getting the season number.
   
 
   const scrollHandler = () => {
     console.log(dataSourceCords.length, scrollToIndex);
-    // if (dataSourceCords.length > scrollToIndex) {
-      // item.data.map((item,index)=>{
-      //   if (scrollToIndex===index){
-      //     setEpisodeFocus(true)
-      //     console.log('scrollToindex',scrollToIndex)
-      //   }
-      // })
       ref.scrollTo({
         x: 260 * scrollToIndex,
-        // y: 0,
-        // animated: true,
       });
-    // } else {
-    //   // alert('Out of Max Index');
-    //   console.log('Out of Max Index')
-    // }
-  };
-
-  const ItemView = (data, index) => {
-    return (
-      // Flat List Item
-      <View
-        key={index}
-        style={styles.item}
-        onLayout={(event) => {
-          // const layout = event.nativeEvent.layout;
-          // dataSourceCords[index] = layout.x;
-          // setDataSourceCords(dataSourceCords);
-
-          // console.log(dataSourceCords);
-          // console.log('height:', layout.height);
-          // console.log('width:', layout.width);
-          // console.log('x:', layout.x);
-          // console.log('y:', layout.y);
-        }}>
-        <RectangleCarditem
-          data={data}
-          type={type}
-          key={index}
-          title={item.title}
-          onPress={(nav) => props.onPress(nav)}
-          onFocus={seasonChange}
-          onBlur={seasonChange}
-          episodeFocus={episodeFocus}
-        />
-      </View>
-    );
   };
    
 
   const seasonOnFocus = (scrollToIndex) => {
     let episodeIndex = seasonNo.findIndex((item) => item == scrollToIndex);
-    // alert(episodeIndex)
-    setScrollToIndex(parseInt(episodeIndex != 0 ? episodeIndex : 0))
+    setScrollToIndex(parseInt(episodeIndex))
   }
 
   const seasonChange = (currentSeason) => {
@@ -96,7 +48,6 @@ export default function RectangleCard(props) {
   const episodeChange = (currentSeason) => {
     let episode = seasonNo.findIndex((item) => item == currentSeason);
     setEpisodeFocus(episode);
-    // console.log(episode + '     episode Index');
   };
 
   return (
@@ -146,10 +97,8 @@ export default function RectangleCard(props) {
                     value={index}
                     season={season}
                     onPress={episodeChange}
-                    seasonOnFocus={(index)=>seasonOnFocus(index)}
+                    seasonOnFocus={(seasonIndex)=>seasonOnFocus(seasonIndex)}
                     scrollHandler={scrollHandler}
-                    // onFocus={onFocus}
-                    // onBlur={onBlur}
                   />
                 ))}
               </View>
@@ -165,15 +114,12 @@ export default function RectangleCard(props) {
         centerContent={true}
         decelerationRate={'fast'}
         snapToAlignment="start"
-        // snapToInterval={550}
-
         ref={(ref) => {
           setRef(ref);
         }}
         >
         {item.data.map((data, index) => (
           <View key={index}> 
-
               <RectangleCarditem
                 data={data}
                 type={type}
@@ -186,9 +132,6 @@ export default function RectangleCard(props) {
               />
           </View>
         ))}
-
-
-        {/* {item.data.map(ItemView)} */}
       </ScrollView>
     </View>
   );

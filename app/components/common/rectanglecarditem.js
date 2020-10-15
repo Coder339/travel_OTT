@@ -51,7 +51,7 @@ export default class RectangleCarditem extends PureComponent {
 
   onPress() {
     // this.props.onPress(this.props.data.type); //needs episode to be created and handled also
-    this.props.data.title === 'Continue Watching' && this.props.onPress('program');
+    this.props.title === 'Continue Watching' && this.props.onPress('program');
   }
   
   plusMinusClickHandler() {
@@ -75,7 +75,8 @@ export default class RectangleCarditem extends PureComponent {
           onBlur={this.onBlur}
           onPress={this.onPress}
           style={
-            episodeFocus || this.state.focused
+            // episodeFocus || this.state.focused
+            this.state.focused
               ? [globalstyles.focusBorder, sizing]
               : globalstyles.blurBorder
           }>
