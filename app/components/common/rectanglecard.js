@@ -52,12 +52,6 @@ export default function RectangleCard(props) {
           const layout = event.nativeEvent.layout;
           dataSourceCords[index] = layout.x;
           setDataSourceCords(dataSourceCords);
-
-          // console.log(dataSourceCords);
-          // console.log('height:', layout.height);
-          // console.log('width:', layout.width);
-          // console.log('x:', layout.x);
-          // console.log('y:', layout.y);
         }}>
         <RectangleCarditem
                 data={data}
@@ -142,8 +136,6 @@ export default function RectangleCard(props) {
                     onPress={episodeChange}
                     seasonOnFocus={(index)=>seasonOnFocus(index)}
                     scrollHandler={()=>scrollHandler()}
-                    // onFocus={onFocus}
-                    // onBlur={onBlur}
                   />
                 ))}
               </View>
@@ -151,7 +143,6 @@ export default function RectangleCard(props) {
           </View>
         )}
       </View>
-
       <ScrollView
         style={styles.imageContainer}
         horizontal={true}
@@ -160,7 +151,6 @@ export default function RectangleCard(props) {
         decelerationRate={'fast'}
         snapToAlignment="start"
         snapToInterval={550}
-
         ref={(ref) => {
           setRef(ref);
         }}
