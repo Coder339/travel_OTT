@@ -4,29 +4,13 @@ import {colors, fontFamily, fontSize, globalstyles, setImageUrl} from '../../ass
 import PlayWatchButton from '../common/playwatchbutton';
 import Buttons from '../common/button';
 import ProgressiveImage from '../common/progressiveimage';
-
+// import movieData from '../../config/OTTProgramDetails.json';
 
 export default function ProgramsBanner(props) {
-    const {movieOTTData} = props;
-    const seasons = Array(movieOTTData.seasons).fill('');
-    const [dataSource, setDataSource] = useState([]);
-    const [dataSourceCords, setDataSourceCords] = useState([]);
-    const [scrollToIndex, setScrollToIndex] = useState(0);
-    const scrollHandler = () => {
-        ref.scrollTo({
-          x: 260 * scrollToIndex,
-        });
-    };
-     
-    const seasonOnFocus = (scrollToIndex) => {
-      let episodeIndex = seasonNo.findIndex((item) => item == scrollToIndex);
-      setScrollToIndex(parseInt(episodeIndex))
-    }
+
+    const {movieOTTData,seasons,seasonOnFocus,episodeChange,} = props;
+
     
-    const episodeChange = (currentSeason) => {
-      let episode = seasonNo.findIndex((item) => item == currentSeason);
-      setEpisodeFocus(episode);
-    };
     return (
       <ScrollView style={styles.container}>
         <View style={styles.programBanner}>
@@ -51,19 +35,24 @@ export default function ProgramsBanner(props) {
               <Text numberOfLines={3} style={styles.bannerParagraphInner}>{movieOTTData.description}</Text>
             </View>
             <View style={styles.buttonCont}>
-              <PlayWatchButton name="Trailer" />
-              {seasons.map((item, index) => (
-                <Buttons
-                  key={index}
-                  name="SEASON"
-                  item={item}
-                  value={index}
-                  season={season}
-                  onPress={episodeChange}
-                  seasonOnFocus={(seasonIndex) => seasonOnFocus(seasonIndex)}
-                  scrollHandler={scrollHandler}
-                />
-              ))}
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+              >
+                <PlayWatchButton name="Trailer" />
+                {seasons.map((item, index) => (
+                  <Buttons
+                    key={index}
+                    name="SEASON"
+                    item={item}
+                    value={index}
+                    // season={season}
+                    onPress={episodeChange}
+                    seasonOnFocus={seasonOnFocus}
+                    // scrollHandler={scrollHandler}
+                  />
+                ))}
+              </ScrollView>
             </View>
           </View>
         </View>

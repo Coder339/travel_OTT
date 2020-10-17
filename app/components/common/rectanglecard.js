@@ -2,22 +2,26 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {colors,fontSize,fontFamily,globalstyles,setImageUrl,} from '../../assets/globalstyleconstants';
 import RectangleCarditem from './rectanglecarditem';
-import PlayWatchButton from './playwatchbutton';
-import Buttons from './button';
-import ProgressiveImage from './progressiveimage';
+
 
 export default function RectangleCard(props) {
-  const {type, item} = props;
+  const {type, item,scrollToIndex,episode,ref} = props;
 
-  let [ref, setRef] = useState(null);
+  let [refer, setRefer] = useState(ref);
   const [season, setSeason] = useState(undefined);
-  const [episodeFocus, setEpisodeFocus] = useState(false);
+  // const [episodeFocus, setEpisodeFocus] = useState(false);
   
   const seasonChange = (currentSeason) => {
     if (season != currentSeason) {
       setSeason(currentSeason);
     }
   };
+
+  // const scrollHandler=()=>{
+  //   ref.scrollTo({
+  //     x: 260 * scrollToIndex,
+  //   });
+  //  };
 
   return (
     <View style={styles.container}>
@@ -37,8 +41,8 @@ export default function RectangleCard(props) {
         centerContent={true}
         decelerationRate={'fast'}
         snapToAlignment="start"
-        ref={(ref) => {
-          setRef(ref);
+        ref={(refer) => {
+          setRefer(refer);
         }}
         >
         {item.data.map((data, index) => (
@@ -50,7 +54,7 @@ export default function RectangleCard(props) {
                 onPress={(nav) => props.onPress(nav)}
                 onFocus={seasonChange}
                 onBlur={seasonChange}
-                episodeFocus={episodeFocus == index}
+                episodeFocus={episode==index}
                 title={item.title}
               />
           </View>

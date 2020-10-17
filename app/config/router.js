@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { createStackNavigator } from '@react-navigation/stack';
-
 import Login from '../views/login';
 import Otp from '../views/otp';
 import Home from '../views/home';

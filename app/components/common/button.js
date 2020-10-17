@@ -20,7 +20,8 @@ export default class Buttons extends PureComponent {
 
   onFocus() {
     this.setState({focused: true});
-    this.props.seasonOnFocus(this.props.value + 1)
+    // this.props.seasonOnFocus(this.props.value + 1)
+    console.log('onfocus')
   }
 
   onBlur() {
@@ -30,7 +31,8 @@ export default class Buttons extends PureComponent {
   }
 
   onPress() {
-    this.props.scrollHandler()
+    // this.props.scrollHandler()
+    this.props.seasonOnFocus(this.props.value + 1)
   }
 
   render() {
