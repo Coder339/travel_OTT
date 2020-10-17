@@ -1,15 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, TouchableHighlight} from 'react-native';
 import FourkSvg from '../../images/fourksvg';
 import HDSvg from '../../images/hdsvg';
 import ProgressiveImage from './progressiveimage';
-import {
-  colors,
-  setImageUrl,
-  globalstyles,
-  fontFamily,
-  fontSize,
-} from '../../assets/globalstyleconstants';
+import {colors,setImageUrl,globalstyles,fontFamily,fontSize,} from '../../assets/globalstyleconstants';
 import VerticalCarditem from './verticalcarditem';
 import PlayWatchButton from './playwatchbutton';
 

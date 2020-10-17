@@ -1,12 +1,6 @@
-import React, {useState,useRef} from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import {
-  colors,
-  fontSize,
-  fontFamily,
-  globalstyles,
-  setImageUrl,
-} from '../../assets/globalstyleconstants';
+import {colors,fontSize,fontFamily,globalstyles,setImageUrl,} from '../../assets/globalstyleconstants';
 import RectangleCarditem from './rectanglecarditem';
 import PlayWatchButton from './playwatchbutton';
 import Buttons from './button';
@@ -15,39 +9,14 @@ import ProgressiveImage from './progressiveimage';
 export default function RectangleCard(props) {
   const {type, item} = props;
 
-  const [dataSource, setDataSource] = useState([]);
-  const [scrollToIndex, setScrollToIndex] = useState(0);
-  const [dataSourceCords, setDataSourceCords] = useState([]);
   let [ref, setRef] = useState(null);
-  const seasons = Array(item.seasons).fill('');//converting the season JSON value to array for mapping.
-
   const [season, setSeason] = useState(undefined);
   const [episodeFocus, setEpisodeFocus] = useState(false);
-  let seasonNo = item.data.map((item) => item.season);//getting the season number.
   
-
-  const scrollHandler = () => {
-    console.log(dataSourceCords.length, scrollToIndex);
-      ref.scrollTo({
-        x: 260 * scrollToIndex,
-      });
-  };
-   
-
-  const seasonOnFocus = (scrollToIndex) => {
-    let episodeIndex = seasonNo.findIndex((item) => item == scrollToIndex);
-    setScrollToIndex(parseInt(episodeIndex))
-  }
-
   const seasonChange = (currentSeason) => {
     if (season != currentSeason) {
       setSeason(currentSeason);
     }
-  };
-  
-  const episodeChange = (currentSeason) => {
-    let episode = seasonNo.findIndex((item) => item == currentSeason);
-    setEpisodeFocus(episode);
   };
 
   return (
@@ -58,52 +27,6 @@ export default function RectangleCard(props) {
             {type === 'rectangle-card' && item.section_title}
             {item.title}
           </Text>
-        )}
-
-        {type === 'rectangle-card-details' && (
-          <View>
-            <View style={styles.progressiveImageContainer}>
-              <View style={styles.progressiveImageInnerContainer} >
-                <ProgressiveImage 
-                  style={globalstyles.rectangleImageDetail}
-                  overlay={false}
-                  thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-                  source={{uri: setImageUrl(item.image, 900, 900)}}
-                  isLinearGradient={true}
-                  type="details"
-                />
-              </View>
-              <View style={styles.rectangleImageDetailTitle}>
-                <Text style={styles.sectionTitleDetails}>{item.title}</Text>
-              </View>
-              <View style={styles.seasonEpisodeCont}>
-                <Text style={styles.itemCont}>{item.seasons} seasons</Text>
-                <Text style={{color: colors.lightgray}}>|</Text>
-                <Text style={styles.itemCont}>{item.episodes} Episodes</Text>
-              </View>
-              <View style={styles.descCont}>
-                <Text numberOfLines={3} style={styles.descContInner}>
-                  {item.description}
-                </Text>
-              </View>
-
-              <View style={styles.buttonCont}>
-                <PlayWatchButton name="Trailer" />
-                {seasons.map((item, index) => (
-                  <Buttons
-                    key={index}
-                    name="SEASON"
-                    item={item}
-                    value={index}
-                    season={season}
-                    onPress={episodeChange}
-                    seasonOnFocus={(seasonIndex)=>seasonOnFocus(seasonIndex)}
-                    scrollHandler={scrollHandler}
-                  />
-                ))}
-              </View>
-            </View>
-          </View>
         )}
       </View>
 

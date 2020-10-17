@@ -64,9 +64,9 @@ export default class RectangleCarditem extends PureComponent {
   }
 
   render() {
-    const {data, type, episodeFocus} = this.props;
+    const {data, type} = this.props;
     const sizing = {width: 260.1, height: 160};
-    console.log(this.props.data.watchlist);
+    // console.log(this.props.data.watchlist);
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -75,7 +75,6 @@ export default class RectangleCarditem extends PureComponent {
           onBlur={this.onBlur}
           onPress={this.onPress}
           style={
-            // episodeFocus || this.state.focused
             this.state.focused
               ? [globalstyles.focusBorder, sizing]
               : globalstyles.blurBorder

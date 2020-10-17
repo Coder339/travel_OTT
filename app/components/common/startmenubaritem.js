@@ -49,21 +49,20 @@ export default class StartMenuBarItem extends PureComponent {
   render() {
     const sizing = {width:this.props.width,height: 55};
     // const sizing = {height: 55};
-    console.log('menxx',this.props.menufocused)
+    // console.log('menu focused',this.props.menufocused)
     return (
       <View style={styles.container}>
         <TouchableHighlight
-          // hasTVPreferredFocus={this.props.svgType === 'search'}
           activeOpacity={0.9}
           underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
-          // width={this.props.draweronFocus ? 150 : 50}
           style={
             [this.state.focused
               ? [globalstyles.focusMenuBar, sizing]
               : [globalstyles.blurMenuBar, sizing]
-            ]}>
+            ]}
+          >
           <View style={[styles.containerItems]}>
             {this.props.svgType === 'search' && (
               <View style={styles.svgs}>
@@ -135,9 +134,6 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     flex: 1,
-    // height:0,
-    // width: 150,
-    
   },
   containerItemsBlur:{
     paddingTop: 18,

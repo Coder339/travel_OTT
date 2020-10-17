@@ -20,7 +20,7 @@ export default function VerticalCard(props) {
           centerContent={true}
           decelerationRate={"fast"}
           snapToAlignment='start'
-          snapToInterval={550}
+          snapToInterval={260}
           >
           {item.data.map((data, index) => (
             <VerticalCarditem data={data} key={index} />

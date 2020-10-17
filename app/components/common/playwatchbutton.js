@@ -42,7 +42,7 @@ export default class PlayWatchButton extends PureComponent {
   render() {
     const {name} = this.props;
     return (
-      <View style={styles.container}>
+      // <View style={styles.container}>
         <TouchableHighlight
           underlayColor={false}
           onFocus={this.onFocus}
@@ -50,8 +50,8 @@ export default class PlayWatchButton extends PureComponent {
           hasTVPreferredFocus={true}
           style={
             this.state.focused
-              ? globalstyles.focusPlayButton
-              : globalstyles.blurPlayButton
+              ? [styles.container,globalstyles.focusPlayButton]
+              : [styles.container,globalstyles.blurPlayButton]
           }>
           <View style={styles.innerContainer}>
             <PlaySvg width="20" height="20" />
@@ -65,7 +65,7 @@ export default class PlayWatchButton extends PureComponent {
             </Text>
           </View>
         </TouchableHighlight>
-      </View>
+      // </View>
     );
   }
 }
