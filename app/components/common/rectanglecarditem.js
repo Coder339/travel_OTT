@@ -53,6 +53,7 @@ export default class RectangleCarditem extends PureComponent {
     // this.props.onPress(this.props.data.type); //needs episode to be created and handled also
     this.props.onPress('program');
   }
+  
   plusMinusClickHandler() {
     if (this.state.disabled) return;
     this.setState({disabled: true});
@@ -74,44 +75,28 @@ export default class RectangleCarditem extends PureComponent {
           onBlur={this.onBlur}
           onPress={this.onPress}
           style={
-            this.props.index===this.props.scrollToIndex || this.state.focused
+            // episodeFocus || this.state.focused
+            this.state.focused
               ? [globalstyles.focusBorder, sizing]
               : globalstyles.blurBorder
           }>
-          {type === 'rectangle-card-title' ? (
-            <ProgressiveImage
-              style={globalstyles.rectangleImage}
-              overlay={false}
-              thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-              source={{uri: setImageUrl(data.image, 320, 100)}}
-              isLinearGradient={true}
-              type="title"
-            />
-          ) : type === 'rectangle-card-details' && this.state.focused ? (
             <React.Fragment>
               <ProgressiveImage
                 style={globalstyles.rectangleImage}
                 overlay={false}
                 thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
                 source={{uri: setImageUrl(data.image, 320, 300)}}
-                isLinearGradient={true}
+                isLinearGradient={(type === 'rectangle-card-title' || 
+                (type === 'rectangle-card-details' && this.state.focused))}
                 type="title"
               />
+             {type === 'rectangle-card-details' && this.state.focused &&
               <View style={styles.progressContainer}>
                 <ProgressBar progress={data.progress + '%'} />
-              </View>
+              </View>}
             </React.Fragment>
-          ) : (
-            <ProgressiveImage
-              style={globalstyles.rectangleImage}
-              overlay={false}
-              thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-              source={{uri: setImageUrl(data.image, 320, 300)}}
-            />
-          )}
         </TouchableHighlight>
-        {(type === 'rectangle-card-title' ||
-          type === 'rectangle-card-details') && (
+        {(type === 'rectangle-card-title' || type === 'rectangle-card-details') && (
           <View style={styles.bannerTitleContainer}>
             <View style={styles.bannerTitleContainerInner}>
               <Text numberOfLines={2} style={globalstyles.cardTitle}>

@@ -1,12 +1,6 @@
 import React, {useState,useRef} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import {
-  colors,
-  fontSize,
-  fontFamily,
-  globalstyles,
-  setImageUrl,
-} from '../../assets/globalstyleconstants';
+import {colors,fontSize,fontFamily,globalstyles,setImageUrl,} from '../../assets/globalstyleconstants';
 import RectangleCarditem from './rectanglecarditem';
 import PlayWatchButton from './playwatchbutton';
 import Buttons from './button';
@@ -17,62 +11,25 @@ export default function RectangleCard(props) {
 
   const [scrollToIndex, setScrollToIndex] = useState(0);
   const [dataSourceCords, setDataSourceCords] = useState([]);
-  const [ref, setRef] = useState(null);
-  // console.log('TYPE', type);
-  // console.log('DATA', item);
+  let [ref, setRef] = useState(null);
   const seasons = Array(item.seasons).fill('');//converting the season JSON value to array for mapping.
 
   const [season, setSeason] = useState(undefined);
   const [episodeFocus, setEpisodeFocus] = useState(false);
-  const episodeRef = useRef();//for direct focus on season click episode!!!
   let seasonNo = item.data.map((item) => item.season);//getting the season number.
   
 
   const scrollHandler = () => {
     console.log(dataSourceCords.length, scrollToIndex);
-    if (dataSourceCords.length > scrollToIndex) {
       ref.scrollTo({
-        x: dataSourceCords[scrollToIndex-1],
-        y: 0,
-        animated: true,
+        x: 260 * scrollToIndex,
       });
-    } else {
-      // alert('Out of Max Index');
-      console.log('Out of Max Index')
-    }
-  };
-
-  const ItemView = (data, index) => {
-    return (
-      // Flat List Item
-      <View
-        key={index}
-        style={styles.item}
-        onLayout={(event) => {
-          const layout = event.nativeEvent.layout;
-          dataSourceCords[index] = layout.x;
-          setDataSourceCords(dataSourceCords);
-        }}>
-        <RectangleCarditem
-                data={data}
-                type={type}
-                scrollToIndex={scrollToIndex}
-                index={index}
-                key={index}
-                onPress={(nav) => props.onPress(nav)}
-                onFocus={seasonChange}
-                onBlur={seasonChange}
-                episodeFocus={episodeFocus}
-              />
-      </View>
-    );
   };
    
 
   const seasonOnFocus = (scrollToIndex) => {
     let episodeIndex = seasonNo.findIndex((item) => item == scrollToIndex);
-    // alert(episodeIndex)
-    setScrollToIndex(parseInt(episodeIndex != 0 ? episodeIndex : 0))
+    setScrollToIndex(parseInt(episodeIndex))
   }
 
   const seasonChange = (currentSeason) => {
@@ -84,7 +41,6 @@ export default function RectangleCard(props) {
   const episodeChange = (currentSeason) => {
     let episode = seasonNo.findIndex((item) => item == currentSeason);
     setEpisodeFocus(episode);
-    // console.log(episode + '     episode Index');
   };
 
   return (
@@ -134,8 +90,8 @@ export default function RectangleCard(props) {
                     value={index}
                     season={season}
                     onPress={episodeChange}
-                    seasonOnFocus={(index)=>seasonOnFocus(index)}
-                    scrollHandler={()=>scrollHandler()}
+                    seasonOnFocus={(seasonIndex)=>seasonOnFocus(seasonIndex)}
+                    scrollHandler={scrollHandler}
                   />
                 ))}
               </View>
@@ -150,14 +106,24 @@ export default function RectangleCard(props) {
         centerContent={true}
         decelerationRate={'fast'}
         snapToAlignment="start"
-        snapToInterval={550}
         ref={(ref) => {
           setRef(ref);
         }}
         >
-
-        {item.data.map(ItemView)}
-
+        {item.data.map((data, index) => (
+          <View key={index}> 
+              <RectangleCarditem
+                data={data}
+                type={type}
+                key={index}
+                onPress={(nav) => props.onPress(nav)}
+                onFocus={seasonChange}
+                onBlur={seasonChange}
+                episodeFocus={episodeFocus == index}
+                title={item.title}
+              />
+          </View>
+        ))}
       </ScrollView>
     </View>
   );

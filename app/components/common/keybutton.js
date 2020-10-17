@@ -93,10 +93,7 @@ export default function Keybutton(props) {
                   <Backspace/>
                 }
                 
-      
             </View>
-            
-              
             
         </TouchableHighlight>
     )
