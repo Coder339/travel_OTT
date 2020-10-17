@@ -8,7 +8,7 @@ import ProgressiveImage from '../common/progressiveimage';
 
 export default function ProgramsBanner(props) {
 
-    const {movieOTTData,seasons,seasonOnFocus,episodeChange,} = props;
+    const {movieOTTData,seasons,seasonOnFocus,episodeChange,setSeasonFocus,scrollHandler} = props;
 
     
     return (
@@ -46,10 +46,10 @@ export default function ProgramsBanner(props) {
                     name="SEASON"
                     item={item}
                     value={index}
-                    // season={season}
+                    season={setSeasonFocus}
                     onPress={episodeChange}
                     seasonOnFocus={seasonOnFocus}
-                    // scrollHandler={scrollHandler}
+                    scrollHandler={scrollHandler}
                   />
                 ))}
               </ScrollView>

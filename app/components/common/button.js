@@ -1,10 +1,6 @@
-import React, {PureComponent} from 'react';
-import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
-import {
-  colors,
-  globalstyles,
-  fontFamily,
-} from '../../assets/globalstyleconstants';
+import React, { PureComponent } from 'react';
+import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
+import { colors, globalstyles, fontFamily } from '../../assets/globalstyleconstants';
 
 export default class Buttons extends PureComponent {
   constructor(props) {
@@ -19,8 +15,8 @@ export default class Buttons extends PureComponent {
   }
 
   onFocus() {
-    this.setState({focused: true});
-    // this.props.seasonOnFocus(this.props.value + 1)
+    this.setState({ focused: true });
+    this.props.seasonOnFocus(this.props.value + 1)
     console.log('onfocus')
   }
 
@@ -31,12 +27,11 @@ export default class Buttons extends PureComponent {
   }
 
   onPress() {
-    // this.props.scrollHandler()
-    this.props.seasonOnFocus(this.props.value + 1)
+    this.props.scrollHandler()
   }
 
   render() {
-    const {name, value, season} = this.props;
+    const { name, value, season } = this.props;
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -55,14 +50,14 @@ export default class Buttons extends PureComponent {
             </Text>
           </View>
         </TouchableHighlight>
-      </View>
+       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    margin: 0.1,
+    marginLeft: 5,
   },
   playwatchTextfocused: {
     fontFamily: fontFamily.bold,
