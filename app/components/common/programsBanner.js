@@ -2,75 +2,117 @@ import React, {useState} from 'react';
 import {View, StyleSheet, ScrollView, Text} from 'react-native';
 import {colors, fontFamily, fontSize, globalstyles, setImageUrl} from '../../assets/globalstyleconstants';
 import PlayWatchButton from '../common/playwatchbutton';
-import Buttons from '../common/button';
+import CustomButtons from './custombutton';
 import ProgressiveImage from '../common/progressiveimage';
-// import movieData from '../../config/OTTProgramDetails.json';
+import RectangleCard from './rectanglecard';
 
-export default function ProgramsBanner(props) {
+export default class ProgramsBanner extends React.PureComponent {
 
-    const {movieOTTData,seasons,seasonOnFocus,episodeChange,setSeasonFocus,scrollHandler} = props;
+  constructor(props) {
+    super(props);
+    const seasons = Array(this.props.data.seasons).fill('');
+    const seasonNo = this.props.data.data.map((item) => item.season);
+    this.state = {
+      scrollToIndex: 0,
+      seasonNo: seasonNo,
+      seasons: seasons,
+      episodeFocus:0,
+      seasonFocus: undefined
+    };
+    this.setSeasonFocus = this.setSeasonFocus.bind(this)
+    this.scrollHandler = this.scrollHandler.bind(this);
+    this.seasonOnFocus = this.seasonOnFocus.bind(this);
+  }
 
-    
+
+  seasonOnFocus(scrollToIndex){
+    let episodeIndex = this.state.seasonNo.findIndex((item) => item === scrollToIndex);
+    this.setState({scrollToIndex:episodeIndex},()=>this.scrollHandler())
+  }
+
+  setSeasonFocus(currentSeason){
+    if(this.state.seasonFocus != currentSeason){
+      this.setState({
+        seasonFocus: currentSeason
+      })
+    }
+  }
+
+  scrollHandler(){
+    this.child.scrollHandler() 
+   };
+
+  render() {
+    const {data,} = this.props;
+    console.log('programdata',data)
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.programBanner}>
           <View style={styles.imageStyle}>
             <ProgressiveImage
               style={globalstyles.rectangleImageDetail}
               overlay={false}
               thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-              source={{uri: setImageUrl(movieOTTData.image, 900, 900)}}
+              source={{uri: setImageUrl(data.image, 900, 900)}}
               isLinearGradient={true}
               type="details"
             />
           </View>
           <View style={styles.bannerContainer}>
-            <Text style={styles.bannerTitle}>{movieOTTData.title}</Text>
+            <Text style={styles.bannerTitle}>{data.title}</Text>
             <View style={styles.seasonEpisodeCont}>
-              <Text style={styles.itemCont}>{movieOTTData.seasons} seasons</Text>
+              <Text style={styles.itemCont}>{data.seasons} seasons</Text>
               <Text style={{color: colors.lightgray}}>|</Text>
-              <Text style={styles.itemCont}>{movieOTTData.episodes} Episodes</Text>
+              <Text style={styles.itemCont}>{data.episodes} Episodes</Text>
             </View>
-            <View style={styles.bannerParagraph}>
-              <Text numberOfLines={3} style={styles.bannerParagraphInner}>{movieOTTData.description}</Text>
-            </View>
+            <Text numberOfLines={3} style={styles.bannerParagraph}>{data.description}</Text>
             <View style={styles.buttonCont}>
               <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
                 <PlayWatchButton name="Trailer" />
-                {seasons.map((item, index) => (
-                  <Buttons
+                {this.state.seasons.map((item, index) => (
+                  <CustomButtons
                     key={index}
                     name="SEASON"
                     item={item}
                     value={index}
-                    season={setSeasonFocus}
-                    onPress={episodeChange}
-                    seasonOnFocus={seasonOnFocus}
-                    scrollHandler={scrollHandler}
+                    season={this.setSeasonFocus}
+                    seasonOnFocus={this.seasonOnFocus}
+                    scrollHandler={this.scrollHandler}
                   />
                 ))}
               </ScrollView>
             </View>
           </View>
-        </View>
+          {(data.type.includes('rectangle-card-details') || data.type === 'rectangle-card') && (
+            <RectangleCard 
+              item={data}
+              type={data.type} 
+              scrollToIndex={this.state.scrollToIndex}
+              episode={this.state.episode}
+              onRef={ref => (this.child = ref)}
+              onEpisodeFocus={this.setSeasonFocus}
+            />
+          )}   
       </ScrollView>
     )
+  }
 }
+
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundColor,
+    position: 'relative',
   },
   bannerContainer:{
-    marginLeft: 74,
-    marginTop: 60,
     backgroundColor: colors.backgroundColor,
     position:'absolute',
+    top:60,
+    left:74
   },
   bannerTitle: {
     color: colors.orange,
@@ -82,8 +124,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     width: 175,
-    // position: 'absolute',
-    // top: 160,
   },
   itemCont: {
     color: colors.lightgray,
@@ -92,10 +132,6 @@ const styles = StyleSheet.create({
   bannerParagraph: {
     width: 380,
     marginTop: 10,
-    // position: 'absolute',
-    // top: 185
-  },
-  bannerParagraphInner: {
     fontSize: fontSize.medium,
     color: colors.white,
   },
@@ -104,12 +140,6 @@ const styles = StyleSheet.create({
     width: 500,
     justifyContent: 'space-between',
     marginTop: 50,
-    // position: 'absolute',
-    // top: 280,
-  },
-  programBanner: {
-    position: 'relative',
-    top: 10,
   },
   imageStyle: {
     alignItems: 'flex-end',

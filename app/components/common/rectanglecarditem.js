@@ -66,7 +66,6 @@ export default class RectangleCarditem extends PureComponent {
   render() {
     const {data, type} = this.props;
     const sizing = {width: 260.1, height: 160};
-    // console.log(this.props.data.watchlist);
     return (
       <View style={styles.container}>
         <TouchableHighlight
@@ -96,12 +95,10 @@ export default class RectangleCarditem extends PureComponent {
             </React.Fragment>
         </TouchableHighlight>
         {(type === 'rectangle-card-title' || type === 'rectangle-card-details') && (
-          <View style={styles.bannerTitleContainer}>
-            <View style={styles.bannerTitleContainerInner}>
-              <Text numberOfLines={2} style={globalstyles.cardTitle}>
-                {data.title}
-              </Text>
-            </View>
+          <View style={styles.bannerTitleContainer}>   
+            <Text numberOfLines={2} style={[globalstyles.cardTitle,styles.bannerTitleContainerInner]}>
+              {data.title}
+            </Text>
             {type === 'rectangle-card-title' && (
               <View
                 style={
@@ -147,12 +144,11 @@ export default class RectangleCarditem extends PureComponent {
                 <FourkSvg width="20" height="20" />
                 <HDSvg width="20" height="20" />
               </View>
-            </View>
-            <View style={styles.cardParagraphContainer}>
-              <Text numberOfLines={3} style={styles.cardParagraph}>
-                {data.description}
-              </Text>
-            </View>
+            </View> 
+            <Text numberOfLines={3} style={styles.cardParagraph}>
+              {data.description}
+            </Text>
+            
           </View>
         )}
       </View>
@@ -168,8 +164,7 @@ const styles = StyleSheet.create({
   image: {},
   container: {
     flex: 1,
-    marginTop: 10,
-    marginBottom: 10,
+    marginVertical:10,
     marginLeft: 10,
     position: 'relative',
   },
@@ -214,13 +209,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginLeft: 20,
   },
-  cardParagraphContainer: {
+  
+  cardParagraph: {
     width: 200,
     marginBottom: 15,
     marginTop: 10,
     marginLeft: 5,
-  },
-  cardParagraph: {
     color: colors.lightgray,
     fontSize: fontSize.medium,
   },

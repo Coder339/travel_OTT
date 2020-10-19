@@ -137,13 +137,13 @@ export default class StartMenuBar extends PureComponent {
             </View> */}
           </View>
 
-          {/* <TouchableHighlight 
+          <TouchableHighlight 
             onFocus={this.draweronBlur} 
             activeOpacity={0}
             style={{opacity:0}}
             underlayColor={false}>
             <Text style={{color:'white',marginTop:10}}>exit</Text>
-          </TouchableHighlight> */}
+          </TouchableHighlight>
         
     </View>
     );

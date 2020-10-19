@@ -1,13 +1,11 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { colors, fontSize, fontFamily, globalstyles, setImageUrl, } from '../../assets/globalstyleconstants';
+import { colors, fontSize, fontFamily,} from '../../assets/globalstyleconstants';
 import RectangleCarditem from './rectanglecarditem';
 
-
-export default class RectangleCard extends PureComponent {
+export default class RectangleCard extends React.PureComponent {
   constructor(props) {
     super(props)
-
     this.state = {
       refer: null,
       season: undefined
@@ -20,10 +18,6 @@ export default class RectangleCard extends PureComponent {
     this.props.onRef && this.props.onRef(this)
   }
 
-  componentWillUnmount() {
-    this.props.onRef && this.props.onRef(undefined)
-  }
-
   seasonChange(currentSeason) {
     if (this.state.season != currentSeason) {
       this.setState({
@@ -34,37 +28,35 @@ export default class RectangleCard extends PureComponent {
   };
 
   scrollHandler() {
-    // alert('hello from child')
-    this.scrollRef.scrollTo({
+    // alert(this.props.scrollToIndex)
+    this.Ref.scrollTo({
       x: 260 * (this.props.scrollToIndex),
     });
-    console.log(this.props.scrollToIndex)
   };
 
   render() {
-    const { type, item, scrollToIndex, episode, onEpisodeFocus } = this.props;
+    const { type, item, episode,} = this.props;
+    console.log('item',item)
     return (
       <View style={styles.container}>
-        <View style={styles.titleContainer}>
           {(type === 'rectangle-card' || type === 'rectangle-card-title') && (
             <Text style={styles.sectionTitle}>
               {type === 'rectangle-card' && item.section_title}
               {item.title}
             </Text>
           )}
-        </View>
-
         <ScrollView
           style={styles.imageContainer}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           centerContent={true}
-          decelerationRate={'fast'}
+          decelerationRate={0}
+          snapToInterval={272}
           snapToAlignment="start"
-          ref={ref => this.scrollRef = ref}
+          ref={ref => this.Ref = ref}
         >
           {item.data.map((data, index) => (
-            <View key={index}>
+            <React.Fragment key={index}>
               <RectangleCarditem
                 data={data}
                 type={type}
@@ -75,7 +67,7 @@ export default class RectangleCard extends PureComponent {
                 episodeFocus={episode == index}
                 title={item.title}
               />
-            </View>
+            </React.Fragment>
           ))}
         </ScrollView>
       </View>
@@ -87,68 +79,15 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: 20,
   },
-  titleContainer: {
-    marginLeft: 54,
-  },
   sectionTitle: {
     color: colors.white,
     fontSize: fontSize.larger,
     fontFamily: fontFamily.regular,
+    marginLeft:54
   },
-  sectionTitleDetails: {
-    color: colors.orange,
-    fontSize: fontSize.superlargest,
-    fontFamily: fontFamily.bold,
-  },
-  selected: {
-    position: 'absolute',
-    top: -20,
-    opacity: 1,
-    width: 230,
-  },
+  
   imageContainer: {
     marginLeft: 40
   },
-  progressiveImageContainer: {
-    position: 'relative',
-    top: 10,
-  },
-  progressiveImageInnerContainer: {
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end'
-  },
-  rectangleImageDetailTitle: {
-    position: 'absolute',
-    top: 100,
-  },
-  seasonEpisodeCont: {
-    flex: 1,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    marginLeft: 1,
-    width: 175,
-    position: 'absolute',
-    top: 160,
-  },
-  itemCont: {
-    color: colors.lightgray,
-    fontSize: fontSize.medium,
-  },
-  descCont: {
-    width: 380,
-    position: 'absolute',
-    top: 185
-  }
-  ,
-  descContInner: {
-    fontSize: fontSize.medium,
-    color: colors.white
-  },
-  buttonCont: {
-    flexDirection: 'row',
-    width: 500,
-    justifyContent: 'space-between',
-    position: 'absolute',
-    top: 280,
-  }
+  
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView, TouchableHighlight} from 'react-native';
+import {View, Text, StyleSheet, ScrollView,} from 'react-native';
 import FourkSvg from '../../images/fourksvg';
 import HDSvg from '../../images/hdsvg';
 import ProgressiveImage from './progressiveimage';
@@ -8,113 +8,96 @@ import VerticalCarditem from './verticalcarditem';
 import PlayWatchButton from './playwatchbutton';
 
 export default React.memo(function HeroCard(props) {
+  
   const {type, item} = props;
-  // console.log('TYPE', type);
-  // console.log('DATA from hero', item);
+  
   return (
     <View style={styles.mainContainer}>
       {type === 'hero-banner' ||
         ('hero-banner-detailed' && (
-          <View>
+          <React.Fragment>
             {item.data.map((data, index) => (
-              <View style={styles.container} key={index}>
-                <View style={styles.progressiveImageContainer}>
-                  <ProgressiveImage
-                    style={globalstyles.heroImage}
-                    overlay={false}
-                    thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-                    source={{uri: setImageUrl(data.image, 900, 900)}}
-                    isLinearGradient={true}
-                    type={type}
-                  />
-                </View>
-                <View style={styles.titleContainer}>
-                  <Text numberOfLines={2} style={globalstyles.bannerTitle}>
+              <React.Fragment key={index}>
+                <ProgressiveImage
+                  style={globalstyles.heroImage}
+                  overlay={false}
+                  thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
+                  source={{uri: setImageUrl(data.image, 900, 900)}}
+                  isLinearGradient={true}
+                  type={type}
+                />
+                <View style={styles.heroCardContainer}>
+                  <Text numberOfLines={2} style={[styles.titleContainer,globalstyles.bannerTitle]}>
                     {data.title}
                   </Text>
-                </View>
-                {type === 'hero-banner-detailed' && (
-                  <View style={styles.durEpisodeContainer}>
-                    <Text style={styles.textColor}>Episode {data.episode}</Text>
-                    <Text style={styles.textColor}> | </Text>
-                    <Text style={styles.textColor}>{data.dur} min</Text>
-                    <View style={styles.hdfourkContainer}>
-                      <FourkSvg width="20" height="20" />
-                      <HDSvg width="20" height="20" />
+                  {type === 'hero-banner-detailed' && (
+                    <View style={styles.durEpisodeContainer}>
+                      <Text style={styles.textColor}>Episode {data.episode}</Text>
+                      <Text style={styles.textColor}> | </Text>
+                      <Text style={styles.textColor}>{data.dur} min</Text>
+                      <View style={styles.hdfourkContainer}>
+                        <FourkSvg width="20" height="20" />
+                        <HDSvg width="20" height="20" />
+                      </View>
                     </View>
-                  </View>
-                )}
-
-                <View style={styles.descContainer}>
-                  <Text style={globalstyles.bannerParagraph} numberOfLines={3}>
+                  )}
+                  <Text style={[styles.descContainer,globalstyles.bannerParagraph]} numberOfLines={3}>
                     {data.description}
                   </Text>
+                  <View style={styles.playWatchContainer}>
+                    <PlayWatchButton name="Watch" />
+                  </View>
                 </View>
 
                 {type === 'hero-card' && (
                   <View style={styles.HeroCardExperienceCont}>
-                    <View style={styles.HeroCardExperienceContInner}>
-                      <Text style={styles.HeroCardExperienceContInnerText}>
-                        Experience Mode
-                      </Text>
-                    </View>
+                    <Text style={styles.HeroCardExperienceContInnerText}>
+                      Experience Mode
+                    </Text>
                     <ScrollView
                       horizontal={true}
                       Vertical={false}
                       showsHorizontalScrollIndicator={false}>
                       {item.data[0].data.map((data, index) => (
-                        <View key={index}>
+                        <React.Fragment key={index}>
                           <VerticalCarditem data={data} key={index} />
-                        </View>
+                        </React.Fragment>
                       ))}
                     </ScrollView>
                   </View>
                 )}
-              </View>
+              </React.Fragment>
             ))}
-
-            <View style={styles.playWatchContainer}>
-              <PlayWatchButton name="Watch" />
-            </View>
-          </View>
+          </React.Fragment>
         ))}
     </View>
   );
 });
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: 'relative',
-  },
   mainContainer: {
+    position: 'relative',
+    flex: 1,
     marginBottom: 40,
   },
   selected: {
-    position: 'absolute',
     top: -20,
     left: 10,
     opacity: 1,
     width: 230,
   },
-  progressiveImageContainer: {
-    position: 'relative',
+  heroCardContainer:{
+    position:'absolute',
+    top:100,
+    left: 75
   },
   titleContainer: {
     width: 410,
-    marginBottom: 15,
-    marginTop: 2,
-    marginLeft: 75,
-    position: 'absolute',
-    top: 140,
   },
   durEpisodeContainer: {
     justifyContent: 'space-between',
     flexDirection: 'row',
     width: 250,
-    marginLeft: 75,
-    position: 'absolute',
-    top: 215,
   },
   hdfourkContainer: {
     justifyContent: 'space-between',
@@ -126,20 +109,14 @@ const styles = StyleSheet.create({
   },
   descContainer: {
     width: 490,
-    marginBottom: 30,
-    marginLeft: 75,
-    position: 'absolute',
-    top: 250,
+    marginTop:-20,
   },
   bannerParagraph: {
     fontSize: 12,
     color: 'white',
   },
   playWatchContainer: {
-    marginLeft: 75,
-    position: 'absolute',
-    top: 335,
-    flex: 1,
+    marginTop:25,
   },
   playwatchText: {
     backgroundColor: colors.white,
@@ -150,9 +127,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 50,
   },
-  verticalCardContainer: {
-    position: 'absolute',
-  },
   textColor: {
     color: colors.lightgray,
   },
@@ -161,12 +135,10 @@ const styles = StyleSheet.create({
     top: 50,
     left: 550,
   },
-  HeroCardExperienceContInner: {
-    marginLeft: 25,
-  },
   HeroCardExperienceContInnerText: {
     color: colors.white,
     fontSize: fontSize.larger,
     fontFamily: fontFamily.regular,
+    marginLeft:15,
   },
 });

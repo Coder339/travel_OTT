@@ -110,7 +110,6 @@ export const globalstyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingLeft: 30,
   },
   blurPlayButton: {
     backgroundColor: colors.white,
@@ -119,10 +118,8 @@ export const globalstyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    // paddingLeft: 30,
   },
   blurPlayButtonDetails:{
-    // backgroundColor: colors.black,
     width: 150,
     height: 55,
     flexDirection: 'row',

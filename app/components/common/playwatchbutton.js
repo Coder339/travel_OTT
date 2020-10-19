@@ -1,16 +1,6 @@
 import React, {PureComponent} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  TouchableHighlight,
-} from 'react-native';
-import {
-  colors,
-  globalstyles,
-  fontFamily,
-} from '../../assets/globalstyleconstants';
+import {Text,View,StyleSheet,TouchableHighlight,} from 'react-native';
+import {colors,globalstyles,fontFamily,} from '../../assets/globalstyleconstants';
 import PlaySvg from '../../images/playsvg';
 
 export default class PlayWatchButton extends PureComponent {
@@ -40,9 +30,8 @@ export default class PlayWatchButton extends PureComponent {
   }
 
   render() {
-    const {name} = this.props;
+    const { name } = this.props;
     return (
-      // <View style={styles.container}>
         <TouchableHighlight
           underlayColor={false}
           onFocus={this.onFocus}
@@ -54,7 +43,7 @@ export default class PlayWatchButton extends PureComponent {
               : [styles.container,globalstyles.blurPlayButton]
           }>
           <View style={styles.innerContainer}>
-            <PlaySvg width="20" height="20" />
+            <PlaySvg width={20} height={20} fill={colors.black} />
             <Text
               style={
                 this.state.focused
@@ -65,7 +54,6 @@ export default class PlayWatchButton extends PureComponent {
             </Text>
           </View>
         </TouchableHighlight>
-      // </View>
     );
   }
 }
@@ -85,5 +73,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.black,
   },
-  innerContainer:{flexDirection:'row'}
+  innerContainer:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
+    width:80,
+  }
 });

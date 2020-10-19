@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
 import { colors, globalstyles, fontFamily } from '../../assets/globalstyleconstants';
 
-export default class Buttons extends PureComponent {
+export default class CustomButtons extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -16,8 +16,6 @@ export default class Buttons extends PureComponent {
 
   onFocus() {
     this.setState({ focused: true });
-    this.props.seasonOnFocus(this.props.value + 1)
-    console.log('onfocus')
   }
 
   onBlur() {
@@ -27,13 +25,12 @@ export default class Buttons extends PureComponent {
   }
 
   onPress() {
-    this.props.scrollHandler()
+    this.props.seasonOnFocus(this.props.value + 1)    
   }
 
   render() {
     const { name, value, season } = this.props;
     return (
-      <View style={styles.container}>
         <TouchableHighlight
           underlayColor={false}
           onFocus={this.onFocus}
@@ -44,13 +41,10 @@ export default class Buttons extends PureComponent {
               ? globalstyles.focusPlayButtonDetails
               : globalstyles.blurPlayButtonDetails
           }>
-          <View style={styles.innerContainer}>
             <Text style={styles.playwatchTextfocused}>
               {name} {value + 1}
             </Text>
-          </View>
         </TouchableHighlight>
-       </View>
     );
   }
 }
@@ -69,7 +63,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.white,
   },
-  innerContainer: {
-    flexDirection: 'row',
-  },
+  
 });
