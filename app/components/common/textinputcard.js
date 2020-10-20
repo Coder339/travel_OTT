@@ -5,6 +5,9 @@ import {colors,globalstyles,fontFamily,fontSize} from '../../assets/globalstylec
 export default function TextInputCard(props) {
     const { 
         onkeypress,
+        onFocus,
+        onBlur,
+        isTrue,
         width, 
         height,
         maxLength,
@@ -14,28 +17,27 @@ export default function TextInputCard(props) {
         value,
         onChange,
         changeIndex,
-        onFocus,
+        checkIndex,
         active,
         inputRef,
         placeholder,
+        isComplete,
         placeholderTextColor } = props
     
     const [proactive,setActive] = useState(active)
-    
-    const borderFocusHandler = () => {
-        // Keyboard.dismiss()
-        changeIndex(index)
-        setActive(true)
-    }
-    
-    const borderBlurhandler = () => {
-        // Keyboard.dismiss()
-        setActive(false)
-    }
 
-    // const referenceHandler = (r) => {
-    //     inputRef && inputRef(r) 
+    // const borderFocusHandler = () => {
+    //     onFocus(index)
+    //     changeIndex(index)
     // }
+    
+    // const borderBlurhandler = () => {
+    //     onBlur(index)
+    //     console.log('checkindex',checkIndex)
+    //     console.log('index',index)
+        
+    // }
+
 
     useEffect(() => {
         
@@ -45,14 +47,14 @@ export default function TextInputCard(props) {
             style={styles.inputContainer}
             underlayColor={false}
             onPress={()=>{}}
-            onFocus={()=>{borderFocusHandler()}}
-            onBlur={()=>{borderBlurhandler()}}
+            onFocus={()=>onFocus(index)}
+            onBlur={()=>onBlur(index)}
             >
             <TextInput 
                style={[styles.input,
                       {width:width,
                       height:height,
-                      borderBottomWidth: proactive ? 1 : 0,
+                      borderBottomWidth: active ? 1 : 0,
                       fontSize:fontSize.normal,
                       }
                      ]}
@@ -63,11 +65,6 @@ export default function TextInputCard(props) {
                placeholderTextColor={placeholderTextColor}
                defaultValue={defaultValue}
                editable={false}
-            //    keyboardType='numeric'
-            //    autoFocus={index === 0 ? true: false}
-            //    onKeyPress={onkeypress}
-            //    onFocus={()=>borderFocusHandler()}
-            //    onBlur={()=>setActive(false)}
                onChangeText={onChange}
                value={value}
                
@@ -79,8 +76,6 @@ export default function TextInputCard(props) {
 
 const styles = StyleSheet.create({
     input:{
-        // height:40,
-        // width:200,
         borderColor:colors.white,
         backgroundColor:'gray',
         opacity:0.7,

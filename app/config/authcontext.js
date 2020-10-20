@@ -9,8 +9,6 @@ const AuthContext = createContext({
     phone_number: '',
     phone_country_code: ''
   },
-  device: '',
-  os: '',
   signOut: {},
   updateUser: {}
 });

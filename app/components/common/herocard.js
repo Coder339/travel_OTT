@@ -15,8 +15,8 @@ import PlayWatchButton from './playwatchbutton';
 
 export default React.memo(function HeroCard(props) {
   const {type, item} = props;
-  console.log('TYPE', type);
-  console.log('DATA from hero', item);
+  // console.log('TYPE', type);
+  // console.log('DATA from hero', item);
   return (
     <View style={styles.mainContainer}>
       {type === 'hero-banner' || 'hero-banner-detailed' ? (

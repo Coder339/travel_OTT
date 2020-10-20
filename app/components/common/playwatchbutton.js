@@ -47,7 +47,7 @@ export default class PlayWatchButton extends PureComponent {
           underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
-          onPress={this.onPress}
+          hasTVPreferredFocus={true}
           style={
             this.state.focused
               ? globalstyles.focusPlayButton

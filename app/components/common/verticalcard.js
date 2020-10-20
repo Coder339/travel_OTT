@@ -6,18 +6,18 @@ import {colors, fontFamily,fontSize} from '../../assets/globalstyleconstants';
 export default function VerticalCard(props) {
   const {type, item} = props;
   const [focus, setFocus] = useState(false);
-  console.log('TYPE', type);
-  console.log('DATA', item);
+  // console.log('TYPE', type);
+  // console.log('DATA', item);
 
   const onFocus = () => {
     setFocus(true);
-    console.log(focus, ' from func');
+    // console.log(focus, ' from func');
   };
 
   const onBlur = () => {
     setFocus(false);
   };
-  console.log(focus, ' focus');
+  // console.log(focus, ' focus');
 
   return (
     <View style={styles.container}>

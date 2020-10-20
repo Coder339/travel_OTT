@@ -16,7 +16,7 @@ export class Home extends PureComponent {
   }
 
   componentDidMount() {
-    console.log('home');
+    // console.log('home');
   }
 
   Cardpress(nav){
