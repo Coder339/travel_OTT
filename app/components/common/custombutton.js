@@ -36,11 +36,12 @@ export default class CustomButtons extends PureComponent {
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           onPress={this.onPress}
-          style={
+          style={[
             (season == value + 1 || this.state.focused)
               ? globalstyles.focusPlayButtonDetails
-              : globalstyles.blurPlayButtonDetails
-          }>
+              : globalstyles.blurPlayButtonDetails,
+              styles.button
+          ]}>
             <Text style={styles.playwatchTextfocused}>
               {name} {value + 1}
             </Text>
@@ -55,13 +56,17 @@ const styles = StyleSheet.create({
   },
   playwatchTextfocused: {
     fontFamily: fontFamily.bold,
-    fontSize: 16,
+    fontSize: 13,
     color: colors.white,
   },
   playwatchTextblured: {
     fontFamily: fontFamily.bold,
-    fontSize: 16,
+    fontSize: 13,
     color: colors.white,
   },
+  button:{
+    marginRight: 20,
+    backgroundColor: colors.black
+  }
   
 });

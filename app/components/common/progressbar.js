@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     height: 3,
     width: '100%',
     borderRadius: 1,
-    backgroundColor: 'grey',
+    backgroundColor: 'rgba(255,255,255,.3)',
   },
   innerClass: {
     height: 3,

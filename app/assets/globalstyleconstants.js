@@ -65,33 +65,28 @@ export const globalstyles = StyleSheet.create({
     paddingVertical: 7,
   },
   verticalImage: {
-    aspectRatio: 0.71,
-    // aspectRatio:250/350,
-    height: 350,
-    width: 250,
+    aspectRatio: 4/5,
+    height: 250,
   },
   rectangleImage: {
-    // aspectRatio: 1.667,width by height
-    aspectRatio: 250 / 150,
-    height: 150,
-    width: 250,
+    aspectRatio: 16/9,
+    height: 120,
   },
   heroImage: {
-    aspectRatio: 0.8,
-    height: 480,
+    aspectRatio: 16/9,
+    height: 350,
   },
   rectangleImageDetail: {
-    aspectRatio: 1,
-    height: 350,
-    width: 750,
+    aspectRatio: 16/9,
+    height: 250,
   },
   focusBorder: {
-    borderWidth: 5,
+    borderWidth: 3,
     borderColor: colors.white,
     overflow: 'hidden',
   },
   blurBorder: {
-    borderWidth: 5,
+    borderWidth: 3,
     borderColor: colors.transparent,
   },
   bannerParagraph: {
@@ -105,30 +100,30 @@ export const globalstyles = StyleSheet.create({
   },
   focusPlayButton: {
     backgroundColor: colors.travelred,
-    width: 150,
-    height: 55,
+    width: 130,
+    height: 45,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   blurPlayButton: {
     backgroundColor: colors.white,
-    width: 150,
-    height: 55,
+    width: 130,
+    height: 45,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   blurPlayButtonDetails:{
-    width: 150,
-    height: 55,
+    width: 130,
+    height: 45,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   focusPlayButtonDetails:{
-    width: 150,
-    height: 55,
+    width: 130,
+    height: 45,
     borderWidth: 2,
     borderColor: colors.white,
     overflow: 'hidden',
@@ -152,10 +147,11 @@ export const globalstyles = StyleSheet.create({
   },
   blurMenuBar: {
     // backgroundColor: '#1F2227',
-    // color: colors.black,
+    color: colors.black,
   },
   cardTitle : {
     color: colors.white,
     fontFamily:fontFamily.heavy,
+    fontSize: 12
   },
 });

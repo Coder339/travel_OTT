@@ -41,7 +41,7 @@ export class Home extends PureComponent {
                       <VerticalCard type={item.type} item={item} />
                     )}
                     {item.type.includes('hero') && (
-                      <HeroCard type={item.type} item={item} />
+                      <HeroCard type={item.type} item={item} mainIndex={index} />
                     )}
                   </View>
                 ),

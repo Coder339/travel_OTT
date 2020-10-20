@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
-import {colors, fontFamily, fontSize, globalstyles, setImageUrl} from '../../assets/globalstyleconstants';
+import React, { useState } from 'react';
+import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { colors, fontFamily, fontSize, globalstyles, setImageUrl } from '../../assets/globalstyleconstants';
 import PlayWatchButton from '../common/playwatchbutton';
 import CustomButtons from './custombutton';
 import ProgressiveImage from '../common/progressiveimage';
@@ -16,7 +16,7 @@ export default class ProgramsBanner extends React.PureComponent {
       scrollToIndex: 0,
       seasonNo: seasonNo,
       seasons: seasons,
-      episodeFocus:0,
+      episodeFocus: 0,
       seasonFocus: undefined
     };
     this.setSeasonFocus = this.setSeasonFocus.bind(this)
@@ -25,76 +25,76 @@ export default class ProgramsBanner extends React.PureComponent {
   }
 
 
-  seasonOnFocus(scrollToIndex){
+  seasonOnFocus(scrollToIndex) {
     let episodeIndex = this.state.seasonNo.findIndex((item) => item === scrollToIndex);
-    this.setState({scrollToIndex:episodeIndex},()=>this.scrollHandler())
+    this.setState({ scrollToIndex: episodeIndex }, () => this.scrollHandler())
   }
 
-  setSeasonFocus(currentSeason){
-    if(this.state.seasonFocus != currentSeason){
+  setSeasonFocus(currentSeason) {
+    if (this.state.seasonFocus != currentSeason) {
       this.setState({
         seasonFocus: currentSeason
       })
     }
   }
 
-  scrollHandler(){
-    this.child.scrollHandler() 
-   };
+  scrollHandler() {
+    this.child.scrollHandler()
+  };
 
   render() {
-    const {data,} = this.props;
-    console.log('programdata',data)
+    const { data, } = this.props;
+    console.log('programdata', data)
     return (
       <ScrollView style={styles.container}>
-          <View style={styles.imageStyle}>
-            <ProgressiveImage
-              style={globalstyles.rectangleImageDetail}
-              overlay={false}
-              thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-              source={{uri: setImageUrl(data.image, 900, 900)}}
-              isLinearGradient={true}
-              type="details"
-            />
+        <View style={styles.imageStyle}>
+          <ProgressiveImage
+            style={globalstyles.rectangleImageDetail}
+            overlay={false}
+            thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
+            source={{ uri: setImageUrl(data.image, 1280, 720) }}
+            isLinearGradient={true}
+            type="details"
+          />
+        </View>
+        <View style={styles.bannerContainer}>
+          <Text style={styles.bannerTitle}>{data.title}</Text>
+          <View style={styles.seasonEpisodeCont}>
+            <Text style={styles.itemCont}>{data.seasons} seasons</Text>
+            <Text style={{ color: colors.lightgray }}>|</Text>
+            <Text style={styles.itemCont}>{data.episodes} Episodes</Text>
           </View>
-          <View style={styles.bannerContainer}>
-            <Text style={styles.bannerTitle}>{data.title}</Text>
-            <View style={styles.seasonEpisodeCont}>
-              <Text style={styles.itemCont}>{data.seasons} seasons</Text>
-              <Text style={{color: colors.lightgray}}>|</Text>
-              <Text style={styles.itemCont}>{data.episodes} Episodes</Text>
-            </View>
-            <Text numberOfLines={3} style={styles.bannerParagraph}>{data.description}</Text>
-            <View style={styles.buttonCont}>
-              <ScrollView
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-              >
-                <PlayWatchButton name="Trailer" />
-                {this.state.seasons.map((item, index) => (
-                  <CustomButtons
-                    key={index}
-                    name="SEASON"
-                    item={item}
-                    value={index}
-                    season={this.setSeasonFocus}
-                    seasonOnFocus={this.seasonOnFocus}
-                    scrollHandler={this.scrollHandler}
-                  />
-                ))}
-              </ScrollView>
-            </View>
-          </View>
-          {(data.type.includes('rectangle-card-details') || data.type === 'rectangle-card') && (
-            <RectangleCard 
-              item={data}
-              type={data.type} 
-              scrollToIndex={this.state.scrollToIndex}
-              episode={this.state.episode}
-              onRef={ref => (this.child = ref)}
-              onEpisodeFocus={this.setSeasonFocus}
-            />
-          )}   
+          <Text numberOfLines={3} style={styles.bannerParagraph}>{data.description}</Text>
+          <ScrollView
+            horizontal={true}
+            contentContainerStyle={styles.buttonCont}
+            showsHorizontalScrollIndicator={false}
+          >
+            <PlayWatchButton name="Trailer" propStyle={{ marginRight: 20 }} focus={true} />
+            {this.state.seasons.map((item, index) => (
+              <CustomButtons
+                key={index}
+                name="SEASON"
+                item={item}
+                value={index}
+                season={this.state.seasonFocus}
+                seasonOnFocus={this.seasonOnFocus}
+                scrollHandler={this.scrollHandler}
+              />
+            ))}
+          </ScrollView>
+        </View>
+        {(data.type.includes('rectangle-card-details') || data.type === 'rectangle-card') && (
+          <RectangleCard
+            item={data}
+            type={data.type}
+            rectangleContainer={{ marginLeft: 0 }}
+            scrollToIndex={this.state.scrollToIndex}
+            episode={this.state.episode}
+            onRef={ref => (this.child = ref)}
+            onEpisodeFocus={this.setSeasonFocus}
+          />
+        )}
       </ScrollView>
     )
   }
@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundColor,
     position: 'relative',
   },
-  bannerContainer:{
-    backgroundColor: colors.backgroundColor,
-    position:'absolute',
-    top:60,
-    left:74
+  bannerContainer: {
+    // backgroundColor: colors.backgroundColor,
+    position: 'absolute',
+    top: 25,
+    left: 40
   },
   bannerTitle: {
     color: colors.orange,
@@ -123,23 +123,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     flexDirection: 'row',
-    width: 175,
+    width: 125,
+    alignItems: 'center'
   },
   itemCont: {
     color: colors.lightgray,
-    fontSize: fontSize.medium,
+    fontSize: 10,
   },
   bannerParagraph: {
     width: 380,
     marginTop: 10,
-    fontSize: fontSize.medium,
+    fontSize: 10,
     color: colors.white,
   },
   buttonCont: {
     flexDirection: 'row',
-    width: 500,
+    // width: 500,
     justifyContent: 'space-between',
-    marginTop: 50,
+    marginTop: 30,
   },
   imageStyle: {
     alignItems: 'flex-end',

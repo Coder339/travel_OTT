@@ -30,23 +30,22 @@ export default class VerticalCarditem extends PureComponent {
 
   render() {
     const {data} = this.props;
-    const sizing = {height: 360, width: 258.5};
     return (
         <TouchableHighlight 
           underlayColor={false} 
           activeOpacity={0.9} 
           onFocus={this.onFocus}
           onBlur={this.onBlur}
-          style={
+          style={[styles.container,
             this.state.focused
-              ? [globalstyles.focusBorder,sizing]
+              ? [globalstyles.focusBorder]
               : globalstyles.blurBorder
-          }>
+          ]}>
             <ProgressiveImage
               style={globalstyles.verticalImage}
               overlay={false}
               thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-              source={{uri: setImageUrl(data.image, 720, 900)}}
+              source={{uri: setImageUrl(data.image, 352, 450)}}
             />
         </TouchableHighlight>
     );
@@ -54,11 +53,7 @@ export default class VerticalCarditem extends PureComponent {
 }
 
 const styles = StyleSheet.create({
-  borderFocus: {
-    borderWidth: 8,
-    borderColor: colors.white,
-  },
   container: {
-    marginLeft: 10,
+    marginRight: 10,
   }
 });

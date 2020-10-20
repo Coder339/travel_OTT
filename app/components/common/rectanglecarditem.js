@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react';
-import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
-import {colors,setImageUrl,globalstyles,fontFamily,fontSize,} from '../../assets/globalstyleconstants';
+import React, { PureComponent } from 'react';
+import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
+import { colors, setImageUrl, globalstyles, fontFamily, fontSize, } from '../../assets/globalstyleconstants';
 import ProgressiveImage from './progressiveimage';
 import WatchlistMinusSvg from '../../images/watchlistminussvg';
 import FourkSvg from '../../images/fourksvg';
@@ -42,6 +42,7 @@ export default class RectangleCarditem extends PureComponent {
     this.setState({
       focusedWatchList: true,
     });
+    this.props.onFocus(this.props.data.season);
   }
   onBlurWatchList() {
     this.setState({
@@ -53,21 +54,21 @@ export default class RectangleCarditem extends PureComponent {
     // this.props.onPress(this.props.data.type); //needs episode to be created and handled also
     this.props.onPress('program');
   }
-  
+
   plusMinusClickHandler() {
     if (this.state.disabled) return;
-    this.setState({disabled: true});
+    this.setState({ disabled: true });
     setTimeout(() => {
-      this.setState({disabled: false});
+      this.setState({ disabled: false });
     }, 500);
-    this.setState({watchList: !this.state.watchList});
+    this.setState({ watchList: !this.state.watchList });
   }
 
   render() {
-    const {data, type} = this.props;
-    const sizing = {width: 260.1, height: 160};
+    const { data, type } = this.props;
     return (
       <View style={styles.container}>
+
         <TouchableHighlight
           underlayColor={false}
           onFocus={this.onFocus}
@@ -75,65 +76,53 @@ export default class RectangleCarditem extends PureComponent {
           onPress={this.onPress}
           style={
             this.state.focused
-              ? [globalstyles.focusBorder, sizing]
+              ? globalstyles.focusBorder
               : globalstyles.blurBorder
           }>
-            <React.Fragment>
-              <ProgressiveImage
-                style={globalstyles.rectangleImage}
-                overlay={false}
-                thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
-                source={{uri: setImageUrl(data.image, 320, 300)}}
-                isLinearGradient={(type === 'rectangle-card-title' || 
+
+          <React.Fragment>
+
+            <ProgressiveImage
+              style={globalstyles.rectangleImage}
+              overlay={false}
+              thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
+              source={{ uri: setImageUrl(data.image, 352, 198) }}
+              isLinearGradient={(type === 'rectangle-card-title' ||
                 (type === 'rectangle-card-details' && this.state.focused))}
-                type="title"
-              />
-             {type === 'rectangle-card-details' && this.state.focused &&
-              <View style={styles.progressContainer}>
-                <ProgressBar progress={data.progress + '%'} />
-              </View>}
-            </React.Fragment>
+              type="title"
+            />
+
+            {data.progress && <View style={styles.progressStyle}>
+              <ProgressBar progress={data.progress + '%'} />
+            </View>}
+
+          </React.Fragment>
+
+
         </TouchableHighlight>
-        {(type === 'rectangle-card-title' || type === 'rectangle-card-details') && (
-          <View style={styles.bannerTitleContainer}>   
-            <Text numberOfLines={2} style={[globalstyles.cardTitle,styles.bannerTitleContainerInner]}>
+
+        {(type === 'rectangle-card-title' || type === 'rectangle-card-details') &&
+
+          <View style={styles.bannerTitleContainer}>
+
+            <Text numberOfLines={2} style={[globalstyles.cardTitle, styles.bannerTitleContainerInner]}>
               {data.title}
             </Text>
-            {type === 'rectangle-card-title' && (
-              <View
-                style={
-                  this.state.focused ? styles.selectedFocus : styles.selected
-                }>
-                <ProgressBar progress={data.progress + '%'} />
-              </View>
-            )}
+
+
             <TouchableHighlight
               onPress={this.plusMinusClickHandler}
               onFocus={this.onFocusWatchList}
               onBlur={this.onBlurWatchList}
-              style={styles.watchlistBackground}>
-              {this.state.watchList ? (
-                <View
-                  style={
-                    this.state.focusedWatchList
-                      ? styles.innerWatchlistBackground
-                      : styles.watchlistBackground
-                  }>
-                  <WatchlistMinusSvg width="20" height="20" />
-                </View>
-              ) : (
-                <View
-                  style={
-                    this.state.focusedWatchList
-                      ? styles.innerWatchlistBackground
-                      : styles.watchlistBackground
-                  }>
-                  <WatchlistPlusSvg width="20" height="20" />
-                </View>
-              )}
+              style={this.state.focusedWatchList
+                ? styles.innerWatchlistBackground
+                : styles.watchlistBackground}>
+              {this.state.watchList ?
+                <WatchlistMinusSvg width="20" height="20" /> :
+                <WatchlistPlusSvg width="20" height="20" />}
             </TouchableHighlight>
           </View>
-        )}
+        }
         {type === 'rectangle-card-details' && (
           <View>
             <View style={styles.epiDurContainer}>
@@ -141,14 +130,18 @@ export default class RectangleCarditem extends PureComponent {
               <Text style={styles.lightgray}> | </Text>
               <Text style={styles.lightgray}>{data.dur} min</Text>
               <View style={styles.svgsContainer}>
-                <FourkSvg width="20" height="20" />
-                <HDSvg width="20" height="20" />
+                <View style={styles.qualitySvg}>
+                <FourkSvg width="15" height="10" />
+                </View>
+                <View style={styles.qualitySvg}>
+                <HDSvg width="15" height="10" />
+                </View>
               </View>
-            </View> 
+            </View>
             <Text numberOfLines={3} style={styles.cardParagraph}>
               {data.description}
             </Text>
-            
+
           </View>
         )}
       </View>
@@ -164,23 +157,15 @@ const styles = StyleSheet.create({
   image: {},
   container: {
     flex: 1,
-    marginVertical:10,
+    marginVertical: 10,
     marginLeft: 10,
     position: 'relative',
   },
-  selected: {
+  progressStyle: {
     position: 'absolute',
-    top: -30,
-    left: 18,
-    opacity: 1,
-    width: 220,
-  },
-  selectedFocus: {
-    position: 'absolute',
-    top: -30,
-    left: 18,
-    opacity: 1,
-    width: 220,
+    bottom: 15,
+    width: '80%',
+    marginLeft: '10%'
   },
   bannerTitleContainer: {
     flex: 1,
@@ -191,7 +176,7 @@ const styles = StyleSheet.create({
   bannerTitleContainerInner: {
     width: 200,
     marginBottom: 1,
-    marginLeft: 5,
+    marginLeft: 4,
   },
   bannerTitle: {
     color: colors.white,
@@ -202,29 +187,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginLeft: 5,
+    alignItems: 'center'
   },
   svgsContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    // justifyContent: 'space-evenly',
     marginLeft: 20,
   },
-  
+
   cardParagraph: {
     width: 200,
     marginBottom: 15,
     marginTop: 10,
     marginLeft: 5,
     color: colors.lightgray,
-    fontSize: fontSize.medium,
-  },
-  progressContainer: {
-    top: -20,
-    width: 220,
-    left: 18,
+    fontSize: 10,
   },
   lightgray: {
     color: colors.lightgray,
+    fontSize: 10,
+    marginRight: 5
   },
   watchlistBackground: {
     backgroundColor: colors.backgroundColor,
@@ -232,10 +215,13 @@ const styles = StyleSheet.create({
     height: 20,
   },
   innerWatchlistBackground: {
-    backgroundColor: colors.lightgray,
+    backgroundColor: colors.orange,
     borderRadius: 15,
     height: 20,
   },
+  qualitySvg:{
+    marginRight: 5,
+  }
 });
 
 

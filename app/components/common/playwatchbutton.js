@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react';
-import {Text,View,StyleSheet,TouchableHighlight,} from 'react-native';
-import {colors,globalstyles,fontFamily,} from '../../assets/globalstyleconstants';
+import React, { PureComponent } from 'react';
+import { Text, View, StyleSheet, TouchableHighlight, } from 'react-native';
+import { colors, globalstyles, fontFamily, } from '../../assets/globalstyleconstants';
 import PlaySvg from '../../images/playsvg';
 
 export default class PlayWatchButton extends PureComponent {
@@ -30,53 +30,44 @@ export default class PlayWatchButton extends PureComponent {
   }
 
   render() {
-    const { name } = this.props;
+    const { name, propStyle, focus } = this.props;
     return (
-        <TouchableHighlight
-          underlayColor={false}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          hasTVPreferredFocus={true}
-          style={
+      <TouchableHighlight
+        underlayColor={false}
+        onFocus={this.onFocus}
+        onBlur={this.onBlur}
+        hasTVPreferredFocus={focus}
+        style={[styles.container, propStyle,
+        this.state.focused ? globalstyles.focusPlayButton : globalstyles.blurPlayButton]}>
+        <>
+          <PlaySvg width={20} height={20} fill={this.state.focused ? colors.white : colors.black} />
+          <Text
+            style={[{ marginLeft: 15 },
             this.state.focused
-              ? [styles.container,globalstyles.focusPlayButton]
-              : [styles.container,globalstyles.blurPlayButton]
-          }>
-          <View style={styles.innerContainer}>
-            <PlaySvg width={20} height={20} fill={colors.black} />
-            <Text
-              style={
-                this.state.focused
-                  ? styles.playwatchTextfocused
-                  : styles.playwatchTextblured
-              }>
-              {name}
-            </Text>
-          </View>
-        </TouchableHighlight>
+              ? styles.playwatchTextfocused
+              : styles.playwatchTextblured
+            ]}>
+            {name}
+          </Text>
+        </>
+      </TouchableHighlight>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 0.1,
-    opacity:0.8
+    padding: 0.1, 
+    opacity: 1,
   },
   playwatchTextfocused: {
     fontFamily: fontFamily.bold,
-    fontSize: 16,
+    fontSize: 13,
     color: colors.white,
   },
   playwatchTextblured: {
     fontFamily: fontFamily.bold,
-    fontSize: 16,
+    fontSize: 13,
     color: colors.black,
-  },
-  innerContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    width:80,
   }
 });
