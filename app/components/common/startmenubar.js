@@ -69,7 +69,8 @@ export default class StartMenuBar extends PureComponent {
               <StartMenuBarItem
                 menuonFocus={this.menuonFocus}
                 menuonBlur={this.menuonBlur}
-                svgType="search"
+                svgType="SearchSvg"
+                title='Search'
                 width={this.state.drawerfocused ? 150 : 50}
                 draweronFocus={draweronFocus}
                 drawerfocused={drawerfocused}
@@ -78,7 +79,8 @@ export default class StartMenuBar extends PureComponent {
               <StartMenuBarItem
                 menuonFocus={this.menuonFocus}
                 menuonBlur={this.menuonBlur}
-                svgType="home"
+                svgType="HomeSvg"
+                title='Home'
                 width={this.state.drawerfocused ? 150 : 50}
                 draweronFocus={draweronFocus}
                 drawerfocused={drawerfocused}
@@ -87,7 +89,8 @@ export default class StartMenuBar extends PureComponent {
               <StartMenuBarItem
                 menuonFocus={this.menuonFocus}
                 menuonBlur={this.menuonBlur}
-                svgType="squaregroup"
+                svgType="SquareGroupSvg"
+                title='Categories'
                 width={this.state.drawerfocused ? 150 : 50}
                 draweronFocus={draweronFocus}
                 drawerfocused={drawerfocused}
@@ -96,7 +99,8 @@ export default class StartMenuBar extends PureComponent {
               <StartMenuBarItem
                 menuonFocus={this.menuonFocus}
                 menuonBlur={this.menuonBlur}
-                svgType="tv"
+                svgType="TvSvg"
+                title='Ambient'
                 width={this.state.drawerfocused ? 150 : 50}
                 draweronFocus={draweronFocus}
                 drawerfocused={drawerfocused}
@@ -105,7 +109,8 @@ export default class StartMenuBar extends PureComponent {
               <StartMenuBarItem
                 menuonFocus={this.menuonFocus}
                 menuonBlur={this.menuonBlur}
-                svgType="watchlistplus"
+                svgType="WatchlistPlusSvg"
+                title='My List'
                 width={this.state.drawerfocused ? 150 : 50}
                 draweronFocus={draweronFocus}
                 drawerfocused={drawerfocused}
@@ -114,7 +119,8 @@ export default class StartMenuBar extends PureComponent {
               <StartMenuBarItem
                 menuonFocus={this.menuonFocus}
                 menuonBlur={this.menuonBlur}
-                svgType="power"
+                svgType="PowerSvg"
+                title='Logout'
                 width={this.state.drawerfocused ? 150 : 50}
                 draweronFocus={draweronFocus}
                 drawerfocused={drawerfocused}

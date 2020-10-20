@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react';
-import {View, StyleSheet, Text, TouchableHighlight} from 'react-native';
-import {colors, globalstyles} from '../../assets/globalstyleconstants';
+import React, { PureComponent } from 'react';
+import { View, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { colors, globalstyles } from '../../assets/globalstyleconstants';
 
 import SearchSvg from '../../images/searchsvg';
 import HomeSvg from '../../images/homesvg';
@@ -15,7 +15,7 @@ export default class StartMenuBarItem extends PureComponent {
 
     this.state = {
       focused: false,
-      firstfocus:false,
+      firstfocus: false,
       // initialFocused: false
     };
     this.onFocus = this.onFocus.bind(this);
@@ -38,84 +38,45 @@ export default class StartMenuBarItem extends PureComponent {
   onPress() {
     alert('Clicked');
   }
-  
-  componentDidMount=()=>{
-    this.setState(prevState=>{
+
+  componentDidMount = () => {
+    this.setState(prevState => {
       this.props.svgType === 'search' && this.props.menufocused ? prevState.firstfocus = true : prevState.firstfocus = false
     })
   }
-  
+
 
   render() {
-    const sizing = {width:this.props.width,height: 55};
+    const sizing = { width: this.props.width, height: 55 };
     // const sizing = {height: 55};
     // console.log('menu focused',this.props.menufocused)
+    let Svg = this.props.svgType === 'SearchSvg' ? SearchSvg :
+      this.props.svgType === "HomeSvg" ? HomeSvg :
+        this.props.svgType === "SquareGroupSvg" ? SquareGroupSvg :
+          this.props.svgType === "TvSvg" ? TvSvg :
+            this.props.svgType === "WatchlistPlusSvg" ? WatchlistPlusSvg :
+              this.props.svgType === "PowerSvg" && PowerSvg;
     return (
-      <View style={styles.container}>
+      // <View style={styles.container}>
         <TouchableHighlight
           activeOpacity={0.9}
           underlayColor={false}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           style={
-            [this.state.focused
-              ? [globalstyles.focusMenuBar, sizing]
-              : [globalstyles.blurMenuBar, sizing]
+            [styles.container,
+            this.state.focused
+              ? globalstyles.focusMenuBar
+              : globalstyles.blurMenuBar,
+              sizing
             ]}
-          >
+        >
           <View style={[styles.containerItems]}>
-            {this.props.svgType === 'search' && (
-              <View style={styles.svgs}>
-                <SearchSvg width="20" height="20" />
-                <View style={styles.titles}>
-                  <Text style={styles.titleColor}>Search</Text>
-                </View>
-              </View>
-            )}
-
-            {this.props.svgType === 'home' && (
-              <View style={styles.svgs}>
-                <HomeSvg width="20" height="20" />
-                <View style={styles.titles}>
-                  <Text style={styles.titleColor}>Home</Text>
-                </View>
-              </View>
-            )}
-            {this.props.svgType === 'squaregroup' && (
-              <View style={styles.svgs}>
-                <SquareGroupSvg width="20" height="20" />
-                <View style={styles.titles}>
-                  <Text style={styles.titleColor}>Categories</Text>
-                </View>
-              </View>
-            )}
-            {this.props.svgType === 'tv' && (
-              <View style={styles.svgs}>
-                <TvSvg width="20" height="20" />
-                <View style={styles.titles}>
-                  <Text style={styles.titleColor}>Ambient</Text>
-                </View>
-              </View>
-            )}
-            {this.props.svgType === 'watchlistplus' && (
-              <View style={styles.svgs}>
-                <WatchlistPlusSvg width="20" height="20" />
-                <View style={styles.titles}>
-                  <Text style={styles.titleColor}>My List</Text>
-                </View>
-              </View>
-            )}
-            {this.props.svgType === 'power' && (
-              <View style={styles.svgs}>
-                <PowerSvg width="25" height="25" />
-                <View style={styles.titles}>
-                  <Text style={styles.titleColor}>Logout</Text>
-                </View>
-              </View>
-            )}
+            <Svg width="20" height="20" />
+            <Text style={[styles.titleColor, styles.titles]}>{this.props.title}</Text>
           </View>
         </TouchableHighlight>
-      </View>
+      // </View>
     );
   }
 }
@@ -134,16 +95,17 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     flex: 1,
+    flexDirection: 'row'
   },
-  containerItemsBlur:{
+  containerItemsBlur: {
     paddingTop: 18,
     paddingLeft: 15,
     paddingRight: 15,
     flex: 1,
     width: 10,
   },
-  svgs: {flexDirection: 'row'},
-  titles: {paddingLeft: 20},
-  titleColor:{color: colors.white},
+  svgs: { flexDirection: 'row' },
+  titles: { paddingLeft: 20 },
+  titleColor: { color: colors.white },
   // item:{alignSelf:'stretch',}
 });
