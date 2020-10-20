@@ -1,23 +1,23 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import VerticalCarditem from './verticalcarditem';
-import {fontFamily} from '../../assets/globalstyleconstants';
+import {colors, fontFamily,fontSize} from '../../assets/globalstyleconstants';
 
 export default function VerticalCard(props) {
   const {type, item} = props;
   const [focus, setFocus] = useState(false);
-  console.log('TYPE', type);
-  console.log('DATA', item);
+  // console.log('TYPE', type);
+  // console.log('DATA', item);
 
   const onFocus = () => {
     setFocus(true);
-    console.log(focus, ' from func');
+    // console.log(focus, ' from func');
   };
 
   const onBlur = () => {
     setFocus(false);
   };
-  console.log(focus, ' focus');
+  // console.log(focus, ' focus');
 
   return (
     <View style={styles.container}>
@@ -26,7 +26,14 @@ export default function VerticalCard(props) {
         <Text style={styles.textWhiteColor}>{item.title}</Text>
       </View>
       <View style={styles.imageContainer}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView 
+          horizontal={true} 
+          showsHorizontalScrollIndicator={false}
+          centerContent={true}
+          decelerationRate={"fast"}
+          snapToAlignment='start'
+          snapToInterval={550}
+          >
           {item.data.map((data, index) => (
             <VerticalCarditem data={data} key={index} />
           ))}
@@ -41,14 +48,16 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 10,
     paddingBottom: 30,
-    paddingLeft: 5,
+    paddingLeft: 25,
   },
   titleContainer: {
     paddingLeft: 48,
   },
   textWhiteColor: {
-    color: 'white',
-    fontFamily: fontFamily.regular,
+    color: colors.white,
+    fontSize:fontSize.larger,
+    fontFamily:fontFamily.regular,
+    paddingTop:15,
   },
   imageContainer: {
     paddingLeft: 35,

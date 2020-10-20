@@ -29,13 +29,13 @@ export const fontSize = {
   smaller: 0.8,
   small: 0.9,
   normal: 1,
-  medium: 1.1,
+  medium: 13,
   large: 1.2,
-  larger: 1.3,
+  larger: 17,
   largest: 1.4, //titlefont is largest
-  extralarge: 1.6,
-  extralargest: 15.5,
-  superlargest: 25.5,
+  extralarge: 14,
+  extralargest: 25.5,
+  superlargest: 30,
 };
 
 export const colors = {
@@ -46,6 +46,7 @@ export const colors = {
   transparent: 'transparent',
   backgroundColor: '#1F2227',
 };
+
 
 export const fontFamily = {
   regular: 'Inter-Regular',
@@ -76,14 +77,14 @@ export const globalstyles = StyleSheet.create({
     aspectRatio: 0.8,
     height: 480,
   },
+  rectangleImageDetail: {
+    aspectRatio: 1,
+    height: 350,
+    width: 750,
+  },
   focusBorder: {
     borderWidth: 5,
     borderColor: colors.white,
-    // opacity: 1,
-    // overlayColor: colors.transparent,
-    // shadowColor: colors.transparent,
-    // tintColor: colors.transparent,
-    // shadowOpacity: 1,
     overflow: 'hidden',
   },
   blurBorder: {
@@ -91,12 +92,12 @@ export const globalstyles = StyleSheet.create({
     borderColor: colors.transparent,
   },
   bannerParagraph: {
-    fontSize: fontSize.extralargest,
+    fontSize: fontSize.extralarge,
     color: colors.white,
   },
   bannerTitle: {
     color: colors.white,
-    fontSize: fontSize.superlargest,
+    fontSize: fontSize.extralargest,
     fontFamily: fontFamily.bold,
   },
   focusPlayButton: {
@@ -107,7 +108,6 @@ export const globalstyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 30,
-    
   },
   blurPlayButton: {
     backgroundColor: colors.white,
@@ -118,14 +118,44 @@ export const globalstyles = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 30,
   },
+  blurPlayButtonDetails:{
+    backgroundColor: colors.black,
+    width: 150,
+    height: 55,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  focusPlayButtonDetails:{
+    width: 150,
+    height: 55,
+    borderWidth: 5,
+    borderColor: colors.white,
+    overflow: 'hidden',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  focusBorderMinusPlusSVG:{
+    borderColor:colors.white,
+    borderWidth:2,
+  },
+  blurBorderMinusPlusSVG:{
+    borderColor:colors.white,
+    borderWidth:2,
+  },
   focusMenuBar: {
     backgroundColor: colors.travelred,
     color: colors.white,
     overflow: 'hidden',
-    borderRadius:55,
+    // borderRadius: 55,
   },
   blurMenuBar: {
     // backgroundColor: '#1F2227',
     // color: colors.black,
+  },
+  cardTitle : {
+    color: colors.white,
+    fontFamily:fontFamily.heavy,
   },
 });
