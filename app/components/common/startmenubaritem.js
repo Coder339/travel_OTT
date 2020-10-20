@@ -53,7 +53,11 @@ export default class StartMenuBarItem extends PureComponent {
     return (
       <View style={styles.container}>
         <TouchableHighlight
+<<<<<<< HEAD
           // hasTVPreferredFocus={this.props.svgType === 'search'}
+=======
+          // hasTVPreferredFocus={this.state.focused}
+>>>>>>> cd39455fc5ec45c4dbf3812d40fd0747c4e73c8d
           activeOpacity={0.9}
           underlayColor={false}
           onFocus={this.onFocus}

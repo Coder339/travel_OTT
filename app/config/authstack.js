@@ -22,7 +22,6 @@ export default class AuthStack extends React.Component {
                 phone_number: '',
                 phone_country_code: ''
             },
-            
             signOut: this.signOut,
             updateUser: this.updateUser
         };
