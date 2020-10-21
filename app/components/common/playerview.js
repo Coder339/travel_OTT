@@ -19,8 +19,8 @@ import Refresh from '../../assets/images/refresh';
 
 const theoEventEmitter = new THEOeventEmitter();
 
-let width = 1;
-let height = 0.5;
+let width = 500;
+let height = 300;
 export default class PlayerView extends React.Component {
     timer;
     constructor(props) {
@@ -192,9 +192,9 @@ export default class PlayerView extends React.Component {
         };
 
         if (Platform.OS === 'android') {
-            // playerStyle.width = width;
+            playerStyle.width = width;
         } else {
-            // playerStyle.height = height;
+            playerStyle.height = height;
             BaseComponent = View;    //ScrollView
         }
 
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     player: {
-        backgroundColor: colors.black,
+        // backgroundColor: colors.black,
     },
     uiContainer: {
         position: 'absolute',

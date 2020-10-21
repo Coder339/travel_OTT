@@ -59,6 +59,6 @@ export default class Player extends React.PureComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.lightblack
+    // backgroundColor: colors.lightblack
   },
 });

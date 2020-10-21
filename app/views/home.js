@@ -15,10 +15,6 @@ export class Home extends PureComponent {
     this.Cardpress = this.Cardpress.bind(this);
   }
 
-  componentDidMount() {
-    // console.log('home');
-  }
-
   Cardpress(nav){
     // console.log(nav+"     nav")
     this.props.navigation.navigate(nav);
