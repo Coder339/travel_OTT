@@ -7,6 +7,9 @@ import ProgressBarActive from '../common/progressbaractive'
 // import LongPlay from '../../assets/images/longplay';
 import PauseBold from '../../assets/images/pausebold';
 import PlayBold from '../../assets/images/playbold';
+import GoBack from '../../assets/images/goback';
+import AudioSub from '../../assets/images/audiosub';
+import PlayList from '../../assets/images/playlist';
 // import Forward30 from '../../assets/images/forward30';
 // import Rewind30 from '../../assets/images/rewind30';
 import THEOeventEmitter from './TheoEventEmitter';
@@ -37,6 +40,8 @@ export default class PlayerView extends React.Component {
             seeked: 0,
             landscape: false,
             seeking: false,
+            audioFocus:false,
+            playListFocus:false,
         }
     }
 
@@ -213,9 +218,9 @@ export default class PlayerView extends React.Component {
                                 <Animated.View style={styles.wrapper}>
 
                                     <View style={styles.topContainer}>
-                                        {/* <TouchableOpacity containerStyle={styles.backIcon} onPress={this.goBack}>
-                                            <LongPlay />
-                                        </TouchableOpacity> */}
+                                        <TouchableOpacity containerStyle={styles.backIcon} onPress={this.goBack}>
+                                            <GoBack width={20} height={20}/>
+                                        </TouchableOpacity>
                                         <Text style={styles.showName}>Backpack S1 | E2</Text>
                                     </View>
 
@@ -246,18 +251,46 @@ export default class PlayerView extends React.Component {
                                         </View>
 
                                         <View style={[styles.bottomBar, {
-                                            marginLeft: 150 ,
+                                            // marginLeft: 150 ,
                                             marginRight: 20 
                                         }]}>
+                                            <Text style={styles.timer}>{(this.pad(Math.floor(this.state.time / 60)) + ":" + this.pad(Math.floor(this.state.time - (Math.floor(this.state.time / 60)) * 60)))}</Text>
                                             <ProgressBarActive
                                                 seekTo={(position) => this.seekTo(position)}
                                                 seeking={(flag) => this.seeking(flag)}
                                                 // outerStyle={styles.seekBar} innerStyle={styles.watchedProgress}
                                                 progress={this.state.timePercent} />
-                                            <Text style={{ color: colors.white, fontFamily: fontFamily.regular, marginLeft: 10, width: 40, fontSize: fontSize.normal }}>{this.state.timePercent >= 99.98 ? '00:00' : (this.pad(Math.floor(this.state.remainingTime / 60)) + ":" + this.pad(Math.floor(this.state.remainingTime - (Math.floor(this.state.remainingTime / 60)) * 60)))}</Text>
-
+                                            <Text style={styles.timer}>{this.state.timePercent >= 99.98 ? '00:00' : (this.pad(Math.floor(this.state.remainingTime / 60)) + ":" + this.pad(Math.floor(this.state.remainingTime - (Math.floor(this.state.remainingTime / 60)) * 60)))}</Text>
                                         </View>
                                     </>}
+                                    
+                                    
+                                    <View style={styles.choiceContainer}>
+                                            <TouchableOpacity
+                                                // onFocus={()=>this.setState({audioFocus:true})}
+                                                // onBlur={()=>this.setState({audioFocus:false})}
+                                                onPress={()=>this.setState({
+                                                        audioFocus:true,
+                                                        playListFocus:false})}>
+                                                
+                                                <AudioSub width={45} height={45} />
+                                            </TouchableOpacity>
+    
+                                        
+                                            <TouchableOpacity
+                                                // onFocus={()=>this.setState({playListFocus:true})}
+                                                // onBlur={()=>this.setState({playListFocus:false})}
+                                                onPress={()=>this.setState({
+                                                    playListFocus:true,
+                                                    audioFocus:false})}>
+                                                <PlayList width={45} height={45}/>
+                                            </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.choiceTextContainer}>
+                                        {this.state.audioFocus && <Text style={styles.audioText}>Audio {'\u0026'} Subtitles</Text>}
+                                        {this.state.playListFocus && <Text style={styles.playListText}>playlist</Text>}
+                                    </View>
+                                    
 
                                 </Animated.View>}
 
@@ -278,7 +311,8 @@ export default class PlayerView extends React.Component {
                         </View>}
 
                         {this.state.errorMsg != '' && <Text style={[styles.errorText, { height: height, width: width } ]}>{this.state.errorMsg}</Text>}
-
+                        
+                        
                     </>
                 } 
             </>
@@ -294,7 +328,6 @@ const styles = StyleSheet.create({
     containerBase: {
         flex: 1,
     },
-
     player: {
         backgroundColor: colors.black,
     },
@@ -338,7 +371,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1,
-        bottom: 10
+        bottom: 10,
+        // width:800
+        // marginHorizontal:20,
     },
     seekBar: {
         width: '85%',
@@ -374,5 +409,40 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontSize: fontSize.largest,
         height: 30
+    },
+    timer:{
+        color: colors.white, 
+        fontFamily: fontFamily.regular, 
+        marginLeft: 10, 
+        width: 40, 
+        fontSize: fontSize.extralarge
+    },
+    choiceContainer:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        width:130,
+        position:'absolute',
+        top:10,
+        right:20,
+    },
+    choiceTextContainer:{
+        position:'absolute',
+        top:60,
+        right:20,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+    },
+    audioText:{  
+        color:colors.white,
+        marginRight:50,
+    },
+    playListText:{
+        color:colors.white,
+        marginLeft:15,
+    },
+    ticker:{
+        color:colors.white,
     }
+
 });

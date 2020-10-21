@@ -13,7 +13,7 @@ import Buttons from './button';
 import ProgressiveImage from './progressiveimage';
 
 export default function RectangleCard(props) {
-  const {type, item} = props;
+  const {type, item,navigation} = props;
   // console.log('TYPE', type);
   // console.log('DATA', item);
   const seasons = Array(item.seasons).fill('');
@@ -84,7 +84,7 @@ export default function RectangleCard(props) {
                   position: 'absolute',
                   top: 280,
                 }}>
-                <PlayWatchButton name="Trailer" />
+                <PlayWatchButton name="Trailer"/>
 
                 {seasons.map((item, index) => (
                   <Buttons name="SEASON" value={index} key={index}/>

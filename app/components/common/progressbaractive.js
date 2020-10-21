@@ -126,7 +126,7 @@ export default class ProgressBarActive extends React.PureComponent {
         return (
             <View style={styles.container}>
                 <TapGestureHandler onHandlerStateChange={this.handleTap}>
-                    <View style={outerStyle ? outerStyle : styles.seekbarContainer, { width: sliderWidth, height: 40, justifyContent: 'center' }}>
+                    <View style={outerStyle ? outerStyle : styles.seekbarContainer, { width: sliderWidth-100, height: 40, justifyContent: 'center' }}>
                         <View style={styles.seekbar} />
                         <View style={[innerStyle ? innerStyle : styles.innerClass, { width: `${progress}%` }]} />
                     </View>
@@ -141,7 +141,8 @@ export default class ProgressBarActive extends React.PureComponent {
                                 circleTransformStyle
 
                             ]}
-                        ><View style={[styles.circle, this.state.seeking ? styles.bigCircle : styles.regularCircle]} /></Animated.View>
+                        ><View style={[styles.circle, this.state.seeking ? styles.bigCircle : styles.regularCircle]} />
+                        </Animated.View>
                     </PanGestureHandler>
                 </>
             </View>
@@ -153,6 +154,7 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         alignItems: 'flex-start',
+        marginHorizontal:5
         // borderWidth: 1,
         // borderColor: colors.orange
     },
@@ -161,16 +163,18 @@ const styles = StyleSheet.create({
         borderRadius:  12 ,
         backgroundColor: colors.transparent,
         justifyContent: 'center',
+        // width:800,
     },
     innerClass: {
         height:  3 ,
         borderRadius: 1 ,
-        backgroundColor: colors.travelred
+        backgroundColor: colors.white
     },
     seekbar: {
         position: 'absolute',
         height: 4,
         width: '100%',
+        // width:800,
         backgroundColor: 'rgba(255,255,255,.2)',
         borderRadius: 2
     },
