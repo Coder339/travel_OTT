@@ -6,19 +6,20 @@ import VerticalCard from '../components/common/verticalcard';
 import HeroCard from '../components/common/herocard';
 import StartMenuBar from '../components/common/startmenubar';
 import {colors} from '../assets/globalstyleconstants';
+import Player from './player';
 
 export class Home extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};
-    this.rectangleCardpress = this.rectangleCardpress.bind(this);
+    this.Cardpress = this.Cardpress.bind(this);
   }
 
   componentDidMount() {
     // console.log('home');
   }
 
-  rectangleCardpress(nav) {
+  Cardpress(nav){
     // console.log(nav+"     nav")
     this.props.navigation.navigate(nav);
   }
@@ -34,15 +35,15 @@ export class Home extends PureComponent {
                   <View
                     key={index}
                     style={index === 1 ? styles.positionBlock : {}}>
-                    {item.type.includes('rectangle-card') && (
-                      <RectangleCard type={item.type} item={item} onPress={this.rectangleCardpress} />
-                    )}
-                    {item.type.includes('vertical-card') && (
+                    {item.type.includes('rectangle-card') ? (
+                      <RectangleCard type={item.type} item={item} onPress={this.Cardpress} />
+                    ) : null}
+                    {item.type.includes('vertical-card') ? (
                       <VerticalCard type={item.type} item={item} />
-                    )}
-                    {item.type.includes('hero') && (
-                      <HeroCard type={item.type} item={item} mainIndex={index} />
-                    )}
+                    ) : null}
+                    {item.type.includes('hero') ? (
+                      <HeroCard type={item.type} item={item} onPress={this.Cardpress} />
+                    ) : null}
                   </View>
                 ),
             )}

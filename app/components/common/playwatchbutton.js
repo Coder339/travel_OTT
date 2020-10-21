@@ -26,7 +26,7 @@ export default class PlayWatchButton extends PureComponent {
     });
   }
   onPress() {
-    alert('Clicked');
+    this.props.onPress('episode')
   }
 
   render() {

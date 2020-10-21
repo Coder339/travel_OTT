@@ -46,7 +46,7 @@ export default React.memo(function HeroCard(props) {
               {data.description}
             </Text>
             <View style={styles.playWatchContainer}>
-              <PlayWatchButton name="Watch" focus={mainIndex == 0} />
+              <PlayWatchButton name="Watch" focus={mainIndex == 0} onPress={(nav)=>props.onPress(nav)} />
             </View>
           </View>
 
