@@ -58,9 +58,9 @@ export default React.memo(function HeroCard(props) {
               <ScrollView
                 horizontal={true}
                 Vertical={false}
-                decelerationRate={0}
-                snapToAlignment='start'
-                snapToInterval={216}
+                // decelerationRate={0}
+                // snapToAlignment='start'
+                // snapToInterval={216}
                 centerContent={true}
                 showsHorizontalScrollIndicator={false}>
                 {data.data.map((data, index) =>

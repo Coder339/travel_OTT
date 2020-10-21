@@ -51,9 +51,9 @@ export default class RectangleCard extends React.PureComponent {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           centerContent={true}
-          decelerationRate={"fast"}
-          snapToInterval={234}
-          snapToAlignment="start"
+          // decelerationRate={"fast"}
+          // snapToInterval={234}
+          // snapToAlignment="start"
           ref={ref => this.Ref = ref}
         >
           {item.data.map((data, index) =>

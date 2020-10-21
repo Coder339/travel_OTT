@@ -13,9 +13,9 @@ export default function VerticalCard(props) {
         horizontal={true} 
         showsHorizontalScrollIndicator={false}
         centerContent={true}
-        decelerationRate={0}
-        snapToAlignment='start'
-        snapToInterval={216}
+        // decelerationRate={0}
+        // snapToAlignment='start'
+        // snapToInterval={216}
         style={styles.imageContainer}
         >
         {item.data.map((data, index) => (

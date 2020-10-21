@@ -48,6 +48,7 @@ export default class RectangleCarditem extends PureComponent {
     this.setState({
       focusedWatchList: false,
     });
+    this.props.onBlur(null);
   }
 
   onPress() {

@@ -25,7 +25,6 @@ export default class StartMenuBar extends PureComponent {
     };
     this.menuonFocus = this.menuonFocus.bind(this);
     this.menuonBlur = this.menuonBlur.bind(this);
-    this.draweronBlur = this.draweronBlur.bind(this);
   }
 
   menuonFocus() {
@@ -36,6 +35,8 @@ export default class StartMenuBar extends PureComponent {
       drawerfocused: true
     });
   }
+
+  
   menuonBlur() {
     setTimeout(() => {
       if (!this.state.menufocused) {
@@ -44,15 +45,6 @@ export default class StartMenuBar extends PureComponent {
         })
       }
     }, 100)
-    this.setState({
-      menufocused: false,
-    });
-  }
-
-  draweronBlur() {
-    this.setState({
-      drawerfocused: false,
-    });
     this.setState({
       menufocused: false,
     });
@@ -78,7 +70,7 @@ export default class StartMenuBar extends PureComponent {
         )}
         </View>
         <BlurView
-          style={styles.absolute}
+          style={styles.blurView}
           blurType="dark"
           blurAmount={100}
           overlayColor={colors.transparent}
@@ -99,7 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative'
   },
-  absolute:{
+  blurView:{
     position: "absolute",
     top: 0,
     left: 0,

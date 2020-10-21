@@ -53,7 +53,7 @@ export class Home extends PureComponent {
                 index > 1 && (
                   <View key={index}>
                     {item.type.includes('rectangle-card') && (
-                      <RectangleCard type={item.type} item={item} />
+                      <RectangleCard type={item.type} item={item} onPress={this.rectangleCardpress} />
                     )}
                     {item.type.includes('vertical-card') && (
                       <VerticalCard type={item.type} item={item} />
