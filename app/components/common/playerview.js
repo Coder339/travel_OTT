@@ -4,14 +4,14 @@ import { colors, font, fontSize, setImageUrl, fontFamily } from '../../assets/gl
 import THEOplayerView from './theoplayerview';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProgressBarActive from '../common/progressbaractive'
-// import LongPlay from '../../assets/images/longplay';
+import LongPlay from '../../assets/images/longplay';
 import PauseBold from '../../assets/images/pausebold';
 import PlayBold from '../../assets/images/playbold';
 import GoBack from '../../assets/images/goback';
 import AudioSub from '../../assets/images/audiosub';
 import PlayList from '../../assets/images/playlist';
-// import Forward30 from '../../assets/images/forward30';
-// import Rewind30 from '../../assets/images/rewind30';
+import Forward30 from '../../assets/images/forward30';
+import Rewind30 from '../../assets/images/rewind30';
 import THEOeventEmitter from './TheoEventEmitter';
 import ProgressiveImage from './progressiveimage';
 import LottieView from 'lottie-react-native';
@@ -163,9 +163,9 @@ export default class PlayerView extends React.Component {
         return newVal
     }
 
-    // goBack = () => {
-    //     this.props.onBack()
-    // }
+    goBack = () => {
+        this.props.onBack()
+    }
 
     seeking = (flag) => {
         if (this.state.seeked !== flag) {
@@ -192,9 +192,9 @@ export default class PlayerView extends React.Component {
         };
 
         if (Platform.OS === 'android') {
-            playerStyle.width = width;
+            // playerStyle.width = width;
         } else {
-            playerStyle.height = height;
+            // playerStyle.height = height;
             BaseComponent = View;    //ScrollView
         }
 
@@ -202,107 +202,121 @@ export default class PlayerView extends React.Component {
             <>
                 <BaseComponent style={styles.containerBase}>
                     <THEOplayerView
-                        style={[playerStyle, customPlayerstyle, { width: width, height: height } ]}
+                        // style={[playerStyle, customPlayerstyle, this.state.landscape ? { width: width, height: height } : { aspectRatio: 1.7 }]}
+                        style={[playerStyle, customPlayerstyle, /*this.state.landscape ?*/ { width: width, height: height } /*: { aspectRatio: 1.7 }*/]}
                         fullscreenOrientationCoupling={false}
                         autoplay={true}
                         source={this.props.source}
                     />
                 </BaseComponent>
-                 {this.props.showUI &&
+                {this.props.showUI &&
                     <>
-
-                        <TouchableOpacity containerStyle={[styles.uiContainer, { height: height, width: width } ]}
-                            onPress={this.showUI}>
-
+                        <TouchableOpacity
+                            // onTouchStart={this.showUI}
+                            onPress={this.showUI}
+                            // containerStyle={[styles.uiContainer, this.state.landscape ? { height: height, width: width } : { width: width, aspectRatio: 1.7 }]}
+                            containerStyle={[styles.uiContainer,/*this.state.landscape ?*/ { width: width, height: height } /*: { aspectRatio: 1.7 }*/]}
+                        >
                             {(this.state.seeking || this.state.showUI) &&
                                 <Animated.View style={styles.wrapper}>
-
                                     <View style={styles.topContainer}>
-                                        <TouchableOpacity containerStyle={styles.backIcon} onPress={this.goBack}>
-                                            <GoBack width={20} height={20}/>
-                                        </TouchableOpacity>
-                                        <Text style={styles.showName}>Backpack S1 | E2</Text>
-                                    </View>
 
-                                    {!this.state.errorMsg && !this.state.showBanner && <>
-                                        <View style={styles.centerContainer}>
+                                        <View style={styles.topLeftContainer}>
 
-                                            {/* <TouchableOpacity
-                                                onPress={() => this.seek('minus')}>
-                                                <Rewind30 />
-                                            </TouchableOpacity> */}
-
-                                            <TouchableOpacity onPress={this.togglePlayPause} style={{ width: 40 }}>
-                                                {(this.state.timePercent < 99.98 && !this.state.isLoading && this.state.paused) &&
-                                                    <PlayBold />
-                                                }
-                                                {(this.state.timePercent < 99.98 && !this.state.isLoading && !this.state.paused) &&
-                                                    <PauseBold />
-                                                }
-
-                                                {this.state.timePercent > 99.98 && <Refresh />}
-
+                                            <TouchableOpacity containerStyle={styles.backIcon} onPress={this.goBack}>
+                                                <LongPlay />
                                             </TouchableOpacity>
+                                            <Text style={styles.showName}>Backpack S1 | E2</Text>
 
-                                            {/* <TouchableOpacity
-                                                onPress={() => this.seek('add')}>
-                                                <Forward30 />
-                                            </TouchableOpacity> */}
+                                        </View>
+                                        <View>
+                                            <View style={styles.choiceContainer}>
+                                                <TouchableOpacity
+                                                    onPress={() => this.setState({
+                                                        audioFocus: true,
+                                                        playListFocus: false
+                                                    })}
+                                                >
+
+                                                    <AudioSub width={22} height={22} />
+                                                </TouchableOpacity>
+
+                                                <TouchableOpacity
+                                                    onPress={() => this.setState({
+                                                        playListFocus: true,
+                                                        audioFocus: false
+                                                    })}>
+                                                    <PlayList width={22} height={22} />
+                                                </TouchableOpacity>
+                                            </View>
+                                            <View style={styles.choiceTextContainer}>
+                                                {this.state.audioFocus && <Text style={styles.audioText}>Audio {'\u0026'} Subtitles</Text>}
+                                                {this.state.playListFocus && <Text style={styles.playListText}>playlist</Text>}
+                                            </View>
                                         </View>
 
-                                        <View style={[styles.bottomBar, {
-                                            // marginLeft: 150 ,
-                                            marginRight: 20 
-                                        }]}>
-                                            <Text style={styles.timer}>{(this.pad(Math.floor(this.state.time / 60)) + ":" + this.pad(Math.floor(this.state.time - (Math.floor(this.state.time / 60)) * 60)))}</Text>
-                                            <ProgressBarActive
-                                                seekTo={(position) => this.seekTo(position)}
-                                                seeking={(flag) => this.seeking(flag)}
-                                                // outerStyle={styles.seekBar} innerStyle={styles.watchedProgress}
-                                                progress={this.state.timePercent} />
-                                            <Text style={styles.timer}>{this.state.timePercent >= 99.98 ? '00:00' : (this.pad(Math.floor(this.state.remainingTime / 60)) + ":" + this.pad(Math.floor(this.state.remainingTime - (Math.floor(this.state.remainingTime / 60)) * 60)))}</Text>
-                                        </View>
-                                    </>}
-                                    
-                                    
-                                    <View style={styles.choiceContainer}>
-                                            <TouchableOpacity
-                                                // onFocus={()=>this.setState({audioFocus:true})}
-                                                // onBlur={()=>this.setState({audioFocus:false})}
-                                                onPress={()=>this.setState({
-                                                        audioFocus:true,
-                                                        playListFocus:false})}>
-                                                
-                                                <AudioSub width={45} height={45} />
-                                            </TouchableOpacity>
-    
-                                        
-                                            <TouchableOpacity
-                                                // onFocus={()=>this.setState({playListFocus:true})}
-                                                // onBlur={()=>this.setState({playListFocus:false})}
-                                                onPress={()=>this.setState({
-                                                    playListFocus:true,
-                                                    audioFocus:false})}>
-                                                <PlayList width={45} height={45}/>
-                                            </TouchableOpacity>
                                     </View>
-                                    <View style={styles.choiceTextContainer}>
-                                        {this.state.audioFocus && <Text style={styles.audioText}>Audio {'\u0026'} Subtitles</Text>}
-                                        {this.state.playListFocus && <Text style={styles.playListText}>playlist</Text>}
-                                    </View>
-                                    
 
-                                </Animated.View>}
+                                    {!this.state.errorMsg && !this.state.showBanner &&
+                                        <>
+                                            <View style={styles.centerContainer}>
+                                                <TouchableOpacity
+                                                    onPress={() => this.seek('minus')}
+                                                >
+                                                    <Rewind30 />
+                                                </TouchableOpacity>
+                                                <TouchableOpacity
+                                                    onPress={this.togglePlayPause}
+                                                    style={{ width: 40 }}
+                                                >
+                                                    {(this.state.timePercent < 99.98 && !this.state.isLoading && this.state.paused) &&
+                                                        <PlayBold />
+                                                    }
+                                                    {(this.state.timePercent < 99.98 && !this.state.isLoading && !this.state.paused) &&
+                                                        <PauseBold />
+                                                    }
+
+                                                    {this.state.timePercent > 99.98 && <Refresh />}
+
+                                                </TouchableOpacity>
+                                                <TouchableOpacity
+                                                    onPress={() => this.seek('add')}
+                                                >
+                                                    <Forward30 />
+                                                </TouchableOpacity>
+                                            </View>
+
+                                            <View style={[styles.bottomBar, {
+                                                marginLeft: this.state.landscape ? 20 : 10,
+                                                marginRight: this.state.landscape ? 20 : 10
+                                            }]}>
+                                                <Text
+                                                    style={styles.timer}>{(this.pad(Math.floor(this.state.time / 60)) + ":" + this.pad(Math.floor(this.state.time - (Math.floor(this.state.time / 60)) * 60)))}</Text>
+                                                <ProgressBarActive
+                                                    seekTo={(position) => this.seekTo(position)}
+                                                    seeking={(flag) => this.seeking(flag)}
+                                                    // outerStyle={styles.seekBar} innerStyle={styles.watchedProgress}
+                                                    progress={this.state.timePercent} />
+                                                <Text style={styles.timer}>{this.state.timePercent >= 99.98 ? '00:00' : (this.pad(Math.floor(this.state.remainingTime / 60)) + ":" + this.pad(Math.floor(this.state.remainingTime - (Math.floor(this.state.remainingTime / 60)) * 60)))}</Text>
+
+                                            </View>
+                                        </>
+                                    }
+
+
+                                </Animated.View>
+                            }
+
 
                         </TouchableOpacity>
 
-                        {!this.state.errorMsg && <View style={[styles.loadingContainer, { height: height, width: width } ]}>
-                            {this.state.isLoading ?
+                        {!this.state.errorMsg && <View style={[styles.loadingContainer, this.state.landscape ? { height: height, width: width } : { width: width, aspectRatio: 1.7 }]}>
+                            {this.state.isLoading &&
                                 <LottieView source={require('../../assets/lottie/fastloading.json')} autoPlay loop style={{ height: 100 }} />
-                                : null}
+                                }
                         </View>}
 
-                        {this.props.source.poster && !this.state.errorMsg && this.state.showBanner && <View style={[styles.posterContainer, { height: height, width: width } ]}>
+                        {this.props.source.poster && !this.state.errorMsg && this.state.showBanner && <View style={[styles.posterContainer, this.state.landscape ? { height: height, width: width } : { width: width, aspectRatio: 1.7 }]}>
                             <ProgressiveImage
                                 style={{ width: width, aspectRatio: 1.7, height: '100%' }}
                                 thumbnailSource={require('../../assets/images/thumbnail1px.jpg')}
@@ -310,11 +324,12 @@ export default class PlayerView extends React.Component {
                             />
                         </View>}
 
-                        {this.state.errorMsg != '' && <Text style={[styles.errorText, { height: height, width: width } ]}>{this.state.errorMsg}</Text>}
-                        
-                        
+                        {this.state.errorMsg != '' && <Text style={[styles.errorText, this.state.landscape ? { height: height, width: width } : { width: width, aspectRatio: 1.7 }]}>{this.state.errorMsg}</Text>}
+
                     </>
-                } 
+                }
+
+
             </>
 
 
@@ -328,52 +343,54 @@ const styles = StyleSheet.create({
     containerBase: {
         flex: 1,
     },
+
     player: {
-        // backgroundColor: colors.black,
+        backgroundColor: colors.black,
     },
     uiContainer: {
-        position: 'absolute',
-        zIndex: 2,
+        // position: 'absolute',
+        // zIndex: 2,
+
     },
     loadingContainer: {
         position: 'absolute',
-        zIndex: 1,
+        // zIndex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
     posterContainer: {
-        position: 'absolute',
-        zIndex: 1,
+        // position: 'absolute',
+        // zIndex: 1,
     },
     errorText: {
-        position: 'absolute',
+        // position: 'absolute',
         top: '50%',
-        zIndex: 1,
+        // zIndex: 1,
         textAlign: 'center',
         color: colors.white,
     },
     centerContainer: {
+        flex: 1,
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
+
     },
     wrapper: {
         height: '100%',
         alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1,
+        // justifyContent: 'center',
+        // zIndex: 1,
         backgroundColor: '#0000004a'
     },
     bottomBar: {
-        position: 'absolute',
+        // position: 'absolute',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1,
-        bottom: 10,
-        // width:800
-        // marginHorizontal:20,
+        // flex: 1,
+        bottom: 10
     },
     seekBar: {
         width: '85%',
@@ -387,22 +404,27 @@ const styles = StyleSheet.create({
         backgroundColor: colors.highlight
     },
     topContainer: {
-        position: 'absolute',
-        top: 10,
-        left: 0,
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
+    },
+    topLeftContainer: {
+        // position: 'absolute',
+        top: 10,
+        left: 10,
+        flexDirection: 'row',
+        // alignItems: 'center',
+        // justifyContent: 'flex-start',
         width: '100%'
     },
     showName: {
-        marginLeft: 0,
+        marginLeft: 12,
         color: colors.white,
         fontSize: fontSize.medium
     },
     backIcon: {
         width: 60,
-        padding: 10,
+        // padding: 10,
+        marginLeft: 12,
         alignItems: 'center',
     },
     replay: {
@@ -410,39 +432,35 @@ const styles = StyleSheet.create({
         fontSize: fontSize.largest,
         height: 30
     },
-    timer:{
-        color: colors.white, 
-        fontFamily: fontFamily.regular, 
-        marginLeft: 10, 
-        width: 40, 
+    timer: {
+        color: colors.white,
+        fontFamily: fontFamily.regular,
+        marginHorizontal: 10,
+        width: 50,
         fontSize: fontSize.extralarge
     },
-    choiceContainer:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        width:130,
-        position:'absolute',
-        top:10,
-        right:20,
+    choiceContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: 80,
+        position: 'absolute',
+        top: 10,
+        right: 20,
     },
-    choiceTextContainer:{
-        position:'absolute',
-        top:60,
-        right:20,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'
+    choiceTextContainer: {
+        position: 'absolute',
+        top: 40,
+        right: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
-    audioText:{  
-        color:colors.white,
-        marginRight:50,
+    audioText: {
+        color: colors.white,
+        marginRight: 20,
     },
-    playListText:{
-        color:colors.white,
-        marginLeft:15,
+    playListText: {
+        color: colors.white,
+        // marginLeft:40,
     },
-    ticker:{
-        color:colors.white,
-    }
-
 });

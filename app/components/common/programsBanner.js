@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Text } from 'react-native';
+import { View, StyleSheet, ScrollView, Text,TouchableOpacity } from 'react-native';
 import { colors, fontFamily, fontSize, globalstyles, setImageUrl } from '../../assets/globalstyleconstants';
 import PlayWatchButton from '../common/playwatchbutton';
 import CustomButtons from './custombutton';
 import ProgressiveImage from '../common/progressiveimage';
 import RectangleCard from './rectanglecard';
+import GoBack from '../../assets/images/goback';
 
 export default class ProgramsBanner extends React.PureComponent {
 
@@ -17,7 +18,8 @@ export default class ProgramsBanner extends React.PureComponent {
       seasonNo: seasonNo,
       seasons: seasons,
       episodeFocus: 0,
-      seasonFocus: undefined
+      seasonFocus: undefined,
+      eIndex:0
     };
     this.setSeasonFocus = this.setSeasonFocus.bind(this)
     this.scrollHandler = this.scrollHandler.bind(this);
@@ -27,7 +29,8 @@ export default class ProgramsBanner extends React.PureComponent {
 
   seasonOnFocus(scrollToIndex) {
     let episodeIndex = this.state.seasonNo.findIndex((item) => item === scrollToIndex);
-    this.setState({ scrollToIndex: episodeIndex }, () => this.scrollHandler())
+    this.setState({ scrollToIndex: episodeIndex,eIndex:episodeIndex }, () => this.scrollHandler())
+
   }
 
   setSeasonFocus(currentSeason) {
@@ -43,8 +46,9 @@ export default class ProgramsBanner extends React.PureComponent {
   };
 
   render() {
-    const { data, } = this.props;
+    const { data } = this.props;
     console.log('programdata', data)
+    console.log('ses',this.state.seasonNo)
     return (
       <ScrollView style={styles.container}>
         <View style={styles.imageStyle}>
@@ -57,6 +61,14 @@ export default class ProgramsBanner extends React.PureComponent {
             type="details"
           />
         </View>
+        <TouchableOpacity 
+            style={styles.goback} 
+            onPress={()=>this.props.navigation.navigate('home')}>
+            <GoBack 
+                width={25} 
+                height={25}
+            />
+        </TouchableOpacity>
         <View style={styles.bannerContainer}>
           <Text style={styles.bannerTitle}>{data.title}</Text>
           <View style={styles.seasonEpisodeCont}>
@@ -77,6 +89,7 @@ export default class ProgramsBanner extends React.PureComponent {
                 name="SEASON"
                 item={item}
                 value={index}
+                ValueEIndex={this.state.seasonNo[this.state.eIndex]}
                 season={this.state.seasonFocus}
                 seasonOnFocus={this.seasonOnFocus}
                 scrollHandler={this.scrollHandler}
@@ -111,8 +124,8 @@ const styles = StyleSheet.create({
   bannerContainer: {
     // backgroundColor: colors.backgroundColor,
     position: 'absolute',
-    top: 25,
-    left: 40
+    top: 40,
+    left: 32
   },
   bannerTitle: {
     color: colors.orange,
@@ -146,4 +159,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
+  goback:{
+    position:'absolute',
+    top:10,
+    left:32
+  }
 });

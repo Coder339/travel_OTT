@@ -45,7 +45,7 @@ export default class Player extends React.PureComponent {
       // <SafeAreaInsetsContext.Consumer>
       //   {insets =>
           <View style={styles.container} >
-            <PlayerView showUI={true} source={this.state.source} />
+            <PlayerView onBack={this.props.navigation.goBack} showUI={true} source={this.state.source} />
           </View>
       //     }
       // </SafeAreaInsetsContext.Consumer>

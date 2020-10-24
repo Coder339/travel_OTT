@@ -26,6 +26,7 @@ export default class VerticalCarditem extends PureComponent {
   }
   onPress() {
     alert('Clicked');
+    // this.props.onPress(this.props.data.type)
   }
 
   render() {
@@ -36,6 +37,7 @@ export default class VerticalCarditem extends PureComponent {
           activeOpacity={0.9} 
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          onPress={this.onPress}
           style={[styles.container,
             this.state.focused
               ? [globalstyles.focusBorder]

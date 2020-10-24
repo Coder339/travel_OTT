@@ -8,15 +8,36 @@ export default class RectangleCard extends React.PureComponent {
     super(props)
     this.state = {
       refer: null,
-      season: undefined
+      season: undefined,
+      rememberIndex:undefined,
     }
     this.seasonChange = this.seasonChange.bind(this)
     this.scrollHandler = this.scrollHandler.bind(this)
+    this.rememberFocusedItem = this.rememberFocusedItem.bind(this)
   }
 
+  // componentWillUnmount(){
+  //   // alert('bienvenido otra vez')
+  //   // if (this.state.focused){
+  //     console.log('bienvenido otra vez')
+  //     // this.setState({backIndex:this.props.index})
+  //     // alert('bienvenido otra vez')
+  //     this.rememberFocusedItem()
+  // }
+  
   componentDidMount() {
     this.props.onRef && this.props.onRef(this)
+    
   }
+
+  rememberFocusedItem(focusedIndex){
+    // alert(focusedIndex)
+    this.setState({rememberIndex:focusedIndex})
+    console.log('fI',this.state.rememberIndex)
+  }
+  
+  
+  
 
   seasonChange(currentSeason) {
     if (this.state.season != currentSeason) {
@@ -61,6 +82,8 @@ export default class RectangleCard extends React.PureComponent {
               data={data}
               type={type}
               key={index}
+              index={index}
+              rememberFocusedItem={this.rememberFocusedItem}
               onPress={this.props.onPress}
               onFocus={this.seasonChange}
               onBlur={this.seasonChange}

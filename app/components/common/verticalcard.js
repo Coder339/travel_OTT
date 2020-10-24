@@ -4,7 +4,7 @@ import VerticalCarditem from './verticalcarditem';
 import {colors, fontFamily,fontSize} from '../../assets/globalstyleconstants';
 
 export default function VerticalCard(props) {
-  const { item } = props;
+  const { item,type,onPress} = props;
   
   return (
     <View style={styles.container}>
@@ -19,7 +19,7 @@ export default function VerticalCard(props) {
         style={styles.imageContainer}
         >
         {item.data.map((data, index) => (
-          <VerticalCarditem data={data} key={index} />
+          <VerticalCarditem data={data} key={index} type={type} onPress={onPress}/>
         ))}
       </ScrollView>
     </View>

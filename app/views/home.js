@@ -32,10 +32,10 @@ export class Home extends PureComponent {
                     key={index}
                     style={index === 1 ? styles.positionBlock : {}}>
                     {item.type.includes('rectangle-card') ? (
-                      <RectangleCard type={item.type} item={item} onPress={this.Cardpress} />
+                      <RectangleCard type={item.type} item={item} onPress={this.Cardpress} navigation={this.props.navigation}/>
                     ) : null}
                     {item.type.includes('vertical-card') ? (
-                      <VerticalCard type={item.type} item={item} />
+                      <VerticalCard type={item.type} item={item} onPress={this.Cardpress} />
                     ) : null}
                     {item.type.includes('hero') ? (
                       <HeroCard type={item.type} item={item} onPress={this.Cardpress} />
@@ -50,7 +50,7 @@ export class Home extends PureComponent {
                 index > 1 && (
                   <View key={index}>
                     {item.type.includes('rectangle-card') && (
-                      <RectangleCard type={item.type} item={item} onPress={this.rectangleCardpress} />
+                      <RectangleCard type={item.type} item={item} onPress={this.rectangleCardpress} navigation={this.props.navigation}/>
                     )}
                     {item.type.includes('vertical-card') && (
                       <VerticalCard type={item.type} item={item} />
