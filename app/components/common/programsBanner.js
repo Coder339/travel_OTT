@@ -16,38 +16,62 @@ export default class ProgramsBanner extends React.PureComponent {
     this.state = {
       scrollToIndex: 0,
       seasonNo: seasonNo,
+      season:undefined,
       seasons: seasons,
       episodeFocus: 0,
       seasonFocus: undefined,
-      eIndex:0
+      eIndex:0,
+      flag:undefined,
+
     };
-    this.setSeasonFocus = this.setSeasonFocus.bind(this)
+    // this.setSeasonFocus = this.setSeasonFocus.bind(this)
     this.scrollHandler = this.scrollHandler.bind(this);
     this.seasonOnFocus = this.seasonOnFocus.bind(this);
+    // this.seasonChange = this.seasonChange.bind(this)
+    // this.onFocusBooleanFlag = this.onFocusBooleanFlag.bind(this)
+    // this.onBlurBooleanFlag = this.onBlurBooleanFlag.bind(this)
+    this.itemFlag = this.itemFlag.bind(this);
   }
 
 
   seasonOnFocus(scrollToIndex) {
     let episodeIndex = this.state.seasonNo.findIndex((item) => item === scrollToIndex);
     this.setState({ scrollToIndex: episodeIndex,eIndex:episodeIndex }, () => this.scrollHandler())
+  }
+
+  itemFlag(){
+    this.setState({flag:true})
+    console.log('playflag',this.state.flag)
 
   }
 
-  setSeasonFocus(currentSeason) {
-    if (this.state.seasonFocus != currentSeason) {
-      this.setState({
-        seasonFocus: currentSeason
-      })
-    }
-  }
+  // setSeasonFocus(currentSeason) {
+  //   if (this.state.seasonFocus != currentSeason) {
+  //     this.setState({
+  //       seasonFocus: currentSeason
+  //     })
+  //   }
+  // }
+
+  // seasonChange(currentSeason) {
+  //   if (this.state.season != currentSeason) {
+  //     this.setState({
+  //       season: currentSeason
+  //     })
+  //     this.setSeasonFocus(currentSeason)
+  //   }
+  // };
 
   scrollHandler() {
     this.child.scrollHandler()
   };
 
+
+  
   render() {
     const { data } = this.props;
     console.log('programdata', data)
+    console.log('programFlg', this.props.program)
     console.log('ses',this.state.seasonNo)
     return (
       <ScrollView style={styles.container}>
@@ -82,15 +106,26 @@ export default class ProgramsBanner extends React.PureComponent {
             contentContainerStyle={styles.buttonCont}
             showsHorizontalScrollIndicator={false}
           >
-            <PlayWatchButton name="Trailer" propStyle={{ marginRight: 20 }} focus={true} />
+            <PlayWatchButton 
+               name="Trailer" 
+               propStyle={{ marginRight: 20 }} 
+               focus={true} 
+               program={this.props.program}
+              //  onBlur={this.seasonChange}
+              itemFlag={this.itemFlag}
+               onBlur={this.props.onBlur}
+            />
             {this.state.seasons.map((item, index) => (
               <CustomButtons
                 key={index}
                 name="SEASON"
                 item={item}
                 value={index}
-                ValueEIndex={this.state.seasonNo[this.state.eIndex]}
-                season={this.state.seasonFocus}
+                onBlur={this.props.onBlur}
+                // onBlur={this.seasonChange}
+                // ValueEIndex={this.state.seasonNo[this.state.eIndex]}
+                season={this.props.seasonFocus}
+                // season={this.state.seasonFocus}
                 seasonOnFocus={this.seasonOnFocus}
                 scrollHandler={this.scrollHandler}
               />
@@ -105,7 +140,12 @@ export default class ProgramsBanner extends React.PureComponent {
             scrollToIndex={this.state.scrollToIndex}
             episode={this.state.episode}
             onRef={ref => (this.child = ref)}
-            onEpisodeFocus={this.setSeasonFocus}
+            flag={this.state.flag}
+            onFocus={this.props.onFocus}
+            onBlur={this.props.onBlur}
+            // onFocus={this.seasonChange}
+            // onBlur={this.seasonChange}
+            // onEpisodeFocus={this.setSeasonFocus}
           />
         )}
       </ScrollView>

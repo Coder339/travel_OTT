@@ -260,11 +260,11 @@ export default class PlayerView extends React.Component {
                                     {!this.state.errorMsg && !this.state.showBanner &&
                                         <>
                                             <View style={styles.centerContainer}>
-                                                <TouchableOpacity
+                                                {/* <TouchableOpacity
                                                     onPress={() => this.seek('minus')}
                                                 >
                                                     <Rewind30 />
-                                                </TouchableOpacity>
+                                                </TouchableOpacity> */}
                                                 <TouchableOpacity
                                                     onPress={this.togglePlayPause}
                                                     style={{ width: 40 }}
@@ -279,11 +279,11 @@ export default class PlayerView extends React.Component {
                                                     {this.state.timePercent > 99.98 && <Refresh />}
 
                                                 </TouchableOpacity>
-                                                <TouchableOpacity
+                                                {/* <TouchableOpacity
                                                     onPress={() => this.seek('add')}
                                                 >
                                                     <Forward30 />
-                                                </TouchableOpacity>
+                                                </TouchableOpacity> */}
                                             </View>
 
                                             <View style={[styles.bottomBar, {

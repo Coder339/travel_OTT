@@ -17,8 +17,6 @@ export default class RectangleCarditem extends PureComponent {
       watchList: this.props.data.watchlist,
       disabled: false,
       focusedWatchList: false,
-      backIndex:undefined,
-      rememberIndex:undefined,
     };
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
@@ -28,62 +26,41 @@ export default class RectangleCarditem extends PureComponent {
     this.onBlurWatchList = this.onBlurWatchList.bind(this);
   }
 
-  componentWillUnmount(){
-    // alert('bienvenido otra vez')
-    // if (this.state.focused){
-      // console.log(this.props.index)
-      this.setState({backIndex:this.props.index})
-      // console.log('backindex',this.state.backIndex)
-      this.props.rememberFocusedItem(0)
-      // alert('bienvenido otra vez')
-      // this.rememberFocusedItem()
-      this.setState({focused:true})
-
-    // }
-  }
-
-  // rememberFocusedItem(){
-  //   // alert(focusedIndex)
-  //   this.setState({rememberIndex:this.props.index})
-  //   console.log('fI',this.state.rememberIndex)
-  // }
 
   onFocus() {
     this.setState({
       focused: true,
     });
-    this.props.onFocus(this.props.data.season);
-    this.setState({backIndex:this.props.index})
-    // alert(this.state.backIndex)
-    // this.props.rememberFocusedItem(this.props.index)
-    // this.setState({rememberIndex:this.props.index})
+    if(this.props.flag){
+      this.props.onFocus(this.props.data.season);
+    }
   }
 
   onBlur() {
     this.setState({
       focused: false,
     });
-    this.props.onBlur(null);
+    // this.props.onBlur(null);
   }
 
   onFocusWatchList() {
     this.setState({
       focusedWatchList: true,
     });
-    this.props.onFocus(this.props.data.season);
+    // this.props.onFocus(this.props.data.season);
   }
 
   onBlurWatchList() {
     this.setState({
       focusedWatchList: false,
     });
-    this.props.onBlur(null);
+    // this.props.onBlur(null);
   }
 
   onPress() {
-    this.props.onPress(this.props.data.type); //needs episode to be created and handled also
-    // this.props.onPress('program');
-    this.setState({backIndex:this.props.index})
+    // this.props.onPress(this.props.data.type); //needs episode to be created and handled also
+    this.props.onPress('program');
+    // this.setState({backIndex:this.props.index})
     // this.props.rememberFocusedItem(this.props.index)
   }
 
@@ -99,6 +76,7 @@ export default class RectangleCarditem extends PureComponent {
   render() {
     const { data, type } = this.props;
     // console.log('backindex',this.state.backIndex)
+    console.log('flag',this.props.flag)
     return (
       <View style={styles.container}>
 

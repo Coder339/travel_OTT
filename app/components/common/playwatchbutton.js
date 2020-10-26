@@ -19,6 +19,10 @@ export default class PlayWatchButton extends PureComponent {
     this.setState({
       focused: true,
     });
+    if(this.props.program){
+      this.props.onBlur(null)
+      this.props.itemFlag()
+    }
   }
   onBlur() {
     this.setState({
@@ -31,6 +35,7 @@ export default class PlayWatchButton extends PureComponent {
 
   render() {
     const { name, propStyle, focus } = this.props;
+    console.log('flaggg',this.props.program)
     return (
       <TouchableHighlight
         underlayColor={false}

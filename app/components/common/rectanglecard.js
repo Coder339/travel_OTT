@@ -9,44 +9,26 @@ export default class RectangleCard extends React.PureComponent {
     this.state = {
       refer: null,
       season: undefined,
-      rememberIndex:undefined,
     }
-    this.seasonChange = this.seasonChange.bind(this)
+    // this.seasonChange = this.seasonChange.bind(this)
     this.scrollHandler = this.scrollHandler.bind(this)
-    this.rememberFocusedItem = this.rememberFocusedItem.bind(this)
   }
 
-  // componentWillUnmount(){
-  //   // alert('bienvenido otra vez')
-  //   // if (this.state.focused){
-  //     console.log('bienvenido otra vez')
-  //     // this.setState({backIndex:this.props.index})
-  //     // alert('bienvenido otra vez')
-  //     this.rememberFocusedItem()
-  // }
   
   componentDidMount() {
     this.props.onRef && this.props.onRef(this)
+    // console.log('flg',this.props.program)
     
   }
-
-  rememberFocusedItem(focusedIndex){
-    // alert(focusedIndex)
-    this.setState({rememberIndex:focusedIndex})
-    console.log('fI',this.state.rememberIndex)
-  }
   
-  
-  
-
-  seasonChange(currentSeason) {
-    if (this.state.season != currentSeason) {
-      this.setState({
-        season: currentSeason
-      })
-      this.props.onEpisodeFocus(currentSeason)
-    }
-  };
+  // seasonChange(currentSeason) {
+  //   if (this.state.season != currentSeason) {
+  //     this.setState({
+  //       season: currentSeason
+  //     })
+  //     this.props.onEpisodeFocus(currentSeason)
+  //   }
+  // };
 
   scrollHandler() {
     // alert(this.props.scrollToIndex)
@@ -85,8 +67,12 @@ export default class RectangleCard extends React.PureComponent {
               index={index}
               rememberFocusedItem={this.rememberFocusedItem}
               onPress={this.props.onPress}
-              onFocus={this.seasonChange}
-              onBlur={this.seasonChange}
+              onFocus={this.props.onFocus}
+              onBlur={this.props.onBlur}
+              itemDisableFlag={this.props.itemDisableFlag}
+              flag={this.props.flag}
+              // onFocus={this.seasonChange}
+              // onBlur={this.seasonChange}
               episodeFocus={episode == index}
               title={item.title}
             />)}

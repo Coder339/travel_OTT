@@ -17,18 +17,20 @@ export default class CustomButtons extends PureComponent {
   }
 
   onFocus() {
-    this.props.seasonOnFocus(this.props.value + 1)
+    // this.props.seasonOnFocus(this.props.value + 1)
     this.setState({ 
       focused: true,
       seasonValue: this.props.value ,
-      sIndex:this.props.value + 1,
+      // sIndex:this.props.value + 1,
     });
+    this.props.onBlur(null)
   }
 
   onBlur() {
     this.setState({
       focused: false,
     });
+    // this.props.onBlurBooleanFlag()
   }
 
   onPress() {
@@ -36,9 +38,9 @@ export default class CustomButtons extends PureComponent {
   }
 
   render() {
-    const { name, value, season,ValueEIndex } = this.props;
-    console.log('VIndex',ValueEIndex)
-    console.log('sIndex',this.state.sIndex)
+    const { name, value, season } = this.props;
+    // console.log('VIndex',ValueEIndex)
+    // console.log('sIndex',this.state.sIndex)
     return (
         <TouchableHighlight
           underlayColor={false}
@@ -46,7 +48,7 @@ export default class CustomButtons extends PureComponent {
           onBlur={this.onBlur}
           onPress={this.onPress}
           style={[
-            (this.state.sIndex ===  ValueEIndex || this.state.focused)
+            (season == value + 1 || this.state.focused)
               ? globalstyles.focusPlayButtonDetails
               : globalstyles.blurPlayButtonDetails,
               styles.button
