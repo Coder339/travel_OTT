@@ -58,8 +58,8 @@ export default class RectangleCarditem extends PureComponent {
   }
 
   onPress() {
-    // this.props.onPress(this.props.data.type); //needs episode to be created and handled also
-    this.props.onPress('program');
+    this.props.onPress(this.props.data.type); //needs episode to be created and handled also
+    // this.props.onPress('program');
     // this.setState({backIndex:this.props.index})
     // this.props.rememberFocusedItem(this.props.index)
   }
